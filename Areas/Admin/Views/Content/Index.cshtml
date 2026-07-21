@@ -1,0 +1,120 @@
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Website Content";
+}
+<h3 class="mb-4">Website Content</h3>
+
+<ul class="nav nav-tabs mb-4">
+    <li class="nav-item"><a class="nav-link active" data-bs-toggle="tab" href="#banners">Banners</a></li>
+    <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#testimonials">Testimonials</a></li>
+    <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#faqs">FAQ</a></li>
+    <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#gallery">Gallery</a></li>
+    <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#contact">Contact Messages</a></li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade show active" id="banners">
+        <div class="admin-card mb-3">
+            <form asp-action="AddBanner" method="post" class="row g-2">
+                @Html.AntiForgeryToken()
+                <div class="col-md-3"><input name="Title" class="form-control" placeholder="Title" required /></div>
+                <div class="col-md-3"><input name="Subtitle" class="form-control" placeholder="Subtitle" /></div>
+                <div class="col-md-3"><input name="ImageUrl" class="form-control" placeholder="Image URL" /></div>
+                <div class="col-md-2"><input name="ButtonText" class="form-control" placeholder="Button text" /></div>
+                <div class="col-md-1"><button class="btn btn-brt w-100">Add</button></div>
+            </form>
+        </div>
+        <table class="table bg-white"><thead><tr><th>Title</th><th>Subtitle</th><th></th></tr></thead>
+        <tbody>
+        @foreach (var b in (IEnumerable<Banner>)ViewBag.Banners)
+        {
+            <tr><td>@b.Title</td><td>@b.Subtitle</td>
+            <td><form asp-action="DeleteBanner" asp-route-id="@b.Id" method="post"><button class="btn btn-sm btn-link text-danger">Remove</button></form></td></tr>
+        }
+        </tbody></table>
+    </div>
+
+    <div class="tab-pane fade" id="testimonials">
+        <div class="admin-card mb-3">
+            <form asp-action="AddTestimonial" method="post" class="row g-2">
+                @Html.AntiForgeryToken()
+                <div class="col-md-3"><input name="DealerName" class="form-control" placeholder="Dealer name" required /></div>
+                <div class="col-md-3"><input name="BusinessName" class="form-control" placeholder="Business" /></div>
+                <div class="col-md-4"><input name="Message" class="form-control" placeholder="Message" required /></div>
+                <div class="col-md-1"><input name="Rating" type="number" min="1" max="5" class="form-control" value="5" /></div>
+                <div class="col-md-1"><button class="btn btn-brt w-100">Add</button></div>
+            </form>
+        </div>
+        <table class="table bg-white"><thead><tr><th>Dealer</th><th>Message</th><th>Approved</th><th></th></tr></thead>
+        <tbody>
+        @foreach (var t in (IEnumerable<Testimonial>)ViewBag.Testimonials)
+        {
+            <tr><td>@t.DealerName</td><td>@t.Message</td><td>@(t.IsApproved ? "Yes" : "No")</td>
+            <td>
+                @if (!t.IsApproved)
+                {
+                    <form asp-action="ApproveTestimonial" asp-route-id="@t.Id" method="post" class="d-inline"><button class="btn btn-sm btn-link">Approve</button></form>
+                }
+                <form asp-action="DeleteTestimonial" asp-route-id="@t.Id" method="post" class="d-inline"><button class="btn btn-sm btn-link text-danger">Remove</button></form>
+            </td></tr>
+        }
+        </tbody></table>
+    </div>
+
+    <div class="tab-pane fade" id="faqs">
+        <div class="admin-card mb-3">
+            <form asp-action="AddFAQ" method="post" class="row g-2">
+                @Html.AntiForgeryToken()
+                <div class="col-md-5"><input name="Question" class="form-control" placeholder="Question" required /></div>
+                <div class="col-md-6"><input name="Answer" class="form-control" placeholder="Answer" required /></div>
+                <div class="col-md-1"><button class="btn btn-brt w-100">Add</button></div>
+            </form>
+        </div>
+        <table class="table bg-white"><thead><tr><th>Question</th><th>Answer</th><th></th></tr></thead>
+        <tbody>
+        @foreach (var f in (IEnumerable<FAQ>)ViewBag.FAQs)
+        {
+            <tr><td>@f.Question</td><td>@f.Answer</td>
+            <td><form asp-action="DeleteFAQ" asp-route-id="@f.Id" method="post"><button class="btn btn-sm btn-link text-danger">Remove</button></form></td></tr>
+        }
+        </tbody></table>
+    </div>
+
+    <div class="tab-pane fade" id="gallery">
+        <div class="admin-card mb-3">
+            <form asp-action="AddGalleryImage" method="post" class="row g-2">
+                @Html.AntiForgeryToken()
+                <div class="col-md-6"><input name="ImageUrl" class="form-control" placeholder="Image URL" required /></div>
+                <div class="col-md-4"><input name="Caption" class="form-control" placeholder="Caption" /></div>
+                <div class="col-md-2"><button class="btn btn-brt w-100">Add</button></div>
+            </form>
+        </div>
+        <div class="row g-2">
+        @foreach (var g in (IEnumerable<GalleryImage>)ViewBag.Gallery)
+        {
+            <div class="col-md-2">
+                <div class="admin-card p-2 text-center">
+                    <small class="d-block mb-1">@g.Caption</small>
+                    <form asp-action="DeleteGalleryImage" asp-route-id="@g.Id" method="post"><button class="btn btn-sm btn-link text-danger">Remove</button></form>
+                </div>
+            </div>
+        }
+        </div>
+    </div>
+
+    <div class="tab-pane fade" id="contact">
+        <table class="table bg-white"><thead><tr><th>Name</th><th>Phone</th><th>Message</th><th>Status</th><th></th></tr></thead>
+        <tbody>
+        @foreach (var c in (IEnumerable<ContactMessage>)ViewBag.ContactMessages)
+        {
+            <tr><td>@c.Name</td><td>@c.Phone</td><td>@c.Message</td><td>@(c.IsResolved ? "Resolved" : "Open")</td>
+            <td>
+                @if (!c.IsResolved)
+                {
+                    <form asp-action="ResolveContact" asp-route-id="@c.Id" method="post"><button class="btn btn-sm btn-link">Mark Resolved</button></form>
+                }
+            </td></tr>
+        }
+        </tbody></table>
+    </div>
+</div>

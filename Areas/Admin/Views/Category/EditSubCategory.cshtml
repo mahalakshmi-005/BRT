@@ -1,0 +1,31 @@
+@model SubCategory
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Edit Sub-category";
+}
+<h3 class="mb-4">Edit Sub-category</h3>
+<div class="admin-card" style="max-width:500px">
+    <form asp-action="EditSubCategory" asp-route-id="@Model.Id" method="post">
+        @Html.AntiForgeryToken()
+        <input type="hidden" asp-for="Id" />
+        <input type="hidden" asp-for="CategoryId" />
+        <div class="mb-3">
+            <label class="form-label">Name (English)</label>
+            <input asp-for="Name" class="form-control" />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Name (Tamil)</label>
+            <input asp-for="NameTamil" class="form-control" />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Display Order</label>
+            <input asp-for="DisplayOrder" class="form-control" type="number" />
+        </div>
+        <div class="form-check mb-3">
+            <input asp-for="IsActive" class="form-check-input" />
+            <label class="form-check-label">Active</label>
+        </div>
+        <button class="btn btn-brt">Update</button>
+        <a asp-action="Index" class="btn btn-outline-secondary">Cancel</a>
+    </form>
+</div>

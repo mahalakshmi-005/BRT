@@ -1,0 +1,67 @@
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Dashboard";
+}
+
+<h3 class="mb-4">Dashboard</h3>
+
+<div class="row g-3 mb-4">
+    <div class="col-md-3">
+        <div class="stat-card">
+            <div class="stat-value">@ViewBag.PendingOrders</div>
+            <div class="stat-label">Pending Orders</div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="stat-card">
+            <div class="stat-value">@ViewBag.UnderReviewOrders</div>
+            <div class="stat-label">Under Review</div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="stat-card">
+            <div class="stat-value">@ViewBag.ConfirmedOrders</div>
+            <div class="stat-label">Confirmed</div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="stat-card">
+            <div class="stat-value">@ViewBag.TotalProducts</div>
+            <div class="stat-label">Total Products</div>
+        </div>
+    </div>
+</div>
+
+@if (ViewBag.PricesUpdatedToday == 0)
+{
+    <div class="alert alert-warning">
+        <span class="material-symbols-outlined">warning</span> Today's market prices are not updated yet. Please update prices before dealers browse the site.
+    </div>
+}
+
+<h5 class="mt-4 mb-3">Recent Order Requests</h5>
+<table class="table table-hover bg-white">
+    <thead>
+        <tr>
+            <th>Order #</th>
+            <th>Buyer</th>
+            <th>Business</th>
+            <th>Phone</th>
+            <th>Status</th>
+            <th>Date</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var o in (IEnumerable<BRT.Models.OrderRequest>)ViewBag.RecentOrders)
+    {
+        <tr>
+            <td>@o.OrderNumber</td>
+            <td>@o.BuyerName</td>
+            <td>@o.BusinessName</td>
+            <td>@o.PhoneNumber</td>
+            <td><span class="badge bg-secondary">@o.Status</span></td>
+            <td>@o.CreatedAt.ToString("dd-MMM-yyyy HH:mm")</td>
+        </tr>
+    }
+    </tbody>
+</table>

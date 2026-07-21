@@ -1,0 +1,36 @@
+@model List<OrderRequest>
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Orders";
+    var allClass = ViewBag.CurrentFilter == null ? "btn-brt" : "btn-outline-secondary";
+}
+<h3 class="mb-4">Order Requests</h3>
+
+<div class="mb-3 d-flex gap-2 flex-wrap">
+    <a asp-action="Index" class="btn btn-sm @allClass">All</a>
+    @foreach (var s in Enum.GetValues<OrderStatus>())
+    {
+        var isActive = ViewBag.CurrentFilter?.ToString() == s.ToString();
+        var filterClass = isActive ? "btn-brt" : "btn-outline-secondary";
+        <a asp-action="Index" asp-route-status="@s" class="btn btn-sm @filterClass">@s</a>
+    }
+</div>
+
+<table class="table table-hover bg-white">
+    <thead><tr><th>Order #</th><th>Buyer</th><th>Business</th><th>Phone</th><th>Items</th><th>Status</th><th>Date</th><th></th></tr></thead>
+    <tbody>
+    @foreach (var o in Model)
+    {
+        <tr>
+            <td>@o.OrderNumber</td>
+            <td>@o.BuyerName</td>
+            <td>@o.BusinessName</td>
+            <td>@o.PhoneNumber</td>
+            <td>@o.Items.Count</td>
+            <td><span class="badge bg-secondary">@o.Status</span></td>
+            <td>@o.CreatedAt.ToString("dd-MMM-yyyy HH:mm")</td>
+            <td><a asp-action="Details" asp-route-id="@o.Id" class="btn btn-sm btn-outline-primary">View</a></td>
+        </tr>
+    }
+    </tbody>
+</table>

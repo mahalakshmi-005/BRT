@@ -1,0 +1,301 @@
+<!-- Google Icons & Fonts CDN (Head section la illana add pannikonga) -->
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+    /* Premium Design System Custom CSS */
+    :root {
+        --brt-gold: #D4AF37;
+        --brt-gold-dark: #AA820A;
+        --dark-bg: #0F172A;
+        --card-bg: #FFFFFF;
+        --text-main: #1E293B;
+        --text-muted: #64748B;
+        --border-color: #E2E8F0;
+    }
+
+    body {
+        font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    /* Hero Section Innovation */
+    .premium-hero {
+        padding: 80px 0 60px;
+        background: radial-gradient(circle at top right, rgba(212, 175, 55, 0.08), transparent 40%), radial-gradient(circle at bottom left, rgba(15, 23, 42, 0.03), transparent 50%);
+        position: relative;
+    }
+
+    .hero-badge {
+        background: rgba(212, 175, 55, 0.1);
+        color: var(--brt-gold-dark);
+        padding: 6px 16px;
+        border-radius: 30px;
+        font-weight: 600;
+        font-size: 0.85rem;
+        display: inline-block;
+        margin-bottom: 1.5rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .premium-hero h1 {
+        font-weight: 800;
+        color: var(--dark-bg);
+        font-size: 2.8rem;
+        letter-spacing: -0.5px;
+    }
+
+    /* Feature Cards - Floating Minimal Design */
+    .innovative-grid .category-card {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 20px;
+        padding: 2.5rem 2rem;
+        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        position: relative;
+        overflow: hidden;
+        z-index: 1;
+    }
+
+        .innovative-grid .category-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--dark-bg) 0%, #1E293B 100%);
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .innovative-grid .category-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(15, 23, 42, 0.12);
+            border-color: transparent;
+        }
+
+            .innovative-grid .category-card:hover::before {
+                opacity: 1;
+            }
+
+    /* Icon Transformation */
+    .category-icon {
+        width: 60px;
+        height: 60px;
+        background: rgba(15, 23, 42, 0.04);
+        border-radius: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 1.8rem;
+        transition: all 0.4s ease;
+    }
+
+        .category-icon span {
+            font-size: 1.8rem;
+            color: var(--dark-bg);
+            transition: all 0.4s ease;
+        }
+
+    .category-card:hover .category-icon {
+        background: rgba(212, 175, 55, 0.2);
+    }
+
+        .category-card:hover .category-icon span {
+            color: var(--brt-gold);
+            transform: scale(1.1);
+        }
+
+    /* Text Toggles on Hover */
+    .category-card h5 {
+        font-weight: 700;
+        margin-bottom: 0.8rem;
+        color: var(--dark-bg);
+        transition: color 0.3s ease;
+    }
+
+    .category-card p {
+        color: var(--text-muted);
+        font-size: 0.95rem;
+        line-height: 1.6;
+        transition: color 0.3s ease;
+    }
+
+    .category-card:hover h5 {
+        color: #FFFFFF;
+    }
+
+    .category-card:hover p {
+        color: #94A3B8;
+    }
+
+    /* QA Process - Modern Horizontal Connected Pipeline Layout */
+    .qa-section-title {
+        font-weight: 800;
+        font-size: 2.2rem;
+        color: var(--dark-bg);
+        margin-bottom: 3.5rem;
+    }
+
+    .pipeline-wrapper {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 2rem;
+    }
+
+    .pipeline-node {
+        flex: 1;
+        min-width: 220px;
+        max-width: 260px;
+        text-align: center;
+        position: relative;
+    }
+
+    .info-icon-circle {
+        width: 80px;
+        height: 80px;
+        background: #F8FAFC;
+        border: 2px dashed rgba(212, 175, 55, 0.4);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 1.5rem;
+        position: relative;
+        transition: all 0.3s ease;
+        z-index: 2;
+    }
+
+        .info-icon-circle span {
+            font-size: 2.2rem;
+            color: var(--brt-gold-dark);
+        }
+
+    .pipeline-node h5 {
+        font-weight: 700;
+        font-size: 1.1rem;
+        color: var(--dark-bg);
+        margin-bottom: 0.5rem;
+    }
+
+    .pipeline-node p {
+        font-size: 0.88rem;
+        color: var(--text-muted);
+        line-height: 1.5;
+    }
+
+    /* Modern CTA Button */
+    .btn-brt-gold {
+        background: linear-gradient(135deg, var(--brt-gold) 0%, var(--brt-gold-dark) 100%);
+        color: #FFFFFF !important;
+        font-weight: 700;
+        padding: 14px 36px;
+        border-radius: 50px;
+        border: none;
+        letter-spacing: 0.5px;
+        box-shadow: 0 10px 20px rgba(212, 175, 55, 0.25);
+        transition: all 0.3s ease;
+    }
+
+        .btn-brt-gold:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(212, 175, 55, 0.4);
+        }
+</style>
+
+<section class="page-hero text-center premium-hero">
+    <div class="hero-badge">B2B Wholesale Partner</div>
+    <h1>Why Choose Us</h1>
+    <p class="text-muted max-w-2xl mx-auto col-md-6 mt-2">What makes BRT the trusted wholesale partner for dealers across the region</p>
+</section>
+
+<div class="container my-5">
+    <!-- Grid System with Hover Effects -->
+    <div class="row g-4 innovative-grid">
+        <div class="col-lg-4 col-md-6 fade-in-up">
+            <div class="category-card h-100">
+                <div class="category-icon"><span class="material-symbols-outlined">trending_up</span></div>
+                <h5>Live Market Pricing</h5>
+                <p>Today's price, yesterday's price, and the movement — updated daily so you always order at the real market rate.</p>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 fade-in-up">
+            <div class="category-card h-100">
+                <div class="category-icon"><span class="material-symbols-outlined">workspace_premium</span></div>
+                <h5>Graded Quality</h5>
+                <p>MP, Himachal &amp; Kashmir garlic sorted into clear grades — Bomb, Laddu, AAA, Bold and more — so quality is never a guess.</p>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 fade-in-up">
+            <div class="category-card h-100">
+                <div class="category-icon"><span class="material-symbols-outlined">inventory_2</span></div>
+                <h5>Bulk Packing Options</h5>
+                <p>30/50 KG bags, boxes, and packs sized to match how your business actually orders — no retail-sized shortcuts.</p>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 fade-in-up">
+            <div class="category-card h-100">
+                <div class="category-icon"><span class="material-symbols-outlined">handshake</span></div>
+                <h5>25+ Years of Trust</h5>
+                <p>Serving dealers, wholesalers, hotels and supermarkets since 2000 — a name the trade already knows.</p>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 fade-in-up">
+            <div class="category-card h-100">
+                <div class="category-icon"><span class="material-symbols-outlined">forum</span></div>
+                <h5>Direct WhatsApp Support</h5>
+                <p>Order updates, confirmations, and dispatch details — all communicated directly, no call centres.</p>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 fade-in-up">
+            <div class="category-card h-100">
+                <div class="category-icon"><span class="material-symbols-outlined">verified</span></div>
+                <h5>Admin-Verified Orders</h5>
+                <p>Every order is personally reviewed and confirmed before dispatch — accuracy over automation.</p>
+            </div>
+        </div>
+    </div>
+
+    <hr class="my-5 opacity-25" />
+
+    <!-- Quality Assurance Workflow Pipeline Layout -->
+    <h3 class="qa-section-title text-center fade-in-up">Our Quality Assurance Process</h3>
+
+    <div class="pipeline-wrapper my-4">
+        <div class="pipeline-node fade-in-up">
+            <div class="info-icon-circle"><span class="material-symbols-outlined">agriculture</span></div>
+            <h5>Fresh Sourcing</h5>
+            <p>Garlic and spices sourced directly from trusted growing regions — MP, Himachal, Kashmir.</p>
+        </div>
+
+        <div class="pipeline-node fade-in-up">
+            <div class="info-icon-circle"><span class="material-symbols-outlined">cleaning_services</span></div>
+            <h5>Hygienic Handling</h5>
+            <p>Every batch is handled and packed under clean, controlled conditions from mandi to dispatch.</p>
+        </div>
+
+        <div class="pipeline-node fade-in-up">
+            <div class="info-icon-circle"><span class="material-symbols-outlined">fact_check</span></div>
+            <h5>Quality Inspection</h5>
+            <p>Each grade is checked and sorted before it reaches the shelf — Bomb, Laddu, AAA, Bold.</p>
+        </div>
+
+        <div class="pipeline-node fade-in-up">
+            <div class="info-icon-circle"><span class="material-symbols-outlined">warehouse</span></div>
+            <h5>Proper Storage</h5>
+            <p>Dry, ventilated storage that preserves freshness and prevents spoilage before your order ships.</p>
+        </div>
+
+        <div class="pipeline-node fade-in-up">
+            <div class="info-icon-circle"><span class="material-symbols-outlined">local_shipping</span></div>
+            <h5>Timely Delivery</h5>
+            <p>Orders confirmed and dispatched on schedule, with clear communication at every step.</p>
+        </div>
+    </div>
+
+    <div class="text-center mt-5 pt-3 fade-in-up">
+        <a asp-controller="Catalog" asp-action="Index" class="btn btn-brt-gold px-5 py-3 text-uppercase fs-6">Browse Wholesale Products</a>
+    </div>
+</div>

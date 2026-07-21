@@ -1,0 +1,120 @@
+<div class="container my-5 text-center fade-in-up" style="max-width: 650px; padding: 60px 20px;">
+    <!-- ===== Google Fonts & Icons ===== -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0..1,0" />
+
+    <style>
+        :root {
+            --brt-bg-cream: #FFFDF9;
+            --brt-dark-navy: #111827;
+            --brt-gold-text: #B38F43;
+            --brt-gold-bg: #FBF4E4;
+            --text-headline: #111827;
+            --text-body: #6B7280;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--brt-bg-cream);
+        }
+
+        /* EXACT ORB ICON MATCH FROM YOUR SYSTEM */
+        .success-icon-orb {
+            width: 80px;
+            height: 80px;
+            background-color: var(--brt-gold-bg);
+            border: 1px solid rgba(179, 143, 67, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 30px auto;
+            box-shadow: 0 10px 25px rgba(179, 143, 67, 0.1);
+        }
+        .success-icon-orb span {
+            color: var(--brt-gold-text);
+            font-size: 3rem;
+            font-variation-settings: 'FILL' 1;
+        }
+
+        /* TYPOGRAPHY MATCHING PLAYFAIR SYSTEM */
+        .success-title {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 2.8rem;
+            color: var(--text-headline);
+            letter-spacing: -0.02em;
+        }
+
+        .order-badge-ticker {
+            display: inline-block;
+            background-color: #FFFFFF;
+            border: 1px solid #E5E7EB;
+            padding: 8px 20px;
+            border-radius: 100px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: var(--text-headline);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.01);
+        }
+
+        .success-desc {
+            color: var(--text-body);
+            font-size: 1.1rem;
+            line-height: 1.6;
+            max-width: 520px;
+            margin: 0 auto;
+        }
+
+        /* EXACT DARK ACCENT BUTTON MATCH */
+        .btn-brt-dark-home {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background-color: var(--brt-dark-navy);
+            color: #FFFFFF !important;
+            font-weight: 600;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+            padding: 14px 32px;
+            border: none;
+            border-radius: 10px;
+            text-decoration: none !important;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 12px rgba(17, 24, 39, 0.1);
+        }
+        .btn-brt-dark-home:hover {
+            background-color: #1F2937;
+            transform: translateY(-1px);
+        }
+
+        .fade-in-up {
+            animation: brtSuccessFade 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        @Html.Raw("@keyframes brtSuccessFade { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }")
+    </style>
+
+    <!-- Success Orb Identifier -->
+    <div class="success-icon-orb">
+        <span class="material-symbols-outlined">check_circle</span>
+    </div>
+
+    <!-- Title and Manifest Tracker -->
+    <h2 class="success-title mt-3 mb-3">Order Request Submitted!</h2>
+    
+    <div class="mb-4">
+        <div class="order-badge-ticker">
+            Order Number: <span style="color: var(--brt-gold-text); font-weight: 700;">@ViewBag.OrderNumber</span>
+        </div>
+    </div>
+
+    <p class="success-desc mb-5">
+        Our admin will review your request and confirm pricing &amp; dispatch details shortly via WhatsApp / phone call.
+    </p>
+
+    <!-- Action Pipeline Trigger -->
+    <a asp-controller="Home" asp-action="Index" class="btn-brt-dark-home">
+        <span class="material-symbols-outlined" style="font-size: 1.1rem;">arrow_back</span>
+        Back to Home
+    </a>
+</div>

@@ -1,0 +1,380 @@
+@{
+    ViewData["Title"] = "Home";
+}
+
+<!-- ===== Announcement Bar ===== -->
+<div class="announcement-bar">
+    <div class="container">
+        <span class="announcement-badges">
+            <span><span class="material-symbols-outlined">verified</span>GST Included</span>
+            <span><span class="material-symbols-outlined">local_shipping</span>Transport Extra</span>
+            <span><span class="material-symbols-outlined">calendar_month</span>Since 2000</span>
+        </span>
+        <a href="tel:9865680694"><span class="material-symbols-outlined">call</span>9865680694</a>
+    </div>
+</div>
+
+<!-- ===== Premium Hero ===== -->
+<section class="hero-modern">
+    <div class="hero-inner container">
+        <div class="hero-content fade-in-up is-visible">
+            <span class="hero-trust-badge"><span class="material-symbols-outlined">workspace_premium</span> Trusted Since 2000</span>
+            <h1>B RAJ TRADERS</h1>
+            <p class="hero-tagline">Garlic &amp; Grocery Commission Mandi<br class="d-none d-md-block" /> Trusted Dealer-to-Dealer Wholesale Supplier</p>
+
+            <blockquote class="hero-quote">
+                <span class="quote-mark">&ldquo;</span>
+                Purity in every clove, trust in every deal.
+                <span class="quote-mark">&rdquo;</span>
+            </blockquote>
+
+            <div class="hero-cta">
+                <a asp-controller="Order" asp-action="Request" class="btn btn-hero-gold">Request Wholesale Quote</a>
+                <a asp-controller="Catalog" asp-action="Index" class="btn btn-hero-outline">Explore Products</a>
+            </div>
+
+            <div class="hero-inline-stats">
+                <div><div class="stat-num">25+</div><div class="stat-label">Years</div></div>
+                <div><div class="stat-num">500+</div><div class="stat-label">Dealers</div></div>
+                <div><div class="stat-num">30+</div><div class="stat-label">Products</div></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Premium Products Showcase ===== -->
+@{
+    var featured = (List<BRT.Models.Product>)ViewBag.FeaturedProducts;
+}
+@if (featured != null && featured.Any())
+{
+    <section class="container my-5 py-3">
+        <div class="text-center mb-5 fade-in-up">
+            <span class="hero-eyebrow" style="color:var(--brt-gold)"><span class="material-symbols-outlined">eco</span> OUR PRODUCTS</span>
+            <h2 class="mt-2" style="color:var(--brt-green)">Premium Wholesale Products</h2>
+            <p class="text-muted mx-auto" style="max-width:600px">High quality garlic and grocery products directly supplied for wholesale buyers, supermarkets, hotels and distributors.</p>
+        </div>
+        <div class="row g-4">
+            @foreach (var p in featured)
+            {
+                <div class="col-md-4 fade-in-up">
+                    <div class="premium-card">
+                        <div class="premium-card-media">
+                            @if (!string.IsNullOrEmpty(p.ImageUrl))
+                            {
+                                <img src="@p.ImageUrl" alt="@p.Name" />
+                            }
+                            else
+                            {
+                                <span class="material-symbols-outlined">@(p.SubCategory?.Category?.Type == BRT.Models.CategoryType.Garlic ? "eco" : "restaurant")</span>
+                            }
+                        </div>
+                        <div class="premium-card-body">
+                            <span class="premium-card-tag">@p.SubCategory?.Name</span>
+                            <h4>
+                                <span class="lang-en-text">@p.Name</span>
+                                @if (!string.IsNullOrEmpty(p.NameTamil))
+                                {
+                                    <span class="lang-ta-text">@p.NameTamil</span>
+                                }
+                            </h4>
+                            <p>@(string.IsNullOrEmpty(p.Description) ? "Premium quality, available in bulk wholesale packing." : p.Description)</p>
+                            <div class="premium-card-footer">
+                                <span class="text-muted small">Bulk Orders</span>
+                                <a asp-controller="Catalog" asp-action="Product" asp-route-slug="@p.Slug">View <span class="material-symbols-outlined" style="font-size:1rem">arrow_forward</span></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="text-center mt-4 fade-in-up">
+            <a asp-controller="Catalog" asp-action="Index" class="btn btn-brt-gold">View More Products</a>
+        </div>
+    </section>
+}
+
+<!-- ===== Live Market Dashboard ===== -->
+@{
+    var dashboard = (List<BRT.Models.MarketPrice>)ViewBag.MarketDashboard;
+}
+<section class="container my-5 py-3">
+    <div class="market-dashboard-section fade-in-up">
+        <div class="text-center mb-5">
+            <span class="hero-eyebrow" style="color:var(--brt-gold)"><span class="material-symbols-outlined">trending_up</span> LIVE MARKET</span>
+            <h2 class="mt-2" style="color:var(--brt-green)">Today's Wholesale Market</h2>
+            <p class="text-muted mx-auto" style="max-width:600px">Prices are updated daily. Final quotation will be confirmed by our team before dispatch.</p>
+        </div>
+        <div class="row g-4">
+            @if (dashboard != null && dashboard.Any())
+            {
+                foreach (var m in dashboard)
+                {
+                    <div class="col-md-3 col-6">
+                        <div class="market-card">
+                            <div class="market-card-icon"><span class="material-symbols-outlined">@(m.Product!.SubCategory?.Category?.Type == BRT.Models.CategoryType.Garlic ? "eco" : "restaurant")</span></div>
+                            <h5>@m.Product.Name</h5>
+                            <small>₹@m.TodayPrice.ToString("F2") / unit</small>
+                            <div class="market-card-footer">
+                                <span>Updated Today</span>
+                                <span class="material-symbols-outlined" style="font-size:1rem;color:var(--brt-gold)">verified</span>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+            <div class="col-md-3 col-6">
+                <div class="market-card market-cta">
+                    <span class="material-symbols-outlined" style="font-size:2rem;margin-bottom:0.6rem">forum</span>
+                    <h5>Need Today's Price?</h5>
+                    <p class="small">Contact our team for live wholesale quotation.</p>
+                    <a asp-controller="Order" asp-action="Request" class="btn btn-sm btn-hero-gold mt-2">Request Quote</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Why Choose BRT (condensed) ===== -->
+<section class="container my-5 py-3">
+    <div class="row g-5 align-items-center">
+        <div class="col-lg-6 fade-in-up">
+            <span class="hero-eyebrow" style="color:var(--brt-gold)"><span class="material-symbols-outlined">handshake</span> WHY CHOOSE BRT</span>
+            <h2 class="mt-2 mb-3" style="color:var(--brt-green)">Trusted Wholesale Partner Since 2000</h2>
+            <p class="text-muted mb-4">We provide premium quality garlic and grocery products with transparent pricing, dependable delivery, and long-term dealer relationships.</p>
+            <ul class="list-unstyled mb-4">
+                <li class="mb-2"><span class="material-symbols-outlined" style="color:var(--brt-gold);font-size:1.1rem">check_circle</span> Premium Grade Products</li>
+                <li class="mb-2"><span class="material-symbols-outlined" style="color:var(--brt-gold);font-size:1.1rem">check_circle</span> Live Wholesale Pricing</li>
+                <li class="mb-2"><span class="material-symbols-outlined" style="color:var(--brt-gold);font-size:1.1rem">check_circle</span> Best Products </li>
+                <li class="mb-2"><span class="material-symbols-outlined" style="color:var(--brt-gold);font-size:1.1rem">check_circle</span> Fast Dispatch &amp; Trusted Dealer Network</li>
+            </ul>
+            <a asp-controller="Home" asp-action="WhyChooseUs" class="btn btn-brt-gold">See Full Details</a>
+        </div>
+        <div class="col-lg-6">
+            <div class="row g-3">
+                <div class="col-6 fade-in-up">
+                    <div class="category-card h-100 text-center">
+                        <div class="category-icon mx-auto"><span class="material-symbols-outlined">workspace_premium</span></div>
+                        <h6 class="fw-bold" style="color:var(--brt-green)">Premium Quality</h6>
+                        <p class="text-muted small mb-0">Carefully graded, consistent quality</p>
+                    </div>
+                </div>
+                <div class="col-6 fade-in-up">
+                    <div class="category-card h-100 text-center">
+                        <div class="category-icon mx-auto"><span class="material-symbols-outlined">local_shipping</span></div>
+                        <h6 class="fw-bold" style="color:var(--brt-green)">Reliable Delivery</h6>
+                        <p class="text-muted small mb-0">Safe packing, timely transport</p>
+                    </div>
+                </div>
+                <div class="col-6 fade-in-up">
+                    <div class="category-card h-100 text-center">
+                        <div class="category-icon mx-auto"><span class="material-symbols-outlined">trending_up</span></div>
+                        <h6 class="fw-bold" style="color:var(--brt-green)">Market Pricing</h6>
+                        <p class="text-muted small mb-0">Updated on live market trends</p>
+                    </div>
+                </div>
+                <div class="col-6 fade-in-up">
+                    <div class="category-card h-100 text-center">
+                        <div class="category-icon mx-auto"><span class="material-symbols-outlined">support_agent</span></div>
+                        <h6 class="fw-bold" style="color:var(--brt-green)">Dedicated Support</h6>
+                        <p class="text-muted small mb-0">Direct WhatsApp assistance</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Category Spotlight (bento showcase) ===== -->
+<section class="container my-5 py-3">
+    <div class="text-center mb-5 fade-in-up">
+        <span class="hero-eyebrow" style="color:var(--brt-gold)"><span class="material-symbols-outlined">grid_view</span> EXPLORE</span>
+        <h2 class="mt-2" style="color:var(--brt-green)">What We Supply</h2>
+        <p class="text-muted mx-auto" style="max-width:600px">From bulk garlic to everyday grocery essentials — explore our full wholesale &amp; retail range.</p>
+    </div>
+    <div class="cat-spotlight-grid stagger-group">
+        <a asp-controller="Catalog" asp-action="Garlic" class="cat-spotlight-card cat-spotlight-lg" style="--cat-bg: linear-gradient(135deg, #2c2013, #4a3620);">
+            <span class="cat-spotlight-icon"><span class="material-symbols-outlined">eco</span></span>
+            <div class="cat-spotlight-body">
+                <span class="cat-spotlight-tag">Wholesale</span>
+                <h3>Garlic</h3>
+                <p>Big &amp; small varieties, graded for bulk buyers</p>
+                <span class="cat-spotlight-cta">Explore Garlic <span class="material-symbols-outlined">arrow_forward</span></span>
+            </div>
+        </a>
+        <a asp-controller="Catalog" asp-action="Grocery" class="cat-spotlight-card cat-spotlight-lg" style="--cat-bg: linear-gradient(135deg, #1c2530, #141a22);">
+            <span class="cat-spotlight-icon"><span class="material-symbols-outlined">restaurant</span></span>
+            <div class="cat-spotlight-body">
+                <span class="cat-spotlight-tag">Wholesale</span>
+                <h3>Grocery</h3>
+                <p>Pulses, spices &amp; everyday grocery staples</p>
+                <span class="cat-spotlight-cta">Explore Grocery <span class="material-symbols-outlined">arrow_forward</span></span>
+            </div>
+        </a>
+        <a asp-controller="Catalog" asp-action="Loose" class="cat-spotlight-card cat-spotlight-sm" style="--cat-bg: linear-gradient(135deg, #3a2f1c, #241d11);">
+            <span class="cat-spotlight-icon"><span class="material-symbols-outlined">inventory_2</span></span>
+            <div class="cat-spotlight-body">
+                <span class="cat-spotlight-tag">Retail</span>
+                <h3>Loose Packs</h3>
+                <span class="cat-spotlight-cta">View <span class="material-symbols-outlined">arrow_forward</span></span>
+            </div>
+        </a>
+        <a asp-controller="Order" asp-action="Request" class="cat-spotlight-card cat-spotlight-sm cat-spotlight-cta-card" style="--cat-bg: linear-gradient(135deg, var(--brt-gold), #8f7038);">
+            <span class="cat-spotlight-icon"><span class="material-symbols-outlined">handshake</span></span>
+            <div class="cat-spotlight-body">
+                <span class="cat-spotlight-tag">Dealer</span>
+                <h3>Bulk Supply</h3>
+                <span class="cat-spotlight-cta">Request Quote <span class="material-symbols-outlined">arrow_forward</span></span>
+            </div>
+        </a>
+    </div>
+</section>
+
+<!-- ===== Industries We Serve ===== -->
+<section class="container my-5 py-3">
+    <div class="text-center mb-5 fade-in-up">
+        <span class="hero-eyebrow" style="color:var(--brt-gold)"><span class="material-symbols-outlined">domain</span> INDUSTRIES WE SERVE</span>
+        <h2 class="mt-2" style="color:var(--brt-green)">Serving Every Business Segment</h2>
+    </div>
+    <div class="row g-3">
+        <div class="col-6 col-md-3 fade-in-up"><div class="industry-card-sm"><span class="material-symbols-outlined">local_grocery_store</span><h6>Supermarkets</h6></div></div>
+        <div class="col-6 col-md-3 fade-in-up"><div class="industry-card-sm"><span class="material-symbols-outlined">storefront</span><h6>Grocery Stores</h6></div></div>
+        <div class="col-6 col-md-3 fade-in-up"><div class="industry-card-sm"><span class="material-symbols-outlined">shopping_bag</span><h6>Retail Shops</h6></div></div>
+        <div class="col-6 col-md-3 fade-in-up"><div class="industry-card-sm"><span class="material-symbols-outlined">hotel</span><h6>Hotels</h6></div></div>
+        <div class="col-6 col-md-3 fade-in-up"><div class="industry-card-sm"><span class="material-symbols-outlined">restaurant</span><h6>Restaurants</h6></div></div>
+        <div class="col-6 col-md-3 fade-in-up"><div class="industry-card-sm"><span class="material-symbols-outlined">soup_kitchen</span><h6>Catering Services</h6></div></div>
+        <div class="col-6 col-md-3 fade-in-up"><div class="industry-card-sm"><span class="material-symbols-outlined">public</span><h6>Exporters</h6></div></div>
+        <div class="col-6 col-md-3 fade-in-up"><div class="industry-card-sm"><span class="material-symbols-outlined">location_on</span><h6>Pan-India + Direct Supply to Pondicherry</h6></div></div>
+    </div>
+</section>
+
+<!-- ===== Statistics Counter ===== -->
+<section class="container my-5 py-3">
+    <div class="stats-counter-section fade-in-up">
+        <div class="text-center mb-4">
+            <span class="hero-eyebrow" style="color:var(--brt-gold-light)"><span class="material-symbols-outlined">emoji_events</span> OUR ACHIEVEMENTS</span>
+            <h2 class="mt-2" style="color:#fff">Trusted by Wholesale Buyers Since 2000</h2>
+        </div>
+        <div class="stats-counter-grid">
+            <div class="stats-counter-card">
+                <span class="material-symbols-outlined">calendar_month</span>
+                <h3 class="counter" data-target="25">25+</h3>
+                <span>Years Experience</span>
+            </div>
+            <div class="stats-counter-card">
+                <span class="material-symbols-outlined">groups</span>
+                <h3 class="counter" data-target="500">5000+</h3>
+                <span>Happy Customers</span>
+            </div>
+            <div class="stats-counter-card">
+                <span class="material-symbols-outlined">handshake</span>
+                <h3 class="counter" data-target="50">300+</h3>
+                <span>Dealers</span>
+            </div>
+            <div class="stats-counter-card">
+                <span class="material-symbols-outlined">local_shipping</span>
+                <h3 class="counter" data-target="5000">15000+</h3>
+                <span>Tons Supplied</span>
+            </div>
+            <div class="stats-counter-card">
+                <span class="material-symbols-outlined">map</span>
+                <h3 class="counter" data-target="15">50+</h3>
+                <span>Districts Served</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Bulk Enquiry CTA ===== -->
+<section class="container my-5 py-3">
+    <div class="bulk-cta-section fade-in-up">
+        <div class="row g-4 align-items-center">
+            <div class="col-lg-7">
+                <span class="hero-eyebrow" style="color:var(--brt-gold-light)"><span class="material-symbols-outlined">local_shipping</span> BULK ORDERS ONLY</span>
+                <h2 class="mt-2 mb-3" style="color:#fff">Need Wholesale Garlic &amp; Grocery Supply?</h2>
+                <p class="mb-0" style="opacity:0.9">Looking for premium quality garlic and grocery products at competitive wholesale prices? Contact BRT today for the latest market quotation.</p>
+                <div class="bulk-cta-points">
+                    <div><span class="material-symbols-outlined">check_circle</span> Premium Quality</div>
+                    <div><span class="material-symbols-outlined">check_circle</span> Live Market Price</div>
+                    <div><span class="material-symbols-outlined">check_circle</span> Bulk Orders Only</div>
+                    <div><span class="material-symbols-outlined">check_circle</span> Trusted Since 2000</div>
+                </div>
+            </div>
+            <div class="col-lg-5">
+                <div class="bulk-cta-card">
+                    <h4>Contact Our Sales Team</h4>
+                    <p>Get today's wholesale quotation instantly.</p>
+                    <a asp-controller="Order" asp-action="Request" class="btn btn-brt-gold">Request Quote</a>
+                    <a href="https://api.whatsapp.com/send?phone=919865680694" class="btn btn-brt-outline-dark">WhatsApp Now</a>
+                    <a href="tel:9865680694" class="btn btn-outline-secondary">
+                        <span class="material-symbols-outlined" style="font-size:1rem">call</span> Call Now
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@if (ViewBag.Testimonials != null && ((IEnumerable<BRT.Models.Testimonial>)ViewBag.Testimonials).Any())
+{
+    <section class="container my-5 py-3">
+        <h3 class="section-title fade-in-up">What Dealers Say</h3>
+        <div class="row g-4">
+            @foreach (var t in (IEnumerable<BRT.Models.Testimonial>)ViewBag.Testimonials)
+            {
+                <div class="col-md-4 fade-in-up">
+                    <div class="testimonial-card">
+                        <div class="stars">
+                            @for (int s = 0; s < 5; s++)
+                            {
+                                var fillStyle = s < t.Rating ? "font-variation-settings:'FILL' 1" : "font-variation-settings:'FILL' 0";
+                                <span class="material-symbols-outlined" style="@fillStyle">star</span>
+                            }
+                        </div>
+                        <p>&ldquo;@t.Message&rdquo;</p>
+                        <strong>@t.DealerName</strong>
+                        <div class="text-muted small">@t.BusinessName @(!string.IsNullOrEmpty(t.City) ? $", {t.City}" : "")</div>
+                    </div>
+                </div>
+            }
+        </div>
+    </section>
+}
+
+@if (ViewBag.FAQs != null && ((IEnumerable<BRT.Models.FAQ>)ViewBag.FAQs).Any())
+{
+    <section class="container my-5 py-3">
+        <h3 class="section-title fade-in-up">Frequently Asked Questions</h3>
+        <div class="accordion fade-in-up" id="faqAccordion">
+            @{
+                int i = 0;
+            }
+            @foreach (var f in (IEnumerable<BRT.Models.FAQ>)ViewBag.FAQs)
+            {
+                i++;
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq@(i)">
+                            @f.Question
+                        </button>
+                    </h2>
+                    <div id="faq@(i)" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">@f.Answer</div>
+                    </div>
+                </div>
+            }
+        </div>
+    </section>
+}
+
+<section class="container my-5 py-3">
+    <div class="disclaimer-box fade-in-up">
+        <span class="disclaimer-item"><span class="material-symbols-outlined">check_circle</span> Bulk Orders Preferred</span>
+        <span class="disclaimer-item"><span class="material-symbols-outlined">check_circle</span> Garlic Wholesale</span>
+        <span class="disclaimer-item"><span class="material-symbols-outlined">check_circle</span> Grocery Wholesale</span>
+        <span class="disclaimer-item"><span class="material-symbols-outlined">check_circle</span> Live Market Prices</span>
+        <span class="disclaimer-item"><span class="material-symbols-outlined">check_circle</span> GST/Tax Included</span>
+        <span class="disclaimer-item"><span class="material-symbols-outlined">check_circle</span> Transport Extra if Applicable</span>
+        <span class="disclaimer-item"><span class="material-symbols-outlined">check_circle</span> Admin will Confirmed Dispatch</span>
+    </div>
+</section>

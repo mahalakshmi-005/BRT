@@ -1,0 +1,76 @@
+@model OrderRequest
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Order " + Model.OrderNumber;
+}
+<h3 class="mb-4">Order @Model.OrderNumber</h3>
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">@TempData["Success"]</div>
+}
+
+<div class="row g-4">
+    <div class="col-md-7">
+        <div class="admin-card mb-3">
+            <h5>Buyer Details</h5>
+            <p class="mb-1"><strong>@Model.BuyerName</strong> — @Model.BusinessName</p>
+            <p class="mb-1"><span class="material-symbols-outlined" style="font-size:1rem">call</span> <a href="tel:@Model.PhoneNumber">@Model.PhoneNumber</a> &nbsp;
+               <a href="https://api.whatsapp.com/send?phone=91@Model.PhoneNumber" target="_blank">WhatsApp</a></p>
+            @if (!string.IsNullOrEmpty(Model.BuyerAddress)) { <p class="mb-1">@Model.BuyerAddress, @Model.City</p> }
+        </div>
+
+        <div class="admin-card mb-3">
+            <h5>Order Items</h5>
+            <table class="table table-sm">
+                <thead><tr><th>Product</th><th>Packing</th><th>Qty</th><th>Price</th><th>Est.</th></tr></thead>
+                <tbody>
+                @foreach (var item in Model.Items)
+                {
+                    <tr>
+                        <td>@item.Product?.Name</td>
+                        <td>@item.PackingType?.PackSize</td>
+                        <td>@item.Quantity</td>
+                        <td>@item.PriceAtOrderTime.ToString("F2")</td>
+                        <td>@item.LineEstimate.ToString("F2")</td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+            <p><strong>Total Estimate: ₹@Model.TotalEstimatedAmount.ToString("F2")</strong> @(Model.TransportChargeApplicable ? "(+ transport)" : "")</p>
+        </div>
+
+        <div class="admin-card">
+            <h5>Status History</h5>
+            <ul class="list-unstyled mb-0">
+            @foreach (var h in Model.StatusHistory.OrderByDescending(x => x.ChangedAt))
+            {
+                <li class="mb-1"><small>@h.ChangedAt.ToString("dd-MMM HH:mm") — @h.OldStatus → <strong>@h.NewStatus</strong> @(h.Remarks != null ? $"({h.Remarks})" : "")</small></li>
+            }
+            </ul>
+        </div>
+    </div>
+
+    <div class="col-md-5">
+        <div class="admin-card">
+            <h5>Update Status</h5>
+            <form asp-action="UpdateStatus" asp-route-id="@Model.Id" method="post">
+                @Html.AntiForgeryToken()
+                <div class="mb-3">
+                    <label class="form-label">New Status</label>
+                    <select name="newStatus" class="form-select" asp-items="Html.GetEnumSelectList<OrderStatus>()">
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Expected Dispatch Date</label>
+                    <input type="date" name="expectedDispatchDate" class="form-control" />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Remarks</label>
+                    <textarea name="remarks" class="form-control" rows="3"></textarea>
+                </div>
+                <button class="btn btn-brt w-100">Update Status</button>
+            </form>
+        </div>
+    </div>
+</div>

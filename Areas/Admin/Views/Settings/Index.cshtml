@@ -1,0 +1,36 @@
+@model List<SiteSetting>
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Settings";
+}
+<h3 class="mb-4">Site Settings</h3>
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">@TempData["Success"]</div>
+}
+
+<div class="admin-card" style="max-width:600px">
+    <form asp-action="Update" method="post">
+        @Html.AntiForgeryToken()
+        @foreach (var s in Model)
+        {
+            <div class="mb-3">
+                <label class="form-label">@s.Key</label>
+                <input type="hidden" name="ids" value="@s.Id" />
+                <input type="text" name="values" class="form-control" value="@s.Value" />
+            </div>
+        }
+        <button class="btn btn-brt">Save All</button>
+    </form>
+</div>
+
+<div class="admin-card mt-4" style="max-width:600px">
+    <h5>Add New Setting</h5>
+    <form asp-action="AddSetting" method="post" class="row g-2">
+        @Html.AntiForgeryToken()
+        <div class="col-md-5"><input name="key" class="form-control" placeholder="Key" required /></div>
+        <div class="col-md-5"><input name="value" class="form-control" placeholder="Value" required /></div>
+        <div class="col-md-2"><button class="btn btn-brt w-100">Add</button></div>
+    </form>
+</div>

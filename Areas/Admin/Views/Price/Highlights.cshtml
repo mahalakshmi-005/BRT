@@ -1,0 +1,45 @@
+@model List<MarketHighlight>
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Market Highlights";
+}
+<h3 class="mb-4">Today's Market Highlights</h3>
+<p class="text-muted">These appear on the homepage — e.g. "MP Garlic ↑", "Jeera ↓", "Cardamom Fresh Stock".</p>
+
+<div class="admin-card mb-4" style="max-width:600px">
+    <form asp-action="AddHighlight" method="post" class="row g-2">
+        @Html.AntiForgeryToken()
+        <div class="col-md-4">
+            <select name="productId" class="form-select" asp-items="ViewBag.Products"></select>
+        </div>
+        <div class="col-md-4">
+            <input name="highlightText" class="form-control" placeholder="e.g. MP Garlic ↑" required />
+        </div>
+        <div class="col-md-3">
+            <select name="trendDirection" class="form-select" asp-items="Html.GetEnumSelectList<TrendDirection>()"></select>
+        </div>
+        <div class="col-md-1">
+            <button class="btn btn-brt">Add</button>
+        </div>
+    </form>
+</div>
+
+<table class="table table-hover bg-white">
+    <thead><tr><th>Text</th><th>Trend</th><th>Date</th><th></th></tr></thead>
+    <tbody>
+    @foreach (var h in Model)
+    {
+        <tr>
+            <td>@h.HighlightText</td>
+            <td>@h.TrendDirection</td>
+            <td>@h.DisplayDate.ToString("dd-MMM-yyyy")</td>
+            <td>
+                <form asp-action="DeleteHighlight" asp-route-id="@h.Id" method="post" onsubmit="return confirm('Remove?');">
+                    @Html.AntiForgeryToken()
+                    <button class="btn btn-sm btn-link text-danger">Remove</button>
+                </form>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

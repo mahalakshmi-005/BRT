@@ -1,0 +1,352 @@
+@{
+    // லேஅவுட்டை மீண்டும் இணைக்கிறோம், இதனால் Nav பார் மற்றும் Footer வந்துவிடும்
+    Layout = "_Layout";
+}
+
+<!-- Premium Corporate Fonts Core Setup -->
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Cinzel:wght@600;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+<style>
+    :root {
+        --brt-gold: #D4AF37;
+        --brt-gold-glow: rgba(212, 175, 55, 0.15);
+        --dark-corporate: #0F172A;
+        --text-main: #1E293B;
+        --text-muted: #64748B;
+        --border-refined: rgba(226, 232, 240, 0.9);
+        --bg-light: #F8FAFC;
+    }
+
+    body {
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        background-color: #FCFCFD;
+        color: var(--text-main);
+    }
+
+        /* DYNAMIC LANGUAGE SWITCH SYSTEM WITH LAYOUT INTEGRATION */
+        html[lang="en"] .lang-en, body[lang="en"] .lang-en {
+            display: inline-block !important;
+        }
+
+        html[lang="en"] .lang-ta, body[lang="en"] .lang-ta {
+            display: none !important;
+        }
+
+        html[lang="ta"] .lang-en, body[lang="ta"] .lang-en {
+            display: none !important;
+        }
+
+        html[lang="ta"] .lang-ta, body[lang="ta"] .lang-ta {
+            display: inline-block !important;
+        }
+
+    .corporate-hero-block {
+        background: radial-gradient(100% 100% at 50% 0%, rgba(212, 175, 55, 0.04) 0%, rgba(255, 255, 255, 0) 100%), var(--bg-light);
+        padding: 100px 20px 80px 20px;
+        position: relative;
+        border-bottom: 1px solid var(--border-refined);
+        text-align: center;
+    }
+
+        .corporate-hero-block::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--brt-gold), transparent);
+        }
+
+    .hero-corporate-title {
+        font-family: 'Cinzel', serif;
+        font-weight: 900;
+        font-size: 3.5rem;
+        color: var(--dark-corporate);
+        letter-spacing: 2px;
+        margin-bottom: 18px;
+    }
+
+    .hero-corporate-subtitle {
+        font-size: 1.1rem;
+        color: var(--text-muted);
+        max-width: 650px;
+        margin: 0 auto;
+        font-weight: 500;
+        line-height: 1.6;
+    }
+
+    .wholesale-corporate-link {
+        text-decoration: none !important;
+        display: block;
+        perspective: 1000px;
+    }
+
+    .b2b-catalog-card {
+        background: #FFFFFF;
+        border: 1px solid var(--border-refined);
+        border-radius: 24px;
+        padding: 48px;
+        height: 100%;
+        position: relative;
+        box-shadow: 0 10px 30px -10px rgba(15, 23, 42, 0.03);
+        transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .card-meta-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 28px;
+    }
+
+    .live-ticker-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 6px 14px;
+        background: #F8FAFC;
+        border: 1px solid #E2E8F0;
+        border-radius: 100px;
+        font-size: 0.72rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: var(--dark-corporate);
+    }
+
+        .live-ticker-pill span.blink-dot {
+            width: 6px;
+            height: 6px;
+            background: #10B981;
+            border-radius: 50%;
+            animation: tickerBlink 1.8s infinite;
+        }
+
+    .b2b-avatar-holder {
+        position: relative;
+        width: 96px;
+        height: 96px;
+    }
+
+    .b2b-avatar-glow-ring {
+        position: absolute;
+        inset: -4px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--brt-gold), transparent);
+        opacity: 0;
+        transition: opacity 0.5s ease;
+        z-index: 1;
+    }
+
+    .b2b-image-avatar-frame {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        overflow: hidden;
+        border: 1px solid rgba(15, 23, 42, 0.08);
+        background: #FAFAFA;
+        position: relative;
+        z-index: 2;
+        transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+        box-shadow: 0 8px 20px -6px rgba(0,0,0,0.1);
+    }
+
+        .b2b-image-avatar-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+    .wholesale-corporate-link:hover .b2b-catalog-card {
+        transform: translateY(-8px) scale(1.01);
+        border-color: rgba(212, 175, 55, 0.4);
+        box-shadow: 0 30px 60px -15px rgba(15, 23, 42, 0.08), 0 0 50px -10px var(--brt-gold-glow);
+    }
+
+    .wholesale-corporate-link:hover .b2b-avatar-glow-ring {
+        opacity: 1;
+    }
+
+    .wholesale-corporate-link:hover .b2b-image-avatar-frame {
+        transform: scale(1.05);
+    }
+
+        .wholesale-corporate-link:hover .b2b-image-avatar-frame img {
+            transform: scale(1.12) rotate(3deg);
+        }
+
+    .b2b-card-title {
+        font-family: 'Cinzel', serif;
+        font-weight: 700;
+        font-size: 1.9rem;
+        color: var(--dark-corporate);
+        margin-bottom: 14px;
+        transition: color 0.3s ease;
+    }
+
+    .wholesale-corporate-link:hover .b2b-card-title {
+        color: #B59226;
+    }
+
+    .b2b-card-desc {
+        font-size: 0.98rem;
+        color: var(--text-muted);
+        line-height: 1.7;
+        margin-bottom: 35px;
+        font-weight: 400;
+    }
+
+    .b2b-action-trigger {
+        display: inline-flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        padding-top: 24px;
+        border-top: 1px dashed #E2E8F0;
+        font-size: 0.85rem;
+        font-weight: 800;
+        color: var(--dark-corporate);
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        transition: all 0.3s ease;
+    }
+
+    .btn-circle-arrow {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background: #F1F5F9;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+
+        .btn-circle-arrow span.material-symbols-outlined {
+            font-size: 1.2rem;
+            color: var(--dark-corporate);
+            transition: transform 0.3s ease;
+        }
+
+    .wholesale-corporate-link:hover .b2b-action-trigger {
+        color: #B59226;
+    }
+
+    .wholesale-corporate-link:hover .btn-circle-arrow {
+        background: var(--dark-corporate);
+    }
+
+        .wholesale-corporate-link:hover .btn-circle-arrow span.material-symbols-outlined {
+            color: #FFFFFF;
+            transform: rotate(-45deg);
+        }
+
+    @@keyframes tickerBlink {
+        0% {
+            opacity: 0.3;
+        }
+
+        50% {
+            opacity: 1;
+        }
+
+        100% {
+            opacity: 0.3;
+        }
+    }
+</style>
+
+<section class="corporate-hero-block">
+    <div class="container">
+        <h1 class="hero-corporate-title lang-en">Wholesale Products</h1>
+        <h1 class="hero-corporate-title lang-ta">மொத்த விற்பனை தயாரிப்புகள்</h1>
+
+        <p class="hero-corporate-subtitle lang-en">Choose a category to browse live-priced dealer wholesale rates</p>
+        <p class="hero-corporate-subtitle lang-ta">டீலர் மொத்த விற்பனை விலைகளை அறிய ஒரு வகையைத் தேர்ந்தெடுக்கவும்</p>
+    </div>
+</section>
+
+<div class="container my-5 py-4">
+    <div class="row g-4 justify-content-center">
+
+        <!-- Garlic Category -->
+        <div class="col-lg-5 col-md-6">
+            <a href="/Catalog/Garlic" class="wholesale-corporate-link">
+                <div class="b2b-catalog-card">
+                    <div>
+                        <div class="card-meta-header">
+                            <div class="b2b-avatar-holder">
+                                <div class="b2b-avatar-glow-ring"></div>
+                                <div class="b2b-image-avatar-frame">
+                                    <img src="https://images.unsplash.com/photo-1615485290382-441e4d049cb5?q=80&w=300&auto=format&fit=crop" alt="Garlic Wholesale" />
+                                </div>
+                            </div>
+                            <div class="live-ticker-pill">
+                                <span class="blink-dot"></span>
+                                <span class="lang-en">Live Index</span>
+                                <span class="lang-ta">நேரடி விலை</span>
+                            </div>
+                        </div>
+                        <h3 class="b2b-card-title">
+                            <span class="lang-en">Garlic</span>
+                            <span class="lang-ta">பூண்டு</span>
+                        </h3>
+                        <p class="b2b-card-desc lang-en">MP, Himachal &amp; Kashmir Garlic — premium industry grades, mapped to live market price index.</p>
+                        <p class="b2b-card-desc lang-ta">மத்திய பிரதேசம், இமாச்சல பிரதேசம் மற்றும் காஷ்மீர் பூண்டு — பிரீமியம் தரங்கள், நேரடி சந்தை விலையுடன் இணைக்கப்பட்டுள்ளது.</p>
+                    </div>
+                    <div class="b2b-action-trigger">
+                        <span class="lang-en">Browse Garlic</span>
+                        <span class="lang-ta">பூண்டு விவரங்கள்</span>
+                        <div class="btn-circle-arrow">
+                            <span class="material-symbols-outlined">arrow_forward</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <!-- Grocery Category -->
+        <div class="col-lg-5 col-md-6">
+            <a href="/Catalog/Grocery" class="wholesale-corporate-link">
+                <div class="b2b-catalog-card">
+                    <div>
+                        <div class="card-meta-header">
+                            <div class="b2b-avatar-holder">
+                                <div class="b2b-avatar-glow-ring"></div>
+                                <div class="b2b-image-avatar-frame">
+                                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScX3aq70kjbJOHPKnykVt_VO7AaOxga590lP9vuu-dBw&s=10" alt="Groceries Wholesale" />
+                                </div>
+                            </div>
+                            <div class="live-ticker-pill">
+                                <span class="blink-dot"></span>
+                                <span class="lang-en">Live Index</span>
+                                <span class="lang-ta">நேரடி விலை</span>
+                            </div>
+                        </div>
+                        <h3 class="b2b-card-title">
+                            <span class="lang-en">Groceries</span>
+                            <span class="lang-ta">மளிகைப் பொருட்கள்</span>
+                        </h3>
+                        <p class="b2b-card-desc lang-en">Selected bulk spices — complete volume catalog configured with today's commercial rates.</p>
+                        <p class="b2b-card-desc lang-ta">தேர்ந்தெடுக்கப்பட்ட மொத்த மசாலாப் பொருட்கள் — இன்றைய வணிக விலைகளுடன் கூடிய முழுமையான பட்டியல்.</p>
+                    </div>
+                    <div class="b2b-action-trigger">
+                        <span class="lang-en">Browse Groceries</span>
+                        <span class="lang-ta">மளிகை விவரங்கள்</span>
+                        <div class="btn-circle-arrow">
+                            <span class="material-symbols-outlined">arrow_forward</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+    </div>
+</div>

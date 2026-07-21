@@ -1,0 +1,26 @@
+@model SubCategory
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Add Sub-category";
+}
+<h3 class="mb-4">Add Sub-category to @ViewBag.CategoryName</h3>
+<div class="admin-card" style="max-width:500px">
+    <form asp-action="CreateSubCategory" method="post">
+        @Html.AntiForgeryToken()
+        <input type="hidden" asp-for="CategoryId" />
+        <div class="mb-3">
+            <label class="form-label">Name (English)</label>
+            <input asp-for="Name" class="form-control" placeholder="e.g. MP Garlic" />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Name (Tamil)</label>
+            <input asp-for="NameTamil" class="form-control" placeholder="e.g. எம்பி பூண்டு" />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Display Order</label>
+            <input asp-for="DisplayOrder" class="form-control" type="number" />
+        </div>
+        <button class="btn btn-brt">Save</button>
+        <a asp-action="Index" class="btn btn-outline-secondary">Cancel</a>
+    </form>
+</div>

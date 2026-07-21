@@ -1,0 +1,127 @@
+@model Product
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Edit Product";
+}
+<h3 class="mb-4">Edit Product</h3>
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">@TempData["Success"]</div>
+}
+@if (!ViewData.ModelState.IsValid)
+{
+    <div class="alert alert-danger">
+        @foreach (var err in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+        {
+            <div>@err.ErrorMessage</div>
+        }
+    </div>
+}
+
+<div class="admin-card mb-4" style="max-width:600px">
+    <form asp-action="Edit" asp-route-id="@Model.Id" method="post" enctype="multipart/form-data">
+        @Html.AntiForgeryToken()
+        <input type="hidden" asp-for="Id" />
+        <div class="mb-3">
+            <label class="form-label">Sub-category</label>
+            <select asp-for="SubCategoryId" class="form-select" asp-items="ViewBag.SubCategoryList"></select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Product Name (English)</label>
+            <input asp-for="Name" class="form-control" />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Product Name (Tamil)</label>
+            <input asp-for="NameTamil" class="form-control" placeholder="தமிழ் பெயர்" />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Grade</label>
+            <input asp-for="Grade" class="form-control" />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Description</label>
+            <textarea asp-for="Description" class="form-control" rows="2"></textarea>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Product Image</label>
+            @if (!string.IsNullOrEmpty(Model.ImageUrl))
+            {
+                <div class="mb-2"><img src="@Model.ImageUrl" style="max-width:120px;border-radius:8px" /></div>
+            }
+            <input type="file" name="imageFile" class="form-control" accept=".jpg,.jpeg,.png,.webp,.gif" />
+            <small class="text-muted">Upload a new photo to replace it — or edit the URL below directly.</small>
+            <input asp-for="ImageUrl" class="form-control mt-2" placeholder="or paste an image URL" />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">HSN Code</label>
+            <input asp-for="HSNCode" class="form-control" />
+        </div>
+        <div class="form-check mb-3">
+            <input asp-for="IsLooseAvailable" class="form-check-input" />
+            <label class="form-check-label">Available in loose retail packs</label>
+        </div>
+        <div class="form-check mb-3">
+            <input asp-for="IsActive" class="form-check-input" />
+            <label class="form-check-label">Active</label>
+        </div>
+        <button class="btn btn-brt">Update</button>
+        <a asp-action="Index" class="btn btn-outline-secondary">Back to List</a>
+    </form>
+</div>
+
+<div class="admin-card" style="max-width:700px">
+    <h5>Packing Types</h5>
+    <table class="table table-sm">
+        <thead><tr><th>Pack Size</th><th>Unit</th><th>Wholesale</th><th>Loose</th><th>Stock</th><th></th></tr></thead>
+        <tbody>
+        @foreach (var pt in Model.PackingTypes.Where(x => x.IsActive))
+        {
+            <tr>
+                <td>@pt.PackSize</td>
+                <td>@pt.PackUnit</td>
+                <td>@(pt.IsWholesale ? "Yes" : "No")</td>
+                <td>@(pt.IsLoose ? "Yes" : "No")</td>
+                <td>@pt.StockQuantity</td>
+                <td>
+                    <form asp-action="DeletePackingType" asp-route-id="@pt.Id" asp-route-productId="@Model.Id" method="post" onsubmit="return confirm('Remove?');">
+                        @Html.AntiForgeryToken()
+                        <button class="btn btn-sm btn-link text-danger">Remove</button>
+                    </form>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+
+    <form asp-action="AddPackingType" method="post" class="row g-2 align-items-end mt-3">
+        @Html.AntiForgeryToken()
+        <input type="hidden" name="ProductId" value="@Model.Id" />
+        <div class="col-md-3">
+            <label class="form-label">Pack Size</label>
+            <input name="PackSize" class="form-control" placeholder="30 KG Bag" required />
+        </div>
+        <div class="col-md-2">
+            <label class="form-label">Unit</label>
+            <select name="PackUnit" class="form-select">
+                <option value="KG">KG</option>
+                <option value="G">G</option>
+            </select>
+        </div>
+        <div class="col-md-2">
+            <label class="form-label">Stock Qty</label>
+            <input name="StockQuantity" type="number" class="form-control" value="0" />
+        </div>
+        <div class="col-md-2 form-check">
+            <input type="checkbox" name="IsWholesale" value="true" class="form-check-input" checked />
+            <label class="form-check-label">Wholesale</label>
+        </div>
+        <div class="col-md-2 form-check">
+            <input type="checkbox" name="IsLoose" value="true" class="form-check-input" />
+            <label class="form-check-label">Loose</label>
+        </div>
+        <div class="col-md-1">
+            <button class="btn btn-brt">Add</button>
+        </div>
+    </form>
+</div>

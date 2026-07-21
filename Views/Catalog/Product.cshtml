@@ -1,0 +1,611 @@
+@model Product
+@{
+    Layout = "_Layout";
+    var mp = (MarketPrice?)ViewBag.TodayPrice;
+}
+
+<!-- Premium Corporate Fonts & Icons Core -->
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Cinzel:wght@600;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+<style>
+    :root {
+        --brt-gold: #D4AF37;
+        --brt-gold-dark: #AA820A;
+        --dark-corporate: #0F172A;
+        --text-main: #1E293B;
+        --text-muted: #64748B;
+        --bg-corporate-light: #F8FAFC;
+        --price-up-bg: rgba(16, 185, 129, 0.08);
+        --price-up-text: #10B981;
+        --price-down-bg: rgba(239, 68, 68, 0.08);
+        --price-down-text: #EF4444;
+        --border-refined: rgba(226, 232, 240, 0.9);
+        --whatsapp-green: #25D366;
+    }
+
+    body {
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        background-color: #FCFCFD;
+        color: var(--text-main);
+    }
+
+        /* AUTOMATIC DYNAMIC LANGUAGE CONTROLLER */
+        html[lang="en"] .lang-ta, body[lang="en"] .lang-ta {
+            display: none !important;
+        }
+
+        html[lang="ta"] .lang-en, body[lang="ta"] .lang-en {
+            display: none !important;
+        }
+
+    /* CORPORATE MEDIA SHOWCASE */
+    .corporate-media-showcase {
+        background: #FFFFFF;
+        border: 1px solid var(--border-refined);
+        border-radius: 28px;
+        padding: 16px;
+        position: relative;
+        box-shadow: 0 20px 40px -20px rgba(15, 23, 42, 0.06);
+        overflow: hidden;
+    }
+
+        .corporate-media-showcase img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            border-radius: 20px;
+            transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        .corporate-media-showcase:hover img {
+            transform: scale(1.03);
+        }
+
+    .detail-fallback-frame {
+        height: 450px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 5rem;
+        color: #CBD5E1;
+        background: var(--bg-corporate-light);
+        border-radius: 20px;
+    }
+
+    /* BREADCRUMB CAPSULE */
+    .corporate-path-capsule {
+        display: inline-flex;
+        align-items: center;
+        background: #F1F5F9;
+        border: 1px solid #E2E8F0;
+        color: var(--dark-corporate);
+        padding: 6px 16px;
+        border-radius: 100px;
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.8px;
+        text-transform: uppercase;
+        margin-bottom: 24px;
+    }
+
+    /* TYPOGRAPHY */
+    .detail-corporate-title {
+        font-family: 'Cinzel', serif;
+        font-weight: 900;
+        font-size: 3.2rem;
+        color: var(--dark-corporate);
+        line-height: 1.15;
+        margin-bottom: 12px;
+        letter-spacing: -0.5px;
+    }
+
+    .detail-corporate-title-ta {
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        font-weight: 800;
+        font-size: 2.5rem;
+        color: var(--dark-corporate);
+        line-height: 1.3;
+        margin-bottom: 12px;
+    }
+
+    .premium-grade-badge {
+        display: inline-flex;
+        align-items: center;
+        background: linear-gradient(135deg, rgba(212, 175, 55, 0.15) 0%, rgba(212, 175, 55, 0.05) 100%);
+        color: var(--brt-gold-dark);
+        font-weight: 800;
+        font-size: 0.75rem;
+        padding: 6px 16px;
+        border-radius: 8px;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        border: 1px solid rgba(212, 175, 55, 0.25);
+        margin-bottom: 28px;
+    }
+
+    /* CORPORATE FINANCIAL TRADING TERMINAL WIDGET */
+    .detail-ticker-panel {
+        border-radius: 24px;
+        padding: 28px;
+        margin: 28px 0;
+        border: 1px solid var(--border-refined);
+        background: #FFFFFF;
+        box-shadow: 0 15px 30px -10px rgba(15, 23, 42, 0.04);
+        position: relative;
+    }
+
+        .detail-ticker-panel::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 6px;
+            height: 100%;
+            border-radius: 24px 0 0 24px;
+        }
+
+        .detail-ticker-panel.state-up::before {
+            background: var(--price-up-text);
+        }
+
+        .detail-ticker-panel.state-down::before {
+            background: var(--price-down-text);
+        }
+
+        .detail-ticker-panel.state-stable::before {
+            background: var(--text-muted);
+        }
+
+    .panel-price-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 16px;
+    }
+
+    .panel-price-left {
+        display: flex;
+        align-items: baseline;
+        gap: 8px;
+    }
+
+    .panel-live-amount {
+        font-size: 3rem;
+        font-weight: 800;
+        color: var(--dark-corporate);
+        letter-spacing: -1.5px;
+        line-height: 1;
+    }
+
+    .panel-live-unit {
+        font-size: 0.95rem;
+        color: var(--text-muted);
+        font-weight: 600;
+    }
+
+    .panel-status-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 0.88rem;
+        font-weight: 800;
+        padding: 8px 16px;
+        border-radius: 12px;
+    }
+
+        .panel-status-pill.up {
+            background: var(--price-up-bg);
+            color: var(--price-up-text);
+        }
+
+        .panel-status-pill.down {
+            background: var(--price-down-bg);
+            color: var(--price-down-text);
+        }
+
+        .panel-status-pill.stable {
+            background: rgba(100, 116, 139, 0.08);
+            color: var(--text-muted);
+        }
+
+    .panel-ticker-footer {
+        margin-top: 20px;
+        font-size: 0.78rem;
+        font-weight: 600;
+        color: var(--text-muted);
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 10px;
+        border-top: 1px solid var(--border-refined);
+        padding-top: 16px;
+    }
+
+    /* CORPORATE B2B CUSTOM REQUEST PANEL */
+    .detail-quote-panel {
+        background: radial-gradient(100% 100% at 50% 0%, rgba(212, 175, 55, 0.03) 0%, transparent 100%), #FFFFFF;
+        border: 1px dashed var(--brt-gold);
+        border-radius: 24px;
+        padding: 32px;
+        text-align: center;
+        margin: 28px 0;
+        box-shadow: 0 10px 30px -15px rgba(212, 175, 55, 0.1);
+    }
+
+    .detail-quote-title {
+        font-size: 1.1rem;
+        font-weight: 800;
+        color: var(--brt-gold-dark);
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+        margin-bottom: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+    }
+
+    .detail-quote-desc {
+        font-size: 0.9rem;
+        color: var(--text-main);
+        margin: 0;
+        font-weight: 600;
+    }
+
+    /* STRUCTURAL DESCRIPTION */
+    .detail-description-block {
+        font-size: 1.05rem;
+        line-height: 1.75;
+        color: #475569;
+        margin-bottom: 32px;
+    }
+
+    /* PACKAGING INFRASTRUCTURE */
+    .quantum-pack-heading {
+        font-size: 0.82rem;
+        font-weight: 800;
+        color: var(--text-muted);
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        margin-bottom: 16px;
+    }
+
+    .quantum-pack-vault {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 40px;
+    }
+
+    .quantum-pack-chip {
+        background: #FFFFFF;
+        border: 1px solid var(--border-refined);
+        color: var(--dark-corporate);
+        font-size: 0.85rem;
+        font-weight: 700;
+        padding: 10px 20px;
+        border-radius: 12px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.01);
+        transition: all 0.2s ease;
+    }
+
+        .quantum-pack-chip.is-loose {
+            border-style: dashed;
+            background: rgba(212, 175, 55, 0.03);
+            color: var(--brt-gold-dark);
+            border-color: var(--brt-gold);
+        }
+
+    /* STRATEGIC CONVERSION CONTROLS */
+    .btn-quantum-core {
+        font-weight: 800;
+        font-size: 0.95rem;
+        padding: 16px 32px;
+        border-radius: 16px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        text-decoration: none !important;
+    }
+
+    .btn-matrix-gold {
+        background: var(--dark-corporate);
+        color: #FFFFFF !important;
+        border: none;
+        box-shadow: 0 10px 25px -10px rgba(15, 23, 42, 0.3);
+    }
+
+        .btn-matrix-gold:hover {
+            background: var(--brt-gold-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px -10px rgba(170, 130, 10, 0.4);
+        }
+
+    .btn-matrix-call {
+        background: #FFFFFF;
+        border: 2px solid var(--dark-corporate);
+        color: var(--dark-corporate) !important;
+    }
+
+        .btn-matrix-call:hover {
+            background: var(--dark-corporate);
+            color: #FFFFFF !important;
+            transform: translateY(-3px);
+        }
+
+    .btn-matrix-whatsapp {
+        background: transparent;
+        border: 2px solid var(--whatsapp-green);
+        color: var(--whatsapp-green) !important;
+    }
+
+        .btn-matrix-whatsapp:hover {
+            background: var(--whatsapp-green);
+            color: #FFFFFF !important;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px -10px rgba(37, 211, 102, 0.3);
+        }
+
+    /* REGULATORY INFORMATION GRID */
+    .cyber-disclaimer-vault {
+        background: #FFFFFF;
+        border: 1px solid var(--border-refined);
+        border-radius: 24px;
+        padding: 28px;
+        margin-top: 48px;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+        box-shadow: 0 10px 30px -15px rgba(0,0,0,0.02);
+    }
+
+    .cyber-disclaimer-item {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+    }
+
+        .cyber-disclaimer-item .icon-wrapper {
+            width: 44px;
+            height: 44px;
+            background: var(--bg-corporate-light);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--brt-gold-dark);
+        }
+
+            .cyber-disclaimer-item .icon-wrapper span {
+                font-size: 1.4rem;
+            }
+
+    .cyber-text-title {
+        font-size: 0.9rem;
+        font-weight: 700;
+        color: var(--dark-corporate);
+        display: block;
+        margin-bottom: 2px;
+    }
+
+    .cyber-text-subtitle {
+        font-size: 0.78rem;
+        color: var(--text-muted);
+        display: block;
+    }
+
+    /* FIXED ESCAPED MEDIA QUERIES FOR RAZOR ENGINE */
+    @@media (max-width: 991px) {
+        .detail-corporate-title {
+            font-size: 2.6rem;
+        }
+
+        .detail-corporate-title-ta {
+            font-size: 2.1rem;
+        }
+    }
+
+    @@media (max-width: 768px) {
+        .cyber-disclaimer-vault {
+            grid-template-columns: 1fr;
+        }
+
+        .panel-price-row {
+            justify-content: flex-start;
+        }
+    }
+</style>
+
+<div class="container my-5 py-3">
+    <div class="row g-5">
+
+        <!-- Showcase (Left side) -->
+        <div class="col-lg-6">
+            <div class="corporate-media-showcase text-center">
+                @if (!string.IsNullOrEmpty(Model.ImageUrl))
+                {
+                    <img src="@Model.ImageUrl" alt="@Model.Name" class="img-fluid" />
+                }
+                else
+                {
+                    <div class="detail-fallback-frame">
+                        <span class="material-symbols-outlined" style="font-size: 6rem;">eco</span>
+                    </div>
+                }
+            </div>
+        </div>
+
+        <!-- Spec Terminal (Right side) -->
+        <div class="col-lg-6">
+
+            <!-- Context Path -->
+            <div>
+                <div class="corporate-path-capsule">
+                    @Model.SubCategory?.Category?.Name <span class="mx-2" style="font-size: 10px;">&rarr;</span> @Model.SubCategory?.Name
+                </div>
+            </div>
+
+            <!-- Title Isolation Engine -->
+            <h1 class="detail-corporate-title lang-en">@Model.Name</h1>
+            @if (!string.IsNullOrEmpty(Model.NameTamil))
+            {
+                <h1 class="detail-corporate-title-ta lang-ta">@Model.NameTamil</h1>
+            }
+
+            @if (!string.IsNullOrEmpty(Model.Grade))
+            {
+                <span class="premium-grade-badge">@Model.Grade</span>
+            }
+
+            <!-- Pricing Engine Widget -->
+            @if (mp != null)
+            {
+                var diff = mp.PriceDifference;
+                var boxState = diff > 0 ? "state-up" : diff < 0 ? "state-down" : "state-stable";
+                var diffClass = diff > 0 ? "up" : diff < 0 ? "down" : "stable";
+                var diffIcon = diff > 0 ? "arrow_upward" : diff < 0 ? "arrow_downward" : "horizontal_rule";
+
+                <div class="detail-ticker-panel @boxState">
+                    <div class="panel-price-row">
+                        <div class="panel-price-left">
+                            <span class="panel-live-amount">₹@mp.TodayPrice.ToString("F2")</span>
+                            <span class="panel-live-unit">/ KG</span>
+                        </div>
+                        <span class="panel-status-pill @diffClass">
+                            <span class="material-symbols-outlined" style="font-size: 16px;">@diffIcon</span>
+                            <strong>₹@Math.Abs(diff).ToString("F2")</strong>
+                        </span>
+                    </div>
+                    <div class="panel-ticker-footer">
+                        <span>
+                            <span class="lang-en">GST Net Valuation Included</span>
+                            <span class="lang-ta">GST வரிகள் உட்பட</span>
+                        </span>
+                        <span>
+                            <span class="lang-en">Index Updated:</span>
+                            <span class="lang-ta">புதுப்பிக்கப்பட்டது:</span> @mp.UpdatedAt.ToString("dd MMM, hh:mm tt")
+                        </span>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <!-- Clean B2B Custom Requested State -->
+                <div class="detail-quote-panel">
+                    <div class="detail-quote-title">
+                        <span class="material-symbols-outlined">analytics</span>
+                        <span class="lang-en">Custom Price Requested</span>
+                        <span class="lang-ta">பிரத்தியேக விலை விவரம் தேவை</span>
+                    </div>
+                    <p class="detail-quote-desc">
+                        <span class="lang-en">Wholesale Supply Matrix — High Volume Orders Only</span>
+                        <span class="lang-ta">பெரிய அளவிலான பல்க் ஆர்டர்களுக்கு மட்டும் விலை வழங்கப்படும்</span>
+                    </p>
+                </div>
+            }
+
+            <!-- Description -->
+            @if (!string.IsNullOrEmpty(Model.Description))
+            {
+                <p class="detail-description-block">@Model.Description</p>
+            }
+
+            <!-- Configured Packing Tags -->
+            <h6 class="quantum-pack-heading">
+                <span class="lang-en">Verified Configured Packing</span>
+                <span class="lang-ta">கிடைக்கும் பேக்கிங் அளவுகள்</span>
+            </h6>
+            <div class="quantum-pack-vault">
+                @foreach (var pt in Model.PackingTypes.Where(x => x.IsActive))
+                {
+                    var looseClass = pt.IsLoose ? "is-loose" : "";
+                    <span class="quantum-pack-chip @looseClass">
+                        @pt.PackSize
+                        @if (pt.IsLoose)
+                        {
+                            <small class="lang-en">(Loose)</small>
+                            <small class="lang-ta">(உதிரி)</small>
+                        }
+                    </span>
+                }
+            </div>
+
+            <!-- Action Convertors Layout -->
+            <div class="row g-3">
+                <div class="col-sm-12 col-md-6 flex-fill">
+                    <a asp-controller="Order" asp-action="Request" asp-route-productId="@Model.Id" class="btn-quantum-core btn-matrix-gold w-100">
+                        <span class="material-symbols-outlined">shopping_cart</span>
+                        <span class="lang-en">Request Bulk Order</span>
+                        <span class="lang-ta">பல்க் ஆர்டர் செய்க</span>
+                    </a>
+                </div>
+                <div class="col-sm-6 col-md-3">
+                    <a href="tel:9865680694" class="btn-quantum-core btn-matrix-call w-100">
+                        <span class="material-symbols-outlined">call</span>
+                        <span class="lang-en">Call</span>
+                        <span class="lang-ta">அழைக்க</span>
+                    </a>
+                </div>
+                <div class="col-sm-6 col-md-3">
+                    <a href="https://api.whatsapp.com/send?phone=919865680694&text=Enquiry%20about%20@Model.Name" class="btn-quantum-core btn-matrix-whatsapp w-100">
+                        <span class="material-symbols-outlined">chat</span>
+                        <span>WhatsApp</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Safe Trade Vault Layout -->
+            <div class="cyber-disclaimer-vault">
+                <div class="cyber-disclaimer-item">
+                    <div class="icon-wrapper">
+                        <span class="material-symbols-outlined">verified</span>
+                    </div>
+                    <div>
+                        <span class="cyber-text-title lang-en">Bulk Preferred</span>
+                        <span class="cyber-text-title lang-ta">மொத்த விற்பனை</span>
+                        <span class="cyber-text-subtitle lang-en">High volume supply</span>
+                        <span class="cyber-text-subtitle lang-ta">பெரிய அளவிலான விநியோகம்</span>
+                    </div>
+                </div>
+                <div class="cyber-disclaimer-item">
+                    <div class="icon-wrapper">
+                        <span class="material-symbols-outlined">receipt_long</span>
+                    </div>
+                    <div>
+                        <span class="cyber-text-title lang-en">GST/Taxes Inc.</span>
+                        <span class="cyber-text-title lang-ta">GST வரிகள் உட்பட</span>
+                        <span class="cyber-text-subtitle lang-en">Standard tax invoicing</span>
+                        <span class="cyber-text-subtitle lang-ta">முறையான வரி விலைப்பட்டியல்</span>
+                    </div>
+                </div>
+                <div class="cyber-disclaimer-item">
+                    <div class="icon-wrapper">
+                        <span class="material-symbols-outlined">local_shipping</span>
+                    </div>
+                    <div>
+                        <span class="cyber-text-title lang-en">Transport Extra</span>
+                        <span class="cyber-text-title lang-ta">போக்குவரத்து தனி</span>
+                        <span class="cyber-text-subtitle lang-en">Ex-Warehouse rates</span>
+                        <span class="cyber-text-subtitle lang-ta">கிடங்கு விநியோக விலை மட்டும்</span>
+                    </div>
+                </div>
+                <div class="cyber-disclaimer-item">
+                    <div class="icon-wrapper">
+                        <span class="material-symbols-outlined">gavel</span>
+                    </div>
+                    <div>
+                        <span class="cyber-text-title lang-en">Admin Dispatch</span>
+                        <span class="cyber-text-title lang-ta">அங்கீகரிக்கப்பட்ட விநியோகம்</span>
+                        <span class="cyber-text-subtitle lang-en">Verified clearance</span>
+                        <span class="cyber-text-subtitle lang-ta">சரிபார்க்கப்பட்ட அனுமதி</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

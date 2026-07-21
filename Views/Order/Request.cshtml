@@ -1,0 +1,268 @@
+@model BRT.ViewModels.OrderRequestViewModel
+@{
+    ViewData["Title"] = "Request Bulk Order";
+    var products = (List<Product>)ViewBag.Products;
+    var summaryDisplay = ViewData.ModelState.IsValid ? "none" : "block";
+}
+
+<!-- ===== Google Fonts Extracted from Your Live Theme ===== -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0..1,0" />
+
+<style>
+    :root {
+        --brt-bg-cream: #FFFDF9; /* Exact off-white/cream background from your image */
+        --brt-dark-navy: #111827; /* Exact deep dark tone from your middle card */
+        --brt-emerald-deep: #064E3B; /* Nav brand green */
+        --brt-gold-text: #B38F43; /* Elegant muted gold for badges */
+        --brt-gold-bg: #FBF4E4; /* Soft gold pill background */
+        --text-headline: #111827;
+        --text-body: #6B7280;
+    }
+
+    body {
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        background-color: var(--brt-bg-cream);
+        color: var(--text-headline);
+    }
+
+    /* ====== 1. EXACT HERO MATCH PANEL ====== */
+    .page-hero-brt {
+        padding: 60px 0 30px 0;
+        text-align: center;
+        background-color: var(--brt-bg-cream);
+    }
+    .brt-wholesale-badge {
+        display: inline-flex;
+        align-items: center;
+        padding: 6px 20px;
+        background-color: var(--brt-gold-bg);
+        border: 1px solid rgba(179, 143, 67, 0.2);
+        color: var(--brt-gold-text);
+        border-radius: 100px;
+        font-size: 0.78rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        margin-bottom: 24px;
+    }
+    .page-hero-brt h1 {
+        font-family: 'Playfair Display', serif;
+        font-weight: 700;
+        font-size: 3.25rem;
+        color: var(--text-headline);
+        margin-bottom: 12px;
+    }
+    .page-hero-brt p {
+        color: var(--text-body);
+        font-size: 1.1rem;
+        max-width: 700px;
+        margin: 0 auto;
+        font-weight: 400;
+    }
+
+    /* ====== 2. FORM STRUCTURAL CARDS ====== */
+    .order-card-clean {
+        background: #FFFFFF;
+        border: 1px solid #E5E7EB;
+        border-radius: 20px;
+        padding: 40px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+    }
+    
+    .form-section-header {
+        font-family: 'Playfair Display', serif;
+        font-weight: 700;
+        font-size: 1.4rem;
+        color: var(--text-headline);
+        border-bottom: 1px solid #F3F4F6;
+        padding-bottom: 12px;
+    }
+
+    /* INPUT ARCHITECTURE MATCHING PREMIUM MINIMALISM */
+    .form-group-brt .form-label {
+        font-size: 0.82rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        color: #4B5563;
+        margin-bottom: 8px;
+    }
+    .form-input-brt {
+        background: #FFFFFF;
+        border: 1px solid #D1D5DB;
+        border-radius: 10px;
+        padding: 12px 16px;
+        font-size: 0.95rem;
+        color: var(--text-headline);
+        transition: all 0.2s ease;
+    }
+    .form-input-brt:focus {
+        border-color: var(--brt-emerald-deep);
+        box-shadow: 0 0 0 3px rgba(6, 78, 59, 0.08);
+        outline: none;
+    }
+
+    /* PRODUCT GENERATOR ROWS */
+    .product-manifest-item {
+        background: #FAFAFA;
+        border: 1px solid #E5E7EB;
+        border-radius: 12px;
+        padding: 16px;
+        transition: all 0.2s ease;
+    }
+    .product-manifest-item:hover {
+        background: #FFFFFF;
+        border-color: #D1D5DB;
+    }
+
+    /* EXACT DARK ACCENT MATCH BUTTON */
+    .btn-brt-dark-submit {
+        background-color: var(--brt-dark-navy);
+        color: #FFFFFF !important;
+        font-weight: 600;
+        font-size: 1rem;
+        letter-spacing: 0.5px;
+        padding: 15px;
+        border: none;
+        border-radius: 10px;
+        transition: all 0.2s ease;
+        width: 100%;
+        box-shadow: 0 4px 12px rgba(17, 24, 39, 0.1);
+    }
+    .btn-brt-dark-submit:hover {
+        background-color: #1F2937;
+        transform: translateY(-1px);
+    }
+
+    /* ====== 3. MINIMAL CLEAN TITANIUM COMPLIANCE ZONE ====== */
+    .compliance-strip-brt {
+        background: #1F2937;
+        border-radius: 14px;
+        padding: 16px 24px;
+        display: flex;
+        justify-content: center;
+        gap: 24px;
+        flex-wrap: wrap;
+    }
+    .compliance-unit {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: #9CA3AF;
+    }
+    .compliance-unit span.icon { color: var(--brt-gold-text); font-size: 1rem; }
+
+    .fade-in-up {
+        animation: brtFadeInUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    @Html.Raw("@keyframes brtFadeInUp { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }")
+</style>
+
+<!-- ===================================================
+     1. HERO ZONE (EXACT MATCH FROM IMAGE)
+     =================================================== -->
+<section class="page-hero-brt">
+    <div class="container">
+        <div class="brt-wholesale-badge">B2B Wholesale Partner</div>
+        <h1>Request Bulk Order</h1>
+        <p>What makes BRT the trusted wholesale partner for dealers across the region — submit your dynamic container loads and item metrics below.</p>
+    </div>
+</section>
+
+<!-- ===================================================
+     2. FORM CONTROLLER CARD
+     =================================================== -->
+<div class="container mb-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-9 col-md-11">
+            <div class="order-card-clean fade-in-up">
+                
+                <div asp-validation-summary="ModelOnly" class="alert alert-danger rounded-3" style="display:@summaryDisplay; font-size:0.9rem;"></div>
+
+                <form asp-action="Request" method="post">
+                    @Html.AntiForgeryToken()
+                    
+                    <!-- Section: Details -->
+                    <div class="form-section-header mb-4">Your Professional Details</div>
+                    
+                    <div class="row g-4 mb-5">
+                        <div class="col-md-6 form-group-brt">
+                            <label class="form-label">Your Name</label>
+                            <input asp-for="BuyerName" class="form-control form-input-brt" placeholder="Enter your full name" required />
+                        </div>
+                        <div class="col-md-6 form-group-brt">
+                            <label class="form-label">Business Name</label>
+                            <input asp-for="BusinessName" class="form-control form-input-brt" placeholder="Company registration title" required />
+                        </div>
+                        <div class="col-md-6 form-group-brt">
+                            <label class="form-label">Phone Number</label>
+                            <input asp-for="PhoneNumber" class="form-control form-input-brt" placeholder="10-digit enterprise mobile" required />
+                        </div>
+                        <div class="col-md-6 form-group-brt">
+                            <label class="form-label">City</label>
+                            <input asp-for="City" class="form-control form-input-brt" placeholder="e.g. Pondicherry, Cochin" />
+                        </div>
+                        <div class="col-12 form-group-brt">
+                            <label class="form-label">Delivery Address</label>
+                            <input asp-for="BuyerAddress" class="form-control form-input-brt" placeholder="Complete destination logistics address" />
+                        </div>
+                    </div>
+
+                    <!-- Section: Products -->
+                    <div class="form-section-header mb-2">Products Required</div>
+                    <p class="text-muted small mb-4">Fill in the products you need — leave unused rows completely blank.</p>
+                    
+                    <div class="d-flex flex-column gap-3 mb-4">
+                        @for (int i = 0; i < Model.Items.Count; i++)
+                        {
+                            <div class="product-manifest-item">
+                                <div class="row g-3 align-items-center">
+                                    <div class="col-md-6">
+                                        <label class="form-label small text-muted fw-bold d-md-none">Select Product</label>
+                                        <select name="Items[@i].ProductId" class="form-select form-input-brt py-2">
+                                            <option value="">-- Select Product --</option>
+                                            @foreach (var p in products)
+                                            {
+                                                var selected = Model.Items[i].ProductId == p.Id;
+                                                <option value="@p.Id" selected="@selected">@p.Name</option>
+                                            }
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label class="form-label small text-muted fw-bold d-md-none">Quantity</label>
+                                        <input name="Items[@i].Quantity" type="number" step="0.01" class="form-control form-input-brt py-2" placeholder="Quantity" value="@Model.Items[i].Quantity" />
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="d-flex align-items-center gap-1 text-muted small" style="font-weight: 500;">
+                                            <span class="material-symbols-outlined text-secondary" style="font-size:1rem;">help_outline</span>
+                                            <span>bags/kg as per packing</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+
+                    <!-- Submission Trigger -->
+                    <button type="submit" class="btn-brt-dark-submit mt-3">
+                        Submit Order Request
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ===================================================
+     3. CLEAN COMPLIANCE STRIP (NO GREEN)
+     =================================================== -->
+<section class="container my-5">
+    <div class="compliance-strip-brt">
+        <div class="compliance-unit"><span class="material-symbols-outlined icon">verified</span> Live Market Pricing</div>
+        <div class="compliance-unit"><span class="material-symbols-outlined icon">verified</span> Graded Quality Assured</div>
+        <div class="compliance-unit"><span class="material-symbols-outlined icon">verified</span> Bulk Packing Options</div>
+    </div>
+</section>

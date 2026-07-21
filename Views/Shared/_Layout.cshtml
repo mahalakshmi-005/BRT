@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@ViewData["Title"] - B Raj Traders</title>
+
+    <!-- Premium Global Frameworks & Typography -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300..400,0..1,0" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/site.css" />
+
+    <style>
+        :root {
+            --brt-bg-cream: #FFFDF9; /* Exact off-white/cream background */
+            --brt-dark-navy: #0B0F19; /* Classic Matte Dark Navy for Header & Footer */
+            --brt-gold-pure: #B38F43; /* Accent Gold from your Badge */
+            --brt-gold-bg: #FBF4E4;
+            --nav-text-white: rgba(255, 255, 255, 0.85);
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--brt-bg-cream);
+            overflow-x: hidden;
+        }
+
+        /* ===================================================
+                           1. INNOVATIVE FLOATING CURVED NAVIGATION SHAPE
+                           =================================================== */
+        .nav-wrapper-holder {
+            position: sticky;
+            top: 0;
+            z-index: 1030;
+            padding: 15px 0 5px 0; /* Creates space above the floating nav */
+            background: transparent;
+        }
+
+        .site-nav-premium {
+            background-color: var(--brt-dark-navy) !important;
+            padding: 10px 24px !important;
+            border: 1.5px solid rgba(179, 143, 67, 0.4); /* Elegant Gold Ring Border */
+            border-radius: 50px; /* Capsule / Pill Shape Design */
+            box-shadow: 0 12px 35px rgba(11, 15, 25, 0.3);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .brt-brand-logo-wrap {
+            display: inline-block;
+            transition: transform 0.25s ease;
+        }
+
+            .brt-brand-logo-wrap:hover {
+                transform: scale(1.05);
+            }
+
+        .nav-logo-graphic {
+            max-height: 42px;
+            width: auto;
+            border-radius: 30px; /* Curved edges for the logo inside the capsule */
+            border: 1px solid rgba(179, 143, 67, 0.2);
+        }
+
+        /* NAVIGATION INTERFACE LINKS */
+        .site-nav-premium .nav-link {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--nav-text-white) !important;
+            padding: 8px 18px !important;
+            border-radius: 30px;
+            transition: all 0.25s ease;
+            position: relative;
+        }
+
+            /* Capsule Pill Active/Hover State */
+            .site-nav-premium .nav-link:hover {
+                color: #FFFFFF !important;
+                background: rgba(255, 255, 255, 0.08);
+                box-shadow: inset 0 0 0 1px rgba(179, 143, 67, 0.3);
+            }
+
+        /* DYNAMIC ON/OFF LANGUAGE TOGGLE */
+        .lang-switch-container {
+            display: inline-flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            padding: 4px;
+            border-radius: 100px;
+            position: relative;
+            cursor: pointer;
+            user-select: none;
+            margin-left: 8px;
+        }
+
+        .lang-option {
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 5px 12px;
+            color: rgba(255, 255, 255, 0.6);
+            border-radius: 100px;
+            transition: all 0.25s ease;
+            z-index: 2;
+        }
+
+        .lang-switch-container .active-slider {
+            position: absolute;
+            top: 4px;
+            bottom: 4px;
+            left: 4px;
+            width: 44px;
+            background: var(--brt-gold-pure);
+            border-radius: 100px;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            z-index: 1;
+        }
+
+        .lang-option.active {
+            color: #111827 !important;
+        }
+
+        /* Responsive Mobile Layout Fixes for Capsule Shape */
+        @@media (max-width: 991.98px) {
+            .site-nav-premium
+
+        {
+            border-radius: 24px !important; /* Slightly blockier on mobile for full menu list */
+            padding: 12px 20px !important;
+        }
+
+        .site-nav-premium .nav-link {
+            border-radius: 12px;
+            margin: 4px 0;
+        }
+
+        .lang-switch-container {
+            margin-left: 0;
+            margin-top: 8px;
+        }
+
+        }
+
+        /* ===================================================
+                           2. ARCHITECTURAL WAVE FOOTER (ZERO GREEN ZONE)
+                           =================================================== */
+        .footer-wave-wrapper {
+            position: relative;
+            background-color: transparent;
+            margin-top: 80px;
+            line-height: 0;
+        }
+
+            .footer-wave-wrapper svg {
+                position: relative;
+                display: block;
+                width: 100%;
+                height: 80px;
+            }
+
+        .site-footer-premium {
+            background-color: var(--brt-dark-navy);
+            color: #F3F4F6;
+            padding: 50px 0 30px 0;
+            position: relative;
+        }
+
+        .footer-heading-premium {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--brt-gold-pure);
+            margin-bottom: 24px;
+        }
+
+        .footer-contact-item {
+            display: flex;
+            gap: 12px;
+            font-size: 0.9rem;
+            color: #9CA3AF;
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+
+            .footer-contact-item span.icon {
+                color: var(--brt-gold-pure);
+                font-size: 1.2rem;
+                flex-shrink: 0;
+            }
+
+        .footer-links-matrix a {
+            font-size: 0.92rem;
+            color: #9CA3AF;
+            text-decoration: none;
+            margin-bottom: 12px;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+        }
+
+            .footer-links-matrix a:hover {
+                color: #FFFFFF;
+                transform: translateX(4px);
+            }
+
+        .coverage-badge-pill {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 16px;
+            font-size: 0.9rem;
+            color: #9CA3AF;
+            line-height: 1.6;
+        }
+
+        .footer-divider-thin {
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            margin: 40px 0 24px 0;
+        }
+
+        .footer-compliance-text {
+            font-size: 0.78rem;
+            color: #6B7280;
+            line-height: 1.8;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .footer-logo-graphic {
+            max-width: 160px;
+            height: auto;
+            border-radius: 8px;
+            border: 1px solid rgba(179, 143, 67, 0.2);
+            filter: drop-shadow(0px 4px 10px rgba(0,0,0,0.3));
+            transition: transform 0.2s ease;
+        }
+
+            .footer-logo-graphic:hover {
+                transform: scale(1.02);
+            }
+    </style>
+</head>
+<body>
+
+    <!-- ===================================================
+         1. HEADER ZONE (INNOVATIVE FLOATING CAPSULE SHAPE)
+         =================================================== -->
+    <div class="nav-wrapper-holder">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-dark site-nav-premium">
+                <!-- Clickable Brand Logo Area -->
+                <a class="brt-brand-logo-wrap" asp-controller="Home" asp-action="Index">
+                    <img src="~/images/brt-logo.jpeg" alt="B Raj Traders Logo" class="nav-logo-graphic" />
+                </a>
+
+                <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navMain">
+                    <span class="material-symbols-outlined text-white" style="font-size: 1.8rem;">menu</span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navMain">
+                    <ul class="navbar-nav ms-auto align-items-start align-items-lg-center mt-3 mt-lg-0 gap-1">
+                        <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="Index">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="About">About Us</a></li>
+                        <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="WhyChooseUs">Why Choose Us</a></li>
+                        <li class="nav-item"><a class="nav-link" asp-controller="Catalog" asp-action="Index">Wholesale Products</a></li>
+                        <li class="nav-item"><a class="nav-link" asp-controller="Catalog" asp-action="Loose">Retail Products</a></li>
+                        <li class="nav-item"><a class="nav-link" asp-controller="Contact" asp-action="Index">Contact</a></li>
+
+                        <!-- Innovative Active Slider Lang Toggle Switch -->
+                        <li class="nav-item">
+                            <div class="lang-switch-container" id="langContainer">
+                                <div class="active-slider" id="langSlider"></div>
+                                <div class="lang-option" id="optEN">EN</div>
+                                <div class="lang-option" id="optTN">தமிழ்</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </div>
+
+    <!-- ===================================================
+         2. CORE ROUTER MANIFEST CONTENT
+         =================================================== -->
+    <main>
+        @RenderBody()
+    </main>
+
+    <!-- ===================================================
+         3. FOOTER ZONE (INNOVATIVE WAVE ACCENT & BRAND META)
+         =================================================== -->
+    <div class="footer-wave-wrapper">
+        <!-- High-End Organic Flow Wave Divider Layer -->
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 100" preserveAspectRatio="none">
+            <path fill="#0B0F19" fill-opacity="1" d="M0,64L60,58.7C120,53,240,43,360,48C480,53,600,75,720,74.7C840,75,960,53,1080,42.7C1200,32,1320,32,1380,32L1440,32L1440,100L1380,100C1320,100,1200,100,1080,100C960,100,840,100,720,100C600,100,480,100,360,100C240,100,120,100,60,100L0,100Z"></path>
+        </svg>
+    </div>
+
+    <footer class="site-footer-premium">
+        <div class="container">
+            <div class="row g-5">
+
+                <!-- Section A: Identity Space & Logo Only -->
+                <div class="col-lg-3 col-md-4 text-center text-md-start">
+                    <div class="mb-3">
+                        <!-- Clickable Image Logo Layer (No text markup underneath) -->
+                        <a asp-controller="Home" asp-action="Index" class="d-inline-block">
+                            <img src="~/images/brt-logo.jpeg" alt="B Raj Traders Logo" class="footer-logo-graphic" />
+                        </a>
+                    </div>
+                    <p style="font-size:0.85rem; color:#6B7280; line-height:1.6;" class="mt-2">
+                        Your trusted bulk supply and trading partner providing quality commodities since 2000.
+                    </p>
+                </div>
+
+                <!-- Section B: Direct Logistics Desk -->
+                <div class="col-lg-3 col-md-4">
+                    <h6 class="footer-heading-premium">Contact Infrastructure</h6>
+                    <div class="footer-card-block">
+                        <div class="footer-contact-item">
+                            <span class="material-symbols-outlined icon">location_on</span>
+                            <span>B Raj Traders, TCA complex, Periyakulam road, Vadugapatti, Tamil Nadu 625603</span>
+                        </div>
+                        <div class="footer-contact-item">
+                            <span class="material-symbols-outlined icon">call</span>
+                            <span>+91 98656 80694<br>8637665532<br>8072824779</span>
+                        </div>
+                        <div class="footer-contact-item mb-0">
+                            <span class="material-symbols-outlined icon">mail</span>
+                            <span style="word-break: break-all;">brajtraders2000@gmail.com</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section C: Fast Travel Nodes -->
+                <div class="col-lg-3 col-md-4">
+                    <h6 class="footer-heading-premium">Quick Actions</h6>
+                    <div class="d-flex flex-column footer-links-matrix">
+                        <a asp-controller="Home" asp-action="About">About Us</a>
+                        <a asp-controller="Home" asp-action="WhyChooseUs">Why Choose Us</a>
+                        <a asp-controller="Catalog" asp-action="Index">Wholesale Products</a>
+                        <a asp-controller="Catalog" asp-action="Loose">Retail Products</a>
+                        <a asp-controller="Order" asp-action="Request" style="color: var(--brt-gold-pure); font-weight:600;">Request Bulk Order</a>
+                        <a asp-controller="Contact" asp-action="Index">Contact Us</a>
+                    </div>
+                </div>
+
+                <!-- Section D: Freight Reach Index -->
+                <div class="col-lg-3 col-md-12">
+                    <h6 class="footer-heading-premium">Service Coverage Map</h6>
+                    <div class="coverage-badge-pill">
+                        <div class="d-flex align-items-center gap-2 mb-2" style="color: #FFFFFF; font-weight:600; font-size:0.85rem;">
+                            <span class="material-symbols-outlined" style="color:var(--brt-gold-pure); font-size:1.1rem;">local_shipping</span>
+                            PAN INDIA LOGISTICS
+                        </div>
+                        Supplying across mainland India, with highly optimized daily dispatch routes covering Pondicherry and over 15+ primary districts across Tamil Nadu.
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Global Manifest Footer Meta Grid -->
+            <div class="footer-divider-thin"></div>
+            <div class="text-center">
+                <div class="mt-4" style="font-size: 0.75rem; color: #4B5563; font-weight: 500;">
+                    &copy; @DateTime.Now.Year B Raj Traders. All Rights Preserved.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap Core Script Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+</body>
+</html>

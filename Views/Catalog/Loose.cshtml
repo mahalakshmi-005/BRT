@@ -1,0 +1,327 @@
+@model List<BRT.Models.Product>
+@{
+    // மீண்டும் மாஸ்டர் லேஅவுட்டை இணைக்கிறோம், இதனால் Nav பார் மற்றும் Footer வந்துவிடும்
+    Layout = "_Layout";
+
+    // NullReferenceException எரர் வராமல் தடுக்க பாதுகாப்பான டிக்ஸ்னரி ஹேண்ட்லிங்
+    var todaysPrices = ViewBag.TodaysPrices as Dictionary<int, BRT.Models.MarketPrice>
+                       ?? new Dictionary<int, BRT.Models.MarketPrice>();
+}
+
+<!-- Premium Corporate Fonts Core Setup -->
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+<style>
+    :root {
+        --brt-green-dark: #1B4332;
+        --brt-gold: #D4AF37;
+        --brt-gold-muted: #AA820A;
+        --text-main: #0F172A;
+        --text-muted: #64748B;
+        --card-border: #F1F5F9;
+        --badge-bg: #F8FAFC;
+    }
+
+    body {
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        background-color: #FAFAFA;
+        color: var(--text-main);
+    }
+
+        /* DYNAMIC LANGUAGE SWITCH SYSTEM WITH LAYOUT INTEGRATION */
+        html[lang="en"] .lang-en, body[lang="en"] .lang-en {
+            display: inline-block !important;
+        }
+
+        html[lang="en"] .lang-ta, body[lang="en"] .lang-ta {
+            display: none !important;
+        }
+
+        html[lang="ta"] .lang-en, body[lang="ta"] .lang-en {
+            display: none !important;
+        }
+
+        html[lang="ta"] .lang-ta, body[lang="ta"] .lang-ta {
+            display: inline-block !important;
+        }
+
+    /* RETAIL HERO SECTION WITH WHITE TEXT FIXED */
+    .page-hero {
+        background-color: var(--brt-green-dark);
+        padding: 60px 20px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        margin-bottom: 40px;
+    }
+
+        .page-hero h1 {
+            font-weight: 800;
+            font-size: 2.5rem;
+            color: #FFFFFF !important;
+            margin-bottom: 12px;
+        }
+
+        .page-hero p {
+            color: rgba(255, 255, 255, 0.9) !important;
+            font-size: 1.05rem;
+            max-width: 700px;
+            margin: 0 auto;
+            font-weight: 500;
+        }
+
+    /* EXACT MATCHING WHOLESALE CARD STRUCTURE */
+    .brt-retail-card {
+        background: #FFFFFF;
+        border: 2px solid #F8FAFC;
+        border-radius: 16px;
+        padding: 24px;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.01);
+        transition: all 0.3s ease;
+    }
+
+        .brt-retail-card:hover {
+            border-color: rgba(212, 175, 55, 0.3);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.04);
+        }
+
+    /* MEDIA CONTAINER WITH REFINED CORNER VALUE */
+    .product-media-frame {
+        width: 100%;
+        height: 220px;
+        background-color: #FAFAFA;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        margin-bottom: 30px;
+        position: relative;
+    }
+
+        .product-media-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+    .placeholder-svg {
+        width: 70px;
+        height: 70px;
+        opacity: 0.15;
+    }
+
+    /* TYPOGRAPHY */
+    .product-title-text {
+        font-size: 1.6rem;
+        font-weight: 700;
+        color: var(--text-main);
+        margin-bottom: 20px;
+        letter-spacing: -0.5px;
+    }
+
+    /* PREMIUM PRICE INSIGHT BOX */
+    .price-insight-box {
+        background-color: #FFFDF6;
+        border: 1px dashed rgba(212, 175, 55, 0.4);
+        border-radius: 12px;
+        padding: 16px;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+        .price-insight-box .price-label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--brt-gold-muted);
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+
+        .price-insight-box .live-price-value {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--text-main);
+        }
+
+    /* PACK TILES / BADGES */
+    .pack-chips-wrapper {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 30px;
+    }
+
+    .pack-chip-tile {
+        background-color: #F8FAFC;
+        border: 1px solid #E2E8F0;
+        border-radius: 8px;
+        padding: 6px 14px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: #475569;
+    }
+
+    /* DUAL BUTTON SYSTEM ACTION MATRIX */
+    .card-action-matrix {
+        display: flex;
+        gap: 12px;
+        margin-top: auto;
+    }
+
+    .btn-brt-secondary {
+        flex: 1;
+        background-color: #FFFFFF;
+        border: 1px solid #E2E8F0;
+        color: var(--text-main);
+        font-weight: 700;
+        font-size: 0.95rem;
+        padding: 12px 16px;
+        border-radius: 10px;
+        text-align: center;
+        text-decoration: none !important;
+        transition: all 0.2s ease;
+    }
+
+        .btn-brt-secondary:hover {
+            background-color: #F8FAFC;
+            border-color: #CBD5E1;
+            color: var(--text-main);
+        }
+
+    .btn-brt-primary-dark {
+        flex: 1;
+        background-color: #0B0F19;
+        color: #FFFFFF !important;
+        font-weight: 700;
+        font-size: 0.95rem;
+        padding: 12px 16px;
+        border-radius: 10px;
+        text-align: center;
+        text-decoration: none !important;
+        transition: opacity 0.2s ease;
+    }
+
+        .btn-brt-primary-dark:hover {
+            opacity: 0.9;
+        }
+
+    @@media (max-width: 576px) {
+        .card-action-matrix
+
+    {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    }
+</style>
+
+<!-- Retail Clean Hero Section with Fixed White Text Over Green Background -->
+<section class="page-hero text-center">
+    <div class="container">
+        <h1 class="lang-en">Retail Products</h1>
+        <h1 class="lang-ta">சில்லறை விற்பனை தயாரிப்புகள்</h1>
+
+        <p class="lang-en">Small retail packs — 50g / 100g / 250g / 500g / 1Kg. Retail pack availability depends on stock.</p>
+        <p class="lang-ta">சிறிய சில்லறைப் பொட்டலங்கள் — 50கி / 100கி / 250கி / 500கி / 1கிலோ. சில்லறைப் பொட்டலங்கள் இருப்பு நிலவரத்திற்கு உட்பட்டவை.</p>
+    </div>
+</section>
+
+<!-- Main Inventory Grid Layout -->
+<div class="container my-5">
+    <div class="row g-4">
+        @if (Model != null && Model.Any())
+        {
+            @foreach (var p in Model)
+            {
+                var hasPrice = todaysPrices.ContainsKey(p.Id);
+                var mp = hasPrice ? todaysPrices[p.Id] : null;
+
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="brt-retail-card">
+                        <div>
+                            <!-- Product Media Container Framework -->
+                            <div class="product-media-frame">
+                                @if (!string.IsNullOrEmpty(p.ImageUrl))
+                                {
+                                    <img src="@p.ImageUrl" alt="@p.Name" loading="lazy" />
+                                }
+                                else
+                                {
+                                    <!-- Exact Leaf Logo Minimal Shape Mimic Placeholder -->
+                                    <svg class="placeholder-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+                                        <path d="M2 22C2 22 6 18 12 18C18 18 22 22 22 22" stroke-linecap="round" />
+                                        <path d="M12 2C6.5 2 2 6.5 2 12C2 15.5 4 16.5 6 16C12 14.5 13.5 9 20 4C21.5 7.5 20.5 12 18 14.5C15.5 17 12 18 12 18" stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                }
+                            </div>
+
+                            <!-- Dynamic Identity Text Frame (Languages Isolated Properly) -->
+                            <h3 class="product-title-text">
+                                <span class="lang-en">@p.Name</span>
+                                @if (!string.IsNullOrEmpty(p.NameTamil))
+                                {
+                                    <span class="lang-ta">@p.NameTamil</span>
+                                }
+                            </h3>
+
+                            <!-- Price Insight Box Context -->
+                            <div class="price-insight-box">
+                                <div class="price-label">
+                                    <span class="lang-en">Today's Retail Price</span>
+                                    <span class="lang-ta">இன்றைய சில்லறை விலை</span>
+                                </div>
+                                <div class="live-price-value">
+                                    @if (mp != null)
+                                    {
+                                        <span>₹@mp.TodayPrice.ToString("F2")</span>
+                                    }
+                                    else
+                                    {
+                                        <span style="font-size:1.05rem; color:var(--text-muted);">—</span>
+                                    }
+                                </div>
+                            </div>
+
+                            <!-- Dynamic Small Packing Types Tag Chips Layout -->
+                            <div class="pack-chips-wrapper">
+                                @if (p.PackingTypes != null)
+                                {
+                                    @foreach (var pt in p.PackingTypes.Where(x => x.IsActive && x.IsLoose))
+                                    {
+                                        <span class="pack-chip-tile">@pt.PackSize</span>
+                                    }
+                                }
+                            </div>
+                        </div>
+
+                        <!-- Fixed Action Buttons Routing Matrix (404 Error Fixed via Routing Helpers) -->
+                        <div class="card-action-matrix">
+                            <a asp-controller="Catalog" asp-action="Product" asp-route-slug="@p.Slug" class="btn-brt-secondary">
+                                <span class="lang-en">Specifications</span>
+                                <span class="lang-ta">விவரங்கள்</span>
+                            </a>
+                            <a asp-controller="Order" asp-action="Request" asp-route-productId="@p.Id" class="btn-brt-primary-dark">
+                                <span class="lang-en">Order Now</span>
+                                <span class="lang-ta">ஆர்டர் செய்க</span>
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="col-12 text-center my-5">
+                <p class="text-muted lang-en">No active retail products found available at the moment.</p>
+                <p class="text-muted lang-ta">தற்போது சில்லறை விற்பனை தயாரிப்புகள் எதுவும் இல்லை.</p>
+            </div>
+        }
+    </div>
+</div>

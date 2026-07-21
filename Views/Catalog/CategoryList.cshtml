@@ -1,0 +1,470 @@
+@model List<SubCategory>
+@{
+    // Safe Null-Coalescing Cast assignment prevents crashes if database returns zero rows
+    var todaysPrices = (ViewBag.TodaysPrices as Dictionary<int, MarketPrice>) ?? new Dictionary<int, MarketPrice>();
+}
+
+<!-- Premium Corporate Fonts & Icons Core -->
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Cinzel:wght@600;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+<style>
+    :root {
+        --brt-gold: #D4AF37;
+        --brt-gold-dark: #AA820A;
+        --dark-corporate: #0F172A;
+        --text-main: #1E293B;
+        --text-muted: #64748B;
+        --bg-corporate-light: #F8FAFC;
+        --price-up-bg: rgba(16, 185, 129, 0.08);
+        --price-up-text: #10B981;
+        --price-down-bg: rgba(239, 68, 68, 0.08);
+        --price-down-text: #EF4444;
+        --border-refined: rgba(226, 232, 240, 0.9);
+    }
+
+    body {
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        background-color: #FCFCFD;
+        color: var(--text-main);
+    }
+
+        /* AUTOMATIC DYNAMIC LANGUAGE CONTROLLER */
+        html[lang="en"] .lang-ta-text, body[lang="en"] .lang-ta-text {
+            display: none !important;
+        }
+
+        html[lang="ta"] .lang-en-text, body[lang="ta"] .lang-en-text {
+            display: none !important;
+        }
+
+    /* HERO ARCHITECTURE */
+    .corporate-page-hero {
+        background: radial-gradient(100% 100% at 50% 100%, rgba(212, 175, 55, 0.05) 0%, transparent 100%), #0F172A;
+        padding: 80px 20px;
+        color: #FFFFFF;
+        position: relative;
+        overflow: hidden;
+        border-bottom: 3px solid var(--brt-gold);
+    }
+
+        .corporate-page-hero h1 {
+            font-family: 'Cinzel', serif;
+            font-weight: 900;
+            font-size: 3.5rem;
+            letter-spacing: -0.5px;
+            margin-bottom: 12px;
+            background: linear-gradient(180deg, #FFFFFF 0%, #E2E8F0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .corporate-page-hero p {
+            font-size: 1.05rem;
+            color: #94A3B8;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+    /* SECTION ARCHITECTURE */
+    .corporate-section-head {
+        position: relative;
+        padding-left: 20px;
+        margin-bottom: 36px;
+    }
+
+        .corporate-section-head::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 4px;
+            bottom: 4px;
+            width: 5px;
+            background: var(--brt-gold);
+            border-radius: 4px;
+        }
+
+    .corporate-section-title {
+        font-family: 'Cinzel', serif;
+        font-size: 2.2rem;
+        font-weight: 900;
+        color: var(--dark-corporate);
+        margin: 0;
+    }
+
+    .corporate-section-title-ta {
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        font-size: 1.8rem;
+        font-weight: 800;
+        color: var(--dark-corporate);
+        margin: 0;
+    }
+
+    /* PREMIUM CARD STRUCTURE */
+    .corporate-product-card {
+        background: #FFFFFF;
+        border: 1px solid var(--border-refined);
+        border-radius: 24px;
+        padding: 24px;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        box-shadow: 0 10px 25px -15px rgba(15, 23, 42, 0.04);
+        transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        position: relative;
+    }
+
+        .corporate-product-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 40px -20px rgba(15, 23, 42, 0.12);
+            border-color: rgba(212, 175, 55, 0.3);
+        }
+
+    /* MEDIA DISPLAY FRAME */
+    .corporate-media-frame {
+        width: 100%;
+        height: 220px;
+        background: var(--bg-corporate-light);
+        border-radius: 16px;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 20px;
+        border: 1px solid rgba(226, 232, 240, 0.5);
+    }
+
+        .corporate-media-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+    .corporate-product-card:hover .corporate-media-frame img {
+        transform: scale(1.04);
+    }
+
+    .corporate-media-frame .fallback-icon {
+        font-size: 4rem;
+        color: #CBD5E1;
+    }
+
+    /* TEXT ENGINE */
+    .card-meta-wrap {
+        margin-bottom: 16px;
+    }
+
+    .corporate-card-title {
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        font-weight: 800;
+        font-size: 1.25rem;
+        color: var(--dark-corporate);
+        line-height: 1.4;
+        margin-bottom: 8px;
+    }
+
+    .corporate-grade-badge {
+        display: inline-flex;
+        background: linear-gradient(135deg, rgba(212, 175, 55, 0.12) 0%, rgba(212, 175, 55, 0.03) 100%);
+        color: var(--brt-gold-dark);
+        font-weight: 800;
+        font-size: 0.72rem;
+        padding: 4px 12px;
+        border-radius: 6px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        border: 1px solid rgba(212, 175, 55, 0.2);
+    }
+
+    /* TRADING TICKER GRID */
+    .card-ticker-strip {
+        background: var(--bg-corporate-light);
+        border-radius: 14px;
+        padding: 14px 16px;
+        margin-bottom: 16px;
+        border: 1px solid rgba(226, 232, 240, 0.6);
+    }
+
+    .ticker-flex-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .ticker-amount {
+        font-size: 1.55rem;
+        font-weight: 800;
+        color: var(--dark-corporate);
+        letter-spacing: -0.5px;
+    }
+
+    .ticker-amount-unit {
+        font-size: 0.8rem;
+        color: var(--text-muted);
+        font-weight: 600;
+    }
+
+    .ticker-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        font-size: 0.78rem;
+        font-weight: 800;
+        padding: 5px 10px;
+        border-radius: 8px;
+    }
+
+        .ticker-pill.up {
+            background: var(--price-up-bg);
+            color: var(--price-up-text);
+        }
+
+        .ticker-pill.down {
+            background: var(--price-down-bg);
+            color: var(--price-down-text);
+        }
+
+        .ticker-pill.stable {
+            background: rgba(100, 116, 139, 0.08);
+            color: var(--text-muted);
+        }
+
+    .ticker-stamp {
+        display: block;
+        font-size: 0.72rem;
+        color: var(--text-muted);
+        font-weight: 600;
+        margin-top: 8px;
+        border-top: 1px solid rgba(226, 232, 240, 0.6);
+        padding-top: 6px;
+    }
+
+    /* STABLE DISCOVERY MATRICES */
+    .card-fallback-matrix {
+        background: rgba(248, 250, 252, 0.8);
+        border: 1px dashed #CBD5E1;
+        border-radius: 14px;
+        padding: 16px;
+        text-align: center;
+        margin-bottom: 16px;
+    }
+
+        .card-fallback-matrix p {
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            margin: 0;
+        }
+
+    /* PACKAGING TAG ARCHITECTURE */
+    .pack-chips-vault {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-bottom: 20px;
+    }
+
+    .pack-mini-chip {
+        background: #FFFFFF;
+        border: 1px solid var(--border-refined);
+        color: #475569;
+        font-size: 0.75rem;
+        font-weight: 700;
+        padding: 4px 10px;
+        border-radius: 8px;
+    }
+
+    /* CONVERSION ACTION ENGINE */
+    .btn-corporate-action {
+        font-weight: 800;
+        font-size: 0.85rem;
+        padding: 10px 16px;
+        border-radius: 12px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        transition: all 0.3s ease;
+        text-decoration: none !important;
+    }
+
+    .btn-action-view {
+        background: #FFFFFF;
+        border: 1px solid var(--dark-corporate);
+        color: var(--dark-corporate) !important;
+    }
+
+        .btn-action-view:hover {
+            background: var(--dark-corporate);
+            color: #FFFFFF !important;
+        }
+
+    .btn-action-order {
+        background: var(--dark-corporate);
+        border: 1px solid var(--dark-corporate);
+        color: #FFFFFF !important;
+        box-shadow: 0 4px 12px rgba(15, 23, 42, 0.15);
+    }
+
+        .btn-action-order:hover {
+            background: var(--brt-gold-dark);
+            border-color: var(--brt-gold-dark);
+            box-shadow: 0 6px 16px rgba(170, 130, 10, 0.25);
+        }
+
+    /* DYNAMIC RESPONSIVE BREAKPOINTS */
+    @@media (max-width: 991px) {
+        .corporate-page-hero {
+            padding: 60px 20px;
+        }
+
+            .corporate-page-hero h1 {
+                font-size: 2.8rem;
+            }
+
+        .corporate-section-title {
+            font-size: 1.8rem;
+        }
+
+        .corporate-section-title-ta {
+            font-size: 1.5rem;
+        }
+    }
+
+    @@media (max-width: 576px) {
+        .corporate-page-hero h1 {
+            font-size: 2.2rem;
+        }
+
+        .corporate-page-hero p {
+            font-size: 0.95rem;
+        }
+    }
+</style>
+
+<!-- Hero Section -->
+<section class="corporate-page-hero text-center">
+    <div class="container">
+        <h1>@ViewData["Title"]</h1>
+        <p>Dealer-to-Dealer Bulk Supply — Live Market Prices Updated Daily</p>
+    </div>
+</section>
+
+<!-- Content Grid Ecosystem -->
+<div class="container my-5">
+    @foreach (var sub in Model)
+    {
+        <div class="mb-5">
+            <!-- Structural Category Section Header -->
+            <div class="corporate-section-head">
+                <h3 class="corporate-section-title lang-en-text">@sub.Name</h3>
+                @if (!string.IsNullOrEmpty(sub.NameTamil))
+                {
+                    <h3 class="corporate-section-title-ta lang-ta-text">@sub.NameTamil</h3>
+                }
+            </div>
+
+            <!-- Products Core Grid -->
+            <div class="row g-4">
+                @foreach (var p in sub.Products)
+                {
+                    var hasPrice = todaysPrices.ContainsKey(p.Id);
+                    var mp = hasPrice ? todaysPrices[p.Id] : null;
+
+                    <div class="col-lg-4 col-md-6 col-sm-6">
+                        <div class="corporate-product-card">
+
+                            <!-- Upper Layout Structure -->
+                            <div>
+                                <!-- Showcase Visual Frame -->
+                                <div class="corporate-media-frame">
+                                    @if (!string.IsNullOrEmpty(p.ImageUrl))
+                                    {
+                                        <img src="@p.ImageUrl" alt="@p.Name" loading="lazy" />
+                                    }
+                                    else
+                                    {
+                                        <span class="material-symbols-outlined fallback-icon">eco</span>
+                                    }
+                                </div>
+
+                                <!-- Metadata Elements -->
+                                <div class="card-meta-wrap">
+                                    <h5 class="corporate-card-title lang-en-text">@p.Name</h5>
+                                    @if (!string.IsNullOrEmpty(p.NameTamil))
+                                    {
+                                        <h5 class="corporate-card-title lang-ta-text">@p.NameTamil</h5>
+                                    }
+
+                                    @if (!string.IsNullOrEmpty(p.Grade))
+                                    {
+                                        <span class="corporate-grade-badge">@p.Grade</span>
+                                    }
+                                </div>
+
+                                <!-- Dynamic Financial Panel Logic -->
+                                @if (mp != null)
+                                {
+                                    var diff = mp.PriceDifference;
+                                    var diffClass = diff > 0 ? "up" : diff < 0 ? "down" : "stable";
+                                    var diffIcon = diff > 0 ? "arrow_upward" : diff < 0 ? "arrow_downward" : "horizontal_rule";
+
+                                    <div class="card-ticker-strip">
+                                        <div class="ticker-flex-row">
+                                            <div>
+                                                <span class="ticker-amount">₹@mp.TodayPrice.ToString("F2")</span>
+                                                <span class="ticker-amount-unit">/ KG</span>
+                                            </div>
+                                            <span class="ticker-pill @diffClass">
+                                                <span class="material-symbols-outlined" style="font-size: 14px;">@diffIcon</span>
+                                                <strong>₹@Math.Abs(diff).ToString("F2")</strong>
+                                            </span>
+                                        </div>
+                                        <span class="ticker-stamp">
+                                            <span class="lang-en-text">GST Net Included • Updated @mp.UpdatedAt.ToString("dd-MMM HH:mm")</span>
+                                            <span class="lang-ta-text">GST உட்பட • மாற்றி அமைக்கப்பட்டது @mp.UpdatedAt.ToString("dd-MMM HH:mm")</span>
+                                        </span>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="card-fallback-matrix">
+                                        <p class="lang-en-text">Price on request — Contact Admin</p>
+                                        <p class="lang-ta-text">விலை விவரங்களுக்கு நிர்வாகியை அணுகவும்</p>
+                                    </div>
+                                }
+
+                                <!-- Packing Configuration Layer -->
+                                <div class="pack-chips-vault">
+                                    @foreach (var pt in p.PackingTypes.Where(x => x.IsActive && x.IsWholesale))
+                                    {
+                                        <span class="pack-mini-chip">@pt.PackSize</span>
+                                    }
+                                </div>
+                            </div>
+
+                            <!-- Structural Bottom Button Matrix -->
+                            <div class="d-flex gap-2 mt-auto pt-2">
+                                <a asp-controller="Catalog" asp-action="Product" asp-route-slug="@p.Slug" class="btn-corporate-action btn-action-view flex-fill">
+                                    <span class="material-symbols-outlined" style="font-size: 18px;">visibility</span>
+                                    <span class="lang-en-text">View</span>
+                                    <span class="lang-ta-text">விவரம்</span>
+                                </a>
+                                <a asp-controller="Order" asp-action="Request" asp-route-productId="@p.Id" class="btn-corporate-action btn-action-order flex-fill">
+                                    <span class="material-symbols-outlined" style="font-size: 18px;">shopping_cart</span>
+                                    <span class="lang-en-text">Order</span>
+                                    <span class="lang-ta-text">ஆர்டர்</span>
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+</div>
