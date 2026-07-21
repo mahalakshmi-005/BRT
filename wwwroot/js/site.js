@@ -1,89 +1,45 @@
 document.addEventListener('DOMContentLoaded', function () {
-
-    // ===================================================
-    // 1. ULTIMATE SAFE SCROLL-REVEAL FORCING VIEW
-    // ===================================================
+    // Scroll-reveal animation for elements marked .fade-in-up
+    // Safe-by-default: only add the "hidden until revealed" state once JS is confirmed running.
     const revealEls = document.querySelectorAll('.fade-in-up');
+    revealEls.forEach(el => el.classList.add('fade-prep'));
 
-    // பக்கத்தில் இருக்கும் அனிமேஷன் எலிமெண்ட்டுகளை உடனடியாகக் காண்பிக்கச் செய்யும் Force Logic
-    if (revealEls.length > 0) {
-        revealEls.forEach(el => {
-            // CSS-ல் ஏதேனும் மறைத்து வைக்கப்பட்டிருந்தால் அதை உடைக்க நேரடி ஸ்டைல் மாற்றி அமைக்கப்படுகிறது
-            el.style.opacity = "1";
-            el.style.transform = "none";
-            el.style.visibility = "visible";
-            el.classList.add('is-visible');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                observer.unobserve(entry.target);
+            }
         });
-    }
+    }, { threshold: 0.12 });
 
-    // ===================================================
-    // 2. STICKY NAV BACKGROUND CHANGE ON SCROLL
-    // ===================================================
-    const nav = document.querySelector('.site-nav-premium');
+    revealEls.forEach(el => observer.observe(el));
+
+    // Safety net: if anything is still hidden after 3s (observer edge cases, layout quirks), reveal it anyway
+    setTimeout(() => {
+        document.querySelectorAll('.fade-prep:not(.is-visible)').forEach(el => el.classList.add('is-visible'));
+    }, 3000);
+
+    // Shrink sticky nav on scroll
+    const nav = document.querySelector('.site-nav');
     if (nav) {
         window.addEventListener('scroll', function () {
-            if (window.scrollY > 40) {
-                nav.classList.add('nav-scrolled');
-            } else {
-                nav.classList.remove('nav-scrolled');
-            }
+            if (window.scrollY > 40) nav.classList.add('nav-scrolled');
+            else nav.classList.remove('nav-scrolled');
         });
     }
 
-    // ===================================================
-    // 3. PREMIUM INTERACTIVE SLIDER LANGUAGE TOGGLE LOGIC
-    // ===================================================
-    const langContainer = document.getElementById('langContainer');
-    const slider = document.getElementById("langSlider");
-    const optEN = document.getElementById("optEN");
-    const optTN = document.getElementById("optTN");
+    // English / Tamil display toggle (delegated — works even if button is re-rendered)
+    document.addEventListener('click', function (e) {
+        const btn = e.target.closest('#langToggle');
+        if (!btn) return;
+        document.body.classList.toggle('lang-ta');
+        btn.textContent = document.body.classList.contains('lang-ta') ? 'தமிழ் | EN' : 'EN | தமிழ்';
+    });
 
-    // LocalStorage-ல் இருந்து ஏற்கனவே சேமிக்கப்பட்ட மொழியைச் சரிபார்க்கும்
-    const savedLang = localStorage.getItem("brtLanguage") || "EN";
-    if (savedLang === "TN") {
-        document.body.classList.add('lang-ta');
-        setSliderUI("TN");
-    } else {
-        document.body.classList.remove('lang-ta');
-        setSliderUI("EN");
-    }
-
-    if (langContainer) {
-        langContainer.addEventListener('click', function () {
-            // Body-ல் lang-ta கிளாஸை மாற்றி அமைக்கும் (Toggle)
-            const isTamil = document.body.classList.toggle('lang-ta');
-
-            if (isTamil) {
-                localStorage.setItem("brtLanguage", "TN");
-                setSliderUI("TN");
-            } else {
-                localStorage.setItem("brtLanguage", "EN");
-                setSliderUI("EN");
-            }
-        });
-    }
-
-    function setSliderUI(lang) {
-        if (!slider || !optEN || !optTN) return;
-
-        if (lang === "EN") {
-            slider.style.left = "4px";
-            slider.style.width = "44px";
-            optEN.classList.add("active");
-            optTN.classList.remove("active");
-        } else {
-            slider.style.left = "44px";
-            slider.style.width = "62px";
-            optTN.classList.add("active");
-            optEN.classList.remove("active");
-        }
-    }
-
-    // ===================================================
-    // 4. ANIMATED STATISTICS COUNTER
-    // ===================================================
+    // Animated statistics counter
     const counters = document.querySelectorAll('.counter');
-    if (counters.length > 0) {
+    if (counters.length) {
         const counterObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -91,7 +47,6 @@ document.addEventListener('DOMContentLoaded', function () {
                     const target = parseInt(el.getAttribute('data-target'), 10) || 0;
                     const duration = 1400;
                     const start = performance.now();
-
                     function tick(now) {
                         const progress = Math.min((now - start) / duration, 1);
                         const eased = 1 - Math.pow(1 - progress, 3);
