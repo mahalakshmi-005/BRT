@@ -1,6 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
     // Scroll-reveal animation for elements marked .fade-in-up
-    // Safe-by-default: only add the "hidden until revealed" state once JS is confirmed running.
     const revealEls = document.querySelectorAll('.fade-in-up');
     revealEls.forEach(el => el.classList.add('fade-prep'));
 
@@ -15,7 +14,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     revealEls.forEach(el => observer.observe(el));
 
-    // Safety net: if anything is still hidden after 3s (observer edge cases, layout quirks), reveal it anyway
     setTimeout(() => {
         document.querySelectorAll('.fade-prep:not(.is-visible)').forEach(el => el.classList.add('is-visible'));
     }, 3000);
@@ -29,13 +27,50 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // English / Tamil display toggle (delegated — works even if button is re-rendered)
-    document.addEventListener('click', function (e) {
-        const btn = e.target.closest('#langToggle');
-        if (!btn) return;
-        document.body.classList.toggle('lang-ta');
-        btn.textContent = document.body.classList.contains('lang-ta') ? 'தமிழ் | EN' : 'EN | தமிழ்';
-    });
+    // ===================================================
+    // LANGUAGE TOGGLE SYSTEM (langContainer / optEN / optTN / langSlider)
+    // Persists selection across page navigation using localStorage
+    // ===================================================
+    const langContainer = document.getElementById('langContainer');
+    const langSlider = document.getElementById('langSlider');
+    const optEN = document.getElementById('optEN');
+    const optTN = document.getElementById('optTN');
+
+    function applyLanguage(lang) {
+        // Set the lang attribute on <html> - this is what all the CSS rules
+        // (html[lang="en"] .lang-en, html[lang="ta"] .lang-ta, etc.) key off of
+        document.documentElement.setAttribute('lang', lang);
+        document.body.setAttribute('lang', lang);
+
+        if (optEN && optTN) {
+            optEN.classList.toggle('active', lang === 'en');
+            optTN.classList.toggle('active', lang === 'ta');
+        }
+
+        if (langSlider && langContainer) {
+            if (lang === 'ta' && optTN) {
+                langSlider.style.left = optTN.offsetLeft + 'px';
+                langSlider.style.width = optTN.offsetWidth + 'px';
+            } else if (optEN) {
+                langSlider.style.left = optEN.offsetLeft + 'px';
+                langSlider.style.width = optEN.offsetWidth + 'px';
+            }
+        }
+
+        localStorage.setItem('brt-lang', lang);
+    }
+
+    if (langContainer) {
+        // Restore saved language on page load (default: English)
+        const savedLang = localStorage.getItem('brt-lang') || 'en';
+        applyLanguage(savedLang);
+
+        langContainer.addEventListener('click', function () {
+            const currentLang = document.documentElement.getAttribute('lang') === 'ta' ? 'ta' : 'en';
+            const newLang = currentLang === 'en' ? 'ta' : 'en';
+            applyLanguage(newLang);
+        });
+    }
 
     // Animated statistics counter
     const counters = document.querySelectorAll('.counter');
