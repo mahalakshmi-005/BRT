@@ -395,10 +395,7 @@
                                 <!-- Metadata Elements -->
                                 <div class="card-meta-wrap">
                                     <h5 class="corporate-card-title lang-en-text">@p.Name</h5>
-                                    @if (!string.IsNullOrEmpty(p.NameTamil))
-                                    {
-                                        <h5 class="corporate-card-title lang-ta-text">@p.NameTamil</h5>
-                                    }
+<h5 class="corporate-card-title lang-ta-text">@(!string.IsNullOrEmpty(p.NameTamil) ? p.NameTamil : p.Name)</h5>
 
                                     @if (!string.IsNullOrEmpty(p.Grade))
                                     {
