@@ -73,10 +73,7 @@
                             <span class="premium-card-tag">@p.SubCategory?.Name</span>
                             <h4>
                                 <span class="lang-en-text">@p.Name</span>
-                                @if (!string.IsNullOrEmpty(p.NameTamil))
-                                {
-                                    <span class="lang-ta-text">@p.NameTamil</span>
-                                }
+                                <span class="lang-ta-text">@(!string.IsNullOrEmpty(p.NameTamil) ? p.NameTamil : p.Name)</span>
                             </h4>
                             <p>@(string.IsNullOrEmpty(p.Description) ? "Premium quality, available in bulk wholesale packing." : p.Description)</p>
                             <div class="premium-card-footer">
@@ -113,7 +110,10 @@
                     <div class="col-md-3 col-6">
                         <div class="market-card">
                             <div class="market-card-icon"><span class="material-symbols-outlined">@(m.Product!.SubCategory?.Category?.Type == BRT.Models.CategoryType.Garlic ? "eco" : "restaurant")</span></div>
-                            <h5>@m.Product.Name</h5>
+                            <h5>
+                                <span class="lang-en-text">@m.Product.Name</span>
+                                <span class="lang-ta-text">@(!string.IsNullOrEmpty(m.Product.NameTamil) ? m.Product.NameTamil : m.Product.Name)</span>
+                            </h5>
                             <small>₹@m.TodayPrice.ToString("F2") / unit</small>
                             <div class="market-card-footer">
                                 <span>Updated Today</span>
