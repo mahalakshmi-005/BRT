@@ -1,6 +1,6 @@
 @model List<BRT.Models.Product>
 @{
-    // மீண்டும் மாஸ்டர் லேஅவுட்டை இணைக்கிறோம், இதனால் Nav பார் மற்றும் Footer வந்துவிடும்
+    // மீண்டும் மாஸ்டர் லேஅவுட்டை இணைக்கிறோம்
     Layout = "_Layout";
 
     // NullReferenceException எரர் வராமல் தடுக்க பாதுகாப்பான டிக்ஸ்னரி ஹேண்ட்லிங்
@@ -29,47 +29,48 @@
         color: var(--text-main);
     }
 
-        /* DYNAMIC LANGUAGE SWITCH SYSTEM WITH LAYOUT INTEGRATION */
-        html[lang="en"] .lang-en, body[lang="en"] .lang-en {
-            display: inline-block !important;
-        }
+    /* DYNAMIC LANGUAGE SWITCH SYSTEM WITH LAYOUT INTEGRATION */
+    html[lang="en"] .lang-en, body[lang="en"] .lang-en {
+        display: inline-block !important;
+    }
 
-        html[lang="en"] .lang-ta, body[lang="en"] .lang-ta {
-            display: none !important;
-        }
+    html[lang="en"] .lang-ta, body[lang="en"] .lang-ta {
+        display: none !important;
+    }
 
-        html[lang="ta"] .lang-en, body[lang="ta"] .lang-en {
-            display: none !important;
-        }
+    html[lang="ta"] .lang-en, body[lang="ta"] .lang-en {
+        display: none !important;
+    }
 
-        html[lang="ta"] .lang-ta, body[lang="ta"] .lang-ta {
-            display: inline-block !important;
-        }
+    html[lang="ta"] .lang-ta, body[lang="ta"] .lang-ta {
+        display: inline-block !important;
+    }
 
-    /* RETAIL HERO SECTION WITH WHITE TEXT FIXED */
+    /* HERO SECTION ALIGNMENT FIX */
     .page-hero {
         background-color: var(--brt-green-dark);
         padding: 60px 20px;
         border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         margin-bottom: 40px;
+        text-align: center;
     }
 
-        .page-hero h1 {
-            font-weight: 800;
-            font-size: 2.5rem;
-            color: #FFFFFF !important;
-            margin-bottom: 12px;
-        }
+    .page-hero h1 {
+        font-weight: 800;
+        font-size: 2.5rem;
+        color: #FFFFFF !important;
+        margin-bottom: 12px;
+    }
 
-        .page-hero p {
-            color: rgba(255, 255, 255, 0.9) !important;
-            font-size: 1.05rem;
-            max-width: 700px;
-            margin: 0 auto;
-            font-weight: 500;
-        }
+    .page-hero p {
+        color: rgba(255, 255, 255, 0.9) !important;
+        font-size: 1.05rem;
+        max-width: 700px;
+        margin: 0 auto;
+        font-weight: 500;
+    }
 
-    /* EXACT MATCHING WHOLESALE CARD STRUCTURE */
+    /* EQUAL HEIGHT CARD STRUCTURE FIX */
     .brt-retail-card {
         background: #FFFFFF;
         border: 2px solid #F8FAFC;
@@ -83,12 +84,19 @@
         transition: all 0.3s ease;
     }
 
-        .brt-retail-card:hover {
-            border-color: rgba(212, 175, 55, 0.3);
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.04);
-        }
+    .brt-retail-card:hover {
+        border-color: rgba(212, 175, 55, 0.3);
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.04);
+    }
 
-    /* MEDIA CONTAINER WITH REFINED CORNER VALUE */
+    /* CARD BODY WRAPPER TO STRETCH INNER CONTENT */
+    .card-body-content {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+    }
+
+    /* MEDIA CONTAINER ALIGNMENT */
     .product-media-frame {
         width: 100%;
         height: 220px;
@@ -98,15 +106,15 @@
         align-items: center;
         justify-content: center;
         overflow: hidden;
-        margin-bottom: 30px;
+        margin-bottom: 20px;
         position: relative;
     }
 
-        .product-media-frame img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+    .product-media-frame img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
 
     .placeholder-svg {
         width: 70px;
@@ -114,63 +122,69 @@
         opacity: 0.15;
     }
 
-    /* TYPOGRAPHY */
+    /* TYPOGRAPHY FIX */
     .product-title-text {
-        font-size: 1.6rem;
+        font-size: 1.4rem;
         font-weight: 700;
         color: var(--text-main);
-        margin-bottom: 20px;
-        letter-spacing: -0.5px;
+        margin-bottom: 16px;
+        letter-spacing: -0.3px;
+        min-height: 2.8rem; /* Consistent title height */
+        display: flex;
+        align-items: center;
     }
 
-    /* PREMIUM PRICE INSIGHT BOX */
+    /* PRICE INSIGHT BOX */
     .price-insight-box {
         background-color: #FFFDF6;
         border: 1px dashed rgba(212, 175, 55, 0.4);
         border-radius: 12px;
-        padding: 16px;
+        padding: 14px;
         text-align: center;
-        margin-bottom: 20px;
+        margin-bottom: 16px;
     }
 
-        .price-insight-box .price-label {
-            font-size: 0.75rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            color: var(--brt-gold-muted);
-            letter-spacing: 1px;
-            margin-bottom: 4px;
-        }
+    .price-insight-box .price-label {
+        font-size: 0.75rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: var(--brt-gold-muted);
+        letter-spacing: 0.8px;
+        margin-bottom: 4px;
+    }
 
-        .price-insight-box .live-price-value {
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: var(--text-main);
-        }
+    .price-insight-box .live-price-value {
+        font-size: 1.4rem;
+        font-weight: 800;
+        color: var(--text-main);
+    }
 
-    /* PACK TILES / BADGES */
+    /* PACK TILES / BADGES ALIGNMENT FIX */
     .pack-chips-wrapper {
         display: flex;
         flex-wrap: wrap;
         gap: 8px;
-        margin-bottom: 30px;
+        margin-bottom: 24px;
+        min-height: 34px; /* Keeps card proportions identical */
+        align-items: flex-start;
     }
 
     .pack-chip-tile {
         background-color: #F8FAFC;
         border: 1px solid #E2E8F0;
         border-radius: 8px;
-        padding: 6px 14px;
-        font-size: 0.85rem;
+        padding: 4px 12px;
+        font-size: 0.8rem;
         font-weight: 600;
         color: #475569;
     }
 
-    /* DUAL BUTTON SYSTEM ACTION MATRIX */
+    /* DUAL BUTTON ACTION MATRIX FIX */
     .card-action-matrix {
         display: flex;
         gap: 12px;
-        margin-top: auto;
+        margin-top: auto; /* Push to absolute bottom */
+        width: 100%;
     }
 
     .btn-brt-secondary {
@@ -179,50 +193,57 @@
         border: 1px solid #E2E8F0;
         color: var(--text-main);
         font-weight: 700;
-        font-size: 0.95rem;
-        padding: 12px 16px;
+        font-size: 0.9rem;
+        padding: 12px 14px;
         border-radius: 10px;
         text-align: center;
         text-decoration: none !important;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
         transition: all 0.2s ease;
     }
 
-        .btn-brt-secondary:hover {
-            background-color: #F8FAFC;
-            border-color: #CBD5E1;
-            color: var(--text-main);
-        }
+    .btn-brt-secondary:hover {
+        background-color: #F8FAFC;
+        border-color: #CBD5E1;
+        color: var(--text-main);
+    }
 
     .btn-brt-primary-dark {
         flex: 1;
         background-color: #0B0F19;
         color: #FFFFFF !important;
         font-weight: 700;
-        font-size: 0.95rem;
-        padding: 12px 16px;
+        font-size: 0.9rem;
+        padding: 12px 14px;
         border-radius: 10px;
         text-align: center;
         text-decoration: none !important;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
         transition: opacity 0.2s ease;
     }
 
-        .btn-brt-primary-dark:hover {
-            opacity: 0.9;
-        }
-
-    @@media (max-width: 576px) {
-        .card-action-matrix
-
-    {
-        flex-direction: column;
-        gap: 8px;
+    .btn-brt-primary-dark:hover {
+        opacity: 0.9;
     }
 
+    @media (max-width: 576px) {
+        .card-action-matrix {
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .product-title-text {
+            min-height: auto;
+        }
     }
 </style>
 
-<!-- Retail Clean Hero Section with Fixed White Text Over Green Background -->
-<section class="page-hero text-center">
+<!-- Retail Clean Hero Section -->
+<section class="page-hero">
     <div class="container">
         <h1 class="lang-en">Retail Products</h1>
         <h1 class="lang-ta">சில்லறை விற்பனை தயாரிப்புகள்</h1>
@@ -234,7 +255,7 @@
 
 <!-- Main Inventory Grid Layout -->
 <div class="container my-5">
-    <div class="row g-4">
+    <div class="row g-4 d-flex align-items-stretch">
         @if (Model != null && Model.Any())
         {
             @foreach (var p in Model)
@@ -242,9 +263,9 @@
                 var hasPrice = todaysPrices.ContainsKey(p.Id);
                 var mp = hasPrice ? todaysPrices[p.Id] : null;
 
-                <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="col-lg-4 col-md-6 col-sm-12 d-flex">
                     <div class="brt-retail-card">
-                        <div>
+                        <div class="card-body-content">
                             <!-- Product Media Container Framework -->
                             <div class="product-media-frame">
                                 @if (!string.IsNullOrEmpty(p.ImageUrl))
@@ -253,7 +274,6 @@
                                 }
                                 else
                                 {
-                                    <!-- Exact Leaf Logo Minimal Shape Mimic Placeholder -->
                                     <svg class="placeholder-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
                                         <path d="M2 22C2 22 6 18 12 18C18 18 22 22 22 22" stroke-linecap="round" />
                                         <path d="M12 2C6.5 2 2 6.5 2 12C2 15.5 4 16.5 6 16C12 14.5 13.5 9 20 4C21.5 7.5 20.5 12 18 14.5C15.5 17 12 18 12 18" stroke-linecap="round" stroke-linejoin="round" />
@@ -261,7 +281,7 @@
                                 }
                             </div>
 
-                            <!-- Dynamic Identity Text Frame (Languages Isolated Properly) -->
+                            <!-- Dynamic Identity Text Frame -->
                             <h3 class="product-title-text">
                                 <span class="lang-en">@p.Name</span>
                                 @if (!string.IsNullOrEmpty(p.NameTamil))
@@ -300,7 +320,7 @@
                             </div>
                         </div>
 
-                        <!-- Fixed Action Buttons Routing Matrix (404 Error Fixed via Routing Helpers) -->
+                        <!-- Fixed Action Buttons Routing Matrix -->
                         <div class="card-action-matrix">
                             <a asp-controller="Catalog" asp-action="Product" asp-route-slug="@p.Slug" class="btn-brt-secondary">
                                 <span class="lang-en">Specifications</span>
