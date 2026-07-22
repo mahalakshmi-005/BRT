@@ -362,10 +362,7 @@
             <!-- Structural Category Section Header -->
             <div class="corporate-section-head">
                 <h3 class="corporate-section-title lang-en-text">@sub.Name</h3>
-                @if (!string.IsNullOrEmpty(sub.NameTamil))
-                {
-                    <h3 class="corporate-section-title-ta lang-ta-text">@sub.NameTamil</h3>
-                }
+                <h3 class="corporate-section-title-ta lang-ta-text">@(!string.IsNullOrEmpty(sub.NameTamil) ? sub.NameTamil : sub.Name)</h3>
             </div>
 
             <!-- Products Core Grid -->
@@ -395,7 +392,7 @@
                                 <!-- Metadata Elements -->
                                 <div class="card-meta-wrap">
                                     <h5 class="corporate-card-title lang-en-text">@p.Name</h5>
-<h5 class="corporate-card-title lang-ta-text">@(!string.IsNullOrEmpty(p.NameTamil) ? p.NameTamil : p.Name)</h5>
+                                    <h5 class="corporate-card-title lang-ta-text">@(!string.IsNullOrEmpty(p.NameTamil) ? p.NameTamil : p.Name)</h5>
 
                                     @if (!string.IsNullOrEmpty(p.Grade))
                                     {
