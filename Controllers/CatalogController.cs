@@ -36,7 +36,6 @@ namespace BRT.Controllers
         // GET: /Catalog/Loose
         public async Task<IActionResult> Loose()
         {
-            var today = DateTime.UtcNow.Date;
             var products = await _context.Products
                 .Include(p => p.SubCategory)
                 .Include(p => p.PackingTypes)
@@ -44,9 +43,7 @@ namespace BRT.Controllers
                 .Where(p => p.IsActive && p.IsLooseAvailable)
                 .ToListAsync();
 
-            ViewBag.TodaysPrices = await _context.MarketPrices
-                .Where(m => m.PriceDate == today)
-                .ToDictionaryAsync(m => m.ProductId, m => m);
+            ViewBag.TodaysPrices = await GetLatestPricesAsync();
 
             ViewData["Title"] = "Retail Products";
             return View(products);
@@ -55,7 +52,6 @@ namespace BRT.Controllers
         // GET: /Catalog/Product/{slug}
         public async Task<IActionResult> Product(string slug)
         {
-            var today = DateTime.UtcNow.Date;
             var product = await _context.Products
                 .Include(p => p.SubCategory).ThenInclude(s => s!.Category)
                 .Include(p => p.PackingTypes)
@@ -63,9 +59,8 @@ namespace BRT.Controllers
 
             if (product == null) return NotFound();
 
-            ViewBag.TodayPrice = await _context.MarketPrices
-                .Where(m => m.ProductId == product.Id && m.PriceDate == today)
-                .FirstOrDefaultAsync();
+            var latestPrices = await GetLatestPricesAsync();
+            ViewBag.TodayPrice = latestPrices.TryGetValue(product.Id, out var mp) ? mp : null;
 
             ViewData["Title"] = product.Name;
             return View(product);
@@ -74,7 +69,6 @@ namespace BRT.Controllers
         // Helper Method for Category Parsing
         private async Task<List<SubCategory>> LoadCategory(CategoryType type)
         {
-            var today = DateTime.UtcNow.Date;
             var subs = await _context.SubCategories
                 .Include(s => s.Category)
                 .Include(s => s.Products.Where(p => p.IsActive))
@@ -83,11 +77,19 @@ namespace BRT.Controllers
                 .OrderBy(s => s.DisplayOrder)
                 .ToListAsync();
 
-            ViewBag.TodaysPrices = await _context.MarketPrices
-                .Where(m => m.PriceDate == today)
-                .ToDictionaryAsync(m => m.ProductId, m => m);
+            ViewBag.TodaysPrices = await GetLatestPricesAsync();
 
             return subs;
+        }
+
+        // Returns the most recent MarketPrice per product (not strictly "today") so the
+        // catalog never goes blank just because Admin hasn't re-entered today's price yet.
+        private async Task<Dictionary<int, MarketPrice>> GetLatestPricesAsync()
+        {
+            var allPrices = await _context.MarketPrices.ToListAsync();
+            return allPrices
+                .GroupBy(m => m.ProductId)
+                .ToDictionary(g => g.Key, g => g.OrderByDescending(m => m.PriceDate).ThenByDescending(m => m.UpdatedAt).First());
         }
     }
 }
