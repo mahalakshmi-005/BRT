@@ -22,7 +22,7 @@
     </div>
 </div>
 
-<!-- ===== Hero Section ===== -->
+<!-- ===== Hero Section (Restored Original) ===== -->
 <section class="hero-modern position-relative py-5 overflow-hidden">
     <div class="hero-inner container py-lg-4">
         <div class="hero-content fade-in-up is-visible max-w-700">
@@ -66,7 +66,7 @@
     </div>
 </section>
 
-<!-- ===== Featured Products Showcase ===== -->
+<!-- ===== Featured Products Showcase (Innovative Redesign) ===== -->
 @{
     var featured = ViewBag.FeaturedProducts as List<BRT.Models.Product>;
 }
@@ -77,42 +77,47 @@
             <span class="hero-eyebrow fw-semibold text-uppercase tracking-wider small d-inline-flex align-items-center gap-1" style="color:var(--brt-gold)">
                 <span class="material-symbols-outlined fs-6">eco</span> OUR PRODUCTS
             </span>
-            <h2 class="fw-bold mt-2" style="color:var(--brt-green)">Premium Wholesale Products</h2>
-            <p class="text-muted mx-auto" style="max-width:600px">High-quality garlic and grocery products directly supplied for wholesale buyers, supermarkets, hotels, and distributors.</p>
+            <h2 class="fw-bold mt-2" style="color:var(--brt-green)">Premium Wholesale Selection</h2>
+            <p class="text-muted mx-auto" style="max-width:600px">Top-tier mandi produce direct to distributors, hotels, and bulk retailers.</p>
         </div>
         <div class="row g-4">
             @foreach (var p in featured)
             {
                 <div class="col-lg-4 col-md-6 fade-in-up">
-                    <div class="premium-card h-100 card border-0 shadow-sm hover-lift rounded-3 overflow-hidden">
-                        <div class="premium-card-media position-relative bg-light text-center py-4">
+                    <div class="card h-100 border-0 rounded-4 shadow-sm hover-lift overflow-hidden position-relative bg-white">
+                        <div class="card-img-top bg-light text-center py-4 px-3 position-relative d-flex align-items-center justify-content-center" style="min-height: 220px; background: linear-gradient(180deg, #f8f9fa 0%, #e9ecef 100%);">
                             @if (!string.IsNullOrEmpty(p.ImageUrl))
                             {
-                                <img src="@p.ImageUrl" alt="@p.Name" class="img-fluid object-fit-cover" style="max-height: 220px;" />
+                                <img src="@p.ImageUrl" alt="@p.Name" class="img-fluid object-fit-contain hover-zoom" style="max-height: 180px;" />
                             }
                             else
                             {
-                                <div class="p-4 text-muted">
-                                    <span class="material-symbols-outlined display-1">
-                                        @(p.SubCategory?.Category?.Type == BRT.Models.CategoryType.Garlic ? "eco" : "restaurant")
+                                <div class="avatar-icon-wrapper rounded-circle p-4 bg-white shadow-sm text-green">
+                                    <span class="material-symbols-outlined display-4">
+                                        @(p.SubCategory?.Category?.Type == BRT.Models.CategoryType.Garlic ? "eco" : "shopping_cart_checkout")
                                     </span>
                                 </div>
                             }
-                        </div>
-                        <div class="premium-card-body card-body d-flex flex-column p-4">
-                            <span class="premium-card-tag badge bg-light text-dark border align-self-start mb-2 fw-normal">
+                            <span class="badge position-absolute top-0 start-0 m-3 px-3 py-2 rounded-pill shadow-sm" style="background: var(--brt-green, #1b3b22); color: #fff; font-size: 0.75rem;">
                                 @(p.SubCategory?.Name ?? "General")
                             </span>
-                            <h4 class="card-title h5 fw-bold mb-2">
-                                <span class="lang-en-text">@p.Name</span>
-                                <span class="lang-ta-text ms-1 text-muted fw-normal fs-6">@(!string.IsNullOrEmpty(p.NameTamil) ? $"({p.NameTamil})" : "")</span>
+                        </div>
+                        
+                        <div class="card-body d-flex flex-column p-4">
+                            <h4 class="card-title h5 fw-bold mb-2 text-dark">
+                                <span>@p.Name</span>
+                                @if (!string.IsNullOrEmpty(p.NameTamil))
+                                {
+                                    <small class="d-block text-muted fw-normal fs-6 mt-1">@p.NameTamil</small>
+                                }
                             </h4>
-                            <p class="card-text text-muted small flex-grow-1">
-                                @(string.IsNullOrEmpty(p.Description) ? "Premium quality, available in bulk wholesale packing." : p.Description)
+                            <p class="card-text text-muted small flex-grow-1 lh-base">
+                                @(string.IsNullOrEmpty(p.Description) ? "Standard commercial bulk packaging available with guaranteed fresh supply." : p.Description)
                             </p>
-                            <div class="premium-card-footer pt-3 mt-3 border-top d-flex justify-content-between align-items-center">
-                                <span class="text-muted small fw-medium">Bulk Orders Only</span>
-                                <a asp-controller="Catalog" asp-action="Product" asp-route-slug="@p.Slug" class="text-decoration-none fw-semibold d-inline-flex align-items-center gap-1 text-green">
+                            
+                            <div class="pt-3 mt-3 border-top d-flex justify-content-between align-items-center">
+                                <span class="badge bg-light text-success border border-success-subtle px-2 py-1">In Stock</span>
+                                <a asp-controller="Catalog" asp-action="Product" asp-route-slug="@p.Slug" class="btn btn-sm btn-outline-dark rounded-pill px-3 fw-semibold d-inline-flex align-items-center gap-1">
                                     View Details <span class="material-symbols-outlined fs-6">arrow_forward</span>
                                 </a>
                             </div>
@@ -122,7 +127,7 @@
             }
         </div>
         <div class="text-center mt-5 fade-in-up">
-            <a asp-controller="Catalog" asp-action="Index" class="btn btn-brt-gold px-4 py-2-5 shadow-sm fw-semibold">View Full Catalog</a>
+            <a asp-controller="Catalog" asp-action="Index" class="btn btn-brt-gold px-4 py-2-5 shadow-sm fw-semibold rounded-pill">View Full Catalog</a>
         </div>
     </section>
 }
@@ -132,13 +137,13 @@
     var dashboard = ViewBag.MarketDashboard as List<BRT.Models.MarketPrice>;
 }
 <section class="container my-5 py-4">
-    <div class="market-dashboard-section p-4 p-md-5 rounded-4 shadow-sm bg-white border fade-in-up">
+    <div class="p-4 p-md-5 rounded-4 shadow-sm border fade-in-up" style="background: linear-gradient(180deg, #ffffff 0%, #f9fbf9 100%);">
         <div class="text-center mb-5">
             <span class="hero-eyebrow fw-semibold text-uppercase tracking-wider small d-inline-flex align-items-center gap-1" style="color:var(--brt-gold)">
                 <span class="material-symbols-outlined fs-6">trending_up</span> LIVE MARKET
             </span>
-            <h2 class="fw-bold mt-2" style="color:var(--brt-green)">Today's Wholesale Rates</h2>
-            <p class="text-muted mx-auto mb-0" style="max-width:600px">Prices are updated daily based on mandi rates. Final quotation will be confirmed before dispatch.</p>
+            <h2 class="fw-bold mt-2" style="color:var(--brt-green)">Today's Mandi Wholesale Rates</h2>
+            <p class="text-muted mx-auto mb-0" style="max-width:600px">Daily updated prices direct from regional suppliers.</p>
         </div>
         <div class="row g-3">
             @if (dashboard != null && dashboard.Any())
@@ -146,23 +151,24 @@
                 foreach (var m in dashboard)
                 {
                     <div class="col-lg-3 col-md-4 col-6">
-                        <div class="market-card p-3 rounded-3 border bg-light h-100 d-flex flex-column justify-content-between">
+                        <div class="p-3 rounded-4 border bg-white h-100 d-flex flex-column justify-content-between shadow-sm hover-lift">
                             <div>
-                                <div class="market-card-icon mb-2 text-gold">
-                                    <span class="material-symbols-outlined">
-                                        @(m.Product?.SubCategory?.Category?.Type == BRT.Models.CategoryType.Garlic ? "eco" : "restaurant")
+                                <div class="d-flex align-items-center justify-content-between mb-2">
+                                    <span class="p-2 rounded-circle bg-light text-gold d-inline-flex align-items-center">
+                                        <span class="material-symbols-outlined fs-5">
+                                            @(m.Product?.SubCategory?.Category?.Type == BRT.Models.CategoryType.Garlic ? "eco" : "shopping_bag")
+                                        </span>
                                     </span>
+                                    <span class="badge bg-success-subtle text-success extra-small fw-semibold">Live</span>
                                 </div>
-                                <h6 class="fw-bold mb-1 text-truncate">
-                                    <span class="lang-en-text">@m.Product?.Name</span>
-                                    <span class="lang-ta-text d-block text-muted small fw-normal">@m.Product?.NameTamil</span>
-                                </h6>
+                                <h6 class="fw-bold mb-0 text-dark text-truncate">@m.Product?.Name</h6>
+                                <span class="text-muted extra-small d-block mb-2">@m.Product?.NameTamil</span>
                             </div>
-                            <div class="mt-3">
+                            <div class="mt-2 pt-2 border-top">
                                 <div class="fs-5 fw-bold text-green">₹@m.TodayPrice.ToString("N2") <span class="fs-7 text-muted fw-normal">/ unit</span></div>
-                                <div class="market-card-footer d-flex justify-content-between align-items-center mt-2 pt-2 border-top text-muted extra-small">
+                                <div class="d-flex justify-content-between align-items-center mt-1 text-muted extra-small">
                                     <span>Updated Today</span>
-                                    <span class="material-symbols-outlined text-gold" style="font-size: 0.9rem">verified</span>
+                                    <span class="material-symbols-outlined text-gold" style="font-size: 0.85rem">verified</span>
                                 </div>
                             </div>
                         </div>
@@ -170,13 +176,103 @@
                 }
             }
             <div class="col-lg-3 col-md-4 col-12">
-                <div class="market-card market-cta p-3 rounded-3 border h-100 text-center d-flex flex-column align-items-center justify-content-center text-white" style="background: linear-gradient(135deg, var(--brt-green, #1b3b22), #2a5233);">
+                <div class="p-4 rounded-4 border h-100 text-center d-flex flex-column align-items-center justify-content-center text-white shadow-sm" style="background: linear-gradient(135deg, var(--brt-green, #1b3b22), #2a5233);">
                     <span class="material-symbols-outlined display-6 mb-2 text-gold">forum</span>
-                    <h6 class="fw-bold mb-1">Need Custom Quotation?</h6>
-                    <p class="extra-small mb-3 opacity-75">Get live bulk rates directly on WhatsApp or Call.</p>
-                    <a asp-controller="Order" asp-action="Request" class="btn btn-sm btn-hero-gold px-3 fw-semibold">Request Quote</a>
+                    <h6 class="fw-bold mb-1">Custom Bulk Rate?</h6>
+                    <p class="extra-small mb-3 opacity-75">Connect directly with our desk for custom orders.</p>
+                    <a asp-controller="Order" asp-action="Request" class="btn btn-sm btn-hero-gold px-3 rounded-pill fw-semibold">Get Quotation</a>
                 </div>
             </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Category Spotlight (Product Portfolio - Perfect Alignment Fix) ===== -->
+<section class="container my-5 py-4">
+    <div class="text-center mb-5 fade-in-up">
+        <span class="hero-eyebrow fw-semibold text-uppercase tracking-wider small d-inline-flex align-items-center gap-1" style="color:var(--brt-gold)">
+            <span class="material-symbols-outlined fs-6">grid_view</span> PORTFOLIO
+        </span>
+        <h2 class="fw-bold mt-2" style="color:var(--brt-green)">Explore Product Portfolio</h2>
+        <p class="text-muted mx-auto" style="max-width:600px">Structured solutions tailored for distributors and commercial buyers.</p>
+    </div>
+    
+    <!-- Aligned Modern Grid System -->
+    <div class="row g-4">
+        <!-- Garlic Mandi -->
+        <div class="col-lg-6 col-md-12 fade-in-up">
+            <a asp-controller="Catalog" asp-action="Garlic" class="card h-100 border-0 rounded-4 text-white text-decoration-none p-4 d-flex flex-column justify-content-between position-relative overflow-hidden hover-lift shadow-sm" style="background: linear-gradient(135deg, #1b3b22 0%, #0d2112 100%); min-height: 280px;">
+                <div class="d-flex justify-content-between align-items-start position-relative z-1">
+                    <span class="p-3 rounded-4 bg-white-10 text-gold backdrop-blur">
+                        <span class="material-symbols-outlined display-6">eco</span>
+                    </span>
+                    <span class="badge bg-gold text-dark fw-bold px-3 py-2 rounded-pill">Primary Supply</span>
+                </div>
+                <div class="mt-4 position-relative z-1">
+                    <h3 class="fw-bold text-white mb-2">Garlic Mandi</h3>
+                    <p class="small text-light opacity-75 mb-3">All grades of garlic bulbs, cloves, raw, and processed varieties suited for wholesale.</p>
+                    <span class="text-gold fw-semibold d-inline-flex align-items-center gap-1">
+                        Explore Garlic Section <span class="material-symbols-outlined fs-6">arrow_forward</span>
+                    </span>
+                </div>
+            </a>
+        </div>
+
+        <!-- Grocery Essentials -->
+        <div class="col-lg-6 col-md-12 fade-in-up">
+            <a asp-controller="Catalog" asp-action="Grocery" class="card h-100 border-0 rounded-4 text-white text-decoration-none p-4 d-flex flex-column justify-content-between position-relative overflow-hidden hover-lift shadow-sm" style="background: linear-gradient(135deg, #2c3e50 0%, #1a252f 100%); min-height: 280px;">
+                <div class="d-flex justify-content-between align-items-start position-relative z-1">
+                    <span class="p-3 rounded-4 bg-white-10 text-gold backdrop-blur">
+                        <span class="material-symbols-outlined display-6">shopping_cart_checkout</span>
+                    </span>
+                    <span class="badge bg-info text-dark fw-bold px-3 py-2 rounded-pill">Grocery Staples</span>
+                </div>
+                <div class="mt-4 position-relative z-1">
+                    <h3 class="fw-bold text-white mb-2">Grocery Essentials</h3>
+                    <p class="small text-light opacity-75 mb-3">Top quality pulses, spices, rice, and commercial kitchen staples direct from mandi.</p>
+                    <span class="text-gold fw-semibold d-inline-flex align-items-center gap-1">
+                        Explore Grocery Catalog <span class="material-symbols-outlined fs-6">arrow_forward</span>
+                    </span>
+                </div>
+            </a>
+        </div>
+
+        <!-- Loose Packs -->
+        <div class="col-lg-6 col-md-12 fade-in-up">
+            <a asp-controller="Catalog" asp-action="Loose" class="card h-100 border-0 rounded-4 text-white text-decoration-none p-4 d-flex flex-column justify-content-between position-relative overflow-hidden hover-lift shadow-sm" style="background: linear-gradient(135deg, #3a2f1c 0%, #241d11 100%); min-height: 220px;">
+                <div class="d-flex justify-content-between align-items-start position-relative z-1">
+                    <span class="p-3 rounded-4 bg-white-10 text-gold backdrop-blur">
+                        <span class="material-symbols-outlined display-6">inventory_2</span>
+                    </span>
+                    <span class="badge bg-secondary text-white fw-medium px-3 py-1 rounded-pill">Retail Packs</span>
+                </div>
+                <div class="mt-3 position-relative z-1">
+                    <h4 class="fw-bold text-white mb-1">Loose &amp; Custom Packing</h4>
+                    <p class="extra-small text-light opacity-75 mb-2">Custom weight packaging for retail stores &amp; direct distribution.</p>
+                    <span class="text-gold small fw-semibold d-inline-flex align-items-center gap-1">
+                        View Packing Options <span class="material-symbols-outlined fs-6">arrow_forward</span>
+                    </span>
+                </div>
+            </a>
+        </div>
+
+        <!-- Bulk Wholesale Orders -->
+        <div class="col-lg-6 col-md-12 fade-in-up">
+            <a asp-controller="Order" asp-action="Request" class="card h-100 border-0 rounded-4 text-dark text-decoration-none p-4 d-flex flex-column justify-content-between position-relative overflow-hidden hover-lift shadow-sm" style="background: linear-gradient(135deg, #d4af37 0%, #f3e5ab 100%); min-height: 220px;">
+                <div class="d-flex justify-content-between align-items-start position-relative z-1">
+                    <span class="p-3 rounded-4 bg-dark-10 text-dark backdrop-blur">
+                        <span class="material-symbols-outlined display-6">handshake</span>
+                    </span>
+                    <span class="badge bg-dark text-white fw-medium px-3 py-1 rounded-pill">Direct Mandi</span>
+                </div>
+                <div class="mt-3 position-relative z-1">
+                    <h4 class="fw-bold text-dark mb-1">Bulk Wholesale Inquiry</h4>
+                    <p class="extra-small text-dark opacity-75 mb-2">Get daily customized quotation based on volume and transport setup.</p>
+                    <span class="text-dark small fw-bold d-inline-flex align-items-center gap-1">
+                        Request Quote Now <span class="material-symbols-outlined fs-6">arrow_forward</span>
+                    </span>
+                </div>
+            </a>
         </div>
     </div>
 </section>
@@ -218,92 +314,41 @@
                 </div>
             </div>
             
-            <a asp-controller="Home" asp-action="WhyChooseUs" class="btn btn-brt-gold px-4 fw-semibold">Learn More About Us</a>
+            <a asp-controller="Home" asp-action="WhyChooseUs" class="btn btn-brt-gold px-4 fw-semibold rounded-pill">Learn More About Us</a>
         </div>
         
         <div class="col-lg-6">
             <div class="row g-3">
                 <div class="col-6 fade-in-up">
-                    <div class="category-card h-100 text-center p-4 rounded-3 border bg-light shadow-sm">
-                        <div class="category-icon mx-auto mb-2 text-gold"><span class="material-symbols-outlined display-6">workspace_premium</span></div>
+                    <div class="h-100 text-center p-4 rounded-4 border bg-white shadow-sm hover-lift">
+                        <span class="material-symbols-outlined display-6 text-gold mb-2">workspace_premium</span>
                         <h6 class="fw-bold" style="color:var(--brt-green)">Strict Grading</h6>
-                        <p class="text-muted small mb-0">Consistently graded for uniform size &amp; purity</p>
+                        <p class="text-muted extra-small mb-0">Consistently graded for uniform size &amp; purity</p>
                     </div>
                 </div>
                 <div class="col-6 fade-in-up">
-                    <div class="category-card h-100 text-center p-4 rounded-3 border bg-light shadow-sm">
-                        <div class="category-icon mx-auto mb-2 text-gold"><span class="material-symbols-outlined display-6">local_shipping</span></div>
+                    <div class="h-100 text-center p-4 rounded-4 border bg-white shadow-sm hover-lift">
+                        <span class="material-symbols-outlined display-6 text-gold mb-2">local_shipping</span>
                         <h6 class="fw-bold" style="color:var(--brt-green)">Safe Transport</h6>
-                        <p class="text-muted small mb-0">Moisture-proof packing &amp; door delivery</p>
+                        <p class="text-muted extra-small mb-0">Moisture-proof packing &amp; door delivery</p>
                     </div>
                 </div>
                 <div class="col-6 fade-in-up">
-                    <div class="category-card h-100 text-center p-4 rounded-3 border bg-light shadow-sm">
-                        <div class="category-icon mx-auto mb-2 text-gold"><span class="material-symbols-outlined display-6">trending_up</span></div>
+                    <div class="h-100 text-center p-4 rounded-4 border bg-white shadow-sm hover-lift">
+                        <span class="material-symbols-outlined display-6 text-gold mb-2">trending_up</span>
                         <h6 class="fw-bold" style="color:var(--brt-green)">Fair Pricing</h6>
-                        <p class="text-muted small mb-0">Real-time daily competitive market prices</p>
+                        <p class="text-muted extra-small mb-0">Real-time daily competitive market prices</p>
                     </div>
                 </div>
                 <div class="col-6 fade-in-up">
-                    <div class="category-card h-100 text-center p-4 rounded-3 border bg-light shadow-sm">
-                        <div class="category-icon mx-auto mb-2 text-gold"><span class="material-symbols-outlined display-6">support_agent</span></div>
+                    <div class="h-100 text-center p-4 rounded-4 border bg-white shadow-sm hover-lift">
+                        <span class="material-symbols-outlined display-6 text-gold mb-2">support_agent</span>
                         <h6 class="fw-bold" style="color:var(--brt-green)">24/7 Desk</h6>
-                        <p class="text-muted small mb-0">Instant response via call or WhatsApp</p>
+                        <p class="text-muted extra-small mb-0">Instant response via call or WhatsApp</p>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
-
-<!-- ===== Category Spotlight (Bento Showcase) ===== -->
-<section class="container my-5 py-4">
-    <div class="text-center mb-5 fade-in-up">
-        <span class="hero-eyebrow fw-semibold text-uppercase tracking-wider small d-inline-flex align-items-center gap-1" style="color:var(--brt-gold)">
-            <span class="material-symbols-outlined fs-6">grid_view</span> EXPLORE
-        </span>
-        <h2 class="fw-bold mt-2" style="color:var(--brt-green)">Product Portfolio</h2>
-        <p class="text-muted mx-auto" style="max-width:600px">Explore our specialized business categories tailored for wholesale and commercial demands.</p>
-    </div>
-    
-    <div class="cat-spotlight-grid stagger-group">
-        <a asp-controller="Catalog" asp-action="Garlic" class="cat-spotlight-card cat-spotlight-lg rounded-4 p-4 text-white text-decoration-none d-flex flex-column justify-content-between" style="background: linear-gradient(135deg, #2c2013, #4a3620);">
-            <span class="cat-spotlight-icon text-gold"><span class="material-symbols-outlined display-5">eco</span></span>
-            <div class="cat-spotlight-body mt-4">
-                <span class="cat-spotlight-tag badge bg-warning text-dark mb-2">Primary Market</span>
-                <h3 class="fw-bold">Garlic Mandi</h3>
-                <p class="small opacity-75">Bulbs, cloves, big &amp; small varieties graded for bulk buyers.</p>
-                <span class="cat-spotlight-cta text-gold fw-semibold d-inline-flex align-items-center gap-1">Explore Garlic <span class="material-symbols-outlined fs-6">arrow_forward</span></span>
-            </div>
-        </a>
-        
-        <a asp-controller="Catalog" asp-action="Grocery" class="cat-spotlight-card cat-spotlight-lg rounded-4 p-4 text-white text-decoration-none d-flex flex-column justify-content-between" style="background: linear-gradient(135deg, #1c2530, #141a22);">
-            <span class="cat-spotlight-icon text-gold"><span class="material-symbols-outlined display-5">restaurant</span></span>
-            <div class="cat-spotlight-body mt-4">
-                <span class="cat-spotlight-tag badge bg-info text-dark mb-2">Bulk Supply</span>
-                <h3 class="fw-bold">Grocery Essentials</h3>
-                <p class="small opacity-75">High grade pulses, spices, and everyday essential staples.</p>
-                <span class="cat-spotlight-cta text-gold fw-semibold d-inline-flex align-items-center gap-1">Explore Grocery <span class="material-symbols-outlined fs-6">arrow_forward</span></span>
-            </div>
-        </a>
-        
-        <a asp-controller="Catalog" asp-action="Loose" class="cat-spotlight-card cat-spotlight-sm rounded-4 p-4 text-white text-decoration-none d-flex flex-column justify-content-between" style="background: linear-gradient(135deg, #3a2f1c, #241d11);">
-            <span class="cat-spotlight-icon text-gold"><span class="material-symbols-outlined fs-3">inventory_2</span></span>
-            <div class="cat-spotlight-body mt-3">
-                <span class="cat-spotlight-tag badge bg-secondary mb-1">Retail Ready</span>
-                <h4 class="fw-bold h5">Loose Packs</h4>
-                <span class="cat-spotlight-cta text-gold small fw-semibold d-inline-flex align-items-center gap-1">View Packs <span class="material-symbols-outlined fs-6">arrow_forward</span></span>
-            </div>
-        </a>
-        
-        <a asp-controller="Order" asp-action="Request" class="cat-spotlight-card cat-spotlight-sm rounded-4 p-4 text-dark text-decoration-none d-flex flex-column justify-content-between" style="background: linear-gradient(135deg, var(--brt-gold, #d4af37), #f3e5ab);">
-            <span class="cat-spotlight-icon text-dark"><span class="material-symbols-outlined fs-3">handshake</span></span>
-            <div class="cat-spotlight-body mt-3">
-                <span class="cat-spotlight-tag badge bg-dark text-white mb-1">Dealer Network</span>
-                <h4 class="fw-bold h5">Bulk Order</h4>
-                <span class="cat-spotlight-cta text-dark small fw-bold d-inline-flex align-items-center gap-1">Get Rates <span class="material-symbols-outlined fs-6">arrow_forward</span></span>
-            </div>
-        </a>
     </div>
 </section>
 
@@ -318,20 +363,20 @@
     <div class="row g-3 text-center">
         @{
             var industries = new[] {
-                (Icon: "local_grocery_store", Name: "Supermarkets"),
-                (Icon: "storefront", Name: "Grocery Mandis"),
-                (Icon: "shopping_bag", Name: "Retail Chains"),
+                (Icon: "storefront", Name: "Supermarkets"),
+                (Icon: "shopping_bag", Name: "Grocery Mandis"),
+                (Icon: "local_mall", Name: "Retail Chains"),
                 (Icon: "hotel", Name: "Hotels & Resorts"),
-                (Icon: "restaurant", Name: "Restaurants"),
+                (Icon: "flatware", Name: "Restaurants"),
                 (Icon: "soup_kitchen", Name: "Catering Teams"),
                 (Icon: "public", Name: "Exporters"),
-                (Icon: "location_on", Name: "Pondicherry & Pan-India")
+                (Icon: "location_on", Name: "Pan-India Network")
             };
         }
         @foreach (var ind in industries)
         {
             <div class="col-6 col-md-3 fade-in-up">
-                <div class="industry-card-sm p-3 border rounded-3 bg-white shadow-sm hover-lift">
+                <div class="p-3 border rounded-4 bg-white shadow-sm hover-lift d-flex flex-column align-items-center justify-content-center h-100">
                     <span class="material-symbols-outlined text-green fs-3 mb-2">@ind.Icon</span>
                     <h6 class="fw-semibold mb-0 text-dark small">@ind.Name</h6>
                 </div>
@@ -340,154 +385,13 @@
     </div>
 </section>
 
-<!-- ===== Statistics Counter ===== -->
-<section class="container my-5 py-4">
-    <div class="stats-counter-section p-4 p-md-5 rounded-4 text-white text-center fade-in-up" style="background: linear-gradient(135deg, var(--brt-green, #1b3b22), #112616);">
-        <div class="mb-5">
-            <span class="hero-eyebrow fw-semibold text-uppercase tracking-wider small d-inline-flex align-items-center gap-1 text-gold">
-                <span class="material-symbols-outlined fs-6">emoji_events</span> OUR TRACK RECORD
-            </span>
-            <h2 class="fw-bold mt-2">Delivering Quality at Scale Since 2000</h2>
-        </div>
-        <div class="row g-4">
-            <div class="col-6 col-md">
-                <span class="material-symbols-outlined display-6 text-gold mb-2">calendar_month</span>
-                <h3 class="counter fw-bold display-6 mb-0" data-target="25">25+</h3>
-                <span class="small opacity-75">Years Experience</span>
-            </div>
-            <div class="col-6 col-md">
-                <span class="material-symbols-outlined display-6 text-gold mb-2">groups</span>
-                <h3 class="counter fw-bold display-6 mb-0" data-target="5000">5000+</h3>
-                <span class="small opacity-75">Happy Clients</span>
-            </div>
-            <div class="col-6 col-md">
-                <span class="material-symbols-outlined display-6 text-gold mb-2">handshake</span>
-                <h3 class="counter fw-bold display-6 mb-0" data-target="300">300+</h3>
-                <span class="small opacity-75">Active Dealers</span>
-            </div>
-            <div class="col-6 col-md">
-                <span class="material-symbols-outlined display-6 text-gold mb-2">local_shipping</span>
-                <h3 class="counter fw-bold display-6 mb-0" data-target="15000">15,000+</h3>
-                <span class="small opacity-75">Tons Supplied</span>
-            </div>
-            <div class="col-12 col-md">
-                <span class="material-symbols-outlined display-6 text-gold mb-2">map</span>
-                <h3 class="counter fw-bold display-6 mb-0" data-target="50">50+</h3>
-                <span class="small opacity-75">Districts Covered</span>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ===== Bulk Enquiry CTA ===== -->
-<section class="container my-5 py-4">
-    <div class="bulk-cta-section p-4 p-md-5 rounded-4 text-white fade-in-up" style="background: linear-gradient(135deg, #2a3d2e, #18281b);">
-        <div class="row g-4 align-items-center">
-            <div class="col-lg-7">
-                <span class="hero-eyebrow fw-semibold text-uppercase tracking-wider small d-inline-flex align-items-center gap-1 text-gold">
-                    <span class="material-symbols-outlined fs-6">local_shipping</span> WHOLESALE &amp; BULK ORDERS
-                </span>
-                <h2 class="fw-bold mt-2 mb-3">Looking for Dependable Garlic &amp; Grocery Mandi Supply?</h2>
-                <p class="opacity-75 mb-4">Get custom quotes tailored to your business volume with competitive wholesale pricing directly from our mandi team.</p>
-                
-                <div class="d-flex flex-wrap gap-3 small text-gold">
-                    <span class="d-flex align-items-center gap-1"><span class="material-symbols-outlined fs-6">check_circle</span> Top Grade Garlic</span>
-                    <span class="d-flex align-items-center gap-1"><span class="material-symbols-outlined fs-6">check_circle</span> Daily Live Pricing</span>
-                    <span class="d-flex align-items-center gap-1"><span class="material-symbols-outlined fs-6">check_circle</span> Fast Dispatch</span>
-                </div>
-            </div>
-            
-            <div class="col-lg-5">
-                <div class="bulk-cta-card p-4 rounded-3 bg-white text-dark shadow-lg">
-                    <h4 class="fw-bold mb-1">Contact Sales Desk</h4>
-                    <p class="text-muted small mb-3">Instant wholesale quotation and dispatch queries.</p>
-                    <div class="d-grid gap-2">
-                        <a asp-controller="Order" asp-action="Request" class="btn btn-brt-gold fw-semibold">Request Wholesale Quote</a>
-                        <a href="https://api.whatsapp.com/send?phone=919865680694" target="_blank" class="btn btn-outline-success fw-semibold d-flex align-items-center justify-content-center gap-2">
-                            <span class="material-symbols-outlined fs-5">chat</span> WhatsApp Us
-                        </a>
-                        <a href="tel:9865680694" class="btn btn-outline-dark fw-semibold d-flex align-items-center justify-content-center gap-2">
-                            <span class="material-symbols-outlined fs-5">call</span> Call +91 98656 80694
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ===== Testimonials ===== -->
-@{
-    var testimonials = ViewBag.Testimonials as IEnumerable<BRT.Models.Testimonial>;
-}
-@if (testimonials != null && testimonials.Any())
-{
-    <section class="container my-5 py-4">
-        <h3 class="fw-bold text-center mb-4 fade-in-up" style="color:var(--brt-green)">What Our Dealers Say</h3>
-        <div class="row g-4">
-            @foreach (var t in testimonials)
-            {
-                <div class="col-md-4 fade-in-up">
-                    <div class="testimonial-card p-4 rounded-3 border bg-light h-100 shadow-sm d-flex flex-column justify-content-between">
-                        <div>
-                            <div class="stars mb-2 text-warning">
-                                @for (int s = 0; s < 5; s++)
-                                {
-                                    var fillStyle = s < t.Rating ? "font-variation-settings:'FILL' 1" : "font-variation-settings:'FILL' 0";
-                                    <span class="material-symbols-outlined fs-6" style="@fillStyle">star</span>
-                                }
-                            </div>
-                            <p class="fst-italic text-secondary small">&ldquo;@t.Message&rdquo;</p>
-                        </div>
-                        <div class="mt-3 pt-3 border-top">
-                            <strong class="d-block text-dark">@t.DealerName</strong>
-                            <span class="text-muted extra-small">@t.BusinessName @(!string.IsNullOrEmpty(t.City) ? $", {t.City}" : "")</span>
-                        </div>
-                    </div>
-                </div>
-            }
-        </div>
-    </section>
-}
-
-<!-- ===== FAQ Accordion ===== -->
-@{
-    var faqs = ViewBag.FAQs as IEnumerable<BRT.Models.FAQ>;
-}
-@if (faqs != null && faqs.Any())
-{
-    <section class="container my-5 py-4">
-        <h3 class="fw-bold text-center mb-4 fade-in-up" style="color:var(--brt-green)">Frequently Asked Questions</h3>
-        <div class="accordion accordion-flush max-w-800 mx-auto shadow-sm border rounded-3 overflow-hidden fade-in-up" id="faqAccordion">
-            @{ int index = 0; }
-            @foreach (var f in faqs)
-            {
-                index++;
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="heading@(index)">
-                        <button class="accordion-button @(index > 1 ? "collapsed" : "") fw-semibold text-dark" type="button" data-bs-toggle="collapse" data-bs-target="#faq@(index)" aria-expanded="@(index == 1 ? "true" : "false")" aria-controls="faq@(index)">
-                            @f.Question
-                        </button>
-                    </h2>
-                    <div id="faq@(index)" class="accordion-collapse collapse @(index == 1 ? "show" : "")" aria-labelledby="heading@(index)" data-bs-parent="#faqAccordion">
-                        <div class="accordion-body text-muted small lh-lg">
-                            @f.Answer
-                        </div>
-                    </div>
-                </div>
-            }
-        </div>
-    </section>
-}
-
 <!-- ===== Disclaimer Footer Ribbon ===== -->
 <section class="container my-5 py-3">
-    <div class="disclaimer-box p-3 rounded-3 bg-light border text-center d-flex flex-wrap justify-content-center align-items-center gap-3 gap-md-4 text-muted small fade-in-up">
+    <div class="p-3 rounded-4 bg-white border text-center d-flex flex-wrap justify-content-center align-items-center gap-3 gap-md-4 text-muted small shadow-sm fade-in-up">
         <span class="d-inline-flex align-items-center gap-1"><span class="material-symbols-outlined text-green fs-6">check_circle</span> Bulk Orders Preferred</span>
         <span class="d-inline-flex align-items-center gap-1"><span class="material-symbols-outlined text-green fs-6">check_circle</span> Garlic Wholesale</span>
         <span class="d-inline-flex align-items-center gap-1"><span class="material-symbols-outlined text-green fs-6">check_circle</span> Grocery Wholesale</span>
         <span class="d-inline-flex align-items-center gap-1"><span class="material-symbols-outlined text-green fs-6">check_circle</span> Live Daily Market Rates</span>
         <span class="d-inline-flex align-items-center gap-1"><span class="material-symbols-outlined text-green fs-6">check_circle</span> Tax/GST Included</span>
-        <span class="d-inline-flex align-items-center gap-1"><span class="material-symbols-outlined text-green fs-6">check_circle</span> Transport Extra</span>
     </div>
 </section>
