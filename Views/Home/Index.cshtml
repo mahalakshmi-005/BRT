@@ -3,26 +3,14 @@
 }
 
 <!-- ===== Modern Corporate Color Palette & Fixed Equal Height Styles ===== -->
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300..900;1,300..900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-
 <style>
     :root {
-        /* ===== Trading Ledger Hero Palette (premium, subject-specific) ===== */
-        --brt-ink: #1B2430;              /* deep ink text */
-        --brt-ink-soft: #4A5568;         /* muted ink for body copy */
-        --brt-paper: #F7F3EA;            /* warm ledger paper */
-        --brt-paper-line: rgba(27, 36, 48, 0.14);
-        --brt-ledger-green: #2F5D50;     /* deep trading green */
-        --brt-ledger-green-deep: #234A40;
-        --brt-trader-gold: #B4842A;      /* muted premium gold, not bright amber */
-        --brt-trader-gold-soft: rgba(180, 132, 42, 0.14);
-
-        /* Legacy hero tokens kept for anything else referencing them */
-        --brt-hero-green: #2F5D50;
-        --brt-hero-emerald: #3F7A68;
-        --brt-hero-mint: #EDE9DD;
-
-        /* Rest of Page Corporate Theme (unchanged) */
+        /* Hero Section Green Theme */
+        --brt-hero-green: #059669;
+        --brt-hero-emerald: #10B981;
+        --brt-hero-mint: #D1FAE5;
+        
+        /* Rest of Page Corporate Theme (No Green Text/Buttons) */
         --brt-navy: #0F172A;
         --brt-navy-light: #1E293B;
         --brt-amber: #D97706;
@@ -145,18 +133,18 @@
         transform: scale(1.08);
     }
 
-    /* Dynamic Buttons (non-hero, unchanged) */
+    /* Dynamic Buttons */
     .btn-brt-hero-green {
-        background: var(--brt-ledger-green);
+        background: var(--brt-hero-green);
         color: #FFFFFF;
         border: none;
         transition: all 0.3s ease;
     }
 
     .btn-brt-hero-green:hover {
-        background: var(--brt-ledger-green-deep);
+        background: #047857;
         color: #FFFFFF;
-        box-shadow: 0 8px 20px rgba(47, 93, 80, 0.3);
+        box-shadow: 0 8px 20px rgba(5, 150, 105, 0.3);
     }
 
     .btn-brt-primary {
@@ -185,284 +173,13 @@
 
     .text-navy { color: var(--brt-navy) !important; }
     .text-amber { color: var(--brt-amber) !important; }
-    .text-hero-green { color: var(--brt-ledger-green) !important; }
+    .text-hero-green { color: var(--brt-hero-green) !important; }
     .bg-navy { background-color: var(--brt-navy) !important; }
     .extra-small { font-size: 0.78rem; }
     .bg-glass {
         background: rgba(255, 255, 255, 0.08);
         backdrop-filter: blur(12px);
         -webkit-backdrop-filter: blur(12px);
-    }
-
-    /* ===================================================================
-       LEDGER HERO — signature element: the hero reads like a trading
-       manifest / grading certificate rather than a generic SaaS hero.
-       =================================================================== */
-    .ledger-hero {
-        background:
-            linear-gradient(180deg, var(--brt-paper) 0%, #FBF9F4 100%);
-        position: relative;
-        overflow: hidden;
-        border-bottom: 1px solid var(--brt-paper-line);
-    }
-
-    .ledger-hero::before {
-        content: '';
-        position: absolute;
-        inset: 0;
-        background-image: repeating-linear-gradient(
-            180deg,
-            transparent 0px,
-            transparent 38px,
-            var(--brt-paper-line) 39px
-        );
-        opacity: 0.5;
-        pointer-events: none;
-    }
-
-    .ledger-stamp-badge {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        border: 1px solid rgba(180, 132, 42, 0.45);
-        background: var(--brt-trader-gold-soft);
-        color: var(--brt-trader-gold);
-        font-family: 'IBM Plex Mono', monospace;
-        font-size: 0.72rem;
-        font-weight: 600;
-        letter-spacing: 1.5px;
-        text-transform: uppercase;
-        padding: 7px 14px;
-        border-radius: 3px;
-    }
-
-    .ledger-stamp-badge .dot {
-        width: 6px;
-        height: 6px;
-        border-radius: 50%;
-        background: var(--brt-trader-gold);
-        flex-shrink: 0;
-    }
-
-    .ledger-headline {
-        font-family: 'Fraunces', serif;
-        font-weight: 600;
-        font-size: 3.4rem;
-        letter-spacing: -0.5px;
-        line-height: 1.05;
-        color: var(--brt-ink);
-        margin: 18px 0 14px 0;
-    }
-
-    .ledger-headline .accent-word {
-        color: var(--brt-trader-gold);
-        font-style: italic;
-        font-weight: 500;
-    }
-
-    .ledger-subtitle {
-        font-size: 1.08rem;
-        color: var(--brt-ink-soft);
-        max-width: 480px;
-        line-height: 1.6;
-        margin-bottom: 0;
-    }
-
-    .ledger-subtitle strong {
-        color: var(--brt-ink);
-        font-weight: 700;
-    }
-
-    .ledger-quote {
-        font-family: 'Fraunces', serif;
-        font-style: italic;
-        font-size: 1.15rem;
-        color: var(--brt-ink-soft);
-        border-left: 3px solid var(--brt-trader-gold);
-        padding: 4px 0 4px 18px;
-        margin: 28px 0;
-    }
-
-    .ledger-quote .quote-mark {
-        color: var(--brt-trader-gold);
-        font-family: 'Fraunces', serif;
-        font-style: normal;
-    }
-
-    /* CTA — two buttons, deliberately side by side, unmistakably premium */
-    .ledger-cta-row {
-        display: flex;
-        gap: 16px;
-        flex-wrap: wrap;
-        margin-bottom: 36px;
-    }
-
-    .btn-ledger-primary {
-        background: var(--brt-ledger-green);
-        color: #FFFFFF !important;
-        border: 1px solid var(--brt-ledger-green);
-        padding: 14px 28px;
-        border-radius: 4px;
-        font-weight: 600;
-        font-size: 0.92rem;
-        letter-spacing: 0.3px;
-        text-decoration: none !important;
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        transition: all 0.3s ease;
-        box-shadow: 0 10px 24px rgba(47, 93, 80, 0.22);
-    }
-
-    .btn-ledger-primary:hover {
-        background: var(--brt-ledger-green-deep);
-        border-color: var(--brt-ledger-green-deep);
-        transform: translateY(-2px);
-        box-shadow: 0 14px 30px rgba(47, 93, 80, 0.3);
-        color: #FFFFFF !important;
-    }
-
-    .btn-ledger-outline {
-        background: transparent;
-        color: var(--brt-ink) !important;
-        border: 1px solid rgba(27, 36, 48, 0.35);
-        padding: 14px 28px;
-        border-radius: 4px;
-        font-weight: 600;
-        font-size: 0.92rem;
-        letter-spacing: 0.3px;
-        text-decoration: none !important;
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        transition: all 0.3s ease;
-    }
-
-    .btn-ledger-outline:hover {
-        border-color: var(--brt-ink);
-        background: rgba(27, 36, 48, 0.04);
-        transform: translateY(-2px);
-        color: var(--brt-ink) !important;
-    }
-
-    /* Manifest / ledger stat strip — figures as data, not decoration */
-    .ledger-manifest {
-        border-top: 1px solid var(--brt-paper-line);
-        padding-top: 20px;
-        display: flex;
-        gap: 32px;
-        flex-wrap: wrap;
-    }
-
-    .ledger-manifest-item {
-        display: flex;
-        flex-direction: column;
-    }
-
-    .ledger-manifest-num {
-        font-family: 'IBM Plex Mono', monospace;
-        font-size: 1.7rem;
-        font-weight: 600;
-        color: var(--brt-ink);
-        line-height: 1;
-    }
-
-    .ledger-manifest-label {
-        font-family: 'IBM Plex Mono', monospace;
-        font-size: 0.68rem;
-        text-transform: uppercase;
-        letter-spacing: 1.2px;
-        color: var(--brt-ink-soft);
-        margin-top: 6px;
-    }
-
-    /* Certificate-style image frame on the right */
-    .ledger-cert-frame {
-        position: relative;
-        display: inline-block;
-        padding: 14px;
-        background: #FFFFFF;
-        border: 1px solid var(--brt-paper-line);
-        border-radius: 6px;
-        box-shadow: 0 30px 60px -20px rgba(27, 36, 48, 0.25);
-    }
-
-    .ledger-cert-frame::before {
-        content: '';
-        position: absolute;
-        inset: 14px -10px -10px 14px;
-        background: var(--brt-paper);
-        border: 1px solid var(--brt-paper-line);
-        border-radius: 6px;
-        z-index: -1;
-    }
-
-    .ledger-cert-frame img {
-        display: block;
-        border-radius: 3px;
-        max-height: 400px;
-        width: 100%;
-        object-fit: cover;
-        border: 1px solid rgba(27, 36, 48, 0.08);
-    }
-
-    .ledger-seal {
-        position: absolute;
-        width: 92px;
-        height: 92px;
-        border-radius: 50%;
-        border: 1.5px dashed var(--brt-trader-gold);
-        background: #FFFFFF;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        box-shadow: 0 8px 20px rgba(27, 36, 48, 0.15);
-    }
-
-    .ledger-seal .material-symbols-outlined {
-        color: var(--brt-ledger-green);
-        font-size: 1.3rem;
-    }
-
-    .ledger-seal span.seal-label {
-        font-family: 'IBM Plex Mono', monospace;
-        font-size: 0.56rem;
-        text-transform: uppercase;
-        letter-spacing: 0.8px;
-        color: var(--brt-ink);
-        font-weight: 600;
-        margin-top: 2px;
-        line-height: 1.2;
-    }
-
-    .ledger-seal-top {
-        top: -18px;
-        left: -18px;
-    }
-
-    .ledger-seal-bottom {
-        bottom: -18px;
-        right: -28px;
-        background: var(--brt-navy);
-        border-color: var(--brt-trader-gold);
-    }
-
-    .ledger-seal-bottom .material-symbols-outlined,
-    .ledger-seal-bottom span.seal-label {
-        color: #FFFFFF;
-    }
-
-    @@media (max-width: 991px) {
-        .ledger-headline { font-size: 2.5rem; }
-        .ledger-cert-frame { margin-top: 40px; }
-    }
-
-    @@media (max-width: 576px) {
-        .ledger-headline { font-size: 2.1rem; }
-        .ledger-manifest { gap: 22px; }
-        .ledger-seal { width: 74px; height: 74px; }
     }
 </style>
 
@@ -486,75 +203,154 @@
     </div>
 </div>
 
-<!-- ===== Ledger / Trading-Manifest Hero Section ===== -->
-<section class="ledger-hero py-5">
-    <div class="container py-lg-4 position-relative">
-        <div class="row align-items-center g-5">
+<!-- ===== Original Green Theme Hero Section ===== -->
+
+<!-- ===== Original Green Theme Hero Section with Image ===== -->
+
+<section class="hero-modern position-relative py-5 overflow-hidden" style="background: linear-gradient(135deg, #ECFDF5 0%, #F0FDF4 50%, #FFFFFF 100%);">
+
+    <div class="hero-inner container py-lg-4">
+
+        <div class="row align-items-center g-4">
+
+            
 
             <!-- Left Column: Content -->
+
             <div class="col-lg-6 fade-in-up is-visible">
 
-                <span class="ledger-stamp-badge">
-                    <span class="dot"></span> Est. 2000 &middot; Direct Mandi Trading
+                <span class="hero-trust-badge d-inline-flex align-items-center gap-1 px-3 py-1 rounded-pill mb-3" style="background: var(--brt-hero-mint); color: var(--brt-hero-green);">
+
+                    <span class="material-symbols-outlined fs-6">workspace_premium</span> Trusted Since 2000
+
                 </span>
 
-                <h1 class="ledger-headline">
-                    B RAJ<br /><span class="accent-word">Traders</span>
-                </h1>
+                <h1 class="display-4 fw-bold mb-2 text-uppercase tracking-tight text-hero-green">B RAJ TRADERS</h1>
 
-                <p class="ledger-subtitle">
-                    <strong>Garlic &amp; grocery commission mandi</strong> — dealer-to-dealer wholesale supply, graded and priced the way a trading floor should be.
+                <p class="hero-tagline fs-5 text-muted mb-4">
+
+                    Garlic &amp; Grocery Commission Mandi<br class="d-none d-md-block" /> 
+
+                    <span class="fw-medium text-dark">Trusted Dealer-to-Dealer Wholesale Supplier</span>
+
                 </p>
 
-                <blockquote class="ledger-quote">
-                    <span class="quote-mark">&ldquo;</span>Purity in every clove, trust in every deal.<span class="quote-mark">&rdquo;</span>
+
+
+                <blockquote class="hero-quote border-start border-4 border-emerald ps-3 py-1 my-4 fst-italic text-secondary" style="border-color: var(--brt-hero-emerald) !important;">
+
+                    <span class="quote-mark fs-3 lh-1 align-middle text-hero-green">&ldquo;</span>
+
+                    Purity in every clove, trust in every deal.
+
+                    <span class="quote-mark fs-3 lh-1 align-middle text-hero-green">&rdquo;</span>
+
                 </blockquote>
 
-                <div class="ledger-cta-row">
-                    <a asp-controller="Order" asp-action="Request" class="btn-ledger-primary">
-                        Request Wholesale Quote <span class="material-symbols-outlined" style="font-size:1.1rem">arrow_forward</span>
-                    </a>
-                    <a asp-controller="Catalog" asp-action="Index" class="btn-ledger-outline">
-                        Explore Products
-                    </a>
+
+
+                <div class="hero-cta d-flex flex-wrap gap-3 mb-4">
+
+                    <a asp-controller="Order" asp-action="Request" class="btn btn-brt-hero-green px-4 py-2-5 shadow-sm fw-semibold rounded-pill">Request Wholesale Quote</a>
+
+                    <a asp-controller="Catalog" asp-action="Index" class="btn btn-outline-dark px-4 py-2-5 fw-semibold rounded-pill">Explore Products</a>
+
                 </div>
 
-                <div class="ledger-manifest">
-                    <div class="ledger-manifest-item">
-                        <span class="ledger-manifest-num">25+</span>
-                        <span class="ledger-manifest-label">Years Trading</span>
+
+
+                <div class="hero-inline-stats d-flex align-items-center gap-4 gap-md-5 pt-3 border-top">
+
+                    <div>
+
+                        <div class="stat-num fw-bold fs-3 text-hero-green">25+</div>
+
+                        <div class="stat-label text-muted small">Years Experience</div>
+
                     </div>
-                    <div class="ledger-manifest-item">
-                        <span class="ledger-manifest-num">500+</span>
-                        <span class="ledger-manifest-label">Dealer Network</span>
+
+                    <div class="border-end h-100 opacity-25"></div>
+
+                    <div>
+
+                        <div class="stat-num fw-bold fs-3 text-hero-green">500+</div>
+
+                        <div class="stat-label text-muted small">Trusted Dealers</div>
+
                     </div>
-                    <div class="ledger-manifest-item">
-                        <span class="ledger-manifest-num">30+</span>
-                        <span class="ledger-manifest-label">Product Varieties</span>
+
+                    <div class="border-end h-100 opacity-25"></div>
+
+                    <div>
+
+                        <div class="stat-num fw-bold fs-3 text-hero-green">30+</div>
+
+                        <div class="stat-label text-muted small">Product Varieties</div>
+
                     </div>
+
                 </div>
+
             </div>
 
-            <!-- Right Column: Certificate-style Hero Image -->
+
+
+            <!-- Right Column: Hero Image Showcase -->
+
             <div class="col-lg-6 text-center fade-in-up">
-                <div class="ledger-cert-frame d-inline-block position-relative">
-                    <img src="~/images/hero.png" alt="Garlic Mandi Wholesale"
-                         onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1618160702438-9b02ab6515c9?auto=format&fit=crop&w=800&q=80';" />
 
-                    <div class="ledger-seal ledger-seal-top d-none d-sm-flex">
-                        <span class="material-symbols-outlined">verified</span>
-                        <span class="seal-label">100%<br />Quality</span>
+                <div class="position-relative d-inline-block">
+
+                    <!-- High Quality Mandi Sourcing Graphic / Image -->
+
+                    <img src="~/images/hero.png" alt="Garlic Mandi Wholesale" class="img-fluid rounded-4 shadow-lg object-fit-cover anim-float-icon" style="max-height: 420px; border: 4px solid #ffffff;" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1618160702438-9b02ab6515c9?auto=format&fit=crop&w=800&q=80';" />
+
+                    
+
+                    <!-- Floating Badge 1 -->
+
+                    <div class="position-absolute top-0 start-0 translate-middle-y bg-white p-3 rounded-4 shadow-sm border d-flex align-items-center gap-2 d-none d-sm-flex">
+
+                        <span class="material-symbols-outlined text-hero-green fs-4">verified</span>
+
+                        <div class="text-start">
+
+                            <span class="d-block fw-bold text-dark extra-small">100% Quality</span>
+
+                            <span class="d-block text-muted" style="font-size:0.7rem;">Direct Mandi Fresh</span>
+
+                        </div>
+
                     </div>
 
-                    <div class="ledger-seal ledger-seal-bottom d-none d-sm-flex">
-                        <span class="material-symbols-outlined">local_shipping</span>
-                        <span class="seal-label">Fast<br />Dispatch</span>
+
+
+                    <!-- Floating Badge 2 -->
+
+                    <div class="position-absolute bottom-0 end-0 translate-middle-y bg-navy text-white p-3 rounded-4 shadow-sm d-flex align-items-center gap-2 d-none d-sm-flex" style="background: var(--brt-navy);">
+
+                        <span class="material-symbols-outlined text-amber fs-4">local_shipping</span>
+
+                        <div class="text-start">
+
+                            <span class="d-block fw-bold extra-small">Fast Dispatch</span>
+
+                            <span class="d-block text-light opacity-75" style="font-size:0.7rem;">Pan-India Transport</span>
+
+                        </div>
+
                     </div>
+
                 </div>
+
             </div>
+
+
 
         </div>
+
     </div>
+
 </section>
 <!-- ===== Featured Products Showcase ===== -->
 @{
