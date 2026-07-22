@@ -57,13 +57,24 @@ namespace BRT.Controllers
                 .Take(6)
                 .ToList();
 
-            // Live Market Dashboard — top 3 products that have today's price entered
-            ViewBag.MarketDashboard = await _context.MarketPrices
+            // Live Market Dashboard — most recently updated prices (today's if entered, otherwise latest on file)
+            var pricesToday = await _context.MarketPrices
                 .Include(m => m.Product).ThenInclude(p => p!.SubCategory).ThenInclude(s => s!.Category)
                 .Where(m => m.PriceDate == today && m.Product!.IsActive)
                 .OrderByDescending(m => m.UpdatedAt)
                 .Take(3)
                 .ToListAsync();
+
+            if (pricesToday.Count == 0)
+            {
+                pricesToday = await _context.MarketPrices
+                    .Include(m => m.Product).ThenInclude(p => p!.SubCategory).ThenInclude(s => s!.Category)
+                    .Where(m => m.Product!.IsActive)
+                    .OrderByDescending(m => m.UpdatedAt)
+                    .Take(3)
+                    .ToListAsync();
+            }
+            ViewBag.MarketDashboard = pricesToday;
 
             return View();
         }
