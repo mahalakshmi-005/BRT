@@ -5,6 +5,12 @@
 <!-- ===== Modern Corporate Color Palette & Fixed Equal Height Styles ===== -->
 <style>
     :root {
+        /* Hero Section Green Theme */
+        --brt-hero-green: #059669;
+        --brt-hero-emerald: #10B981;
+        --brt-hero-mint: #D1FAE5;
+        
+        /* Rest of Page Corporate Theme (No Green Text/Buttons) */
         --brt-navy: #0F172A;
         --brt-navy-light: #1E293B;
         --brt-amber: #D97706;
@@ -127,7 +133,20 @@
         transform: scale(1.08);
     }
 
-    /* Dynamic Button Theme Override */
+    /* Dynamic Buttons */
+    .btn-brt-hero-green {
+        background: var(--brt-hero-green);
+        color: #FFFFFF;
+        border: none;
+        transition: all 0.3s ease;
+    }
+
+    .btn-brt-hero-green:hover {
+        background: #047857;
+        color: #FFFFFF;
+        box-shadow: 0 8px 20px rgba(5, 150, 105, 0.3);
+    }
+
     .btn-brt-primary {
         background: var(--brt-navy);
         color: #FFFFFF;
@@ -154,6 +173,7 @@
 
     .text-navy { color: var(--brt-navy) !important; }
     .text-amber { color: var(--brt-amber) !important; }
+    .text-hero-green { color: var(--brt-hero-green) !important; }
     .bg-navy { background-color: var(--brt-navy) !important; }
     .extra-small { font-size: 0.78rem; }
     .bg-glass {
@@ -183,43 +203,43 @@
     </div>
 </div>
 
-<!-- ===== Hero Section ===== -->
-<section class="hero-modern position-relative py-5 overflow-hidden">
+<!-- ===== Original Green Theme Hero Section ===== -->
+<section class="hero-modern position-relative py-5 overflow-hidden" style="background: linear-gradient(135deg, #ECFDF5 0%, #F0FDF4 50%, #FFFFFF 100%);">
     <div class="hero-inner container py-lg-4">
         <div class="hero-content fade-in-up is-visible max-w-700">
-            <span class="hero-trust-badge d-inline-flex align-items-center gap-1 px-3 py-1 rounded-pill mb-3" style="background: rgba(217, 119, 6, 0.12); color: var(--brt-amber);">
+            <span class="hero-trust-badge d-inline-flex align-items-center gap-1 px-3 py-1 rounded-pill mb-3" style="background: var(--brt-hero-mint); color: var(--brt-hero-green);">
                 <span class="material-symbols-outlined fs-6">workspace_premium</span> Trusted Since 2000
             </span>
-            <h1 class="display-4 fw-bold mb-2 text-uppercase tracking-tight text-navy">B RAJ TRADERS</h1>
+            <h1 class="display-4 fw-bold mb-2 text-uppercase tracking-tight text-hero-green">B RAJ TRADERS</h1>
             <p class="hero-tagline fs-5 text-muted mb-4">
                 Garlic &amp; Grocery Commission Mandi<br class="d-none d-md-block" /> 
                 <span class="fw-medium text-dark">Trusted Dealer-to-Dealer Wholesale Supplier</span>
             </p>
 
-            <blockquote class="hero-quote border-start border-4 border-warning ps-3 py-1 my-4 fst-italic text-secondary" style="border-color: var(--brt-amber) !important;">
-                <span class="quote-mark fs-3 lh-1 align-middle text-amber">&ldquo;</span>
+            <blockquote class="hero-quote border-start border-4 border-emerald ps-3 py-1 my-4 fst-italic text-secondary" style="border-color: var(--brt-hero-emerald) !important;">
+                <span class="quote-mark fs-3 lh-1 align-middle text-hero-green">&ldquo;</span>
                 Purity in every clove, trust in every deal.
-                <span class="quote-mark fs-3 lh-1 align-middle text-amber">&rdquo;</span>
+                <span class="quote-mark fs-3 lh-1 align-middle text-hero-green">&rdquo;</span>
             </blockquote>
 
             <div class="hero-cta d-flex flex-wrap gap-3 mb-5">
-                <a asp-controller="Order" asp-action="Request" class="btn btn-brt-amber px-4 py-2-5 shadow-sm fw-semibold rounded-pill">Request Wholesale Quote</a>
+                <a asp-controller="Order" asp-action="Request" class="btn btn-brt-hero-green px-4 py-2-5 shadow-sm fw-semibold rounded-pill">Request Wholesale Quote</a>
                 <a asp-controller="Catalog" asp-action="Index" class="btn btn-outline-dark px-4 py-2-5 fw-semibold rounded-pill">Explore Products</a>
             </div>
 
             <div class="hero-inline-stats d-flex align-items-center gap-4 gap-md-5 pt-3 border-top">
                 <div>
-                    <div class="stat-num fw-bold fs-3 text-navy">25+</div>
+                    <div class="stat-num fw-bold fs-3 text-hero-green">25+</div>
                     <div class="stat-label text-muted small">Years Experience</div>
                 </div>
                 <div class="border-end h-100 opacity-25"></div>
                 <div>
-                    <div class="stat-num fw-bold fs-3 text-navy">500+</div>
+                    <div class="stat-num fw-bold fs-3 text-hero-green">500+</div>
                     <div class="stat-label text-muted small">Trusted Dealers</div>
                 </div>
                 <div class="border-end h-100 opacity-25"></div>
                 <div>
-                    <div class="stat-num fw-bold fs-3 text-navy">30+</div>
+                    <div class="stat-num fw-bold fs-3 text-hero-green">30+</div>
                     <div class="stat-label text-muted small">Product Varieties</div>
                 </div>
             </div>
