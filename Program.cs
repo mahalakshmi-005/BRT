@@ -5,7 +5,7 @@ using BRT.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Npgsql 6+ is strict about DateTime.Kind for timestamp columns — this project only ever writes
+// Npgsql 6+ is strict about DateTime.Kind for timestamp columns ï¿½ this project only ever writes
 // DateTime.UtcNow, but this switch avoids a repeat of past "Cannot write DateTime with Kind=Unspecified" errors.
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
@@ -23,7 +23,18 @@ var connectionString = BuildConnectionString(builder.Configuration);
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseNpgsql(connectionString));
 
-builder.Services.AddScoped<BRT.Services.IFileUploadService, BRT.Services.FileUploadService>();
+// Cloudinary â€” env vars (CLOUDINARY_CLOUD_NAME/API_KEY/API_SECRET) override appsettings.json,
+// so real credentials never need to be committed to GitHub.
+builder.Services.Configure<BRT.Services.CloudinarySettings>(options =>
+{
+    options.CloudName = Environment.GetEnvironmentVariable("CLOUDINARY_CLOUD_NAME")
+        ?? builder.Configuration["Cloudinary:CloudName"] ?? string.Empty;
+    options.ApiKey = Environment.GetEnvironmentVariable("CLOUDINARY_API_KEY")
+        ?? builder.Configuration["Cloudinary:ApiKey"] ?? string.Empty;
+    options.ApiSecret = Environment.GetEnvironmentVariable("CLOUDINARY_API_SECRET")
+        ?? builder.Configuration["Cloudinary:ApiSecret"] ?? string.Empty;
+});
+builder.Services.AddScoped<BRT.Services.IFileUploadService, BRT.Services.CloudinaryFileUploadService>();
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>
@@ -46,24 +57,17 @@ var forwardedHeadersOptions = new ForwardedHeadersOptions
 {
     ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
 };
-// Render's proxy IP isn't known ahead of time and changes — clear the default loopback-only
+// Render's proxy IP isn't known ahead of time and changes ï¿½ clear the default loopback-only
 // allow-list so forwarded headers from Render's edge are actually trusted.
 forwardedHeadersOptions.KnownNetworks.Clear();
 forwardedHeadersOptions.KnownProxies.Clear();
 app.UseForwardedHeaders(forwardedHeadersOptions);
 
-// --- Seed database on startup ---
 // --- Apply migrations & seed database on startup ---
 using (var scope = app.Services.CreateScope())
 {
     var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-
-    // Create/update database schema
-    context.Database.Migrate();
-
     var config = scope.ServiceProvider.GetRequiredService<IConfiguration>();
-
-    // Seed initial data
     DbInitializer.Seed(context, config);
 }
 // --- Middleware pipeline ---
@@ -94,7 +98,7 @@ app.MapControllerRoute(
 
 app.Run();
 
-// Render provides DATABASE_URL as postgres://user:pass@host:port/dbname — Npgsql needs key=value format.
+// Render provides DATABASE_URL as postgres://user:pass@host:port/dbname ï¿½ Npgsql needs key=value format.
 // Falls back to appsettings.json ConnectionStrings:DefaultConnection for local development.
 static string BuildConnectionString(IConfiguration config)
 {
