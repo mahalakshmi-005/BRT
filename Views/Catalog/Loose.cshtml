@@ -129,7 +129,7 @@
         color: var(--text-main);
         margin-bottom: 16px;
         letter-spacing: -0.3px;
-        min-height: 2.8rem; /* Consistent title height */
+        min-height: 2.8rem;
         display: flex;
         align-items: center;
     }
@@ -165,7 +165,7 @@
         flex-wrap: wrap;
         gap: 8px;
         margin-bottom: 24px;
-        min-height: 34px; /* Keeps card proportions identical */
+        min-height: 34px;
         align-items: flex-start;
     }
 
@@ -183,7 +183,7 @@
     .card-action-matrix {
         display: flex;
         gap: 12px;
-        margin-top: auto; /* Push to absolute bottom */
+        margin-top: auto;
         width: 100%;
     }
 
@@ -230,7 +230,8 @@
         opacity: 0.9;
     }
 
-    @media (max-width: 576px) {
+    /* Razor எரரைத் தவிர்க்க @@media பயன்படுத்தப்பட்டுள்ளது */
+    @@media (max-width: 576px) {
         .card-action-matrix {
             flex-direction: column;
             gap: 8px;
