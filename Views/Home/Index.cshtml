@@ -203,82 +203,155 @@
     </div>
 </div>
 
-<!-- ===== Original Green Theme Hero Section ===== -->
-<!-- ===== Original Green Theme Hero Section with Image ===== -->
-<section class="hero-modern position-relative py-5 overflow-hidden" style="background: linear-gradient(135deg, #ECFDF5 0%, #F0FDF4 50%, #FFFFFF 100%);">
-    <div class="hero-inner container py-lg-4">
-        <div class="row align-items-center g-4">
+<!-- ===== Ultra-Innovative Hero Section (Green Theme + Modern Graphics) ===== -->
+<section class="hero-modern position-relative py-5 overflow-hidden" style="background: radial-gradient(circle at 10% 20%, #E6F4EA 0%, #F0FDF4 40%, #FFFFFF 90%);">
+    <!-- Background Floating Glow Orbs -->
+    <div style="position: absolute; width: 300px; height: 300px; background: rgba(16, 185, 129, 0.15); filter: blur(80px); border-radius: 50%; top: -50px; left: -50px; pointer-events: none;"></div>
+    <div style="position: absolute; width: 350px; height: 350px; background: rgba(245, 158, 11, 0.12); filter: blur(90px); border-radius: 50%; bottom: -50px; right: 5%; pointer-events: none;"></div>
+
+    <div class="hero-inner container py-lg-4 position-relative z-1">
+        <div class="row align-items-center g-5">
             
-            <!-- Left Column: Content -->
+            <!-- Left Side: Dynamic Text Content -->
             <div class="col-lg-6 fade-in-up is-visible">
-                <span class="hero-trust-badge d-inline-flex align-items-center gap-1 px-3 py-1 rounded-pill mb-3" style="background: var(--brt-hero-mint); color: var(--brt-hero-green);">
-                    <span class="material-symbols-outlined fs-6">workspace_premium</span> Trusted Since 2000
-                </span>
-                <h1 class="display-4 fw-bold mb-2 text-uppercase tracking-tight text-hero-green">B RAJ TRADERS</h1>
-                <p class="hero-tagline fs-5 text-muted mb-4">
-                    Garlic &amp; Grocery Commission Mandi<br class="d-none d-md-block" /> 
-                    <span class="fw-medium text-dark">Trusted Dealer-to-Dealer Wholesale Supplier</span>
-                </p>
-
-                <blockquote class="hero-quote border-start border-4 border-emerald ps-3 py-1 my-4 fst-italic text-secondary" style="border-color: var(--brt-hero-emerald) !important;">
-                    <span class="quote-mark fs-3 lh-1 align-middle text-hero-green">&ldquo;</span>
-                    Purity in every clove, trust in every deal.
-                    <span class="quote-mark fs-3 lh-1 align-middle text-hero-green">&rdquo;</span>
-                </blockquote>
-
-                <div class="hero-cta d-flex flex-wrap gap-3 mb-4">
-                    <a asp-controller="Order" asp-action="Request" class="btn btn-brt-hero-green px-4 py-2-5 shadow-sm fw-semibold rounded-pill">Request Wholesale Quote</a>
-                    <a asp-controller="Catalog" asp-action="Index" class="btn btn-outline-dark px-4 py-2-5 fw-semibold rounded-pill">Explore Products</a>
+                <div class="d-inline-flex align-items-center gap-2 px-3 py-1-5 rounded-pill mb-3 shadow-sm border border-emerald" style="background: #D1FAE5; border-color: rgba(16, 185, 129, 0.3) !important;">
+                    <span class="material-symbols-outlined fs-6 text-hero-green anim-float-icon">workspace_premium</span>
+                    <span class="fw-bold extra-small text-hero-green tracking-wide text-uppercase">Direct Mandi Sourcing Since 2000</span>
                 </div>
 
-                <div class="hero-inline-stats d-flex align-items-center gap-4 gap-md-5 pt-3 border-top">
-                    <div>
-                        <div class="stat-num fw-bold fs-3 text-hero-green">25+</div>
-                        <div class="stat-label text-muted small">Years Experience</div>
+                <h1 class="display-3 fw-black mb-3 text-uppercase tracking-tight" style="color: #047857; font-weight: 800; letter-spacing: -1px; text-shadow: 0 2px 10px rgba(4, 120, 87, 0.1);">
+                    B RAJ TRADERS
+                </h1>
+
+                <p class="hero-tagline fs-5 text-secondary mb-4 lh-base">
+                    Garlic &amp; Grocery Commission Mandi<br /> 
+                    <span class="fw-bold text-dark">Trusted Dealer-to-Dealer Wholesale Supplier</span>
+                </p>
+
+                <!-- Innovative Quote Card -->
+                <div class="p-3 rounded-4 mb-4 border-start border-4 border-emerald shadow-sm" style="background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(10px); border-color: #10B981 !important;">
+                    <div class="d-flex align-items-center gap-2">
+                        <span class="material-symbols-outlined fs-3 text-hero-green">format_quote</span>
+                        <p class="mb-0 fst-italic fw-medium text-dark small">
+                            "Purity in every clove, trust in every deal."
+                        </p>
                     </div>
-                    <div class="border-end h-100 opacity-25"></div>
+                </div>
+
+                <!-- Call To Action Buttons -->
+                <div class="hero-cta d-flex flex-wrap gap-3 mb-4">
+                    <a asp-controller="Order" asp-action="Request" class="btn btn-brt-hero-green px-4 py-3 shadow fw-bold rounded-pill d-inline-flex align-items-center gap-2">
+                        <span>Request Wholesale Quote</span>
+                        <span class="material-symbols-outlined fs-6 arrow-icon">arrow_forward</span>
+                    </a>
+                    <a asp-controller="Catalog" asp-action="Index" class="btn btn-outline-dark px-4 py-3 fw-bold rounded-pill">
+                        Explore Catalog
+                    </a>
+                </div>
+
+                <!-- Inline Counter Stats -->
+                <div class="hero-inline-stats d-flex align-items-center gap-4 gap-md-5 pt-3 border-top border-2">
                     <div>
-                        <div class="stat-num fw-bold fs-3 text-hero-green">500+</div>
-                        <div class="stat-label text-muted small">Trusted Dealers</div>
+                        <div class="stat-num fw-extrabold fs-2" style="color: #047857;">25+</div>
+                        <div class="stat-label text-muted extra-small text-uppercase fw-semibold">Years Experience</div>
                     </div>
-                    <div class="border-end h-100 opacity-25"></div>
+                    <div class="border-end h-100 opacity-25" style="min-height: 35px;"></div>
                     <div>
-                        <div class="stat-num fw-bold fs-3 text-hero-green">30+</div>
-                        <div class="stat-label text-muted small">Product Varieties</div>
+                        <div class="stat-num fw-extrabold fs-2" style="color: #047857;">500+</div>
+                        <div class="stat-label text-muted extra-small text-uppercase fw-semibold">Trusted Dealers</div>
+                    </div>
+                    <div class="border-end h-100 opacity-25" style="min-height: 35px;"></div>
+                    <div>
+                        <div class="stat-num fw-extrabold fs-2" style="color: #047857;">30+</div>
+                        <div class="stat-label text-muted extra-small text-uppercase fw-semibold">Varieties</div>
                     </div>
                 </div>
             </div>
 
-            <!-- Right Column: Hero Image Showcase -->
+            <!-- Right Side: Innovative Glassmorphic Dashboard & Floating Cards -->
             <div class="col-lg-6 text-center fade-in-up">
-                <div class="position-relative d-inline-block">
-                    <!-- High Quality Mandi Sourcing Graphic / Image -->
-                    <img src="~/images/hero-garlic.png" alt="Garlic Mandi Wholesale" class="img-fluid rounded-4 shadow-lg object-fit-cover anim-float-icon" style="max-height: 420px; border: 4px solid #ffffff;" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1618160702438-9b02ab6515c9?auto=format&fit=crop&w=800&q=80';" />
+                <div class="position-relative mx-auto" style="max-width: 480px;">
                     
-                    <!-- Floating Badge 1 -->
-                    <div class="position-absolute top-0 start-0 translate-middle-y bg-white p-3 rounded-4 shadow-sm border d-flex align-items-center gap-2 d-none d-sm-flex">
-                        <span class="material-symbols-outlined text-hero-green fs-4">verified</span>
-                        <div class="text-start">
-                            <span class="d-block fw-bold text-dark extra-small">100% Quality</span>
-                            <span class="d-block text-muted" style="font-size:0.7rem;">Direct Mandi Fresh</span>
+                    <!-- Main Hero Graphic Card -->
+                    <div class="p-4 rounded-5 text-start shadow-lg border" style="background: rgba(255, 255, 255, 0.75); backdrop-filter: blur(16px); border-color: rgba(255, 255, 255, 0.8) !important; box-shadow: 0 20px 40px rgba(5, 150, 105, 0.12) !important;">
+                        
+                        <div class="d-flex align-items-center justify-content-between mb-3 pb-3 border-bottom">
+                            <div class="d-flex align-items-center gap-2">
+                                <span class="p-2 rounded-circle bg-emerald text-white d-inline-flex align-items-center" style="background: #10B981;">
+                                    <span class="material-symbols-outlined fs-5">storefront</span>
+                                </span>
+                                <div>
+                                    <h6 class="fw-bold mb-0 text-dark">Live Mandi Hub</h6>
+                                    <span class="extra-small text-muted">Real-time daily updates</span>
+                                </div>
+                            </div>
+                            <span class="badge bg-danger text-white px-2-5 py-1 rounded-pill extra-small fw-bold pulse-badge">LIVE RATES</span>
+                        </div>
+
+                        <!-- Product 1 Live Ticker -->
+                        <div class="p-3 rounded-4 mb-3 border d-flex align-items-center justify-content-between" style="background: #F0FDF4; border-color: #A7F3D0 !important;">
+                            <div class="d-flex align-items-center gap-3">
+                                <span class="fs-2">🧄</span>
+                                <div>
+                                    <h6 class="fw-bold mb-0 text-dark">Ooty Garlic (First Grade)</h6>
+                                    <span class="extra-small text-muted">Bulk Bags (50kg)</span>
+                                </div>
+                            </div>
+                            <div class="text-end">
+                                <span class="fw-bold text-success d-block fs-6">Market Ready</span>
+                                <span class="extra-small text-muted">Best Price</span>
+                            </div>
+                        </div>
+
+                        <!-- Product 2 Live Ticker -->
+                        <div class="p-3 rounded-4 mb-3 border d-flex align-items-center justify-content-between" style="background: #FFFBEB; border-color: #FDE68A !important;">
+                            <div class="d-flex align-items-center gap-3">
+                                <span class="fs-2">🌾</span>
+                                <div>
+                                    <h6 class="fw-bold mb-0 text-dark">Commercial Grocery</h6>
+                                    <span class="extra-small text-muted">Pulses &amp; Spices Mandi</span>
+                                </div>
+                            </div>
+                            <div class="text-end">
+                                <span class="fw-bold text-amber d-block fs-6">Fresh Arrival</span>
+                                <span class="extra-small text-muted">Direct Sourced</span>
+                            </div>
+                        </div>
+
+                        <!-- Fast Quote CTA inside Card -->
+                        <div class="p-3 rounded-4 bg-navy text-white d-flex align-items-center justify-content-between" style="background: #0F172A;">
+                            <div>
+                                <span class="d-block fw-bold small">Need Volume Pricing?</span>
+                                <span class="extra-small opacity-75">Instant WhatsApp / Phone Desk</span>
+                            </div>
+                            <a href="tel:9865680694" class="btn btn-sm btn-brt-amber rounded-pill px-3 fw-bold">Call Desk</a>
                         </div>
                     </div>
 
-                    <!-- Floating Badge 2 -->
-                    <div class="position-absolute bottom-0 end-0 translate-middle-y bg-navy text-white p-3 rounded-4 shadow-sm d-flex align-items-center gap-2 d-none d-sm-flex" style="background: var(--brt-navy);">
-                        <span class="material-symbols-outlined text-amber fs-4">local_shipping</span>
+                    <!-- Floating Badge Top Right -->
+                    <div class="position-absolute top-0 end-0 translate-middle-y bg-white p-3 rounded-4 shadow-lg border d-flex align-items-center gap-2 d-none d-sm-flex anim-float-icon" style="z-index: 2;">
+                        <span class="material-symbols-outlined text-success fs-3">verified</span>
                         <div class="text-start">
-                            <span class="d-block fw-bold extra-small">Fast Dispatch</span>
-                            <span class="d-block text-light opacity-75" style="font-size:0.7rem;">Pan-India Transport</span>
+                            <span class="d-block fw-bold text-dark extra-small">100% Quality</span>
+                            <span class="d-block text-muted" style="font-size:0.68rem;">Tested &amp; Graded Stock</span>
                         </div>
                     </div>
+
+                    <!-- Floating Badge Bottom Left -->
+                    <div class="position-absolute bottom-0 start-0 translate-middle-y p-3 rounded-4 shadow-lg d-flex align-items-center gap-2 d-none d-sm-flex" style="background: #0F172A; color: white; z-index: 2;">
+                        <span class="material-symbols-outlined text-amber fs-3">local_shipping</span>
+                        <div class="text-start">
+                            <span class="d-block fw-bold extra-small text-amber">Fast Transport</span>
+                            <span class="d-block text-light opacity-75" style="font-size:0.68rem;">Pan-India Delivery</span>
+                        </div>
+                    </div>
+
                 </div>
             </div>
 
         </div>
     </div>
 </section>
-
 <!-- ===== Featured Products Showcase ===== -->
 @{
     var featured = ViewBag.FeaturedProducts as List<BRT.Models.Product>;
