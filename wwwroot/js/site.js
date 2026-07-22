@@ -29,7 +29,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // ===================================================
     // LANGUAGE TOGGLE SYSTEM (langContainer / optEN / optTN / langSlider)
-    // Persists selection across page navigation using localStorage
+    // Sets BOTH the [lang] attribute (used by some pages' inline styles)
+    // AND a .lang-ta class on <body> (used by site.css) so every page's
+    // language-switching markup works no matter which convention it uses.
+    // Persists selection across page navigation using localStorage.
     // ===================================================
     const langContainer = document.getElementById('langContainer');
     const langSlider = document.getElementById('langSlider');
@@ -37,10 +40,12 @@ document.addEventListener('DOMContentLoaded', function () {
     const optTN = document.getElementById('optTN');
 
     function applyLanguage(lang) {
-        // Set the lang attribute on <html> - this is what all the CSS rules
-        // (html[lang="en"] .lang-en, html[lang="ta"] .lang-ta, etc.) key off of
+        // Attribute-based selectors: html[lang="ta"] / body[lang="ta"]
         document.documentElement.setAttribute('lang', lang);
         document.body.setAttribute('lang', lang);
+
+        // Class-based selectors: body.lang-ta
+        document.body.classList.toggle('lang-ta', lang === 'ta');
 
         if (optEN && optTN) {
             optEN.classList.toggle('active', lang === 'en');
