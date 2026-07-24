@@ -3,43 +3,301 @@
     Layout = "_AdminLayout";
     ViewData["Title"] = "Products";
 }
-<div class="d-flex justify-content-between align-items-center mb-4">
-    <h3>Products</h3>
-    <a asp-action="Create" class="btn btn-brt">+ Add Product</a>
+
+<style>
+    :root {
+        --brt-navy-dark: #0B132A;
+        --brt-gold-accent: #D97706;
+        --brt-gold-hover: #B45309;
+        --brt-border-color: #E2E8F0;
+        --brt-text-dark: #0F172A;
+        --brt-text-muted: #64748B;
+    }
+
+    /* Header Section */
+    .page-header-container {
+        margin-bottom: 1.5rem;
+    }
+
+    .eyebrow-text {
+        color: var(--brt-gold-accent);
+        font-size: 0.725rem;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        display: block;
+        margin-bottom: 0.2rem;
+    }
+
+    .page-title {
+        font-family: Georgia, serif;
+        color: var(--brt-navy-dark);
+        font-weight: 700;
+        font-size: 1.75rem;
+        margin: 0;
+    }
+
+    /* Buttons */
+    .btn-brt-gold {
+        background: var(--brt-gold-accent);
+        color: #FFFFFF;
+        font-weight: 700;
+        font-size: 0.85rem;
+        padding: 0.6rem 1.25rem;
+        border-radius: 10px;
+        border: none;
+        transition: all 0.2s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        text-decoration: none;
+    }
+
+    .btn-brt-gold:hover {
+        background: var(--brt-gold-hover);
+        color: #FFFFFF;
+        box-shadow: 0 4px 12px rgba(217, 119, 6, 0.25);
+    }
+
+    /* Form Filter Controls */
+    .form-select-filter {
+        height: 40px;
+        border-radius: 10px;
+        border: 1px solid var(--brt-border-color);
+        font-size: 0.85rem;
+        color: var(--brt-text-dark);
+        background-color: #FFFFFF;
+        padding: 0.5rem 0.85rem;
+        transition: all 0.2s ease;
+        min-width: 260px;
+    }
+
+    .form-select-filter:focus {
+        border-color: var(--brt-gold-accent);
+        box-shadow: 0 0 0 3px rgba(217, 119, 6, 0.15);
+    }
+
+    /* Table Container Styling */
+    .table-card-container {
+        background: #FFFFFF;
+        border: 1px solid var(--brt-border-color);
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 4px 20px rgba(15, 23, 42, 0.03);
+    }
+
+    .table-custom {
+        margin-bottom: 0;
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+    }
+
+    .table-custom th {
+        background: #F8FAFC;
+        color: var(--brt-text-muted);
+        font-size: 0.725rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-weight: 700;
+        padding: 0.9rem 1.25rem;
+        border-bottom: 1px solid var(--brt-border-color);
+    }
+
+    .table-custom td {
+        padding: 0.95rem 1.25rem;
+        vertical-align: middle;
+        color: var(--brt-text-dark);
+        font-size: 0.875rem;
+        border-bottom: 1px solid #F1F5F9;
+        transition: background 0.2s ease;
+    }
+
+    .table-custom tbody tr:last-child td {
+        border-bottom: none;
+    }
+
+    .table-custom tbody tr:hover td {
+        background-color: #F8FAFC;
+    }
+
+    /* Category Breadcrumb Badge */
+    .category-path-badge {
+        font-size: 0.775rem;
+        color: var(--brt-text-muted);
+        background: #F1F5F9;
+        padding: 0.3rem 0.65rem;
+        border-radius: 6px;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.3rem;
+    }
+
+    /* Status Badges */
+    .badge-status-active {
+        background: #DCFCE7;
+        color: #15803D;
+        font-size: 0.725rem;
+        font-weight: 700;
+        padding: 0.3rem 0.65rem;
+        border-radius: 20px;
+    }
+
+    .badge-status-inactive {
+        background: #F1F5F9;
+        color: #64748B;
+        font-size: 0.725rem;
+        font-weight: 600;
+        padding: 0.3rem 0.65rem;
+        border-radius: 20px;
+    }
+
+    .badge-pack-count {
+        background: #EFF6FF;
+        color: #1D4ED8;
+        font-size: 0.75rem;
+        font-weight: 700;
+        padding: 0.25rem 0.6rem;
+        border-radius: 8px;
+        border: 1px solid #DBEAFE;
+    }
+
+    /* Alert Styling */
+    .brt-alert-success {
+        background: #F0FDF4;
+        border: 1px solid #BBF7D0;
+        border-left: 5px solid #16A34A;
+        border-radius: 12px;
+        padding: 0.9rem 1.25rem;
+        color: #15803D;
+        font-size: 0.875rem;
+        font-weight: 500;
+        margin-bottom: 1.5rem;
+    }
+</style>
+
+<!-- Header Section -->
+<div class="page-header-container d-flex justify-content-between align-items-center flex-wrap gap-2">
+    <div>
+        <span class="eyebrow-text">CATALOG MANAGEMENT</span>
+        <h3 class="page-title">Products Index</h3>
+    </div>
+    <a asp-action="Create" class="btn btn-brt-gold">
+        <span class="material-symbols-outlined fs-6">add</span>
+        <span>Add Product</span>
+    </a>
 </div>
 
+<!-- Flash Alert -->
 @if (TempData["Success"] != null)
 {
-    <div class="alert alert-success">@TempData["Success"]</div>
+    <div class="brt-alert-success d-flex align-items-center gap-2">
+        <span class="material-symbols-outlined fs-5">check_circle</span>
+        <span>@TempData["Success"]</span>
+    </div>
 }
 
-<form method="get" class="mb-3" style="max-width:320px">
-    <select name="subCategoryId" class="form-select" asp-items="ViewBag.SubCategories" onchange="this.form.submit()">
-        <option value="">-- All Sub-categories --</option>
-    </select>
-</form>
+<!-- Action Filter Bar -->
+<div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+    <form method="get" class="d-flex align-items-center gap-2">
+        <select name="subCategoryId" class="form-select form-select-filter" asp-items="ViewBag.SubCategories" onchange="this.form.submit()">
+            <option value="">-- All Sub-categories --</option>
+        </select>
+    </form>
+    <div class="text-muted small">
+        Showing <strong>@(Model?.Count ?? 0)</strong> items
+    </div>
+</div>
 
-<table class="table table-hover bg-white">
-    <thead>
-        <tr><th>Product</th><th>Sub-category</th><th>Grade</th><th>Packing Types</th><th>Status</th><th></th></tr>
-    </thead>
-    <tbody>
-    @foreach (var p in Model)
-    {
-        <tr>
-            <td>@p.Name</td>
-            <td>@p.SubCategory?.Category?.Name → @p.SubCategory?.Name</td>
-            <td>@p.Grade</td>
-            <td>@p.PackingTypes.Count(pt => pt.IsActive)</td>
-            <td>@(p.IsActive ? "Active" : "Inactive")</td>
-            <td class="text-end">
-                <a asp-action="Edit" asp-route-id="@p.Id" class="btn btn-sm btn-outline-primary">Edit</a>
-                <form asp-action="Delete" asp-route-id="@p.Id" method="post" class="d-inline" onsubmit="return confirm('Remove this product?');">
-                    @Html.AntiForgeryToken()
-                    <button class="btn btn-sm btn-outline-danger">Delete</button>
-                </form>
-            </td>
-        </tr>
-    }
-    </tbody>
-</table>
+<!-- Products Table Container -->
+<div class="table-card-container">
+    <div class="table-responsive">
+        <table class="table-custom">
+            <thead>
+                <tr>
+                    <th>Product Name</th>
+                    <th>Category Mapping</th>
+                    <th>Grade</th>
+                    <th>Packing Types</th>
+                    <th>Status</th>
+                    <th class="text-end">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            @if (Model != null && Model.Any())
+            {
+                @foreach (var p in Model)
+                {
+                    var packCount = p.PackingTypes?.Count(pt => pt.IsActive) ?? 0;
+                    
+                    <tr>
+                        <td>
+                            <div class="fw-bold text-dark fs-6">@p.Name</div>
+                            @if(!string.IsNullOrEmpty(p.NameTamil))
+                            {
+                                <div class="text-muted small">@p.NameTamil</div>
+                            }
+                        </td>
+                        <td>
+                            <span class="category-path-badge">
+                                <span>@(p.SubCategory?.Category?.Name ?? "Uncategorized")</span>
+                                <span class="material-symbols-outlined" style="font-size: 12px;">chevron_right</span>
+                                <strong class="text-dark">@(p.SubCategory?.Name ?? "—")</strong>
+                            </span>
+                        </td>
+                        <td>
+                            @if(!string.IsNullOrEmpty(p.Grade))
+                            {
+                                <span class="badge bg-light text-dark border">@p.Grade</span>
+                            }
+                            else
+                            {
+                                <span class="text-muted small">—</span>
+                            }
+                        </td>
+                        <td>
+                            <span class="badge-pack-count">
+                                @packCount Packs
+                            </span>
+                        </td>
+                        <td>
+                            @if(p.IsActive)
+                            {
+                                <span class="badge-status-active">Active</span>
+                            }
+                            else
+                            {
+                                <span class="badge-status-inactive">Inactive</span>
+                            }
+                        </td>
+                        <td class="text-end">
+                            <div class="d-inline-flex gap-1">
+                                <a asp-action="Edit" asp-route-id="@p.Id" class="btn btn-sm btn-outline-dark rounded-pill px-2.5 d-inline-flex align-items-center gap-1" title="Edit Product">
+                                    <span class="material-symbols-outlined fs-6">edit</span>
+                                    <span>Edit</span>
+                                </a>
+                                <form asp-action="Delete" asp-route-id="@p.Id" method="post" class="d-inline" onsubmit="return confirm('Are you sure you want to remove this product?');">
+                                    @Html.AntiForgeryToken()
+                                    <button type="submit" class="btn btn-sm btn-outline-danger border-0 rounded-circle p-1" title="Delete Product">
+                                        <span class="material-symbols-outlined fs-6 align-middle">delete</span>
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="6" class="text-center py-5 text-muted">
+                        <span class="material-symbols-outlined fs-1 text-secondary d-block mb-2">inventory_2</span>
+                        <div class="fw-bold fs-6">No Products Found</div>
+                        <span class="small">Try selecting a different sub-category or add a new product above.</span>
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+</div>
