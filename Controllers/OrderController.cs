@@ -1,3 +1,4 @@
+using System.Text;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -36,7 +37,6 @@ namespace BRT.Controllers
                 return View(model);
             }
 
-            var today = DateTime.UtcNow.Date;
             var order = new OrderRequest
             {
                 OrderNumber = $"BRT-{DateTime.UtcNow:yyyyMMdd}-{new Random().Next(1000, 9999)}",
@@ -50,23 +50,29 @@ namespace BRT.Controllers
                 CreatedAt = DateTime.UtcNow
             };
 
+            // Use each product's most-recent entered price (not strictly "today") so the
+            // order total doesn't silently come out as ₹0 just because Admin hasn't
+            // re-entered today's price yet.
+            var latestPrices = await GetLatestPricesAsync();
+
+            var lineDescriptions = new List<string>();
             decimal total = 0;
             foreach (var item in validItems)
             {
-                var price = await _context.MarketPrices
-                    .Where(m => m.ProductId == item.ProductId && m.PriceDate == today)
-                    .Select(m => (decimal?)m.TodayPrice)
-                    .FirstOrDefaultAsync() ?? 0;
+                var product = await _context.Products.FindAsync(item.ProductId!.Value);
+                var price = latestPrices.TryGetValue(item.ProductId.Value, out var mp) ? mp.TodayPrice : 0;
 
                 var lineItem = new OrderRequestItem
                 {
-                    ProductId = item.ProductId!.Value,
+                    ProductId = item.ProductId.Value,
                     PackingTypeId = item.PackingTypeId,
                     Quantity = item.Quantity!.Value,
                     PriceAtOrderTime = price
                 };
                 total += lineItem.Quantity * price;
                 order.Items.Add(lineItem);
+
+                lineDescriptions.Add($"- {product?.Name ?? "Product"} x {item.Quantity} (₹{price:F2}/unit)");
             }
             order.TotalEstimatedAmount = total;
 
@@ -84,12 +90,33 @@ namespace BRT.Controllers
             });
             await _context.SaveChangesAsync();
 
+            // --- Build the WhatsApp message that goes to Admin ---
+            var sb = new StringBuilder();
+            sb.AppendLine($"*New Bulk Order Request — {order.OrderNumber}*");
+            sb.AppendLine();
+            sb.AppendLine($"Name: {order.BuyerName}");
+            sb.AppendLine($"Business: {order.BusinessName}");
+            sb.AppendLine($"Phone: {order.PhoneNumber}");
+            if (!string.IsNullOrWhiteSpace(order.City)) sb.AppendLine($"City: {order.City}");
+            if (!string.IsNullOrWhiteSpace(order.BuyerAddress)) sb.AppendLine($"Address: {order.BuyerAddress}");
+            sb.AppendLine();
+            sb.AppendLine("Products:");
+            foreach (var line in lineDescriptions) sb.AppendLine(line);
+            sb.AppendLine();
+            sb.AppendLine($"Estimated Total: ₹{total:F2} (+ transport if applicable)");
+            sb.AppendLine("Please confirm pricing and dispatch.");
+
+            var adminWhatsApp = await GetAdminWhatsAppNumberAsync();
+            var whatsAppUrl = $"https://api.whatsapp.com/send?phone={adminWhatsApp}&text={Uri.EscapeDataString(sb.ToString())}";
+
+            TempData["WhatsAppUrl"] = whatsAppUrl;
             return RedirectToAction(nameof(Success), new { orderNumber = order.OrderNumber });
         }
 
         public IActionResult Success(string orderNumber)
         {
             ViewBag.OrderNumber = orderNumber;
+            ViewBag.WhatsAppUrl = TempData["WhatsAppUrl"] as string;
             ViewData["Title"] = "Order Submitted";
             return View();
         }
@@ -103,6 +130,21 @@ namespace BRT.Controllers
                 .ToListAsync();
             ViewBag.ProductList = new SelectList(products, "Id", "Name");
             ViewBag.Products = products;
+        }
+
+        // Returns the most recent MarketPrice per product (mirrors CatalogController's logic).
+        private async Task<Dictionary<int, MarketPrice>> GetLatestPricesAsync()
+        {
+            var allPrices = await _context.MarketPrices.ToListAsync();
+            return allPrices
+                .GroupBy(m => m.ProductId)
+                .ToDictionary(g => g.Key, g => g.OrderByDescending(m => m.PriceDate).ThenByDescending(m => m.UpdatedAt).First());
+        }
+
+        private async Task<string> GetAdminWhatsAppNumberAsync()
+        {
+            var setting = await _context.SiteSettings.FirstOrDefaultAsync(s => s.Key == "WhatsAppNumber");
+            return setting?.Value ?? "919865680694";
         }
     }
 }
