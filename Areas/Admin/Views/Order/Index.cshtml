@@ -2,35 +2,258 @@
 @{
     Layout = "_AdminLayout";
     ViewData["Title"] = "Orders";
-    var allClass = ViewBag.CurrentFilter == null ? "btn-brt" : "btn-outline-secondary";
+    var currentFilter = ViewBag.CurrentFilter?.ToString();
+    var isAllActive = string.IsNullOrEmpty(currentFilter);
 }
-<h3 class="mb-4">Order Requests</h3>
 
-<div class="mb-3 d-flex gap-2 flex-wrap">
-    <a asp-action="Index" class="btn btn-sm @allClass">All</a>
+<style>
+    :root {
+        --brt-navy-dark: #0B132A;
+        --brt-gold-accent: #D97706;
+        --brt-gold-hover: #B45309;
+        --brt-border-color: #E2E8F0;
+        --brt-text-dark: #0F172A;
+        --brt-text-muted: #64748B;
+    }
+
+    /* Header Section */
+    .page-header-container {
+        margin-bottom: 1.5rem;
+    }
+
+    .eyebrow-text {
+        color: var(--brt-gold-accent);
+        font-size: 0.725rem;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        display: block;
+        margin-bottom: 0.2rem;
+    }
+
+    .page-title {
+        font-family: Georgia, serif;
+        color: var(--brt-navy-dark);
+        font-weight: 700;
+        font-size: 1.75rem;
+        margin: 0;
+    }
+
+    /* Filter Pills */
+    .filter-pills-container {
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+        margin-bottom: 1.5rem;
+    }
+
+    .btn-filter-pill {
+        font-size: 0.8rem;
+        font-weight: 600;
+        padding: 0.45rem 1rem;
+        border-radius: 20px;
+        border: 1px solid var(--brt-border-color);
+        background: #FFFFFF;
+        color: var(--brt-text-muted);
+        text-decoration: none;
+        transition: all 0.2s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+    }
+
+    .btn-filter-pill:hover {
+        background: #F8FAFC;
+        color: var(--brt-navy-dark);
+        border-color: #CBD5E1;
+    }
+
+    .btn-filter-pill.active {
+        background: var(--brt-gold-accent);
+        color: #FFFFFF;
+        border-color: var(--brt-gold-accent);
+        font-weight: 700;
+        box-shadow: 0 3px 10px rgba(217, 119, 6, 0.2);
+    }
+
+    /* Table Container Styling */
+    .table-card-container {
+        background: #FFFFFF;
+        border: 1px solid var(--brt-border-color);
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 4px 20px rgba(15, 23, 42, 0.03);
+    }
+
+    .table-custom {
+        margin-bottom: 0;
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+    }
+
+    .table-custom th {
+        background: #F8FAFC;
+        color: var(--brt-text-muted);
+        font-size: 0.725rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-weight: 700;
+        padding: 0.9rem 1.25rem;
+        border-bottom: 1px solid var(--brt-border-color);
+    }
+
+    .table-custom td {
+        padding: 1rem 1.25rem;
+        vertical-align: middle;
+        color: var(--brt-text-dark);
+        font-size: 0.875rem;
+        border-bottom: 1px solid #F1F5F9;
+        transition: background 0.2s ease;
+    }
+
+    .table-custom tbody tr:last-child td {
+        border-bottom: none;
+    }
+
+    .table-custom tbody tr:hover td {
+        background-color: #F8FAFC;
+    }
+
+    /* Status Badges */
+    .badge-status {
+        padding: 0.35rem 0.8rem;
+        border-radius: 20px;
+        font-size: 0.725rem;
+        font-weight: 700;
+        letter-spacing: 0.3px;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+    }
+
+    .badge-pending { background: #FEF3C7; color: #92400E; }
+    .badge-review { background: #E0F2FE; color: #0369A1; }
+    .badge-confirmed { background: #DCFCE7; color: #15803D; }
+    .badge-cancelled { background: #FEE2E2; color: #B91C1C; }
+    .badge-default { background: #F1F5F9; color: #475569; }
+
+    .btn-action-view {
+        color: var(--brt-navy-dark);
+        border: 1px solid var(--brt-border-color);
+        background: #FFFFFF;
+        font-size: 0.78rem;
+        font-weight: 600;
+        padding: 0.35rem 0.85rem;
+        border-radius: 20px;
+        text-decoration: none;
+        transition: all 0.2s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.25rem;
+    }
+
+    .btn-action-view:hover {
+        background: var(--brt-navy-dark);
+        color: #FFFFFF;
+        border-color: var(--brt-navy-dark);
+    }
+</style>
+
+<!-- Header Section -->
+<div class="page-header-container">
+    <span class="eyebrow-text">ORDER MANAGEMENT</span>
+    <h3 class="page-title">Order Requests</h3>
+</div>
+
+<!-- Status Filter Pills -->
+<div class="filter-pills-container">
+    <a asp-action="Index" class="btn-filter-pill @(isAllActive ? "active" : "")">
+        <span>All Requests</span>
+    </a>
     @foreach (var s in Enum.GetValues<OrderStatus>())
     {
-        var isActive = ViewBag.CurrentFilter?.ToString() == s.ToString();
-        var filterClass = isActive ? "btn-brt" : "btn-outline-secondary";
-        <a asp-action="Index" asp-route-status="@s" class="btn btn-sm @filterClass">@s</a>
+        var isActive = currentFilter == s.ToString();
+        <a asp-action="Index" asp-route-status="@s" class="btn-filter-pill @(isActive ? "active" : "")">
+            <span>@s</span>
+        </a>
     }
 </div>
 
-<table class="table table-hover bg-white">
-    <thead><tr><th>Order #</th><th>Buyer</th><th>Business</th><th>Phone</th><th>Items</th><th>Status</th><th>Date</th><th></th></tr></thead>
-    <tbody>
-    @foreach (var o in Model)
-    {
-        <tr>
-            <td>@o.OrderNumber</td>
-            <td>@o.BuyerName</td>
-            <td>@o.BusinessName</td>
-            <td>@o.PhoneNumber</td>
-            <td>@o.Items.Count</td>
-            <td><span class="badge bg-secondary">@o.Status</span></td>
-            <td>@o.CreatedAt.ToString("dd-MMM-yyyy HH:mm")</td>
-            <td><a asp-action="Details" asp-route-id="@o.Id" class="btn btn-sm btn-outline-primary">View</a></td>
-        </tr>
-    }
-    </tbody>
-</table>
+<!-- Orders Table -->
+<div class="table-card-container">
+    <div class="table-responsive">
+        <table class="table-custom">
+            <thead>
+                <tr>
+                    <th>Order #</th>
+                    <th>Buyer Name</th>
+                    <th>Business</th>
+                    <th>Phone</th>
+                    <th class="text-center">Items</th>
+                    <th>Status</th>
+                    <th>Date</th>
+                    <th class="text-end">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+            @if (Model != null && Model.Any())
+            {
+                @foreach (var o in Model)
+                {
+                    var statusStr = o.Status.ToString();
+                    var badgeClass = statusStr.ToLower() switch
+                    {
+                        "pending" => "badge-pending",
+                        "underreview" => "badge-review",
+                        "confirmed" => "badge-confirmed",
+                        "cancelled" => "badge-cancelled",
+                        _ => "badge-default"
+                    };
+
+                    <tr>
+                        <td>
+                            <a asp-action="Details" asp-route-id="@o.Id" class="fw-bold text-dark text-decoration-none">
+                                #@o.OrderNumber
+                            </a>
+                        </td>
+                        <td class="fw-semibold text-dark">@o.BuyerName</td>
+                        <td class="text-muted">@(string.IsNullOrEmpty(o.BusinessName) ? "—" : o.BusinessName)</td>
+                        <td>
+                            <a href="tel:@o.PhoneNumber" class="text-secondary text-decoration-none small">
+                                @o.PhoneNumber
+                            </a>
+                        </td>
+                        <td class="text-center">
+                            <span class="badge bg-light text-dark border rounded-pill px-2.5 py-1">@o.Items.Count</span>
+                        </td>
+                        <td>
+                            <span class="badge-status @badgeClass">
+                                <span class="material-symbols-outlined" style="font-size: 11px;">circle</span>
+                                @o.Status
+                            </span>
+                        </td>
+                        <td class="text-secondary small">@o.CreatedAt.ToString("dd-MMM-yyyy HH:mm")</td>
+                        <td class="text-end">
+                            <a asp-action="Details" asp-route-id="@o.Id" class="btn-action-view">
+                                <span>View</span>
+                                <span class="material-symbols-outlined fs-6">arrow_forward</span>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="8" class="text-center py-5 text-muted">
+                        <span class="material-symbols-outlined fs-1 text-secondary d-block mb-2">inbox</span>
+                        <div class="fw-bold fs-6">No Order Requests Found</div>
+                        <span class="small">There are no orders matching the selected filter status.</span>
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+</div>
