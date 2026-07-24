@@ -1,36 +1,207 @@
 @model List<SiteSetting>
 @{
     Layout = "_AdminLayout";
-    ViewData["Title"] = "Settings";
-}
-<h3 class="mb-4">Site Settings</h3>
-
-@if (TempData["Success"] != null)
-{
-    <div class="alert alert-success">@TempData["Success"]</div>
+    ViewData["Title"] = "Site Settings";
 }
 
-<div class="admin-card" style="max-width:600px">
-    <form asp-action="Update" method="post">
-        @Html.AntiForgeryToken()
-        @foreach (var s in Model)
-        {
-            <div class="mb-3">
-                <label class="form-label">@s.Key</label>
-                <input type="hidden" name="ids" value="@s.Id" />
-                <input type="text" name="values" class="form-control" value="@s.Value" />
-            </div>
-        }
-        <button class="btn btn-brt">Save All</button>
-    </form>
+<style>
+    :root {
+        --brt-navy-dark: #0B132A;
+        --brt-gold-accent: #D97706;
+        --brt-gold-hover: #B45309;
+        --brt-border-color: #E2E8F0;
+        --brt-text-dark: #0F172A;
+        --brt-text-muted: #64748B;
+    }
+
+    /* Header Section */
+    .page-header-container {
+        margin-bottom: 1.5rem;
+    }
+
+    .eyebrow-text {
+        color: var(--brt-gold-accent);
+        font-size: 0.725rem;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        display: block;
+        margin-bottom: 0.2rem;
+    }
+
+    .page-title {
+        font-family: Georgia, serif;
+        color: var(--brt-navy-dark);
+        font-weight: 700;
+        font-size: 1.75rem;
+        margin: 0;
+    }
+
+    /* Form Container */
+    .form-card-container {
+        background: #FFFFFF;
+        border: 1px solid var(--brt-border-color);
+        border-radius: 16px;
+        padding: 1.75rem;
+        box-shadow: 0 4px 20px rgba(15, 23, 42, 0.03);
+        max-width: 680px;
+    }
+
+    .card-title-custom {
+        font-family: Georgia, serif;
+        color: var(--brt-navy-dark);
+        font-size: 1.15rem;
+        font-weight: 700;
+    }
+
+    .form-label-custom {
+        font-weight: 600;
+        font-size: 0.825rem;
+        color: var(--brt-navy-dark);
+        margin-bottom: 0.4rem;
+        display: inline-block;
+    }
+
+    .form-control-custom {
+        border-radius: 10px;
+        border: 1px solid var(--brt-border-color);
+        font-size: 0.875rem;
+        color: var(--brt-text-dark);
+        background-color: #FAFAFA;
+        padding: 0.6rem 0.9rem;
+        transition: all 0.2s ease;
+    }
+
+    .form-control-custom:focus {
+        background-color: #FFFFFF;
+        border-color: var(--brt-gold-accent);
+        box-shadow: 0 0 0 3px rgba(217, 119, 6, 0.15);
+    }
+
+    /* Buttons */
+    .btn-brt-gold {
+        background: var(--brt-gold-accent);
+        color: #FFFFFF;
+        font-weight: 700;
+        font-size: 0.875rem;
+        padding: 0.65rem 1.25rem;
+        border-radius: 10px;
+        border: none;
+        transition: all 0.2s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+    }
+
+    .btn-brt-gold:hover {
+        background: var(--brt-gold-hover);
+        color: #FFFFFF;
+        box-shadow: 0 4px 12px rgba(217, 119, 6, 0.25);
+    }
+
+    .brt-alert-success {
+        background: #F0FDF4;
+        border: 1px solid #BBF7D0;
+        border-left: 5px solid #16A34A;
+        border-radius: 12px;
+        padding: 0.9rem 1.25rem;
+        color: #15803D;
+        font-size: 0.875rem;
+        font-weight: 500;
+        margin-bottom: 1.5rem;
+        max-width: 680px;
+    }
+
+    .setting-key-badge {
+        background: #F1F5F9;
+        color: var(--brt-navy-dark);
+        font-family: monospace;
+        padding: 0.2rem 0.5rem;
+        border-radius: 6px;
+        font-size: 0.8rem;
+        border: 1px solid #E2E8F0;
+    }
+</style>
+
+<!-- Header Section -->
+<div class="page-header-container">
+    <span class="eyebrow-text">SYSTEM CONFIGURATION</span>
+    <h3 class="page-title">Site Settings</h3>
 </div>
 
-<div class="admin-card mt-4" style="max-width:600px">
-    <h5>Add New Setting</h5>
-    <form asp-action="AddSetting" method="post" class="row g-2">
+<!-- Flash Alert -->
+@if (TempData["Success"] != null)
+{
+    <div class="brt-alert-success d-flex align-items-center gap-2">
+        <span class="material-symbols-outlined fs-5">check_circle</span>
+        <span>@TempData["Success"]</span>
+    </div>
+}
+
+<!-- Manage Existing Settings Card -->
+<div class="form-card-container mb-4">
+    <div class="d-flex justify-content-between align-items-center mb-3.5">
+        <h5 class="card-title-custom mb-0">System Configurations</h5>
+        <span class="badge bg-light text-dark border">@(Model?.Count ?? 0) Keys Configured</span>
+    </div>
+
+    @if (Model != null && Model.Any())
+    {
+        <form asp-action="Update" method="post">
+            @Html.AntiForgeryToken()
+            
+            <div class="d-flex flex-column gap-3 mb-4">
+                @foreach (var s in Model)
+                {
+                    <div>
+                        <div class="d-flex align-items-center gap-2 mb-1">
+                            <span class="setting-key-badge">@s.Key</span>
+                        </div>
+                        <input type="hidden" name="ids" value="@s.Id" />
+                        <input type="text" name="values" class="form-control form-control-custom" value="@s.Value" />
+                    </div>
+                }
+            </div>
+
+            <div class="pt-2 border-top">
+                <button type="submit" class="btn btn-brt-gold">
+                    <span class="material-symbols-outlined fs-6">save</span>
+                    <span>Save All Changes</span>
+                </button>
+            </div>
+        </form>
+    }
+    else
+    {
+        <div class="text-center py-4 text-muted small">
+            <span class="material-symbols-outlined fs-2 text-secondary d-block mb-1">settings_suggest</span>
+            No custom site settings found.
+        </div>
+    }
+</div>
+
+<!-- Add New Setting Card -->
+<div class="form-card-container">
+    <h5 class="card-title-custom mb-3">Add New Configuration Key</h5>
+    
+    <form asp-action="AddSetting" method="post" class="row g-2 align-items-end">
         @Html.AntiForgeryToken()
-        <div class="col-md-5"><input name="key" class="form-control" placeholder="Key" required /></div>
-        <div class="col-md-5"><input name="value" class="form-control" placeholder="Value" required /></div>
-        <div class="col-md-2"><button class="btn btn-brt w-100">Add</button></div>
+        
+        <div class="col-md-5">
+            <label class="form-label-custom">Setting Key</label>
+            <input name="key" class="form-control form-control-custom" placeholder="e.g. SupportPhoneNumber" required />
+        </div>
+        
+        <div class="col-md-5">
+            <label class="form-label-custom">Setting Value</label>
+            <input name="value" class="form-control form-control-custom" placeholder="e.g. +91 9876543210" required />
+        </div>
+        
+        <div class="col-md-2">
+            <button type="submit" class="btn btn-brt-gold w-100 justify-content-center">
+                <span class="material-symbols-outlined fs-6">add</span>
+                <span>Add</span>
+            </button>
+        </div>
     </form>
 </div>
