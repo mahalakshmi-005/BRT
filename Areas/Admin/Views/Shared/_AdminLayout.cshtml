@@ -26,6 +26,7 @@
                 <a asp-area="Admin" asp-controller="Order" asp-action="Index">Orders</a>
                 <a asp-area="Admin" asp-controller="Content" asp-action="Index">Website Content</a>
                 <a asp-area="Admin" asp-controller="Settings" asp-action="Index">Settings</a>
+                <a asp-area="Admin" asp-controller="Account" asp-action="ChangePassword">Change Password</a>
             </nav>
             <form asp-area="Admin" asp-controller="Account" asp-action="Logout" method="post" class="sidebar-logout">
                 @Html.AntiForgeryToken()
