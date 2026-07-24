@@ -3,117 +3,159 @@
     ViewData["Title"] = "Dashboard";
 }
 
-<!-- Custom Dashboard Styling matching Website Theme -->
+<!-- Custom Embedded Styles for Premium BRT Admin Dashboard -->
 <style>
     :root {
         --brt-navy-dark: #0B132A;
+        --brt-navy-card: #0F172A;
         --brt-gold-accent: #D97706;
+        --brt-gold-hover: #B45309;
         --brt-gold-light: #FFFBEB;
         --brt-border-color: #E2E8F0;
-        --brt-text-dark: #1E293B;
+        --brt-text-dark: #0F172A;
         --brt-text-muted: #64748B;
+        --brt-bg-light: #F8FAFC;
     }
 
-    /* Top Section Header */
+    /* Top Banner Header */
     .dashboard-header {
+        background: linear-gradient(135deg, #FFFFFF 0%, #F8FAFC 100%);
+        border: 1px solid var(--brt-border-color);
+        border-radius: 16px;
+        padding: 1.5rem 1.75rem;
         margin-bottom: 2rem;
+        box-shadow: 0 4px 15px rgba(15, 23, 42, 0.02);
     }
 
     .eyebrow-text {
         color: var(--brt-gold-accent);
-        font-size: 0.75rem;
+        font-size: 0.725rem;
         font-weight: 700;
         letter-spacing: 2px;
         text-transform: uppercase;
+        display: block;
+        margin-bottom: 0.2rem;
     }
 
     .dashboard-title {
         font-family: Georgia, serif;
-        color: var(--brt-text-dark);
+        color: var(--brt-navy-dark);
         font-weight: 700;
-        font-size: 1.85rem;
-        margin-top: 0.2rem;
+        font-size: 1.75rem;
+        margin: 0;
     }
 
-    /* Stat Cards Styling */
+    /* Stat Cards Base */
     .stat-card-custom {
         background: #FFFFFF;
         border: 1px solid var(--brt-border-color);
         border-radius: 16px;
-        padding: 1.5rem;
+        padding: 1.35rem 1.25rem;
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         position: relative;
         overflow: hidden;
         height: 100%;
-        box-shadow: 0 4px 15px rgba(15, 23, 42, 0.03);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        box-shadow: 0 4px 12px rgba(15, 23, 42, 0.03);
     }
 
     .stat-card-custom:hover {
-        transform: translateY(-3px);
+        transform: translateY(-4px);
         border-color: #CBD5E1;
-        box-shadow: 0 12px 25px rgba(15, 23, 42, 0.08);
+        box-shadow: 0 12px 24px rgba(15, 23, 42, 0.08);
     }
 
-    .stat-card-custom .stat-icon {
-        width: 44px;
-        height: 44px;
+    .stat-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 0.75rem;
+    }
+
+    .stat-icon-wrapper {
+        width: 42px;
+        height: 42px;
         border-radius: 12px;
         display: flex;
         align-items: center;
         justify-content: center;
-        margin-bottom: 1rem;
-        font-size: 1.35rem;
     }
 
     .stat-value-custom {
-        font-size: 1.8rem;
+        font-size: 2rem;
         font-weight: 800;
         color: var(--brt-text-dark);
-        line-height: 1.2;
+        line-height: 1;
+        letter-spacing: -0.5px;
     }
 
     .stat-label-custom {
-        font-size: 0.825rem;
+        font-size: 0.8rem;
         font-weight: 600;
         color: var(--brt-text-muted);
         text-transform: uppercase;
         letter-spacing: 0.5px;
-        margin-top: 0.3rem;
+        margin-top: 0.5rem;
     }
 
-    /* Distinct Stat Color Accents */
-    .stat-pending .stat-icon { background: #FEF3C7; color: #D97706; }
-    .stat-review .stat-icon { background: #E0F2FE; color: #0284C7; }
-    .stat-confirmed .stat-icon { background: #DCFCE7; color: #16A34A; }
-    .stat-products .stat-icon { background: #F1F5F9; color: var(--brt-navy-dark); }
+    /* Specific Stat Card Colors */
+    .stat-pending .stat-icon-wrapper { background: #FEF3C7; color: #D97706; }
+    .stat-review .stat-icon-wrapper { background: #E0F2FE; color: #0284C7; }
+    .stat-confirmed .stat-icon-wrapper { background: #DCFCE7; color: #16A34A; }
+    .stat-products .stat-icon-wrapper { background: #F1F5F9; color: var(--brt-navy-dark); }
 
-    /* Custom Alert Banner */
+    /* Custom Price Alert Banner */
     .brt-alert-warning {
         background: #FFFBEB;
         border: 1px solid #FDE68A;
         border-left: 5px solid var(--brt-gold-accent);
-        border-radius: 12px;
-        padding: 1rem 1.25rem;
+        border-radius: 14px;
+        padding: 1.1rem 1.35rem;
         color: #92400E;
-        font-size: 0.9rem;
-        font-weight: 500;
+        box-shadow: 0 4px 12px rgba(217, 119, 6, 0.05);
     }
 
-    /* Section Headers */
-    .section-title {
-        font-family: Georgia, serif;
-        color: var(--brt-text-dark);
+    .btn-update-prices {
+        background: var(--brt-gold-accent);
+        color: #FFFFFF;
+        font-size: 0.8rem;
         font-weight: 700;
-        font-size: 1.25rem;
+        padding: 0.45rem 1rem;
+        border-radius: 20px;
+        text-decoration: none;
+        transition: all 0.2s ease;
+        white-space: nowrap;
+    }
+
+    .btn-update-prices:hover {
+        background: var(--brt-gold-hover);
+        color: #FFFFFF;
+        box-shadow: 0 4px 10px rgba(217, 119, 6, 0.25);
     }
 
     /* Table Container Styling */
-    .table-container {
+    .table-card-container {
         background: #FFFFFF;
         border: 1px solid var(--brt-border-color);
         border-radius: 16px;
         overflow: hidden;
         box-shadow: 0 4px 20px rgba(15, 23, 42, 0.03);
+    }
+
+    .table-header-bar {
+        padding: 1.25rem 1.5rem;
+        border-bottom: 1px solid var(--brt-border-color);
+        background: #FFFFFF;
+    }
+
+    .section-title {
+        font-family: Georgia, serif;
+        color: var(--brt-navy-dark);
+        font-weight: 700;
+        font-size: 1.25rem;
+        margin: 0;
     }
 
     .table-custom {
@@ -126,11 +168,11 @@
     .table-custom th {
         background: #F8FAFC;
         color: var(--brt-text-muted);
-        font-size: 0.75rem;
+        font-size: 0.725rem;
         text-transform: uppercase;
         letter-spacing: 1px;
         font-weight: 700;
-        padding: 1rem 1.25rem;
+        padding: 0.9rem 1.25rem;
         border-bottom: 1px solid var(--brt-border-color);
     }
 
@@ -151,73 +193,99 @@
         background-color: #F8FAFC;
     }
 
-    /* Dynamic Order Status Badges */
+    /* Dynamic Status Badges */
     .badge-status {
-        padding: 0.35rem 0.75rem;
+        padding: 0.35rem 0.8rem;
         border-radius: 20px;
-        font-size: 0.75rem;
+        font-size: 0.725rem;
         font-weight: 700;
         letter-spacing: 0.3px;
-        display: inline-block;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
     }
     
     .badge-pending { background: #FEF3C7; color: #92400E; }
     .badge-review { background: #E0F2FE; color: #0369A1; }
     .badge-confirmed { background: #DCFCE7; color: #15803D; }
     .badge-default { background: #F1F5F9; color: #475569; }
+
+    .order-link {
+        color: var(--brt-navy-dark);
+        font-weight: 700;
+        text-decoration: none;
+        transition: color 0.2s ease;
+    }
+
+    .order-link:hover {
+        color: var(--brt-gold-accent);
+    }
 </style>
 
-<!-- Header Section -->
+<!-- Top Banner Header -->
 <div class="dashboard-header d-flex align-items-center justify-content-between">
     <div>
-        <span class="eyebrow-text">OVERVIEW</span>
-        <h3 class="dashboard-title">System Dashboard</h3>
+        <span class="eyebrow-text">ADMIN DASHBOARD</span>
+        <h3 class="dashboard-title">System Overview</h3>
+    </div>
+    <div>
+        <span class="badge bg-light text-secondary border px-3 py-2 rounded-pill font-monospace small">
+            <span class="material-symbols-outlined fs-6 align-middle text-success me-1">circle</span> Live Mandi System
+        </span>
     </div>
 </div>
 
 <!-- Stat Cards Section -->
 <div class="row g-3 mb-4">
     <!-- Pending Orders -->
-    <div class="col-6 col-md-3">
+    <div class="col-12 col-sm-6 col-md-3">
         <div class="stat-card-custom stat-pending">
-            <div class="stat-icon">
-                <span class="material-symbols-outlined">hourglass_top</span>
+            <div class="stat-header">
+                <span class="stat-label-custom">Pending Orders</span>
+                <div class="stat-icon-wrapper">
+                    <span class="material-symbols-outlined fs-5">hourglass_top</span>
+                </div>
             </div>
             <div class="stat-value-custom">@ViewBag.PendingOrders</div>
-            <div class="stat-label-custom">Pending Orders</div>
         </div>
     </div>
 
     <!-- Under Review -->
-    <div class="col-6 col-md-3">
+    <div class="col-12 col-sm-6 col-md-3">
         <div class="stat-card-custom stat-review">
-            <div class="stat-icon">
-                <span class="material-symbols-outlined">rate_review</span>
+            <div class="stat-header">
+                <span class="stat-label-custom">Under Review</span>
+                <div class="stat-icon-wrapper">
+                    <span class="material-symbols-outlined fs-5">rate_review</span>
+                </div>
             </div>
             <div class="stat-value-custom">@ViewBag.UnderReviewOrders</div>
-            <div class="stat-label-custom">Under Review</div>
         </div>
     </div>
 
     <!-- Confirmed Orders -->
-    <div class="col-6 col-md-3">
+    <div class="col-12 col-sm-6 col-md-3">
         <div class="stat-card-custom stat-confirmed">
-            <div class="stat-icon">
-                <span class="material-symbols-outlined">check_circle</span>
+            <div class="stat-header">
+                <span class="stat-label-custom">Confirmed</span>
+                <div class="stat-icon-wrapper">
+                    <span class="material-symbols-outlined fs-5">check_circle</span>
+                </div>
             </div>
             <div class="stat-value-custom">@ViewBag.ConfirmedOrders</div>
-            <div class="stat-label-custom">Confirmed</div>
         </div>
     </div>
 
     <!-- Total Products -->
-    <div class="col-6 col-md-3">
+    <div class="col-12 col-sm-6 col-md-3">
         <div class="stat-card-custom stat-products">
-            <div class="stat-icon">
-                <span class="material-symbols-outlined">inventory_2</span>
+            <div class="stat-header">
+                <span class="stat-label-custom">Total Products</span>
+                <div class="stat-icon-wrapper">
+                    <span class="material-symbols-outlined fs-5">inventory_2</span>
+                </div>
             </div>
             <div class="stat-value-custom">@ViewBag.TotalProducts</div>
-            <div class="stat-label-custom">Total Products</div>
         </div>
     </div>
 </div>
@@ -225,54 +293,67 @@
 <!-- Price Alert Banner -->
 @if (ViewBag.PricesUpdatedToday == 0)
 {
-    <div class="brt-alert-warning d-flex align-items-center gap-3 mb-4 shadow-sm">
-        <span class="material-symbols-outlined fs-4 text-warning">warning</span>
-        <div>
-            <strong>Market Prices Pending:</strong> Today's market prices are not updated yet. Please update prices before dealers browse the site.
+    <div class="brt-alert-warning d-flex align-items-center justify-content-between gap-3 mb-4">
+        <div class="d-flex align-items-center gap-3">
+            <span class="material-symbols-outlined fs-4 text-warning">warning</span>
+            <div class="small">
+                <strong>Market Prices Pending:</strong> Today's market prices are not updated yet. Please update prices before dealers browse the site.
+            </div>
         </div>
+        <a asp-area="Admin" asp-controller="MarketPrice" asp-action="Index" class="btn-update-prices">Update Prices Now</a>
     </div>
 }
 
-<!-- Recent Order Requests Table -->
-<div class="d-flex align-items-center justify-content-between mb-3 mt-4">
-    <h5 class="section-title mb-0">Recent Order Requests</h5>
-</div>
+<!-- Recent Order Requests Table Card -->
+<div class="table-card-container">
+    <div class="table-header-bar d-flex align-items-center justify-content-between">
+        <h5 class="section-title">Recent Order Requests</h5>
+        <a asp-area="Admin" asp-controller="Order" asp-action="Index" class="btn btn-sm btn-outline-dark rounded-pill fw-semibold px-3" style="font-size: 0.78rem;">View All Orders</a>
+    </div>
 
-<div class="table-container">
-    <table class="table-custom">
-        <thead>
-            <tr>
-                <th>Order #</th>
-                <th>Buyer</th>
-                <th>Business</th>
-                <th>Phone</th>
-                <th>Status</th>
-                <th>Date</th>
-            </tr>
-        </thead>
-        <tbody>
-        @foreach (var o in (IEnumerable<BRT.Models.OrderRequest>)ViewBag.RecentOrders)
-        {
-            var statusStr = o.Status.ToString();
-            var badgeClass = statusStr.ToLower() switch
+    <div class="table-responsive">
+        <table class="table-custom">
+            <thead>
+                <tr>
+                    <th>Order #</th>
+                    <th>Buyer</th>
+                    <th>Business</th>
+                    <th>Phone</th>
+                    <th>Status</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+            @foreach (var o in (IEnumerable<BRT.Models.OrderRequest>)ViewBag.RecentOrders)
             {
-                "pending" => "badge-pending",
-                "underreview" => "badge-review",
-                "confirmed" => "badge-confirmed",
-                _ => "badge-default"
-            };
+                var statusStr = o.Status.ToString();
+                var badgeClass = statusStr.ToLower() switch
+                {
+                    "pending" => "badge-pending",
+                    "underreview" => "badge-review",
+                    "confirmed" => "badge-confirmed",
+                    _ => "badge-default"
+                };
 
-            <tr>
-                <td class="fw-bold text-primary">@o.OrderNumber</td>
-                <td class="fw-medium">@o.BuyerName</td>
-                <td>@o.BusinessName</td>
-                <td>@o.PhoneNumber</td>
-                <td>
-                    <span class="badge-status @badgeClass">@o.Status</span>
-                </td>
-                <td class="text-secondary small">@o.CreatedAt.ToString("dd-MMM-yyyy HH:mm")</td>
-            </tr>
-        }
-        </tbody>
-    </table>
+                <tr>
+                    <td>
+                        <a asp-area="Admin" asp-controller="Order" asp-action="Details" asp-route-id="@o.Id" class="order-link">
+                            @o.OrderNumber
+                        </a>
+                    </td>
+                    <td class="fw-medium">@o.BuyerName</td>
+                    <td>@o.BusinessName</td>
+                    <td>@o.PhoneNumber</td>
+                    <td>
+                        <span class="badge-status @badgeClass">
+                            <span class="material-symbols-outlined" style="font-size: 11px;">circle</span>
+                            @o.Status
+                        </span>
+                    </td>
+                    <td class="text-secondary small">@o.CreatedAt.ToString("dd-MMM-yyyy HH:mm")</td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
 </div>
