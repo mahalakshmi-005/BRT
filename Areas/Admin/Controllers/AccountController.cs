@@ -96,5 +96,35 @@ namespace BRT.Areas.Admin.Controllers
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("Login");
         }
+
+        [HttpGet]
+        [Authorize]
+        public IActionResult ChangePassword() => View(new ChangePasswordViewModel());
+
+        [HttpPost]
+        [Authorize]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ChangePassword(ChangePasswordViewModel model)
+        {
+            if (!ModelState.IsValid) return View(model);
+
+            var emailClaim = User.FindFirst(ClaimTypes.Email)?.Value;
+            var admin = await _context.AdminUsers.FirstOrDefaultAsync(a => a.Email == emailClaim && a.IsActive);
+            if (admin == null) return RedirectToAction(nameof(Login));
+
+            var hasher = new PasswordHasher<Models.AdminUser>();
+            var verify = hasher.VerifyHashedPassword(admin, admin.PasswordHash, model.CurrentPassword);
+            if (verify == PasswordVerificationResult.Failed)
+            {
+                ModelState.AddModelError(nameof(model.CurrentPassword), "Current password is incorrect.");
+                return View(model);
+            }
+
+            admin.PasswordHash = hasher.HashPassword(admin, model.NewPassword);
+            await _context.SaveChangesAsync();
+
+            TempData["Success"] = "Password changed successfully.";
+            return RedirectToAction(nameof(ChangePassword));
+        }
     }
 }
