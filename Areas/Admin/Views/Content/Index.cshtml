@@ -2,119 +2,525 @@
     Layout = "_AdminLayout";
     ViewData["Title"] = "Website Content";
 }
-<h3 class="mb-4">Website Content</h3>
 
-<ul class="nav nav-tabs mb-4">
-    <li class="nav-item"><a class="nav-link active" data-bs-toggle="tab" href="#banners">Banners</a></li>
-    <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#testimonials">Testimonials</a></li>
-    <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#faqs">FAQ</a></li>
-    <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#gallery">Gallery</a></li>
-    <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#contact">Contact Messages</a></li>
+<style>
+    :root {
+        --brt-navy-dark: #0B132A;
+        --brt-gold-accent: #D97706;
+        --brt-gold-hover: #B45309;
+        --brt-border-color: #E2E8F0;
+        --brt-text-dark: #0F172A;
+        --brt-text-muted: #64748B;
+    }
+
+    /* Header Section */
+    .page-header-container {
+        margin-bottom: 1.5rem;
+    }
+
+    .eyebrow-text {
+        color: var(--brt-gold-accent);
+        font-size: 0.725rem;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        display: block;
+        margin-bottom: 0.2rem;
+    }
+
+    .page-title {
+        font-family: Georgia, serif;
+        color: var(--brt-navy-dark);
+        font-weight: 700;
+        font-size: 1.75rem;
+        margin: 0;
+    }
+
+    /* Modern Tabs Styling */
+    .custom-tabs {
+        border-bottom: 2px solid var(--brt-border-color);
+        gap: 0.5rem;
+    }
+
+    .custom-tabs .nav-link {
+        color: var(--brt-text-muted);
+        font-weight: 600;
+        font-size: 0.875rem;
+        border: none;
+        border-bottom: 3px solid transparent;
+        padding: 0.65rem 1.15rem;
+        border-radius: 0;
+        transition: all 0.2s ease;
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+    }
+
+    .custom-tabs .nav-link:hover {
+        color: var(--brt-navy-dark);
+        border-color: #CBD5E1;
+    }
+
+    .custom-tabs .nav-link.active {
+        color: var(--brt-gold-accent);
+        background: transparent;
+        border-bottom-color: var(--brt-gold-accent);
+        font-weight: 700;
+    }
+
+    /* Forms & Containers */
+    .content-card {
+        background: #FFFFFF;
+        border: 1px solid var(--brt-border-color);
+        border-radius: 14px;
+        padding: 1.25rem;
+        box-shadow: 0 4px 15px rgba(15, 23, 42, 0.02);
+    }
+
+    .form-control-custom {
+        height: 40px;
+        border-radius: 8px;
+        border: 1px solid var(--brt-border-color);
+        font-size: 0.85rem;
+        color: var(--brt-text-dark);
+        background-color: #FAFAFA;
+        padding: 0.5rem 0.8rem;
+    }
+
+    .form-control-custom:focus {
+        background-color: #FFFFFF;
+        border-color: var(--brt-gold-accent);
+        box-shadow: 0 0 0 3px rgba(217, 119, 6, 0.15);
+    }
+
+    /* Buttons */
+    .btn-brt-gold {
+        background: var(--brt-gold-accent);
+        color: #FFFFFF;
+        font-weight: 700;
+        font-size: 0.825rem;
+        height: 40px;
+        border-radius: 8px;
+        border: none;
+        transition: all 0.2s ease;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.35rem;
+    }
+
+    .btn-brt-gold:hover {
+        background: var(--brt-gold-hover);
+        color: #FFFFFF;
+    }
+
+    /* Tables UI */
+    .table-custom-container {
+        background: #FFFFFF;
+        border: 1px solid var(--brt-border-color);
+        border-radius: 14px;
+        overflow: hidden;
+    }
+
+    .table-custom {
+        margin-bottom: 0;
+    }
+
+    .table-custom th {
+        background: #F8FAFC;
+        color: var(--brt-text-muted);
+        font-size: 0.75rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        border-bottom: 1px solid var(--brt-border-color);
+        padding: 0.85rem 1rem;
+    }
+
+    .table-custom td {
+        padding: 0.85rem 1rem;
+        vertical-align: middle;
+        border-bottom: 1px solid #F1F5F9;
+        font-size: 0.875rem;
+        color: var(--brt-text-dark);
+    }
+
+    .table-custom tr:last-child td {
+        border-bottom: none;
+    }
+
+    /* Badges */
+    .badge-approved {
+        background: #DCFCE7;
+        color: #15803D;
+        font-size: 0.7rem;
+        font-weight: 700;
+        padding: 0.25rem 0.6rem;
+        border-radius: 12px;
+    }
+
+    .badge-pending {
+        background: #FEF3C7;
+        color: #B45309;
+        font-size: 0.7rem;
+        font-weight: 700;
+        padding: 0.25rem 0.6rem;
+        border-radius: 12px;
+    }
+
+    .badge-resolved {
+        background: #F1F5F9;
+        color: #475569;
+        font-size: 0.7rem;
+        font-weight: 700;
+        padding: 0.25rem 0.6rem;
+        border-radius: 12px;
+    }
+
+    /* Gallery Card */
+    .gallery-card {
+        background: #FFFFFF;
+        border: 1px solid var(--brt-border-color);
+        border-radius: 12px;
+        overflow: hidden;
+        transition: all 0.2s ease;
+    }
+
+    .gallery-card:hover {
+        border-color: #CBD5E1;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+
+    .gallery-img-thumb {
+        width: 100%;
+        height: 120px;
+        object-fit: cover;
+        background: #F8FAFC;
+    }
+
+    .rating-stars {
+        color: #F59E0B;
+        font-size: 0.8rem;
+    }
+</style>
+
+<!-- Header Section -->
+<div class="page-header-container">
+    <span class="eyebrow-text">CMS MANAGEMENT</span>
+    <h3 class="page-title">Website Content</h3>
+</div>
+
+<!-- Custom Nav Tabs -->
+<ul class="nav custom-tabs mb-4">
+    <li class="nav-item">
+        <a class="nav-link active" data-bs-toggle="tab" href="#banners">
+            <span class="material-symbols-outlined fs-5">view_carousel</span>
+            <span>Banners</span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" data-bs-toggle="tab" href="#testimonials">
+            <span class="material-symbols-outlined fs-5">reviews</span>
+            <span>Testimonials</span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" data-bs-toggle="tab" href="#faqs">
+            <span class="material-symbols-outlined fs-5">help</span>
+            <span>FAQ</span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" data-bs-toggle="tab" href="#gallery">
+            <span class="material-symbols-outlined fs-5">photo_library</span>
+            <span>Gallery</span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" data-bs-toggle="tab" href="#contact">
+            <span class="material-symbols-outlined fs-5">mail</span>
+            <span>Contact Messages</span>
+        </a>
+    </li>
 </ul>
 
+<!-- Tab Content Wrapper -->
 <div class="tab-content">
+    
+    <!-- Banners Tab -->
     <div class="tab-pane fade show active" id="banners">
-        <div class="admin-card mb-3">
+        <div class="content-card mb-4">
+            <h6 class="fw-bold text-dark mb-3">Add New Banner</h6>
             <form asp-action="AddBanner" method="post" class="row g-2">
                 @Html.AntiForgeryToken()
-                <div class="col-md-3"><input name="Title" class="form-control" placeholder="Title" required /></div>
-                <div class="col-md-3"><input name="Subtitle" class="form-control" placeholder="Subtitle" /></div>
-                <div class="col-md-3"><input name="ImageUrl" class="form-control" placeholder="Image URL" /></div>
-                <div class="col-md-2"><input name="ButtonText" class="form-control" placeholder="Button text" /></div>
-                <div class="col-md-1"><button class="btn btn-brt w-100">Add</button></div>
+                <div class="col-md-3">
+                    <input name="Title" class="form-control form-control-custom" placeholder="Banner Title *" required />
+                </div>
+                <div class="col-md-3">
+                    <input name="Subtitle" class="form-control form-control-custom" placeholder="Subtitle" />
+                </div>
+                <div class="col-md-3">
+                    <input name="ImageUrl" class="form-control form-control-custom" placeholder="Image URL" />
+                </div>
+                <div class="col-md-2">
+                    <input name="ButtonText" class="form-control form-control-custom" placeholder="Button Label" />
+                </div>
+                <div class="col-md-1">
+                    <button type="submit" class="btn btn-brt-gold w-100">Add</button>
+                </div>
             </form>
         </div>
-        <table class="table bg-white"><thead><tr><th>Title</th><th>Subtitle</th><th></th></tr></thead>
-        <tbody>
-        @foreach (var b in (IEnumerable<Banner>)ViewBag.Banners)
-        {
-            <tr><td>@b.Title</td><td>@b.Subtitle</td>
-            <td><form asp-action="DeleteBanner" asp-route-id="@b.Id" method="post"><button class="btn btn-sm btn-link text-danger">Remove</button></form></td></tr>
-        }
-        </tbody></table>
+
+        <div class="table-custom-container">
+            <table class="table table-custom">
+                <thead>
+                    <tr>
+                        <th>Banner Info</th>
+                        <th>Subtitle</th>
+                        <th class="text-end">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                @foreach (var b in (IEnumerable<Banner>)ViewBag.Banners)
+                {
+                    <tr>
+                        <td>
+                            <div class="fw-bold text-dark">@b.Title</div>
+                            @if (!string.IsNullOrEmpty(b.ButtonText))
+                            {
+                                <span class="badge bg-light text-dark border mt-1">Button: @b.ButtonText</span>
+                            }
+                        </td>
+                        <td class="text-muted">@b.Subtitle</td>
+                        <td class="text-end">
+                            <form asp-action="DeleteBanner" asp-route-id="@b.Id" method="post" class="d-inline" onsubmit="return confirm('Remove this banner?');">
+                                @Html.AntiForgeryToken()
+                                <button type="submit" class="btn btn-sm btn-outline-danger border-0 rounded-pill px-2">
+                                    <span class="material-symbols-outlined fs-6 align-middle">delete</span>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
     </div>
 
+    <!-- Testimonials Tab -->
     <div class="tab-pane fade" id="testimonials">
-        <div class="admin-card mb-3">
+        <div class="content-card mb-4">
+            <h6 class="fw-bold text-dark mb-3">Add Testimonial</h6>
             <form asp-action="AddTestimonial" method="post" class="row g-2">
                 @Html.AntiForgeryToken()
-                <div class="col-md-3"><input name="DealerName" class="form-control" placeholder="Dealer name" required /></div>
-                <div class="col-md-3"><input name="BusinessName" class="form-control" placeholder="Business" /></div>
-                <div class="col-md-4"><input name="Message" class="form-control" placeholder="Message" required /></div>
-                <div class="col-md-1"><input name="Rating" type="number" min="1" max="5" class="form-control" value="5" /></div>
-                <div class="col-md-1"><button class="btn btn-brt w-100">Add</button></div>
+                <div class="col-md-3">
+                    <input name="DealerName" class="form-control form-control-custom" placeholder="Dealer Name *" required />
+                </div>
+                <div class="col-md-2">
+                    <input name="BusinessName" class="form-control form-control-custom" placeholder="Business Name" />
+                </div>
+                <div class="col-md-4">
+                    <input name="Message" class="form-control form-control-custom" placeholder="Feedback / Message *" required />
+                </div>
+                <div class="col-md-1">
+                    <input name="Rating" type="number" min="1" max="5" class="form-control form-control-custom text-center" value="5" title="Rating (1-5)" />
+                </div>
+                <div class="col-md-2">
+                    <button type="submit" class="btn btn-brt-gold w-100">Add Feedback</button>
+                </div>
             </form>
         </div>
-        <table class="table bg-white"><thead><tr><th>Dealer</th><th>Message</th><th>Approved</th><th></th></tr></thead>
-        <tbody>
-        @foreach (var t in (IEnumerable<Testimonial>)ViewBag.Testimonials)
-        {
-            <tr><td>@t.DealerName</td><td>@t.Message</td><td>@(t.IsApproved ? "Yes" : "No")</td>
-            <td>
-                @if (!t.IsApproved)
+
+        <div class="table-custom-container">
+            <table class="table table-custom">
+                <thead>
+                    <tr>
+                        <th>Dealer / Business</th>
+                        <th>Message</th>
+                        <th>Status</th>
+                        <th class="text-end">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                @foreach (var t in (IEnumerable<Testimonial>)ViewBag.Testimonials)
                 {
-                    <form asp-action="ApproveTestimonial" asp-route-id="@t.Id" method="post" class="d-inline"><button class="btn btn-sm btn-link">Approve</button></form>
+                    <tr>
+                        <td>
+                            <div class="fw-bold text-dark">@t.DealerName</div>
+                            <span class="text-muted small">@t.BusinessName</span>
+                        </td>
+                        <td>
+                            <div>"@t.Message"</div>
+                            <div class="rating-stars mt-1">
+                                @for (int i = 0; i < t.Rating; i++) { <span>★</span> }
+                            </div>
+                        </td>
+                        <td>
+                            @if (t.IsApproved)
+                            {
+                                <span class="badge-approved">Approved</span>
+                            }
+                            else
+                            {
+                                <span class="badge-pending">Pending</span>
+                            }
+                        </td>
+                        <td class="text-end">
+                            <div class="d-inline-flex gap-1">
+                                @if (!t.IsApproved)
+                                {
+                                    <form asp-action="ApproveTestimonial" asp-route-id="@t.Id" method="post" class="d-inline">
+                                        @Html.AntiForgeryToken()
+                                        <button type="submit" class="btn btn-sm btn-outline-success rounded-pill px-2 fs-7">
+                                            Approve
+                                        </button>
+                                    </form>
+                                }
+                                <form asp-action="DeleteTestimonial" asp-route-id="@t.Id" method="post" class="d-inline" onsubmit="return confirm('Remove testimonial?');">
+                                    @Html.AntiForgeryToken()
+                                    <button type="submit" class="btn btn-sm btn-outline-danger border-0 rounded-pill px-2">
+                                        <span class="material-symbols-outlined fs-6 align-middle">delete</span>
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
                 }
-                <form asp-action="DeleteTestimonial" asp-route-id="@t.Id" method="post" class="d-inline"><button class="btn btn-sm btn-link text-danger">Remove</button></form>
-            </td></tr>
-        }
-        </tbody></table>
+                </tbody>
+            </table>
+        </div>
     </div>
 
+    <!-- FAQ Tab -->
     <div class="tab-pane fade" id="faqs">
-        <div class="admin-card mb-3">
+        <div class="content-card mb-4">
+            <h6 class="fw-bold text-dark mb-3">Add FAQ Item</h6>
             <form asp-action="AddFAQ" method="post" class="row g-2">
                 @Html.AntiForgeryToken()
-                <div class="col-md-5"><input name="Question" class="form-control" placeholder="Question" required /></div>
-                <div class="col-md-6"><input name="Answer" class="form-control" placeholder="Answer" required /></div>
-                <div class="col-md-1"><button class="btn btn-brt w-100">Add</button></div>
+                <div class="col-md-5">
+                    <input name="Question" class="form-control form-control-custom" placeholder="Question *" required />
+                </div>
+                <div class="col-md-5">
+                    <input name="Answer" class="form-control form-control-custom" placeholder="Answer *" required />
+                </div>
+                <div class="col-md-2">
+                    <button type="submit" class="btn btn-brt-gold w-100">Add FAQ</button>
+                </div>
             </form>
         </div>
-        <table class="table bg-white"><thead><tr><th>Question</th><th>Answer</th><th></th></tr></thead>
-        <tbody>
-        @foreach (var f in (IEnumerable<FAQ>)ViewBag.FAQs)
-        {
-            <tr><td>@f.Question</td><td>@f.Answer</td>
-            <td><form asp-action="DeleteFAQ" asp-route-id="@f.Id" method="post"><button class="btn btn-sm btn-link text-danger">Remove</button></form></td></tr>
-        }
-        </tbody></table>
+
+        <div class="table-custom-container">
+            <table class="table table-custom">
+                <thead>
+                    <tr>
+                        <th style="width: 35%;">Question</th>
+                        <th>Answer</th>
+                        <th class="text-end" style="width: 10%;">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                @foreach (var f in (IEnumerable<FAQ>)ViewBag.FAQs)
+                {
+                    <tr>
+                        <td class="fw-bold text-dark">@f.Question</td>
+                        <td class="text-muted">@f.Answer</td>
+                        <td class="text-end">
+                            <form asp-action="DeleteFAQ" asp-route-id="@f.Id" method="post" class="d-inline" onsubmit="return confirm('Remove FAQ?');">
+                                @Html.AntiForgeryToken()
+                                <button type="submit" class="btn btn-sm btn-outline-danger border-0 rounded-pill px-2">
+                                    <span class="material-symbols-outlined fs-6 align-middle">delete</span>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
     </div>
 
+    <!-- Gallery Tab -->
     <div class="tab-pane fade" id="gallery">
-        <div class="admin-card mb-3">
+        <div class="content-card mb-4">
+            <h6 class="fw-bold text-dark mb-3">Add Gallery Photo</h6>
             <form asp-action="AddGalleryImage" method="post" class="row g-2">
                 @Html.AntiForgeryToken()
-                <div class="col-md-6"><input name="ImageUrl" class="form-control" placeholder="Image URL" required /></div>
-                <div class="col-md-4"><input name="Caption" class="form-control" placeholder="Caption" /></div>
-                <div class="col-md-2"><button class="btn btn-brt w-100">Add</button></div>
+                <div class="col-md-6">
+                    <input name="ImageUrl" class="form-control form-control-custom" placeholder="Image URL *" required />
+                </div>
+                <div class="col-md-4">
+                    <input name="Caption" class="form-control form-control-custom" placeholder="Image Caption / Description" />
+                </div>
+                <div class="col-md-2">
+                    <button type="submit" class="btn btn-brt-gold w-100">Upload Photo</button>
+                </div>
             </form>
         </div>
-        <div class="row g-2">
+
+        <div class="row g-3">
         @foreach (var g in (IEnumerable<GalleryImage>)ViewBag.Gallery)
         {
-            <div class="col-md-2">
-                <div class="admin-card p-2 text-center">
-                    <small class="d-block mb-1">@g.Caption</small>
-                    <form asp-action="DeleteGalleryImage" asp-route-id="@g.Id" method="post"><button class="btn btn-sm btn-link text-danger">Remove</button></form>
+            <div class="col-6 col-md-3 col-lg-2">
+                <div class="gallery-card p-2 text-center">
+                    <img src="@g.ImageUrl" alt="@g.Caption" class="gallery-img-thumb rounded mb-2" onerror="this.src='https://via.placeholder.com/150?text=No+Image';" />
+                    <small class="d-block text-truncate fw-semibold text-dark mb-1" title="@g.Caption">@(string.IsNullOrEmpty(g.Caption) ? "Untitled" : g.Caption)</small>
+                    <form asp-action="DeleteGalleryImage" asp-route-id="@g.Id" method="post" onsubmit="return confirm('Remove photo?');">
+                        @Html.AntiForgeryToken()
+                        <button type="submit" class="btn btn-sm btn-link text-danger text-decoration-none p-0 small">Remove</button>
+                    </form>
                 </div>
             </div>
         }
         </div>
     </div>
 
+    <!-- Contact Messages Tab -->
     <div class="tab-pane fade" id="contact">
-        <table class="table bg-white"><thead><tr><th>Name</th><th>Phone</th><th>Message</th><th>Status</th><th></th></tr></thead>
-        <tbody>
-        @foreach (var c in (IEnumerable<ContactMessage>)ViewBag.ContactMessages)
-        {
-            <tr><td>@c.Name</td><td>@c.Phone</td><td>@c.Message</td><td>@(c.IsResolved ? "Resolved" : "Open")</td>
-            <td>
-                @if (!c.IsResolved)
+        <div class="table-custom-container">
+            <table class="table table-custom">
+                <thead>
+                    <tr>
+                        <th>Sender Details</th>
+                        <th>Message</th>
+                        <th>Status</th>
+                        <th class="text-end">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                @foreach (var c in (IEnumerable<ContactMessage>)ViewBag.ContactMessages)
                 {
-                    <form asp-action="ResolveContact" asp-route-id="@c.Id" method="post"><button class="btn btn-sm btn-link">Mark Resolved</button></form>
+                    <tr>
+                        <td>
+                            <div class="fw-bold text-dark">@c.Name</div>
+                            <span class="text-muted small"><span class="material-symbols-outlined fs-6 align-middle me-1">call</span>@c.Phone</span>
+                        </td>
+                        <td class="text-muted">@c.Message</td>
+                        <td>
+                            @if (c.IsResolved)
+                            {
+                                <span class="badge-resolved">Resolved</span>
+                            }
+                            else
+                            {
+                                <span class="badge-pending">Open Enquiry</span>
+                            }
+                        </td>
+                        <td class="text-end">
+                            @if (!c.IsResolved)
+                            {
+                                <form asp-action="ResolveContact" asp-route-id="@c.Id" method="post" class="d-inline">
+                                    @Html.AntiForgeryToken()
+                                    <button type="submit" class="btn btn-sm btn-outline-dark rounded-pill px-3" style="font-size: 0.78rem;">
+                                        Mark Resolved
+                                    </button>
+                                </form>
+                            }
+                        </td>
+                    </tr>
                 }
-            </td></tr>
-        }
-        </tbody></table>
+                </tbody>
+            </table>
+        </div>
     </div>
+
 </div>
