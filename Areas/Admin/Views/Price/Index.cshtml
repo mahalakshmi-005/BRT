@@ -4,54 +4,267 @@
     ViewData["Title"] = "Market Prices";
     var todaysPrices = (Dictionary<int, MarketPrice>)ViewBag.TodaysPrices;
 }
-<div class="d-flex justify-content-between align-items-center mb-4">
-    <h3>Today's Market Prices</h3>
-    <a asp-action="Highlights" class="btn btn-outline-secondary">Manage Market Highlights</a>
+
+<style>
+    :root {
+        --brt-navy-dark: #0B132A;
+        --brt-gold-accent: #D97706;
+        --brt-gold-hover: #B45309;
+        --brt-border-color: #E2E8F0;
+        --brt-text-dark: #0F172A;
+        --brt-text-muted: #64748B;
+    }
+
+    /* Header Section */
+    .page-header-container {
+        margin-bottom: 1.5rem;
+    }
+
+    .eyebrow-text {
+        color: var(--brt-gold-accent);
+        font-size: 0.725rem;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        display: block;
+        margin-bottom: 0.2rem;
+    }
+
+    .page-title {
+        font-family: Georgia, serif;
+        color: var(--brt-navy-dark);
+        font-weight: 700;
+        font-size: 1.75rem;
+        margin: 0;
+    }
+
+    /* Table Container Styling */
+    .table-card-container {
+        background: #FFFFFF;
+        border: 1px solid var(--brt-border-color);
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 4px 20px rgba(15, 23, 42, 0.03);
+    }
+
+    .table-custom {
+        margin-bottom: 0;
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+    }
+
+    .table-custom th {
+        background: #F8FAFC;
+        color: var(--brt-text-muted);
+        font-size: 0.725rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-weight: 700;
+        padding: 0.9rem 1.25rem;
+        border-bottom: 1px solid var(--brt-border-color);
+    }
+
+    .table-custom td {
+        padding: 0.85rem 1.25rem;
+        vertical-align: middle;
+        color: var(--brt-text-dark);
+        font-size: 0.875rem;
+        border-bottom: 1px solid #F1F5F9;
+        transition: background 0.2s ease;
+    }
+
+    .table-custom tbody tr:last-child td {
+        border-bottom: none;
+    }
+
+    .table-custom tbody tr:hover td {
+        background-color: #F8FAFC;
+    }
+
+    /* Price Movements Badges */
+    .price-diff-badge {
+        padding: 0.25rem 0.6rem;
+        border-radius: 20px;
+        font-size: 0.75rem;
+        font-weight: 700;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.2rem;
+    }
+
+    .diff-up { background: #DCFCE7; color: #15803D; }
+    .diff-down { background: #FEE2E2; color: #B91C1C; }
+    .diff-neutral { background: #F1F5F9; color: #475569; }
+
+    /* Custom Form Controls */
+    .input-price-custom {
+        width: 110px;
+        height: 36px;
+        border-radius: 8px;
+        border: 1px solid var(--brt-border-color);
+        font-size: 0.85rem;
+        padding: 0.35rem 0.65rem;
+        transition: all 0.2s ease;
+    }
+
+    .input-price-custom:focus {
+        border-color: var(--brt-gold-accent);
+        box-shadow: 0 0 0 3px rgba(217, 119, 6, 0.15);
+    }
+
+    .btn-brt-gold-sm {
+        background: var(--brt-gold-accent);
+        color: #FFFFFF;
+        font-weight: 700;
+        font-size: 0.78rem;
+        height: 36px;
+        padding: 0 0.85rem;
+        border-radius: 8px;
+        border: none;
+        transition: all 0.2s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.25rem;
+        white-space: nowrap;
+    }
+
+    .btn-brt-gold-sm:hover {
+        background: var(--brt-gold-hover);
+        color: #FFFFFF;
+        box-shadow: 0 2px 8px rgba(217, 119, 6, 0.25);
+    }
+
+    .brt-alert-success {
+        background: #F0FDF4;
+        border: 1px solid #BBF7D0;
+        border-left: 5px solid #16A34A;
+        border-radius: 12px;
+        padding: 0.9rem 1.25rem;
+        color: #15803D;
+        font-size: 0.875rem;
+        font-weight: 500;
+        margin-bottom: 1.5rem;
+    }
+</style>
+
+<!-- Header Section -->
+<div class="page-header-container d-flex justify-content-between align-items-center flex-wrap gap-2">
+    <div>
+        <span class="eyebrow-text">DAILY MANDI PRICING</span>
+        <h3 class="page-title">Today's Market Prices</h3>
+    </div>
+    <a asp-action="Highlights" class="btn btn-sm btn-outline-dark rounded-pill px-3 fw-semibold d-inline-flex align-items-center gap-1">
+        <span class="material-symbols-outlined fs-6">campaign</span>
+        <span>Manage Highlights</span>
+    </a>
 </div>
 
+<!-- Flash Success Alert -->
 @if (TempData["Success"] != null)
 {
-    <div class="alert alert-success">@TempData["Success"]</div>
+    <div class="brt-alert-success d-flex align-items-center gap-2">
+        <span class="material-symbols-outlined fs-5">check_circle</span>
+        <span>@TempData["Success"]</span>
+    </div>
 }
 
-<table class="table table-hover bg-white align-middle">
-    <thead>
-        <tr><th>Product</th><th>Previous Price</th><th>Today's Price</th><th>Difference</th><th>GST Included</th><th>Update</th></tr>
-    </thead>
-    <tbody>
-    @foreach (var p in Model)
-    {
-        var hasPrice = todaysPrices.ContainsKey(p.Id);
-        var mp = hasPrice ? todaysPrices[p.Id] : null;
-        <tr>
-            <td>@p.Name <small class="text-muted">(@p.SubCategory?.Name)</small></td>
-            <td>@(mp?.PreviousPrice.ToString("F2") ?? "-")</td>
-            <td>@(mp?.TodayPrice.ToString("F2") ?? "-")</td>
-            <td>
-                @if (mp != null)
+<!-- Market Prices Table -->
+<div class="table-card-container">
+    <div class="table-responsive">
+        <table class="table-custom">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Previous Price</th>
+                    <th>Today's Price</th>
+                    <th>Difference</th>
+                    <th>GST Status</th>
+                    <th>Update Price Action</th>
+                </tr>
+            </thead>
+            <tbody>
+            @if (Model != null && Model.Any())
+            {
+                @foreach (var p in Model)
                 {
-                    var diff = mp.PriceDifference;
-                    var diffClass = diff > 0 ? "text-success" : diff < 0 ? "text-danger" : "text-muted";
-                    var diffIcon = diff > 0 ? "arrow_upward" : diff < 0 ? "arrow_downward" : "remove";
-                    <span class="@diffClass">
-                        <span class="material-symbols-outlined" style="font-size:1rem">@diffIcon</span> @diff.ToString("F2")
-                    </span>
+                    var hasPrice = todaysPrices.ContainsKey(p.Id);
+                    var mp = hasPrice ? todaysPrices[p.Id] : null;
+
+                    <tr>
+                        <td>
+                            <div class="fw-bold text-dark">@p.Name</div>
+                            <span class="text-muted small">@p.SubCategory?.Name</span>
+                        </td>
+                        <td class="font-monospace">
+                            @(mp != null ? "₹" + mp.PreviousPrice.ToString("N2") : "—")
+                        </td>
+                        <td class="font-monospace fw-bold text-dark">
+                            @(mp != null ? "₹" + mp.TodayPrice.ToString("N2") : "—")
+                        </td>
+                        <td>
+                            @if (mp != null)
+                            {
+                                var diff = mp.PriceDifference;
+                                var diffClass = diff > 0 ? "diff-up" : diff < 0 ? "diff-down" : "diff-neutral";
+                                var diffIcon = diff > 0 ? "arrow_upward" : diff < 0 ? "arrow_downward" : "remove";
+
+                                <span class="price-diff-badge @diffClass">
+                                    <span class="material-symbols-outlined" style="font-size: 13px;">@diffIcon</span>
+                                    <span>₹@Math.Abs(diff).ToString("N2")</span>
+                                </span>
+                            }
+                            else
+                            {
+                                <span class="text-muted small">—</span>
+                            }
+                        </td>
+                        <td>
+                            @if (mp != null)
+                            {
+                                <span class="badge @(mp.GSTIncluded ? "bg-light text-dark border" : "bg-warning text-dark") rounded-pill">
+                                    @(mp.GSTIncluded ? "GST Included" : "+ GST Extra")
+                                </span>
+                            }
+                            else
+                            {
+                                <span class="text-muted small">—</span>
+                            }
+                        </td>
+                        <td>
+                            <form asp-action="UpdatePrice" method="post" class="d-flex align-items-center gap-2">
+                                @Html.AntiForgeryToken()
+                                <input type="hidden" name="productId" value="@p.Id" />
+                                
+                                <input type="number" step="0.01" name="todayPrice" class="form-control input-price-custom" placeholder="Price (₹)" value="@mp?.TodayPrice" required />
+                                
+                                <div class="form-check m-0 d-flex align-items-center gap-1" title="GST Included">
+                                    <input type="checkbox" name="gstIncluded" value="true" class="form-check-input mt-0" id="gst_@p.Id" @(mp?.GSTIncluded != false ? "checked" : "") />
+                                    <label class="form-check-label text-muted small" for="gst_@p.Id">GST</label>
+                                </div>
+                                
+                                <input type="hidden" name="updatedBy" value="@User.Identity!.Name" />
+                                
+                                <button type="submit" class="btn btn-brt-gold-sm">
+                                    <span class="material-symbols-outlined fs-6">sync</span>
+                                    <span>Save</span>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
                 }
-            </td>
-            <td>@(mp?.GSTIncluded == true ? "Yes" : "No")</td>
-            <td>
-                <form asp-action="UpdatePrice" method="post" class="d-flex gap-2">
-                    @Html.AntiForgeryToken()
-                    <input type="hidden" name="productId" value="@p.Id" />
-                    <input type="number" step="0.01" name="todayPrice" class="form-control form-control-sm" style="width:110px" placeholder="Price" value="@mp?.TodayPrice" required />
-                    <div class="form-check">
-                        <input type="checkbox" name="gstIncluded" value="true" class="form-check-input" checked />
-                    </div>
-                    <input type="hidden" name="updatedBy" value="@User.Identity!.Name" />
-                    <button class="btn btn-sm btn-brt">Update</button>
-                </form>
-            </td>
-        </tr>
-    }
-    </tbody>
-</table>
+            }
+            else
+            {
+                <tr>
+                    <td colspan="6" class="text-center py-5 text-muted">
+                        <span class="material-symbols-outlined fs-1 text-secondary d-block mb-2">inventory_2</span>
+                        <div class="fw-bold fs-6">No Products Configured</div>
+                        <span class="small">Add products first to manage daily mandi market rates.</span>
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+</div>
