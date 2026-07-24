@@ -1,4 +1,4 @@
-﻿@{
+@{
     var settings = (Dictionary<string, string>)ViewBag.Settings;
 }
 
@@ -573,6 +573,21 @@
                     <div class="alert alert-success shadow-sm" style="border-radius:14px; font-weight:700; background:#ECFDF5; border-color:#A7F3D0; color:#065F46; padding:16px 20px; margin-bottom: 20px;">
                         @TempData["Success"]
                     </div>
+
+                    @if (TempData["WhatsAppUrl"] != null)
+                    {
+                        var waUrl = TempData["WhatsAppUrl"]!.ToString();
+                        <a href="@waUrl" target="_blank" id="contactWaBtn"
+                           style="display:inline-flex;align-items:center;gap:8px;background:#25D366;color:#fff;font-weight:600;padding:12px 26px;border-radius:10px;text-decoration:none;margin-bottom:20px;">
+                            <span class="material-symbols-outlined" style="font-size:1.1rem;">chat</span>
+                            Send Details via WhatsApp
+                        </a>
+                        <script>
+                            setTimeout(function () {
+                                window.open('@Html.Raw(waUrl)', '_blank');
+                            }, 1200);
+                        </script>
+                    }
                 }
 
                 <form asp-controller="Contact" asp-action="Submit" method="post" style="margin-bottom: 0;">
