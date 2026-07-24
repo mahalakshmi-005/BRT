@@ -18,7 +18,19 @@ namespace BRT.Controllers
         {
             await LoadProducts();
             var model = new OrderRequestViewModel();
-            if (productId.HasValue) model.Items[0].ProductId = productId;
+
+            // Items null-a irundhaa, default empty list throw pannaama prevent panren
+            if (model.Items == null)
+            {
+                model.Items = new List<OrderItemInput> { new OrderItemInput() };
+            }
+
+            // ProductId param vandhaa 1st item-ku assign panna
+            if (productId.HasValue && model.Items.Count > 0)
+            {
+                model.Items[0].ProductId = productId.Value;
+            }
+
             ViewData["Title"] = "Request Bulk Order";
             return View(model);
         }
@@ -27,9 +39,18 @@ namespace BRT.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Request(OrderRequestViewModel model)
         {
-            var validItems = model.Items.Where(i => i.ProductId.HasValue && i.Quantity is > 0).ToList();
+            // Null safety & valid products filtering
+            var itemsList = model?.Items ?? new List<OrderItemInput>();
+            
+            // Atleast Valid Product & Quantity > 0 irukkura items mattum extraction
+            var validItems = itemsList
+                .Where(i => i.ProductId.HasValue && i.ProductId.Value > 0 && i.Quantity.HasValue && i.Quantity.Value > 0)
+                .ToList();
+
             if (validItems.Count == 0)
-                ModelState.AddModelError(string.Empty, "Add at least one product with quantity.");
+            {
+                ModelState.AddModelError(string.Empty, "At least one valid product with quantity is required.");
+            }
 
             if (!ModelState.IsValid)
             {
@@ -50,13 +71,11 @@ namespace BRT.Controllers
                 CreatedAt = DateTime.UtcNow
             };
 
-            // Use each product's most-recent entered price (not strictly "today") so the
-            // order total doesn't silently come out as ₹0 just because Admin hasn't
-            // re-entered today's price yet.
             var latestPrices = await GetLatestPricesAsync();
 
             var lineDescriptions = new List<string>();
             decimal total = 0;
+
             foreach (var item in validItems)
             {
                 var product = await _context.Products.FindAsync(item.ProductId!.Value);
@@ -69,11 +88,13 @@ namespace BRT.Controllers
                     Quantity = item.Quantity!.Value,
                     PriceAtOrderTime = price
                 };
+
                 total += lineItem.Quantity * price;
                 order.Items.Add(lineItem);
 
                 lineDescriptions.Add($"- {product?.Name ?? "Product"} x {item.Quantity} (₹{price:F2}/unit)");
             }
+
             order.TotalEstimatedAmount = total;
 
             _context.OrderRequests.Add(order);
@@ -90,7 +111,7 @@ namespace BRT.Controllers
             });
             await _context.SaveChangesAsync();
 
-            // --- Build the WhatsApp message that goes to Admin ---
+            // --- WhatsApp Message Generator ---
             var sb = new StringBuilder();
             sb.AppendLine($"*New Bulk Order Request — {order.OrderNumber}*");
             sb.AppendLine();
@@ -132,7 +153,6 @@ namespace BRT.Controllers
             ViewBag.Products = products;
         }
 
-        // Returns the most recent MarketPrice per product (mirrors CatalogController's logic).
         private async Task<Dictionary<int, MarketPrice>> GetLatestPricesAsync()
         {
             var allPrices = await _context.MarketPrices.ToListAsync();
