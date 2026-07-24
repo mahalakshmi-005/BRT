@@ -108,9 +108,30 @@
         </div>
     </div>
 
-    <p class="success-desc mb-5">
+    <p class="success-desc mb-4">
         Our admin will review your request and confirm pricing &amp; dispatch details shortly via WhatsApp / phone call.
     </p>
+
+    @if (!string.IsNullOrEmpty((string)ViewBag.WhatsAppUrl))
+    {
+        <p class="success-desc mb-4" style="font-size:0.95rem">
+            Tap below to send your order details to us on WhatsApp so we can confirm it faster.
+        </p>
+        <a href="@ViewBag.WhatsAppUrl" target="_blank" id="waConfirmBtn"
+           style="display:inline-flex;align-items:center;gap:8px;background:#25D366;color:#fff;font-weight:600;padding:14px 32px;border-radius:10px;text-decoration:none;margin-bottom:20px;">
+            <span class="material-symbols-outlined" style="font-size:1.1rem;">chat</span>
+            Confirm via WhatsApp
+        </a>
+        <br />
+        <script>
+            // Auto-open WhatsApp with the order details pre-filled — customer just taps Send.
+            setTimeout(function () {
+                window.open('@Html.Raw(ViewBag.WhatsAppUrl)', '_blank');
+            }, 1200);
+        </script>
+    }
+
+    <div class="mb-3"></div>
 
     <!-- Action Pipeline Trigger -->
     <a asp-controller="Home" asp-action="Index" class="btn-brt-dark-home">
