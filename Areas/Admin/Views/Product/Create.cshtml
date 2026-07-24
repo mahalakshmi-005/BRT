@@ -3,46 +3,265 @@
     Layout = "_AdminLayout";
     ViewData["Title"] = "Add Product";
 }
-<h3 class="mb-4">Add Product</h3>
-<div class="admin-card" style="max-width:600px">
+
+<style>
+    :root {
+        --brt-navy-dark: #0B132A;
+        --brt-gold-accent: #D97706;
+        --brt-gold-hover: #B45309;
+        --brt-border-color: #E2E8F0;
+        --brt-text-dark: #0F172A;
+        --brt-text-muted: #64748B;
+    }
+
+    /* Header Section */
+    .page-header-container {
+        margin-bottom: 1.5rem;
+    }
+
+    .eyebrow-text {
+        color: var(--brt-gold-accent);
+        font-size: 0.725rem;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        display: block;
+        margin-bottom: 0.2rem;
+    }
+
+    .page-title {
+        font-family: Georgia, serif;
+        color: var(--brt-navy-dark);
+        font-weight: 700;
+        font-size: 1.75rem;
+        margin: 0;
+    }
+
+    /* Form Container */
+    .form-card-container {
+        background: #FFFFFF;
+        border: 1px solid var(--brt-border-color);
+        border-radius: 16px;
+        padding: 2rem;
+        box-shadow: 0 4px 20px rgba(15, 23, 42, 0.03);
+        max-width: 680px;
+    }
+
+    .form-label-custom {
+        font-weight: 600;
+        font-size: 0.85rem;
+        color: var(--brt-text-dark);
+        margin-bottom: 0.4rem;
+        display: block;
+    }
+
+    .form-control-custom, .form-select-custom {
+        border-radius: 10px;
+        border: 1px solid var(--brt-border-color);
+        font-size: 0.875rem;
+        color: var(--brt-text-dark);
+        background-color: #FAFAFA;
+        padding: 0.6rem 0.9rem;
+        transition: all 0.2s ease;
+    }
+
+    .form-control-custom:focus, .form-select-custom:focus {
+        background-color: #FFFFFF;
+        border-color: var(--brt-gold-accent);
+        box-shadow: 0 0 0 3px rgba(217, 119, 6, 0.15);
+    }
+
+    /* Image Upload Section */
+    .upload-box-wrapper {
+        background: #F8FAFC;
+        border: 1px dashed #CBD5E1;
+        border-radius: 12px;
+        padding: 1rem;
+        margin-top: 0.35rem;
+    }
+
+    .divider-text {
+        display: flex;
+        align-items: center;
+        text-align: center;
+        color: var(--brt-text-muted);
+        font-size: 0.75rem;
+        font-weight: 600;
+        margin: 0.75rem 0;
+    }
+
+    .divider-text::before,
+    .divider-text::after {
+        content: '';
+        flex: 1;
+        border-bottom: 1px solid var(--brt-border-color);
+    }
+
+    .divider-text:not(:empty)::before {
+        margin-right: .5em;
+    }
+
+    .divider-text:not(:empty)::after {
+        margin-left: .5em;
+    }
+
+    /* Custom Checkbox */
+    .form-check-custom {
+        padding-left: 1.75rem;
+        margin-top: 0.5rem;
+    }
+
+    .form-check-custom .form-check-input {
+        width: 1.15rem;
+        height: 1.15rem;
+        margin-left: -1.75rem;
+        border-color: var(--brt-border-color);
+        cursor: pointer;
+    }
+
+    .form-check-custom .form-check-input:checked {
+        background-color: var(--brt-gold-accent);
+        border-color: var(--brt-gold-accent);
+    }
+
+    .form-check-custom .form-check-label {
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: var(--brt-text-dark);
+        cursor: pointer;
+    }
+
+    /* Buttons */
+    .btn-brt-gold {
+        background: var(--brt-gold-accent);
+        color: #FFFFFF;
+        font-weight: 700;
+        font-size: 0.875rem;
+        padding: 0.65rem 1.25rem;
+        border-radius: 10px;
+        border: none;
+        transition: all 0.2s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+    }
+
+    .btn-brt-gold:hover {
+        background: var(--brt-gold-hover);
+        color: #FFFFFF;
+        box-shadow: 0 4px 12px rgba(217, 119, 6, 0.25);
+    }
+
+    .btn-cancel-custom {
+        border: 1px solid var(--brt-border-color);
+        background: #FFFFFF;
+        color: var(--brt-text-muted);
+        font-weight: 600;
+        font-size: 0.875rem;
+        padding: 0.65rem 1.25rem;
+        border-radius: 10px;
+        text-decoration: none;
+        transition: all 0.2s ease;
+    }
+
+    .btn-cancel-custom:hover {
+        background: #F1F5F9;
+        color: var(--brt-navy-dark);
+    }
+</style>
+
+<!-- Header Section -->
+<div class="page-header-container">
+    <span class="eyebrow-text">CATALOG MANAGEMENT</span>
+    <h3 class="page-title">Add New Product</h3>
+</div>
+
+<!-- Form Card -->
+<div class="form-card-container">
     <form asp-action="Create" method="post" enctype="multipart/form-data">
         @Html.AntiForgeryToken()
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <div class="mb-3">
-            <label class="form-label">Sub-category</label>
-            <select asp-for="SubCategoryId" class="form-select" asp-items="ViewBag.SubCategoryList"></select>
+        
+        <div asp-validation-summary="ModelOnly" class="alert alert-danger rounded-3 mb-4" role="alert"></div>
+
+        <!-- Sub-Category Selection -->
+        <div class="mb-3.5">
+            <label class="form-label-custom">Sub-Category <span class="text-danger">*</span></label>
+            <select asp-for="SubCategoryId" class="form-select form-select-custom" asp-items="ViewBag.SubCategoryList">
+                <option value="">-- Select Sub-Category --</option>
+            </select>
+            <span asp-validation-for="SubCategoryId" class="text-danger small"></span>
         </div>
-        <div class="mb-3">
-            <label class="form-label">Product Name (English)</label>
-            <input asp-for="Name" class="form-control" placeholder="e.g. MP Garlic Bomb" />
+
+        <!-- Product Name Row -->
+        <div class="row g-3 mb-3">
+            <div class="col-md-6">
+                <label class="form-label-custom">Product Name (English) <span class="text-danger">*</span></label>
+                <input asp-for="Name" class="form-control form-control-custom" placeholder="e.g. MP Garlic Bomb" required />
+                <span asp-validation-for="Name" class="text-danger small"></span>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label-custom">Product Name (Tamil)</label>
+                <input asp-for="NameTamil" class="form-control form-control-custom" placeholder="e.g. எம்பி பூண்டு பாம்ப்" />
+                <span asp-validation-for="NameTamil" class="text-danger small"></span>
+            </div>
         </div>
-        <div class="mb-3">
-            <label class="form-label">Product Name (Tamil)</label>
-            <input asp-for="NameTamil" class="form-control" placeholder="e.g. எம்பி பூண்டு பாம்ப்" />
+
+        <!-- Grade & HSN Code Row -->
+        <div class="row g-3 mb-3">
+            <div class="col-md-6">
+                <label class="form-label-custom">Grade</label>
+                <input asp-for="Grade" class="form-control form-control-custom" placeholder="e.g. Bomb / AAA / Bold" />
+                <span asp-validation-for="Grade" class="text-danger small"></span>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label-custom">HSN Code</label>
+                <input asp-for="HSNCode" class="form-control form-control-custom" placeholder="e.g. 07032000" />
+                <span asp-validation-for="HSNCode" class="text-danger small"></span>
+            </div>
         </div>
-        <div class="mb-3">
-            <label class="form-label">Grade</label>
-            <input asp-for="Grade" class="form-control" placeholder="e.g. Bomb / AAA / Bold" />
+
+        <!-- Description -->
+        <div class="mb-3.5">
+            <label class="form-label-custom">Description</label>
+            <textarea asp-for="Description" class="form-control form-control-custom" rows="3" placeholder="Enter detailed product description or quality notes..."></textarea>
+            <span asp-validation-for="Description" class="text-danger small"></span>
         </div>
-        <div class="mb-3">
-            <label class="form-label">Description</label>
-            <textarea asp-for="Description" class="form-control" rows="2"></textarea>
+
+        <!-- Product Image Section -->
+        <div class="mb-3.5">
+            <label class="form-label-custom">Product Image</label>
+            <div class="upload-box-wrapper">
+                <div>
+                    <input type="file" name="imageFile" class="form-control form-control-custom" accept=".jpg,.jpeg,.png,.webp,.gif" />
+                    <span class="text-muted small mt-1 d-block">Accepted formats: JPG, PNG, WEBP (Max size: 5MB)</span>
+                </div>
+                
+                <div class="divider-text">OR</div>
+
+                <div>
+                    <input asp-for="ImageUrl" class="form-control form-control-custom" placeholder="Paste direct image URL (e.g. https://...)" />
+                </div>
+            </div>
+            <span asp-validation-for="ImageUrl" class="text-danger small"></span>
         </div>
-        <div class="mb-3">
-            <label class="form-label">Product Image</label>
-            <input type="file" name="imageFile" class="form-control" accept=".jpg,.jpeg,.png,.webp,.gif" />
-            <small class="text-muted">Upload a photo (JPG/PNG/WEBP, max 5MB) — or leave blank and paste a URL below.</small>
-            <input asp-for="ImageUrl" class="form-control mt-2" placeholder="or paste an image URL" />
+
+        <!-- Loose Availability Toggle -->
+        <div class="mb-4">
+            <div class="form-check form-check-custom">
+                <input asp-for="IsLooseAvailable" class="form-check-input" id="looseCheck" />
+                <label class="form-check-label" for="looseCheck">
+                    Available in loose retail packs
+                </label>
+            </div>
         </div>
-        <div class="mb-3">
-            <label class="form-label">HSN Code</label>
-            <input asp-for="HSNCode" class="form-control" />
+
+        <!-- Form Actions -->
+        <div class="d-flex align-items-center gap-2 pt-2 border-top">
+            <button type="submit" class="btn btn-brt-gold">
+                <span>Save &amp; Continue to Packing Types</span>
+                <span class="material-symbols-outlined fs-6">arrow_forward</span>
+            </button>
+            <a asp-action="Index" class="btn btn-cancel-custom">Cancel</a>
         </div>
-        <div class="form-check mb-3">
-            <input asp-for="IsLooseAvailable" class="form-check-input" />
-            <label class="form-check-label">Available in loose retail packs</label>
-        </div>
-        <button class="btn btn-brt">Save &amp; Continue to Packing Types</button>
-        <a asp-action="Index" class="btn btn-outline-secondary">Cancel</a>
     </form>
 </div>
