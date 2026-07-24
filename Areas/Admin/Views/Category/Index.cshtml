@@ -4,51 +4,303 @@
     ViewData["Title"] = "Categories";
 }
 
-<div class="d-flex justify-content-between align-items-center mb-4">
-    <h3>Categories</h3>
-    <a asp-action="CreateCategory" class="btn btn-brt">+ Add Category</a>
+<style>
+    :root {
+        --brt-navy-dark: #0B132A;
+        --brt-gold-accent: #D97706;
+        --brt-gold-hover: #B45309;
+        --brt-border-color: #E2E8F0;
+        --brt-text-dark: #0F172A;
+        --brt-text-muted: #64748B;
+    }
+
+    /* Header Section */
+    .page-header-container {
+        margin-bottom: 2rem;
+    }
+
+    .eyebrow-text {
+        color: var(--brt-gold-accent);
+        font-size: 0.725rem;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        display: block;
+        margin-bottom: 0.2rem;
+    }
+
+    .page-title {
+        font-family: Georgia, serif;
+        color: var(--brt-navy-dark);
+        font-weight: 700;
+        font-size: 1.75rem;
+        margin: 0;
+    }
+
+    /* Primary CTA Button */
+    .btn-brt-gold {
+        background: var(--brt-gold-accent);
+        color: #FFFFFF;
+        font-weight: 700;
+        font-size: 0.85rem;
+        letter-spacing: 0.5px;
+        height: 42px;
+        border-radius: 21px;
+        border: none;
+        padding: 0 1.25rem;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 12px rgba(217, 119, 6, 0.2);
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        text-decoration: none;
+    }
+
+    .btn-brt-gold:hover {
+        background: var(--brt-gold-hover);
+        color: #FFFFFF;
+        box-shadow: 0 6px 16px rgba(217, 119, 6, 0.3);
+        transform: translateY(-1px);
+    }
+
+    /* Main Category Card */
+    .category-card {
+        background: #FFFFFF;
+        border: 1px solid var(--brt-border-color);
+        border-radius: 16px;
+        padding: 1.25rem 1.5rem;
+        margin-bottom: 1rem;
+        transition: all 0.2s ease;
+        box-shadow: 0 4px 15px rgba(15, 23, 42, 0.02);
+    }
+
+    .category-card:hover {
+        border-color: #CBD5E1;
+        box-shadow: 0 8px 20px rgba(15, 23, 42, 0.05);
+    }
+
+    .category-thumb {
+        width: 44px;
+        height: 44px;
+        border-radius: 10px;
+        object-fit: cover;
+        border: 1px solid var(--brt-border-color);
+        background: #F8FAFC;
+    }
+
+    /* Badges */
+    .badge-type {
+        background: #F1F5F9;
+        color: var(--brt-navy-dark);
+        font-size: 0.725rem;
+        font-weight: 700;
+        padding: 0.3rem 0.65rem;
+        border-radius: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .badge-status-active {
+        background: #DCFCE7;
+        color: #15803D;
+        font-size: 0.7rem;
+        font-weight: 700;
+        padding: 0.25rem 0.6rem;
+        border-radius: 12px;
+    }
+
+    .badge-status-inactive {
+        background: #FEE2E2;
+        color: #B91C1C;
+        font-size: 0.7rem;
+        font-weight: 700;
+        padding: 0.25rem 0.6rem;
+        border-radius: 12px;
+    }
+
+    /* Sub-categories Box */
+    .subcategory-box {
+        background: #F8FAFC;
+        border: 1px solid #F1F5F9;
+        border-radius: 12px;
+        padding: 0.5rem 1rem;
+        margin-top: 1rem;
+    }
+
+    .subcategory-table {
+        margin-bottom: 0;
+    }
+
+    .subcategory-table td {
+        padding: 0.65rem 0.5rem;
+        vertical-align: middle;
+        border-bottom: 1px dashed var(--brt-border-color);
+        font-size: 0.85rem;
+    }
+
+    .subcategory-table tr:last-child td {
+        border-bottom: none;
+    }
+
+    /* Action Icon Buttons */
+    .btn-action-icon {
+        width: 34px;
+        height: 34px;
+        border-radius: 8px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid var(--brt-border-color);
+        color: var(--brt-text-muted);
+        background: #FFFFFF;
+        transition: all 0.2s ease;
+        text-decoration: none;
+    }
+
+    .btn-action-icon:hover {
+        background: #F1F5F9;
+        color: var(--brt-navy-dark);
+    }
+
+    .btn-action-delete:hover {
+        background: #FEE2E2;
+        color: #DC2626;
+        border-color: #FECDD3;
+    }
+
+    /* Success Toast Alert */
+    .brt-alert-success {
+        background: #F0FDF4;
+        border: 1px solid #BBF7D0;
+        border-left: 5px solid #16A34A;
+        border-radius: 12px;
+        padding: 0.9rem 1.25rem;
+        color: #15803D;
+        font-size: 0.875rem;
+        font-weight: 500;
+        margin-bottom: 1.5rem;
+    }
+</style>
+
+<!-- Header Section -->
+<div class="page-header-container d-flex justify-content-between align-items-center">
+    <div>
+        <span class="eyebrow-text">INVENTORY MANAGEMENT</span>
+        <h3 class="page-title">Categories</h3>
+    </div>
+    <a asp-action="CreateCategory" class="btn-brt-gold">
+        <span class="material-symbols-outlined fs-5">add</span>
+        <span>Add Category</span>
+    </a>
 </div>
 
+<!-- Flash Success Message -->
 @if (TempData["Success"] != null)
 {
-    <div class="alert alert-success">@TempData["Success"]</div>
+    <div class="brt-alert-success d-flex align-items-center gap-2">
+        <span class="material-symbols-outlined fs-5">check_circle</span>
+        <span>@TempData["Success"]</span>
+    </div>
 }
 
+<!-- Categories List Loop -->
 @foreach (var cat in Model)
 {
-    <div class="admin-card mb-3">
-        <div class="d-flex justify-content-between align-items-center">
-            <div>
-                <h5 class="mb-0">@cat.Name <span class="badge bg-secondary">@cat.Type</span> @if (!cat.IsActive) { <span class="badge bg-danger">Inactive</span> }</h5>
+    <div class="category-card">
+        <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
+            <div class="d-flex align-items-center gap-3">
+                @if (!string.IsNullOrEmpty(cat.ImageUrl))
+                {
+                    <img src="@cat.ImageUrl" alt="@cat.Name" class="category-thumb" />
+                }
+                else
+                {
+                    <div class="category-thumb d-flex align-items-center justify-content-center text-muted">
+                        <span class="material-symbols-outlined fs-4">category</span>
+                    </div>
+                }
+
+                <div>
+                    <div class="d-flex align-items-center gap-2 mb-1">
+                        <h5 class="fw-bold text-dark mb-0 fs-6">@cat.Name</h5>
+                        <span class="badge-type">@cat.Type</span>
+                        @if (!cat.IsActive)
+                        {
+                            <span class="badge-status-inactive">Inactive</span>
+                        }
+                        else
+                        {
+                            <span class="badge-status-active">Active</span>
+                        }
+                    </div>
+                    @if (!string.IsNullOrEmpty(cat.NameTamil))
+                    {
+                        <span class="text-muted small">@cat.NameTamil</span>
+                    }
+                </div>
             </div>
-            <div class="d-flex gap-2">
-                <a asp-action="CreateSubCategory" asp-route-categoryId="@cat.Id" class="btn btn-sm btn-outline-secondary">+ Sub-category</a>
-                <a asp-action="EditCategory" asp-route-id="@cat.Id" class="btn btn-sm btn-outline-primary">Edit</a>
-                <form asp-action="DeleteCategory" asp-route-id="@cat.Id" method="post" onsubmit="return confirm('Remove this category?');">
+
+            <!-- Category Actions -->
+            <div class="d-flex align-items-center gap-2">
+                <a asp-action="CreateSubCategory" asp-route-categoryId="@cat.Id" class="btn btn-sm btn-outline-dark rounded-pill fw-semibold px-3" style="font-size: 0.78rem;">
+                    + Sub-category
+                </a>
+                
+                <a asp-action="EditCategory" asp-route-id="@cat.Id" class="btn-action-icon" title="Edit Category">
+                    <span class="material-symbols-outlined fs-5">edit</span>
+                </a>
+
+                <form asp-action="DeleteCategory" asp-route-id="@cat.Id" method="post" class="d-inline" onsubmit="return confirm('Remove this category?');">
                     @Html.AntiForgeryToken()
-                    <button class="btn btn-sm btn-outline-danger">Delete</button>
+                    <button type="submit" class="btn-action-icon btn-action-delete" title="Delete Category">
+                        <span class="material-symbols-outlined fs-5">delete</span>
+                    </button>
                 </form>
             </div>
         </div>
+
+        <!-- Sub-categories Table -->
         @if (cat.SubCategories.Any())
         {
-            <table class="table table-sm mt-3 mb-0">
-                <tbody>
-                @foreach (var sub in cat.SubCategories.OrderBy(s => s.DisplayOrder))
-                {
-                    <tr>
-                        <td>@sub.Name @if (!sub.IsActive) { <span class="badge bg-danger">Inactive</span> }</td>
-                        <td class="text-end">
-                            <a asp-action="EditSubCategory" asp-route-id="@sub.Id" class="btn btn-sm btn-link">Edit</a>
-                            <form asp-action="DeleteSubCategory" asp-route-id="@sub.Id" method="post" class="d-inline" onsubmit="return confirm('Remove this sub-category?');">
-                                @Html.AntiForgeryToken()
-                                <button class="btn btn-sm btn-link text-danger">Delete</button>
-                            </form>
-                        </td>
-                    </tr>
-                }
-                </tbody>
-            </table>
+            <div class="subcategory-box">
+                <table class="table subcategory-table">
+                    <tbody>
+                    @foreach (var sub in cat.SubCategories.OrderBy(s => s.DisplayOrder))
+                    {
+                        <tr>
+                            <td>
+                                <div class="d-flex align-items-center gap-2">
+                                    <span class="material-symbols-outlined text-muted" style="font-size: 16px;">subheader_arrow_right</span>
+                                    <span class="fw-medium text-dark">@sub.Name</span>
+                                    @if (!string.IsNullOrEmpty(sub.NameTamil))
+                                    {
+                                        <span class="text-muted small">(@sub.NameTamil)</span>
+                                    }
+                                    @if (!sub.IsActive)
+                                    {
+                                        <span class="badge-status-inactive">Inactive</span>
+                                    }
+                                </div>
+                            </td>
+                            <td class="text-end">
+                                <div class="d-inline-flex gap-2">
+                                    <a asp-action="EditSubCategory" asp-route-id="@sub.Id" class="btn-action-icon" title="Edit Sub-category" style="width: 28px; height: 28px;">
+                                        <span class="material-symbols-outlined" style="font-size: 16px;">edit</span>
+                                    </a>
+                                    
+                                    <form asp-action="DeleteSubCategory" asp-route-id="@sub.Id" method="post" class="d-inline" onsubmit="return confirm('Remove this sub-category?');">
+                                        @Html.AntiForgeryToken()
+                                        <button type="submit" class="btn-action-icon btn-action-delete" title="Delete Sub-category" style="width: 28px; height: 28px;">
+                                            <span class="material-symbols-outlined" style="font-size: 16px;">delete</span>
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+            </div>
         }
     </div>
 }
