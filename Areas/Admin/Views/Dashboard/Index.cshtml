@@ -127,6 +127,9 @@
         text-decoration: none;
         transition: all 0.2s ease;
         white-space: nowrap;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
     }
 
     .btn-update-prices:hover {
@@ -203,6 +206,7 @@
         display: inline-flex;
         align-items: center;
         gap: 0.35rem;
+        text-transform: capitalize;
     }
     
     .badge-pending { background: #FEF3C7; color: #92400E; }
@@ -223,14 +227,14 @@
 </style>
 
 <!-- Top Banner Header -->
-<div class="dashboard-header d-flex align-items-center justify-content-between">
+<div class="dashboard-header d-flex flex-wrap align-items-center justify-content-between gap-3">
     <div>
         <span class="eyebrow-text">ADMIN DASHBOARD</span>
         <h3 class="dashboard-title">System Overview</h3>
     </div>
     <div>
-        <span class="badge bg-light text-secondary border px-3 py-2 rounded-pill font-monospace small">
-            <span class="material-symbols-outlined fs-6 align-middle text-success me-1">circle</span> Live Mandi System
+        <span class="badge bg-light text-secondary border px-3 py-2 rounded-pill font-monospace small d-inline-flex align-items-center gap-1">
+            <span class="material-symbols-outlined fs-6 text-success">circle</span> Live Mandi System
         </span>
     </div>
 </div>
@@ -293,13 +297,17 @@
 <!-- Price Alert Banner -->
 @if (ViewBag.PricesUpdatedToday == 0)
 {
-    <div class="brt-alert-warning d-flex align-items-center justify-content-between gap-3 mb-4">
+    <div class="brt-alert-warning d-flex flex-wrap align-items-center justify-content-between gap-3 mb-4">
         <div class="d-flex align-items-center gap-3">
             <span class="material-symbols-outlined fs-4 text-warning">warning</span>
             <div class="small">
                 <strong>Market Prices Pending:</strong> Today's market prices are not updated yet. Please update prices before dealers browse the site.
             </div>
         </div>
+        <a asp-area="Admin" asp-controller="Price" asp-action="Index" class="btn-update-prices">
+            <span>Update Prices Now</span>
+            <span class="material-symbols-outlined fs-6">arrow_forward</span>
+        </a>
     </div>
 }
 
@@ -323,33 +331,45 @@
                 </tr>
             </thead>
             <tbody>
-            @foreach (var o in (IEnumerable<BRT.Models.OrderRequest>)ViewBag.RecentOrders)
+            @if (ViewBag.RecentOrders != null && ((IEnumerable<BRT.Models.OrderRequest>)ViewBag.RecentOrders).Any())
             {
-                var statusStr = o.Status.ToString();
-                var badgeClass = statusStr.ToLower() switch
+                @foreach (var o in (IEnumerable<BRT.Models.OrderRequest>)ViewBag.RecentOrders)
                 {
-                    "pending" => "badge-pending",
-                    "underreview" => "badge-review",
-                    "confirmed" => "badge-confirmed",
-                    _ => "badge-default"
-                };
+                    var statusStr = o.Status.ToString();
+                    var badgeClass = statusStr.ToLower() switch
+                    {
+                        "pending" => "badge-pending",
+                        "underreview" => "badge-review",
+                        "confirmed" => "badge-confirmed",
+                        _ => "badge-default"
+                    };
 
+                    <tr>
+                        <td>
+                            <a asp-area="Admin" asp-controller="Order" asp-action="Details" asp-route-id="@o.Id" class="order-link">
+                                #@o.OrderNumber
+                            </a>
+                        </td>
+                        <td class="fw-medium">@o.BuyerName</td>
+                        <td>@o.BusinessName</td>
+                        <td>@o.PhoneNumber</td>
+                        <td>
+                            <span class="badge-status @badgeClass">
+                                <span class="material-symbols-outlined" style="font-size: 11px;">circle</span>
+                                @o.Status
+                            </span>
+                        </td>
+                        <td class="text-secondary small">@o.CreatedAt.ToString("dd-MMM-yyyy HH:mm")</td>
+                    </tr>
+                }
+            }
+            else
+            {
                 <tr>
-                    <td>
-                        <a asp-area="Admin" asp-controller="Order" asp-action="Details" asp-route-id="@o.Id" class="order-link">
-                            @o.OrderNumber
-                        </a>
+                    <td colspan="6" class="text-center py-4 text-muted small">
+                        <span class="material-symbols-outlined fs-3 d-block mb-1 text-secondary">inbox</span>
+                        No recent order requests found.
                     </td>
-                    <td class="fw-medium">@o.BuyerName</td>
-                    <td>@o.BusinessName</td>
-                    <td>@o.PhoneNumber</td>
-                    <td>
-                        <span class="badge-status @badgeClass">
-                            <span class="material-symbols-outlined" style="font-size: 11px;">circle</span>
-                            @o.Status
-                        </span>
-                    </td>
-                    <td class="text-secondary small">@o.CreatedAt.ToString("dd-MMM-yyyy HH:mm")</td>
                 </tr>
             }
             </tbody>
