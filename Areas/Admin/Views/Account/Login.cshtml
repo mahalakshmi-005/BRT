@@ -1,74 +1,312 @@
 @model BRT.Areas.Admin.ViewModels.LoginViewModel
 @{
     Layout = null;
-    ViewData["Title"] = "Admin Login";
+    ViewData["Title"] = "Admin Portal Login";
 }
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Admin Login - BRT</title>
+    <title>Admin Portal - B Raj Traders</title>
+    <!-- Bootstrap 5.3 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" />
+    <!-- Google Material Symbols & Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
     <style>
+        :root {
+            --brt-dark-green: #053b20;
+            --brt-emerald: #0b5e35;
+            --brt-accent-gold: #f59e0b;
+            --brt-gold-glow: rgba(245, 158, 11, 0.25);
+        }
+
         body {
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(135deg, #0b3d24 0%, #10552f 100%);
-            font-family: 'Segoe UI', sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: radial-gradient(circle at 10% 20%, #082d18 0%, #031c0e 90%);
+            position: relative;
+            overflow: hidden;
         }
-        .login-card {
-            background: #fff;
-            border-radius: 14px;
-            padding: 2.5rem;
+
+        /* Ambient Background Orbs */
+        .ambient-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.4;
+            pointer-events: none;
+        }
+        .orb-1 {
+            width: 350px;
+            height: 350px;
+            background: #107c41;
+            top: -50px;
+            left: -50px;
+        }
+        .orb-2 {
+            width: 400px;
+            height: 400px;
+            background: var(--brt-accent-gold);
+            bottom: -100px;
+            right: -100px;
+            opacity: 0.15;
+        }
+
+        /* Keyframe Animations */
+        @@keyframes floatSymbol {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-8px) rotate(2deg); }
+        }
+
+        @@keyframes pulseGlow {
+            0%, 100% { box-shadow: 0 0 25px rgba(245, 158, 11, 0.2); }
+            50% { box-shadow: 0 0 40px rgba(245, 158, 11, 0.4); }
+        }
+
+        /* Glassmorphism Login Card */
+        .admin-glass-card {
+            background: rgba(255, 255, 255, 0.96);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 24px;
+            padding: 2.8rem 2.2rem;
             width: 100%;
-            max-width: 400px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            max-width: 420px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+            position: relative;
+            z-index: 10;
         }
-        .login-card h2 { color: #0b3d24; font-weight: 700; }
-        .om-symbol { text-align: center; font-size: 2rem; color: #c9a227; }
-        .brand-sub { text-align: center; color: #6b7280; font-size: 0.85rem; margin-bottom: 1.5rem; }
-        .btn-brt { background: #0b3d24; color: #fff; border: none; }
-        .btn-brt:hover { background: #10552f; color: #fff; }
+
+        .om-symbol-wrapper {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.2rem auto;
+            font-size: 2rem;
+            color: #b45309;
+            box-shadow: 0 10px 20px rgba(245, 158, 11, 0.15);
+            animation: floatSymbol 4s ease-in-out infinite;
+        }
+
+        .brand-title {
+            color: var(--brt-dark-green);
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            font-size: 1.75rem;
+        }
+
+        .brand-subtitle {
+            color: #64748b;
+            font-size: 0.825rem;
+            font-weight: 500;
+        }
+
+        /* Form Inputs */
+        .form-label {
+            font-size: 0.825rem;
+            font-weight: 600;
+            color: #334155;
+            margin-bottom: 0.4rem;
+        }
+
+        .input-group-custom {
+            position: relative;
+        }
+
+        .input-group-custom .input-icon {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #94a3b8;
+            font-size: 1.25rem;
+            z-index: 5;
+            transition: color 0.3s ease;
+        }
+
+        .form-control-custom {
+            padding-left: 2.75rem !important;
+            padding-right: 2.75rem;
+            height: 48px;
+            border-radius: 12px;
+            border: 1.5px solid #e2e8f0;
+            font-size: 0.925rem;
+            font-weight: 500;
+            transition: all 0.25s ease;
+            background: #f8fafc;
+        }
+
+        .form-control-custom:focus {
+            background: #ffffff;
+            border-color: var(--brt-emerald);
+            box-shadow: 0 0 0 4px rgba(11, 94, 53, 0.12);
+        }
+
+        .form-control-custom:focus + .input-icon {
+            color: var(--brt-emerald);
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #94a3b8;
+            cursor: pointer;
+            z-index: 5;
+            padding: 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .toggle-password:hover {
+            color: #334155;
+        }
+
+        /* Action Buttons */
+        .btn-brt-submit {
+            background: linear-gradient(135deg, var(--brt-dark-green) 0%, var(--brt-emerald) 100%);
+            color: #ffffff;
+            font-weight: 700;
+            height: 48px;
+            border-radius: 12px;
+            border: none;
+            font-size: 0.95rem;
+            letter-spacing: 0.3px;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px rgba(5, 59, 32, 0.25);
+        }
+
+        .btn-brt-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 14px 26px rgba(5, 59, 32, 0.35);
+            color: #ffffff;
+        }
+
+        .btn-brt-submit:active {
+            transform: translateY(0);
+        }
+
+        .form-check-input:checked {
+            background-color: var(--brt-emerald);
+            border-color: var(--brt-emerald);
+        }
+
+        .admin-footer {
+            margin-top: 1.8rem;
+            padding-top: 1.2rem;
+            border-top: 1px solid #f1f5f9;
+            font-size: 0.75rem;
+            color: #94a3b8;
+        }
     </style>
 </head>
 <body>
-    <div class="login-card">
-        <div class="om-symbol">🕉</div>
-        <h2 class="text-center">BRT Admin</h2>
-        <div class="brand-sub">B Raj Traders — Garlic &amp; Grocery Commission Mandi</div>
 
+    <!-- Ambient Glow Effect -->
+    <div class="ambient-orb orb-1"></div>
+    <div class="ambient-orb orb-2"></div>
+
+    <div class="admin-glass-card">
+        <!-- Header / Logo -->
+        <div class="text-center">
+            <div class="om-symbol-wrapper">🕉</div>
+            <h1 class="brand-title mb-1">BRT Admin</h1>
+            <p class="brand-subtitle mb-4">B Raj Traders • Garlic &amp; Grocery Mandi</p>
+        </div>
+
+        <!-- Login Form -->
         <form asp-area="Admin" asp-controller="Account" asp-action="Login" method="post" novalidate>
             @Html.AntiForgeryToken()
             <input type="hidden" asp-for="ReturnUrl" />
 
-            <div asp-validation-summary="ModelOnly" class="alert alert-danger py-2" role="alert" style="display:none"></div>
+            <!-- ASP.NET Validation Summary -->
+            <div asp-validation-summary="ModelOnly" class="alert alert-danger border-0 rounded-3 py-2 small mb-3" role="alert" style="display:none"></div>
             @if (!ViewData.ModelState.IsValid)
             {
-                <div class="alert alert-danger py-2">
+                <div class="alert alert-danger border-0 rounded-3 py-2 small mb-3">
                     @foreach (var err in ViewData.ModelState.Values.SelectMany(v => v.Errors))
                     {
-                        <div>@err.ErrorMessage</div>
+                        <div class="d-flex align-items-center gap-1">
+                            <span class="material-symbols-outlined fs-6">error</span>
+                            <span>@err.ErrorMessage</span>
+                        </div>
                     }
                 </div>
             }
 
+            <!-- Email Field -->
             <div class="mb-3">
-                <label asp-for="Email" class="form-label">Email</label>
-                <input asp-for="Email" class="form-control" autocomplete="username" />
+                <label asp-for="Email" class="form-label">Email Address</label>
+                <div class="input-group-custom">
+                    <input asp-for="Email" class="form-control form-control-custom" placeholder="admin@brajtraders.com" autocomplete="username" />
+                    <span class="material-symbols-outlined input-icon">mail</span>
+                </div>
             </div>
+
+            <!-- Password Field -->
             <div class="mb-3">
                 <label asp-for="Password" class="form-label">Password</label>
-                <input asp-for="Password" class="form-control" autocomplete="current-password" />
+                <div class="input-group-custom">
+                    <input asp-for="Password" id="passwordInput" type="password" class="form-control form-control-custom" placeholder="••••••••" autocomplete="current-password" />
+                    <span class="material-symbols-outlined input-icon">lock</span>
+                    <button type="button" class="toggle-password" onclick="togglePasswordVisibility()">
+                        <span class="material-symbols-outlined" id="toggleIcon">visibility</span>
+                    </button>
+                </div>
             </div>
-            <div class="form-check mb-3">
-                <input asp-for="RememberMe" class="form-check-input" />
-                <label asp-for="RememberMe" class="form-check-label">Remember me</label>
+
+            <!-- Remember Me Checkbox -->
+            <div class="d-flex align-items-center justify-content-between mb-4">
+                <div class="form-check mb-0">
+                    <input asp-for="RememberMe" class="form-check-input" id="rememberMeCheck" />
+                    <label asp-for="RememberMe" class="form-check-label small text-secondary fw-medium" for="rememberMeCheck">
+                        Keep me signed in
+                    </label>
+                </div>
             </div>
-            <button type="submit" class="btn btn-brt w-100 py-2">Login</button>
+
+            <!-- Submit Button -->
+            <button type="submit" class="btn btn-brt-submit w-100 d-flex align-items-center justify-content-center gap-2">
+                <span>Sign In to Dashboard</span>
+                <span class="material-symbols-outlined fs-5">arrow_forward</span>
+            </button>
         </form>
+
+        <!-- Footer -->
+        <div class="admin-footer text-center">
+            <span class="d-inline-flex align-items-center gap-1">
+                <span class="material-symbols-outlined fs-6 text-warning">verified_user</span> Secure Management Console
+            </span>
+        </div>
     </div>
+
+    <!-- Interactive JS Script for Password Toggle -->
+    <script>
+        function togglePasswordVisibility() {
+            const passwordInput = document.getElementById('passwordInput');
+            const toggleIcon = document.getElementById('toggleIcon');
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                toggleIcon.textContent = 'visibility_off';
+            } else {
+                passwordInput.type = 'password';
+                toggleIcon.textContent = 'visibility';
+            }
+        }
+    </script>
 </body>
 </html>
