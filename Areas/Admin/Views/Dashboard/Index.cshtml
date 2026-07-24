@@ -3,65 +3,276 @@
     ViewData["Title"] = "Dashboard";
 }
 
-<h3 class="mb-4">Dashboard</h3>
+<!-- Custom Dashboard Styling matching Website Theme -->
+<style>
+    :root {
+        --brt-navy-dark: #0B132A;
+        --brt-gold-accent: #D97706;
+        --brt-gold-light: #FFFBEB;
+        --brt-border-color: #E2E8F0;
+        --brt-text-dark: #1E293B;
+        --brt-text-muted: #64748B;
+    }
 
+    /* Top Section Header */
+    .dashboard-header {
+        margin-bottom: 2rem;
+    }
+
+    .eyebrow-text {
+        color: var(--brt-gold-accent);
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+    }
+
+    .dashboard-title {
+        font-family: Georgia, serif;
+        color: var(--brt-text-dark);
+        font-weight: 700;
+        font-size: 1.85rem;
+        margin-top: 0.2rem;
+    }
+
+    /* Stat Cards Styling */
+    .stat-card-custom {
+        background: #FFFFFF;
+        border: 1px solid var(--brt-border-color);
+        border-radius: 16px;
+        padding: 1.5rem;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        overflow: hidden;
+        height: 100%;
+        box-shadow: 0 4px 15px rgba(15, 23, 42, 0.03);
+    }
+
+    .stat-card-custom:hover {
+        transform: translateY(-3px);
+        border-color: #CBD5E1;
+        box-shadow: 0 12px 25px rgba(15, 23, 42, 0.08);
+    }
+
+    .stat-card-custom .stat-icon {
+        width: 44px;
+        height: 44px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 1rem;
+        font-size: 1.35rem;
+    }
+
+    .stat-value-custom {
+        font-size: 1.8rem;
+        font-weight: 800;
+        color: var(--brt-text-dark);
+        line-height: 1.2;
+    }
+
+    .stat-label-custom {
+        font-size: 0.825rem;
+        font-weight: 600;
+        color: var(--brt-text-muted);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-top: 0.3rem;
+    }
+
+    /* Distinct Stat Color Accents */
+    .stat-pending .stat-icon { background: #FEF3C7; color: #D97706; }
+    .stat-review .stat-icon { background: #E0F2FE; color: #0284C7; }
+    .stat-confirmed .stat-icon { background: #DCFCE7; color: #16A34A; }
+    .stat-products .stat-icon { background: #F1F5F9; color: var(--brt-navy-dark); }
+
+    /* Custom Alert Banner */
+    .brt-alert-warning {
+        background: #FFFBEB;
+        border: 1px solid #FDE68A;
+        border-left: 5px solid var(--brt-gold-accent);
+        border-radius: 12px;
+        padding: 1rem 1.25rem;
+        color: #92400E;
+        font-size: 0.9rem;
+        font-weight: 500;
+    }
+
+    /* Section Headers */
+    .section-title {
+        font-family: Georgia, serif;
+        color: var(--brt-text-dark);
+        font-weight: 700;
+        font-size: 1.25rem;
+    }
+
+    /* Table Container Styling */
+    .table-container {
+        background: #FFFFFF;
+        border: 1px solid var(--brt-border-color);
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 4px 20px rgba(15, 23, 42, 0.03);
+    }
+
+    .table-custom {
+        margin-bottom: 0;
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+    }
+
+    .table-custom th {
+        background: #F8FAFC;
+        color: var(--brt-text-muted);
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-weight: 700;
+        padding: 1rem 1.25rem;
+        border-bottom: 1px solid var(--brt-border-color);
+    }
+
+    .table-custom td {
+        padding: 1rem 1.25rem;
+        vertical-align: middle;
+        color: var(--brt-text-dark);
+        font-size: 0.875rem;
+        border-bottom: 1px solid #F1F5F9;
+        transition: background 0.2s ease;
+    }
+
+    .table-custom tbody tr:last-child td {
+        border-bottom: none;
+    }
+
+    .table-custom tbody tr:hover td {
+        background-color: #F8FAFC;
+    }
+
+    /* Dynamic Order Status Badges */
+    .badge-status {
+        padding: 0.35rem 0.75rem;
+        border-radius: 20px;
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.3px;
+        display: inline-block;
+    }
+    
+    .badge-pending { background: #FEF3C7; color: #92400E; }
+    .badge-review { background: #E0F2FE; color: #0369A1; }
+    .badge-confirmed { background: #DCFCE7; color: #15803D; }
+    .badge-default { background: #F1F5F9; color: #475569; }
+</style>
+
+<!-- Header Section -->
+<div class="dashboard-header d-flex align-items-center justify-content-between">
+    <div>
+        <span class="eyebrow-text">OVERVIEW</span>
+        <h3 class="dashboard-title">System Dashboard</h3>
+    </div>
+</div>
+
+<!-- Stat Cards Section -->
 <div class="row g-3 mb-4">
-    <div class="col-md-3">
-        <div class="stat-card">
-            <div class="stat-value">@ViewBag.PendingOrders</div>
-            <div class="stat-label">Pending Orders</div>
+    <!-- Pending Orders -->
+    <div class="col-6 col-md-3">
+        <div class="stat-card-custom stat-pending">
+            <div class="stat-icon">
+                <span class="material-symbols-outlined">hourglass_top</span>
+            </div>
+            <div class="stat-value-custom">@ViewBag.PendingOrders</div>
+            <div class="stat-label-custom">Pending Orders</div>
         </div>
     </div>
-    <div class="col-md-3">
-        <div class="stat-card">
-            <div class="stat-value">@ViewBag.UnderReviewOrders</div>
-            <div class="stat-label">Under Review</div>
+
+    <!-- Under Review -->
+    <div class="col-6 col-md-3">
+        <div class="stat-card-custom stat-review">
+            <div class="stat-icon">
+                <span class="material-symbols-outlined">rate_review</span>
+            </div>
+            <div class="stat-value-custom">@ViewBag.UnderReviewOrders</div>
+            <div class="stat-label-custom">Under Review</div>
         </div>
     </div>
-    <div class="col-md-3">
-        <div class="stat-card">
-            <div class="stat-value">@ViewBag.ConfirmedOrders</div>
-            <div class="stat-label">Confirmed</div>
+
+    <!-- Confirmed Orders -->
+    <div class="col-6 col-md-3">
+        <div class="stat-card-custom stat-confirmed">
+            <div class="stat-icon">
+                <span class="material-symbols-outlined">check_circle</span>
+            </div>
+            <div class="stat-value-custom">@ViewBag.ConfirmedOrders</div>
+            <div class="stat-label-custom">Confirmed</div>
         </div>
     </div>
-    <div class="col-md-3">
-        <div class="stat-card">
-            <div class="stat-value">@ViewBag.TotalProducts</div>
-            <div class="stat-label">Total Products</div>
+
+    <!-- Total Products -->
+    <div class="col-6 col-md-3">
+        <div class="stat-card-custom stat-products">
+            <div class="stat-icon">
+                <span class="material-symbols-outlined">inventory_2</span>
+            </div>
+            <div class="stat-value-custom">@ViewBag.TotalProducts</div>
+            <div class="stat-label-custom">Total Products</div>
         </div>
     </div>
 </div>
 
+<!-- Price Alert Banner -->
 @if (ViewBag.PricesUpdatedToday == 0)
 {
-    <div class="alert alert-warning">
-        <span class="material-symbols-outlined">warning</span> Today's market prices are not updated yet. Please update prices before dealers browse the site.
+    <div class="brt-alert-warning d-flex align-items-center gap-3 mb-4 shadow-sm">
+        <span class="material-symbols-outlined fs-4 text-warning">warning</span>
+        <div>
+            <strong>Market Prices Pending:</strong> Today's market prices are not updated yet. Please update prices before dealers browse the site.
+        </div>
     </div>
 }
 
-<h5 class="mt-4 mb-3">Recent Order Requests</h5>
-<table class="table table-hover bg-white">
-    <thead>
-        <tr>
-            <th>Order #</th>
-            <th>Buyer</th>
-            <th>Business</th>
-            <th>Phone</th>
-            <th>Status</th>
-            <th>Date</th>
-        </tr>
-    </thead>
-    <tbody>
-    @foreach (var o in (IEnumerable<BRT.Models.OrderRequest>)ViewBag.RecentOrders)
-    {
-        <tr>
-            <td>@o.OrderNumber</td>
-            <td>@o.BuyerName</td>
-            <td>@o.BusinessName</td>
-            <td>@o.PhoneNumber</td>
-            <td><span class="badge bg-secondary">@o.Status</span></td>
-            <td>@o.CreatedAt.ToString("dd-MMM-yyyy HH:mm")</td>
-        </tr>
-    }
-    </tbody>
-</table>
+<!-- Recent Order Requests Table -->
+<div class="d-flex align-items-center justify-content-between mb-3 mt-4">
+    <h5 class="section-title mb-0">Recent Order Requests</h5>
+</div>
+
+<div class="table-container">
+    <table class="table-custom">
+        <thead>
+            <tr>
+                <th>Order #</th>
+                <th>Buyer</th>
+                <th>Business</th>
+                <th>Phone</th>
+                <th>Status</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (var o in (IEnumerable<BRT.Models.OrderRequest>)ViewBag.RecentOrders)
+        {
+            var statusStr = o.Status.ToString();
+            var badgeClass = statusStr.ToLower() switch
+            {
+                "pending" => "badge-pending",
+                "underreview" => "badge-review",
+                "confirmed" => "badge-confirmed",
+                _ => "badge-default"
+            };
+
+            <tr>
+                <td class="fw-bold text-primary">@o.OrderNumber</td>
+                <td class="fw-medium">@o.BuyerName</td>
+                <td>@o.BusinessName</td>
+                <td>@o.PhoneNumber</td>
+                <td>
+                    <span class="badge-status @badgeClass">@o.Status</span>
+                </td>
+                <td class="text-secondary small">@o.CreatedAt.ToString("dd-MMM-yyyy HH:mm")</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>
