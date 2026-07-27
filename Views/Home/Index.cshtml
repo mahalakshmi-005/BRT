@@ -203,93 +203,97 @@
     </div>
 </div>
 
-<!-- ===== Clean & Neat Premium Hero Section ===== -->
-<section class="hero-modern position-relative py-5 overflow-hidden" style="background: linear-gradient(180deg, #F8FAFC 0%, #F1F5F9 100%); min-height: 500px;">
+<!-- ===== Clean & Premium Hero Section ===== -->
+<section class="hero-modern-premium position-relative py-5 overflow-hidden" style="font-family: 'Plus Jakarta Sans', sans-serif; background: radial-gradient(circle at 10% 20%, rgba(217, 119, 6, 0.05) 0%, transparent 40%), linear-gradient(135deg, #FAFBFD 0%, #F1F5F9 100%); min-height: 520px;">
     
     <div class="hero-inner container py-lg-4 position-relative z-1">
         <div class="row align-items-center g-4 g-lg-5">
 
             <!-- Left Column: Content -->
-            <div class="col-lg-6 fade-in-up is-visible">
+            <div class="col-lg-6">
+                
                 <!-- Trust Badge -->
-                <span class="hero-trust-badge d-inline-flex align-items-center gap-2 px-3 py-1-5 rounded-pill mb-3 border bg-white shadow-sm" style="border-color: rgba(15, 23, 42, 0.1) !important;">
-                    <span class="material-symbols-outlined fs-6 text-amber">workspace_premium</span> 
-                    <span class="fw-semibold extra-small text-uppercase tracking-wider text-navy">Trusted Since 2000</span>
-                </span>
+                <div class="d-inline-flex align-items-center gap-2 px-3 py-2 rounded-pill mb-3 border bg-white shadow-sm" style="border-color: rgba(217, 119, 6, 0.2) !important;">
+                    <span class="material-symbols-outlined fs-6" style="color: #D97706;">verified_user</span> 
+                    <span class="fw-bold extra-small text-uppercase tracking-wider" style="color: #0F172A; font-size: 0.75rem;">Trusted Wholesale Mandi Since 2000</span>
+                </div>
 
-                <!-- Title -->
-                <h1 class="display-4 fw-bold mb-2 text-uppercase tracking-tight text-navy">
-                    B RAJ <span class="text-amber">TRADERS</span>
+                <!-- Title with Premium Typography -->
+                <h1 class="display-4 fw-bold mb-2" style="font-family: 'Playfair Display', serif; letter-spacing: -0.5px; color: #0F172A;">
+                    B RAJ <span style="color: #D97706; font-style: italic;">TRADERS</span>
                 </h1>
 
                 <!-- Tagline -->
-                <p class="hero-tagline fs-5 text-muted mb-4">
+                <p class="hero-tagline fs-5 text-muted mb-4 fw-normal" style="line-height: 1.6;">
                     Garlic &amp; Grocery Commission Mandi<br class="d-none d-md-block" /> 
-                    <span class="fw-medium text-dark">Trusted Dealer-to-Dealer Wholesale Supplier</span>
+                    <span class="fw-semibold text-dark">Premium Dealer-to-Dealer Bulk Wholesale Supplier</span>
                 </p>
 
-                <!-- Quote Block -->
-                <blockquote class="hero-quote border-start border-3 ps-3 py-1 my-4 fst-italic text-secondary" style="border-color: var(--brt-amber) !important;">
-                    <span class="quote-mark fs-3 lh-1 align-middle text-amber">&ldquo;</span>
-                    Purity in every clove, trust in every deal.
-                    <span class="quote-mark fs-3 lh-1 align-middle text-amber">&rdquo;</span>
-                </blockquote>
+                <!-- Luxurious Quote Block -->
+                <div class="p-3 rounded-end-3 shadow-sm my-4" style="font-family: 'Playfair Display', serif; background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(8px); border-left: 4px solid #D97706 !important;">
+                    <p class="m-0 fs-5 text-secondary fst-italic">
+                        <span style="color: #D97706;" class="fs-3 align-middle me-1">&ldquo;</span>Purity in every clove, trust in every deal.<span style="color: #D97706;" class="fs-3 align-middle ms-1">&rdquo;</span>
+                    </p>
+                </div>
 
                 <!-- CTA Buttons -->
                 <div class="hero-cta d-flex flex-wrap gap-3 mb-4">
-                    <a asp-controller="Order" asp-action="Request" class="btn btn-brt-amber px-4 py-2-5 shadow-sm fw-semibold rounded-pill d-inline-flex align-items-center gap-2">
-                        <span>Secure Your Supply</span>
+                    <a asp-controller="Order" asp-action="Request" class="btn px-4 py-3 shadow-sm fw-bold rounded-pill d-inline-flex align-items-center gap-2" style="background-color: #D97706; color: #ffffff;">
+                        <span>Secure Your Bulk Supply</span>
                         <span class="material-symbols-outlined fs-6">arrow_forward</span>
                     </a>
-                    <a asp-controller="Catalog" asp-action="Index" class="btn btn-outline-dark px-4 py-2-5 fw-semibold rounded-pill">
-                        Explore Products
+                    <a asp-controller="Catalog" asp-action="Index" class="btn btn-outline-dark px-4 py-3 fw-bold rounded-pill">
+                        Explore Catalog
                     </a>
                 </div>
 
-                <!-- Stats Section -->
+                <!-- Inline Stats -->
                 <div class="hero-inline-stats d-flex align-items-center gap-4 gap-md-5 pt-4 border-top border-secondary border-opacity-10">
                     <div>
-                        <div class="stat-num fw-bold fs-3 text-navy">25+</div>
-                        <div class="stat-label text-muted extra-small">Years Experience</div>
+                        <div class="fw-bold fs-2" style="font-family: 'Playfair Display', serif; color: #0F172A;">25+</div>
+                        <div class="stat-label text-muted extra-small text-uppercase tracking-wider">Years Legacy</div>
                     </div>
-                    <div class="border-end h-100 opacity-25 border-dark"></div>
+                    <div class="border-end opacity-25 border-dark" style="height: 35px;"></div>
                     <div>
-                        <div class="stat-num fw-bold fs-3 text-navy">500+</div>
-                        <div class="stat-label text-muted extra-small">Trusted Dealers</div>
+                        <div class="fw-bold fs-2" style="font-family: 'Playfair Display', serif; color: #0F172A;">500+</div>
+                        <div class="stat-label text-muted extra-small text-uppercase tracking-wider">Partner Dealers</div>
                     </div>
-                    <div class="border-end h-100 opacity-25 border-dark"></div>
+                    <div class="border-end opacity-25 border-dark" style="height: 35px;"></div>
                     <div>
-                        <div class="stat-num fw-bold fs-3 text-navy">30+</div>
-                        <div class="stat-label text-muted extra-small">Product Varieties</div>
+                        <div class="fw-bold fs-2" style="font-family: 'Playfair Display', serif; color: #0F172A;">30+</div>
+                        <div class="stat-label text-muted extra-small text-uppercase tracking-wider">Product Varieties</div>
                     </div>
                 </div>
+
             </div>
 
-            <!-- Right Column: Hero Image Showcase -->
-            <div class="col-lg-6 text-center fade-in-up">
-                <div class="position-relative d-inline-block">
-                    <!-- Image Container with Subtle Clean Shadow -->
-                    <div class="p-2 rounded-4 shadow-sm bg-white" style="border: 1px solid rgba(15, 23, 42, 0.08);">
-                        <img src="~/images/hero.png" alt="Garlic Mandi Wholesale" class="img-fluid rounded-4 object-fit-cover anim-float-icon" style="max-height: 420px; width: 100%;" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1618160702438-9b02ab6515c9?auto=format&fit=crop&w=800&q=80';" />
+            <!-- Right Column: Visual Showcase -->
+            <div class="col-lg-6 text-center position-relative">
+                <div class="position-relative d-inline-block z-1">
+                    
+                    <!-- Image Card with Glass Border -->
+                    <div class="p-2 rounded-5 shadow-lg bg-white" style="border: 1px solid rgba(15, 23, 42, 0.08);">
+                        <img src="~/images/hero.png" alt="Garlic Wholesale Mandi" class="img-fluid rounded-4 object-fit-cover" style="max-height: 440px; width: 100%;" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1618160702438-9b02ab6515c9?auto=format&fit=crop&w=800&q=80';" />
                     </div>
 
-                    <!-- Floating Badge 1 (Top Left) -->
-                    <div class="position-absolute top-0 start-0 translate-middle-y bg-white text-navy p-2-5 px-3 rounded-4 shadow-sm border d-flex align-items-center gap-2 d-none d-sm-flex" style="z-index: 2;">
-                        <span class="material-symbols-outlined text-amber fs-4">verified</span>
+                    <!-- Top Left Glass Floating Badge -->
+                    <div class="position-absolute top-0 start-0 translate-middle-y p-3 rounded-4 shadow-sm d-flex align-items-center gap-3 d-none d-sm-flex" style="background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.6); z-index: 2; margin-top: 20px;">
+                        <span class="material-symbols-outlined fs-3" style="color: #D97706;">workspace_premium</span>
                         <div class="text-start">
-                            <span class="d-block fw-bold text-navy extra-small">100% Quality</span>
-                            <span class="d-block text-muted" style="font-size:0.7rem;">Direct Mandi Fresh</span>
+                            <span class="d-block fw-bold text-dark extra-small">100% Quality Assurance</span>
+                            <span class="d-block text-muted" style="font-size:0.75rem;">Direct Mandi Fresh</span>
                         </div>
                     </div>
 
-                    <!-- Floating Badge 2 (Bottom Right) -->
-                    <div class="position-absolute bottom-0 end-0 translate-middle-y p-2-5 px-3 rounded-4 shadow-sm d-flex align-items-center gap-2 d-none d-sm-flex" style="background: var(--brt-navy); z-index: 2;">
-                        <span class="material-symbols-outlined text-amber fs-4">local_shipping</span>
+                    <!-- Bottom Right Dark Floating Badge -->
+                    <div class="position-absolute bottom-0 end-0 translate-middle-y p-3 rounded-4 shadow-lg d-flex align-items-center gap-3 d-none d-sm-flex" style="background: rgba(15, 23, 42, 0.9); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.1); z-index: 2; margin-bottom: 20px;">
+                        <span class="material-symbols-outlined fs-3" style="color: #D97706;">local_shipping</span>
                         <div class="text-start">
                             <span class="d-block fw-bold text-white extra-small">Fast Dispatch</span>
-                            <span class="d-block text-light opacity-75" style="font-size:0.7rem;">Pan-India Transport</span>
+                            <span class="d-block text-light opacity-75" style="font-size:0.75rem;">Pan-India Logistics</span>
                         </div>
                     </div>
+
                 </div>
             </div>
 
