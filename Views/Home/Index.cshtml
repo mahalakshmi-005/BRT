@@ -1,18 +1,16 @@
 @{
-    ViewData["Title"] = "B RAJ TRADERS";
+    ViewData["Title"] = "B RAJ TRADERS | Premium Wholesale Mandi";
 }
 
-<!-- ===== Ultra-Luxury Modern Corporate Palette & Innovative UI ===== -->
+<!-- ===== Ultra-Luxury Modern Executive UI (Mobile-First Engineered) ===== -->
 <style>
     :root {
-        /* Premium Luxury Palette (Gold & Slate Navy) */
+        /* Color Palette */
         --brt-navy: #0D131F;
         --brt-navy-light: #182232;
-        --brt-navy-surface: rgba(13, 19, 31, 0.75);
         --brt-gold: #D4AF37;
         --brt-gold-light: #F3E5AB;
         --brt-gold-glow: rgba(212, 175, 55, 0.25);
-        --brt-gold-subtle: rgba(212, 175, 55, 0.08);
         --brt-card-bg: #FFFFFF;
         
         /* Glassmorphism Variables */
@@ -23,19 +21,18 @@
     /* Keyframe Animations (Razor Escaped @@) */
     @@keyframes floatIcon {
         0%, 100% { transform: translateY(0px) rotate(0deg); }
-        50% { transform: translateY(-6px) rotate(1deg); }
+        50% { transform: translateY(-5px) rotate(1deg); }
     }
     @@keyframes pulseGlow {
         0% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.4); }
-        70% { box-shadow: 0 0 0 12px rgba(212, 175, 55, 0); }
+        70% { box-shadow: 0 0 0 10px rgba(212, 175, 55, 0); }
         100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); }
     }
-    @@keyframes shimmerSweep {
-        0% { left: -150%; }
-        100% { left: 250%; }
-    }
 
-    /* Flex Grid Alignment */
+    /* Base Layout Hacks */
+    body {
+        overflow-x: hidden;
+    }
     .row-equal-height {
         display: flex;
         flex-wrap: wrap;
@@ -45,7 +42,43 @@
         flex-direction: column;
     }
 
-    /* Next-Gen Innovative Card */
+    /* Mobile Horizontal Snap Carousel */
+    .mobile-scroll-container {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        gap: 1rem;
+        padding-bottom: 1rem;
+        padding-left: 0.25rem;
+        padding-right: 0.25rem;
+    }
+    .mobile-scroll-container::-webkit-scrollbar {
+        height: 4px;
+    }
+    .mobile-scroll-container::-webkit-scrollbar-thumb {
+        background: var(--brt-gold);
+        border-radius: 10px;
+    }
+    .mobile-scroll-item {
+        flex: 0 0 82%;
+        scroll-snap-align: center;
+    }
+    @@media (min-width: 768px) {
+        .mobile-scroll-container {
+            display: flex;
+            flex-wrap: wrap;
+            overflow-x: visible;
+            padding-bottom: 0;
+            gap: 0;
+        }
+        .mobile-scroll-item {
+            flex: 0 0 auto;
+        }
+    }
+
+    /* High-End Innovative Card */
     .innovative-card {
         background: var(--brt-card-bg);
         border: 1px solid rgba(13, 19, 31, 0.08);
@@ -58,75 +91,45 @@
         flex-direction: column;
         justify-content: space-between;
     }
-    .innovative-card::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: -150%;
-        width: 60%;
-        height: 100%;
-        background: linear-gradient(
-            90deg, 
-            transparent 0%, 
-            rgba(255, 255, 255, 0.7) 50%, 
-            transparent 100%
-        );
-        z-index: 3;
-        pointer-events: none;
-    }
-    .innovative-card:hover::before {
-        animation: shimmerSweep 0.8s ease-in-out forwards;
-    }
     .innovative-card:hover {
-        transform: translateY(-8px);
+        transform: translateY(-6px);
         border-color: var(--brt-gold) !important;
-        box-shadow: 
-            0 20px 35px -10px rgba(13, 19, 31, 0.08),
-            0 0 20px var(--brt-gold-glow) !important;
+        box-shadow: 0 15px 30px -10px rgba(13, 19, 31, 0.08), 0 0 20px var(--brt-gold-glow) !important;
     }
 
-    /* Dynamic Hero Bento Card */
+    /* Bento Hero Cards */
     .portfolio-card-hero {
         background: var(--brt-navy);
-        border-radius: 24px;
+        border-radius: 22px;
         transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
         position: relative;
         overflow: hidden;
         z-index: 1;
         width: 100%;
-        min-height: 280px;
+        min-height: 260px;
         border: 1px solid var(--brt-glass-border);
     }
     .portfolio-card-hero::after {
         content: '';
         position: absolute;
         inset: 0;
-        background: 
-            radial-gradient(circle at top right, rgba(212, 175, 55, 0.15), transparent 60%),
-            radial-gradient(circle at bottom left, rgba(24, 34, 50, 0.8), transparent 60%);
+        background: radial-gradient(circle at top right, rgba(212, 175, 55, 0.15), transparent 60%);
         z-index: 0;
     }
     .portfolio-card-hero:hover {
-        transform: translateY(-6px);
+        transform: translateY(-5px);
         border-color: var(--brt-gold);
-        box-shadow: 0 25px 50px -12px rgba(13, 19, 31, 0.35);
-    }
-    .portfolio-card-hero:hover .arrow-icon {
-        transform: translateX(6px);
-        color: var(--brt-gold) !important;
-    }
-    .arrow-icon {
-        transition: transform 0.3s ease, color 0.3s ease;
+        box-shadow: 0 20px 40px -12px rgba(13, 19, 31, 0.35);
     }
 
-    /* Image Zoom Frame */
+    /* Image Zoom Box */
     .img-zoom-container {
         overflow: hidden;
         border-radius: 16px;
         position: relative;
     }
     .img-zoom-container img {
-        transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+        transition: transform 0.6s ease;
         width: 100%;
         object-fit: cover;
     }
@@ -134,29 +137,24 @@
         transform: scale(1.06);
     }
 
-    /* Utility Styling */
-    .anim-float-icon {
-        animation: floatIcon 4s ease-in-out infinite;
-        display: inline-block;
-    }
-    .pulse-badge {
-        animation: pulseGlow 2.5s infinite;
-    }
+    /* Utility Helpers */
+    .anim-float-icon { animation: floatIcon 4s ease-in-out infinite; display: inline-block; }
+    .pulse-badge { animation: pulseGlow 2.5s infinite; }
     .text-navy { color: var(--brt-navy) !important; }
     .text-gold { color: var(--brt-gold) !important; }
     .bg-navy { background-color: var(--brt-navy) !important; }
     .bg-gold { background-color: var(--brt-gold) !important; }
     .extra-small { font-size: 0.78rem; letter-spacing: 0.03em; }
 
-    /* Frosted Glass */
+    /* Custom Glass Effect */
     .bg-glass {
         background: var(--brt-glass-bg);
-        backdrop-filter: blur(16px);
-        -webkit-backdrop-filter: blur(16px);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
         border: 1px solid var(--brt-glass-border);
     }
 
-    /* Custom Luxury Buttons */
+    /* Premium Button Styles */
     .btn-brt-gold {
         background: linear-gradient(135deg, #D4AF37 0%, #C59B27 100%);
         color: #0D131F !important;
@@ -169,7 +167,7 @@
     .btn-brt-gold:hover {
         background: linear-gradient(135deg, #E2BD45 0%, #D4AF37 100%);
         transform: translateY(-2px);
-        box-shadow: 0 10px 25px rgba(212, 175, 55, 0.4);
+        box-shadow: 0 10px 25px rgba(212, 175, 55, 0.35);
     }
     .btn-brt-outline {
         border: 1.5px solid var(--brt-navy);
@@ -182,112 +180,125 @@
         background: var(--brt-navy);
         color: #FFFFFF !important;
     }
+
+    /* Mobile Responsive Specific Adjustments */
+    @@media (max-width: 576px) {
+        .display-4 { font-size: 2.3rem !important; }
+        .hero-cta .btn { width: 100%; text-align: center; justify-content: center; }
+        .hero-inline-stats { justify-content: space-between; }
+        .hero-inline-stats .fs-2 { font-size: 1.5rem !important; }
+        .mobile-badge-stack {
+            position: relative !important;
+            transform: none !important;
+            margin-top: 10px !important;
+        }
+    }
 </style>
 
 <!-- ===== Announcement Bar ===== -->
-<div class="announcement-bar py-2 text-white" style="background: var(--brt-navy); font-size: 0.85rem; border-bottom: 1px solid rgba(212, 175, 55, 0.15);">
+<div class="announcement-bar py-2 text-white" style="background: var(--brt-navy); font-size: 0.8rem; border-bottom: 1px solid rgba(212, 175, 55, 0.15);">
     <div class="container d-flex flex-wrap justify-content-between align-items-center gap-2">
-        <div class="announcement-badges d-flex flex-wrap align-items-center gap-3">
-            <span class="d-inline-flex align-items-center gap-1.5">
-                <span class="material-symbols-outlined fs-6 text-gold">verified</span> Premium Products
+        <div class="announcement-badges d-flex flex-wrap align-items-center gap-2 gap-md-3">
+            <span class="d-inline-flex align-items-center gap-1">
+                <span class="material-symbols-outlined fs-6 text-gold">verified</span> Premium Wholesale
             </span>
-            <span class="d-inline-flex align-items-center gap-1.5">
+            <span class="d-inline-flex align-items-center gap-1 d-none d-sm-inline-flex">
                 <span class="material-symbols-outlined fs-6 text-gold">support_agent</span> Dedicated Support
             </span>
-            <span class="d-inline-flex align-items-center gap-1.5">
-                <span class="material-symbols-outlined fs-6 text-gold">workspace_premium</span> Trusted Business Partner
+            <span class="d-inline-flex align-items-center gap-1">
+                <span class="material-symbols-outlined fs-6 text-gold">workspace_premium</span> Direct Mandi
             </span>
         </div>
-        <a href="tel:9865680694" class="text-white text-decoration-none fw-semibold d-inline-flex align-items-center gap-1.5">
+        <a href="tel:9865680694" class="text-white text-decoration-none fw-semibold d-inline-flex align-items-center gap-1 ms-auto ms-md-0">
             <span class="material-symbols-outlined fs-6 text-gold">call</span> +91 98656 80694
         </a>
     </div>
 </div>
 
-<!-- ===== Ultra-Clean & Luxury Hero Section ===== -->
-<section class="hero-modern-premium position-relative py-5 overflow-hidden" style="font-family: 'Plus Jakarta Sans', sans-serif; background: radial-gradient(circle at 15% 20%, rgba(212, 175, 55, 0.06) 0%, transparent 45%), linear-gradient(135deg, #FAFBFD 0%, #F1F5F9 100%); min-height: 520px;">
-    <div class="hero-inner container py-lg-4 position-relative z-1">
+<!-- ===== Responsive Mobile-Optimized Hero Section ===== -->
+<section class="hero-modern-premium position-relative py-4 py-lg-5 overflow-hidden" style="font-family: 'Plus Jakarta Sans', sans-serif; background: radial-gradient(circle at 15% 20%, rgba(212, 175, 55, 0.06) 0%, transparent 45%), linear-gradient(135deg, #FAFBFD 0%, #F1F5F9 100%);">
+    <div class="hero-inner container py-2 py-lg-4 position-relative z-1">
         <div class="row align-items-center g-4 g-lg-5">
             
-            <!-- Left Column: Content -->
-            <div class="col-lg-6">
+            <!-- Left Column: Primary Content -->
+            <div class="col-lg-6 text-center text-lg-start">
                 <!-- Trust Badge -->
                 <div class="d-inline-flex align-items-center gap-2 px-3 py-1.5 rounded-pill mb-3 border bg-white shadow-sm" style="border-color: rgba(212, 175, 55, 0.3) !important;">
                     <span class="material-symbols-outlined fs-6 text-gold">verified_user</span> 
-                    <span class="fw-bold extra-small text-uppercase tracking-wider text-navy" style="font-size: 0.72rem;">Trusted Wholesale Mandi Since 2000</span>
+                    <span class="fw-bold extra-small text-uppercase tracking-wider text-navy" style="font-size: 0.7rem;">Trusted Wholesale Mandi Since 2000</span>
                 </div>
 
-                <!-- Title -->
+                <!-- Main Headline -->
                 <h1 class="display-4 fw-bold mb-2 text-navy" style="font-family: 'Playfair Display', serif; letter-spacing: -0.5px;">
                     B RAJ <span class="text-gold" style="font-style: italic;">TRADERS</span>
                 </h1>
 
                 <!-- Tagline -->
-                <p class="hero-tagline fs-5 text-muted mb-4 fw-normal" style="line-height: 1.6;">
+                <p class="hero-tagline fs-6 fs-md-5 text-muted mb-3 mb-md-4 fw-normal" style="line-height: 1.6;">
                     Garlic &amp; Grocery Commission Mandi<br class="d-none d-md-block" /> 
-                    <span class="fw-semibold text-dark">Premium Dealer-to-Dealer Bulk Wholesale Supplier</span>
+                    <span class="fw-semibold text-dark">Premium Dealer-to-Dealer Wholesale Supplier</span>
                 </p>
 
-                <!-- Quote Block -->
-                <div class="p-3 rounded-end-3 shadow-sm my-4" style="font-family: 'Playfair Display', serif; background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(8px); border-left: 4px solid var(--brt-gold) !important;">
-                    <p class="m-0 fs-5 text-secondary fst-italic">
-                        <span class="text-gold fs-3 align-middle me-1">&ldquo;</span>Purity in every clove, trust in every deal.<span class="text-gold fs-3 align-middle ms-1">&rdquo;</span>
+                <!-- Luxury Quote Card -->
+                <div class="p-3 rounded-3 shadow-sm my-3 my-md-4 text-start" style="font-family: 'Playfair Display', serif; background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(8px); border-left: 4px solid var(--brt-gold) !important;">
+                    <p class="m-0 fs-6 fs-md-5 text-secondary fst-italic">
+                        <span class="text-gold fs-4 align-middle me-1">&ldquo;</span>Purity in every clove, trust in every deal.<span class="text-gold fs-4 align-middle ms-1">&rdquo;</span>
                     </p>
                 </div>
 
-                <!-- CTA Buttons -->
-                <div class="hero-cta d-flex flex-wrap gap-3 mb-4">
-                    <a asp-controller="Order" asp-action="Request" class="btn btn-brt-gold px-4 py-3 shadow-sm d-inline-flex align-items-center gap-2">
-                        <span>Secure Your Bulk Supply</span>
+                <!-- CTA Action Buttons -->
+                <div class="hero-cta d-flex flex-column flex-sm-row gap-2.5 gap-md-3 mb-4">
+                    <a asp-controller="Order" asp-action="Request" class="btn btn-brt-gold px-4 py-3 shadow-sm d-inline-flex align-items-center justify-content-center gap-2">
+                        <span>Secure Bulk Supply</span>
                         <span class="material-symbols-outlined fs-6">arrow_forward</span>
                     </a>
-                    <a asp-controller="Catalog" asp-action="Index" class="btn btn-brt-outline px-4 py-3">
+                    <a asp-controller="Catalog" asp-action="Index" class="btn btn-brt-outline px-4 py-3 d-inline-flex align-items-center justify-content-center">
                         Explore Catalog
                     </a>
                 </div>
 
-                <!-- Inline Stats -->
-                <div class="hero-inline-stats d-flex align-items-center gap-4 gap-md-5 pt-4 border-top border-secondary border-opacity-10">
+                <!-- Inline Metric Numbers -->
+                <div class="hero-inline-stats d-flex align-items-center gap-3 gap-md-5 pt-3 pt-md-4 border-top border-secondary border-opacity-10">
                     <div>
                         <div class="fw-bold fs-2 text-navy" style="font-family: 'Playfair Display', serif;">25+</div>
                         <div class="stat-label text-muted extra-small text-uppercase tracking-wider">Years Legacy</div>
                     </div>
-                    <div class="border-end opacity-25 border-dark" style="height: 35px;"></div>
+                    <div class="border-end opacity-25 border-dark" style="height: 30px;"></div>
                     <div>
                         <div class="fw-bold fs-2 text-navy" style="font-family: 'Playfair Display', serif;">500+</div>
-                        <div class="stat-label text-muted extra-small text-uppercase tracking-wider">Partner Dealers</div>
+                        <div class="stat-label text-muted extra-small text-uppercase tracking-wider">Dealers</div>
                     </div>
-                    <div class="border-end opacity-25 border-dark" style="height: 35px;"></div>
+                    <div class="border-end opacity-25 border-dark" style="height: 30px;"></div>
                     <div>
                         <div class="fw-bold fs-2 text-navy" style="font-family: 'Playfair Display', serif;">30+</div>
-                        <div class="stat-label text-muted extra-small text-uppercase tracking-wider">Product Varieties</div>
+                        <div class="stat-label text-muted extra-small text-uppercase tracking-wider">Varieties</div>
                     </div>
                 </div>
             </div>
 
-            <!-- Right Column: Visual Showcase -->
-            <div class="col-lg-6 text-center position-relative">
-                <div class="position-relative d-inline-block z-1">
-                    <!-- Image Card with Glass Border -->
+            <!-- Right Column: Visual Showcase Card -->
+            <div class="col-lg-6 text-center position-relative mt-4 mt-lg-0">
+                <div class="position-relative d-inline-block w-100 z-1" style="max-width: 500px;">
+                    <!-- Image Wrapper -->
                     <div class="p-2 rounded-5 shadow-lg bg-white" style="border: 1px solid rgba(212, 175, 55, 0.2);">
-                        <img src="~/images/hero.png" alt="Garlic Wholesale Mandi" class="img-fluid rounded-4 object-fit-cover" style="max-height: 440px; width: 100%;" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1618160702438-9b02ab6515c9?auto=format&fit=crop&w=800&q=80';" />
+                        <img src="~/images/hero.png" alt="Garlic Wholesale Mandi" class="img-fluid rounded-4 object-fit-cover" style="max-height: 380px; width: 100%;" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1618160702438-9b02ab6515c9?auto=format&fit=crop&w=800&q=80';" />
                     </div>
 
                     <!-- Top Left Glass Floating Badge -->
-                    <div class="position-absolute top-0 start-0 translate-middle-y p-3 rounded-4 shadow-sm d-flex align-items-center gap-3 d-none d-sm-flex" style="background: rgba(255, 255, 255, 0.92); backdrop-filter: blur(12px); border: 1px solid rgba(212, 175, 55, 0.25); z-index: 2; margin-top: 20px;">
-                        <span class="material-symbols-outlined fs-3 text-gold">workspace_premium</span>
+                    <div class="position-absolute top-0 start-0 translate-middle-y p-2.5 p-md-3 rounded-4 shadow-sm d-flex align-items-center gap-2.5 mobile-badge-stack" style="background: rgba(255, 255, 255, 0.92); backdrop-filter: blur(12px); border: 1px solid rgba(212, 175, 55, 0.25); z-index: 2;">
+                        <span class="material-symbols-outlined fs-4 text-gold">workspace_premium</span>
                         <div class="text-start">
                             <span class="d-block fw-bold text-dark extra-small">100% Quality Assurance</span>
-                            <span class="d-block text-muted" style="font-size:0.72rem;">Direct Mandi Fresh</span>
+                            <span class="d-block text-muted" style="font-size:0.7rem;">Direct Mandi Fresh</span>
                         </div>
                     </div>
 
                     <!-- Bottom Right Dark Floating Badge -->
-                    <div class="position-absolute bottom-0 end-0 translate-middle-y p-3 rounded-4 shadow-lg d-flex align-items-center gap-3 d-none d-sm-flex" style="background: rgba(13, 19, 31, 0.92); backdrop-filter: blur(12px); border: 1px solid rgba(212, 175, 55, 0.3); z-index: 2; margin-bottom: 20px;">
-                        <span class="material-symbols-outlined fs-3 text-gold">local_shipping</span>
+                    <div class="position-absolute bottom-0 end-0 translate-middle-y p-2.5 p-md-3 rounded-4 shadow-lg d-flex align-items-center gap-2.5 d-none d-sm-flex" style="background: rgba(13, 19, 31, 0.92); backdrop-filter: blur(12px); border: 1px solid rgba(212, 175, 55, 0.3); z-index: 2;">
+                        <span class="material-symbols-outlined fs-4 text-gold">local_shipping</span>
                         <div class="text-start">
                             <span class="d-block fw-bold text-white extra-small">Fast Dispatch</span>
-                            <span class="d-block text-light opacity-75" style="font-size:0.72rem;">Pan-India Logistics</span>
+                            <span class="d-block text-light opacity-75" style="font-size:0.7rem;">Pan-India Network</span>
                         </div>
                     </div>
                 </div>
@@ -297,208 +308,210 @@
     </div>
 </section>
 
-<!-- ===== Featured Products Showcase ===== -->
+<!-- ===== Featured Products Showcase (Mobile Touch Swipe) ===== -->
 @{
     var featured = ViewBag.FeaturedProducts as List<BRT.Models.Product>;
 }
 @if (featured != null && featured.Any())
 {
-    <section class="container my-5 py-4">
-        <div class="text-center mb-5 fade-in-up">
+    <section class="container my-4 my-md-5 py-2">
+        <div class="text-center mb-4 mb-md-5">
             <span class="hero-eyebrow fw-semibold text-uppercase tracking-wider small d-inline-flex align-items-center gap-1.5 text-gold">
                 <span class="material-symbols-outlined fs-6 anim-float-icon">workspace_premium</span> OUR PRODUCTS
             </span>
-            <h2 class="fw-bold mt-2 text-navy">Premium Wholesale Selection</h2>
-            <p class="text-muted mx-auto" style="max-width:600px">Top-tier mandi produce direct to distributors, hotels, and bulk retailers.</p>
+            <h2 class="fw-bold mt-1 text-navy fs-3 fs-md-2">Premium Wholesale Selection</h2>
+            <p class="text-muted mx-auto extra-small fs-md-6" style="max-width:550px">Top-tier mandi produce direct to distributors, hotels, and bulk retailers.</p>
         </div>
-        <div class="row g-4 row-equal-height">
+
+        <div class="mobile-scroll-container row-equal-height">
             @foreach (var p in featured)
             {
-                <div class="col-lg-4 col-md-6 fade-in-up">
+                <div class="mobile-scroll-item col-lg-4 col-md-6">
                     <div class="innovative-card p-3 d-flex flex-column justify-content-between h-100">
                         <div>
-                            <div class="img-zoom-container bg-light text-center py-4 px-3 position-relative d-flex align-items-center justify-content-center" style="min-height: 200px; background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);">
+                            <div class="img-zoom-container bg-light text-center py-3 px-2 position-relative d-flex align-items-center justify-content-center" style="min-height: 180px; background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);">
                                 @if (!string.IsNullOrEmpty(p.ImageUrl))
                                 {
-                                    <img src="@p.ImageUrl" alt="@p.Name" class="img-fluid object-fit-contain" style="max-height: 170px;" />
+                                    <img src="@p.ImageUrl" alt="@p.Name" class="img-fluid object-fit-contain" style="max-height: 150px;" />
                                 }
                                 else
                                 {
-                                    <div class="rounded-circle p-4 bg-white shadow-sm text-navy anim-float-icon">
-                                        <span class="material-symbols-outlined display-4">
+                                    <div class="rounded-circle p-3 bg-white shadow-sm text-navy anim-float-icon">
+                                        <span class="material-symbols-outlined display-5">
                                             @(p.SubCategory?.Category?.Type == BRT.Models.CategoryType.Garlic ? "eco" : "shopping_cart_checkout")
                                         </span>
                                     </div>
                                 }
-                                <span class="badge position-absolute top-0 start-0 m-3 px-3 py-2 rounded-pill shadow-sm bg-navy text-white" style="font-size: 0.72rem; border: 1px solid rgba(212,175,55,0.3);">
+                                <span class="badge position-absolute top-0 start-0 m-2.5 px-2.5 py-1.5 rounded-pill shadow-sm bg-navy text-white" style="font-size: 0.7rem; border: 1px solid rgba(212,175,55,0.3);">
                                     @(p.SubCategory?.Name ?? "General")
                                 </span>
                             </div>
-                            <div class="pt-3 px-2">
-                                <h4 class="card-title h5 fw-bold mb-1 text-navy">
+                            <div class="pt-3 px-1">
+                                <h4 class="card-title h6 fw-bold mb-1 text-navy">
                                     <span>@p.Name</span>
                                 </h4>
                                 @if (!string.IsNullOrEmpty(p.NameTamil))
                                 {
-                                    <span class="d-block text-muted small fw-medium mb-2">@p.NameTamil</span>
+                                    <span class="d-block text-muted extra-small fw-medium mb-1">@p.NameTamil</span>
                                 }
-                                <p class="card-text text-muted small lh-base">
-                                    @(string.IsNullOrEmpty(p.Description) ? "Standard commercial bulk packaging available with fresh mandi stock." : p.Description)
+                                <p class="card-text text-muted extra-small lh-base">
+                                    @(string.IsNullOrEmpty(p.Description) ? "Standard commercial bulk packaging with fresh mandi stock." : p.Description)
                                 </p>
                             </div>
                         </div>
-                        <div class="pt-3 px-2 mt-3 border-top d-flex justify-content-between align-items-center">
-                            <span class="badge bg-light text-dark border px-2-5 py-1 rounded-pill extra-small fw-semibold">
+                        <div class="pt-2 px-1 mt-2 border-top d-flex justify-content-between align-items-center">
+                            <span class="badge bg-light text-dark border px-2 py-1 rounded-pill extra-small fw-semibold">
                                 Fresh Stock
                             </span>
-                            <a asp-controller="Catalog" asp-action="Product" asp-route-slug="@p.Slug" class="btn btn-sm btn-outline-dark rounded-pill px-3 fw-semibold d-inline-flex align-items-center gap-1">
-                                Details <span class="material-symbols-outlined fs-6 arrow-icon">arrow_forward</span>
+                            <a asp-controller="Catalog" asp-action="Product" asp-route-slug="@p.Slug" class="btn btn-sm btn-outline-dark rounded-pill px-3 extra-small fw-semibold d-inline-flex align-items-center gap-1">
+                                Details <span class="material-symbols-outlined fs-6">arrow_forward</span>
                             </a>
                         </div>
                     </div>
                 </div>
             }
         </div>
-        <div class="text-center mt-5 fade-in-up">
-            <a asp-controller="Catalog" asp-action="Index" class="btn btn-brt-outline px-4 py-2-5 shadow-sm fw-semibold">View Full Catalog</a>
+        <div class="text-center mt-4">
+            <a asp-controller="Catalog" asp-action="Index" class="btn btn-brt-outline px-4 py-2 shadow-sm extra-small fw-bold">View Full Catalog</a>
         </div>
     </section>
 }
 
-<!-- ===== Live Market Dashboard ===== -->
+<!-- ===== Live Market Dashboard (Adaptive Matrix Grid) ===== -->
 @{
     var dashboard = ViewBag.MarketDashboard as List<BRT.Models.MarketPrice>;
 }
-<section class="container my-5 py-4">
-    <div class="p-4 p-md-5 rounded-4 shadow-sm border fade-in-up" style="background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%); border-color: rgba(212, 175, 55, 0.15) !important;">
-        <div class="text-center mb-5">
+<section class="container my-4 my-md-5 py-2">
+    <div class="p-3 p-md-5 rounded-4 shadow-sm border" style="background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%); border-color: rgba(212, 175, 55, 0.15) !important;">
+        <div class="text-center mb-4">
             <span class="hero-eyebrow fw-semibold text-uppercase tracking-wider small d-inline-flex align-items-center gap-1.5 text-gold">
                 <span class="material-symbols-outlined fs-6 anim-float-icon">trending_up</span> LIVE MARKET
             </span>
-            <h2 class="fw-bold mt-2 text-navy">Today's Mandi Wholesale Rates</h2>
-            <p class="text-muted mx-auto mb-0" style="max-width:600px">Daily updated rates directly synchronized with mandi markets.</p>
+            <h2 class="fw-bold mt-1 text-navy fs-3 fs-md-2">Today's Mandi Wholesale Rates</h2>
+            <p class="text-muted mx-auto mb-0 extra-small fs-md-6" style="max-width:550px">Real-time daily rates synchronized directly with primary mandi auctions.</p>
         </div>
-        <div class="row g-3 row-equal-height">
+
+        <div class="row g-2 g-md-3 row-equal-height">
             @if (dashboard != null && dashboard.Any())
             {
                 foreach (var m in dashboard)
                 {
-                    <div class="col-lg-3 col-md-4 col-6">
-                        <div class="innovative-card p-3 h-100 d-flex flex-column justify-content-between">
+                    <div class="col-6 col-md-4 col-lg-3">
+                        <div class="innovative-card p-2.5 p-md-3 h-100 d-flex flex-column justify-content-between">
                             <div>
-                                <div class="d-flex align-items-center justify-content-between mb-2">
-                                    <span class="p-2 rounded-circle bg-light text-gold d-inline-flex align-items-center anim-float-icon">
-                                        <span class="material-symbols-outlined fs-5">
+                                <div class="d-flex align-items-center justify-content-between mb-1.5">
+                                    <span class="p-1.5 rounded-circle bg-light text-gold d-inline-flex align-items-center anim-float-icon">
+                                        <span class="material-symbols-outlined fs-6">
                                             @(m.Product?.SubCategory?.Category?.Type == BRT.Models.CategoryType.Garlic ? "eco" : "shopping_cart_checkout")
                                         </span>
                                     </span>
-                                    <span class="badge bg-danger text-white extra-small fw-semibold pulse-badge">LIVE</span>
+                                    <span class="badge bg-danger text-white extra-small fw-semibold pulse-badge" style="font-size:0.65rem;">LIVE</span>
                                 </div>
-                                <h6 class="fw-bold mb-0 text-navy text-truncate">@m.Product?.Name</h6>
-                                <span class="text-muted extra-small d-block mb-2">@m.Product?.NameTamil</span>
+                                <h6 class="fw-bold mb-0 text-navy text-truncate extra-small fs-md-6">@m.Product?.Name</h6>
+                                <span class="text-muted extra-small d-block mb-1" style="font-size: 0.7rem;">@m.Product?.NameTamil</span>
                             </div>
-                            <div class="mt-2 pt-2 border-top">
-                                <div class="fs-5 fw-bold text-navy">₹@m.TodayPrice.ToString("N2") <span class="fs-7 text-muted fw-normal">/ unit</span></div>
-                                <div class="d-flex justify-content-between align-items-center mt-1 text-muted extra-small">
+                            <div class="mt-2 pt-1.5 border-top">
+                                <div class="fw-bold text-navy fs-6 fs-md-5">₹@m.TodayPrice.ToString("N2") <span class="extra-small text-muted fw-normal">/ unit</span></div>
+                                <div class="d-flex justify-content-between align-items-center mt-1 text-muted" style="font-size:0.68rem;">
                                     <span>Updated Today</span>
-                                    <span class="material-symbols-outlined text-gold" style="font-size: 0.85rem">verified</span>
+                                    <span class="material-symbols-outlined text-gold" style="font-size: 0.8rem">verified</span>
                                 </div>
                             </div>
                         </div>
                     </div>
                 }
             }
-            <div class="col-lg-3 col-md-4 col-12">
-                <div class="portfolio-card-hero p-4 h-100 text-center d-flex flex-column align-items-center justify-content-center text-white bg-navy">
-                    <span class="material-symbols-outlined display-6 mb-2 text-gold anim-float-icon">forum</span>
-                    <h6 class="fw-bold mb-1">Need Custom Quotation?</h6>
-                    <p class="extra-small mb-3 opacity-75">Connect directly with our desk for custom orders.</p>
-                    <a asp-controller="Order" asp-action="Request" class="btn btn-sm btn-brt-gold px-3 py-2 fw-semibold">Get Quotation</a>
+            <div class="col-12 col-md-4 col-lg-3 mt-2 mt-md-0">
+                <div class="portfolio-card-hero p-3 text-center d-flex flex-column align-items-center justify-content-center text-white bg-navy h-100">
+                    <span class="material-symbols-outlined fs-2 mb-1 text-gold anim-float-icon">forum</span>
+                    <h6 class="fw-bold mb-1 extra-small fs-md-6">Custom Quotation?</h6>
+                    <p class="extra-small mb-2 opacity-75" style="font-size: 0.72rem;">Direct bulk quotes for customized weights.</p>
+                    <a asp-controller="Order" asp-action="Request" class="btn btn-sm btn-brt-gold px-3 py-1.5 extra-small fw-bold">Get Quotation</a>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- ===== Category Portfolio (Bento Grid) ===== -->
-<section class="container my-5 py-4">
-    <div class="text-center mb-5 fade-in-up">
+<!-- ===== Category Portfolio (Bento Cards) ===== -->
+<section class="container my-4 my-md-5 py-2">
+    <div class="text-center mb-4 mb-md-5">
         <span class="hero-eyebrow fw-semibold text-uppercase tracking-wider small d-inline-flex align-items-center gap-1.5 text-gold">
             <span class="material-symbols-outlined fs-6 anim-float-icon">grid_view</span> PORTFOLIO
         </span>
-        <h2 class="fw-bold mt-2 text-navy">Explore Product Portfolio</h2>
-        <p class="text-muted mx-auto" style="max-width:600px">Structured solutions tailored for distributors and commercial buyers.</p>
+        <h2 class="fw-bold mt-1 text-navy fs-3 fs-md-2">Explore Product Portfolio</h2>
+        <p class="text-muted mx-auto extra-small fs-md-6" style="max-width:550px">Structured supply chain solutions designed for commercial buyers.</p>
     </div>
     
-    <div class="row g-4 row-equal-height">
+    <div class="row g-3 g-md-4 row-equal-height">
         <!-- Garlic Mandi Card -->
-        <div class="col-lg-6 fade-in-up">
-            <a asp-controller="Catalog" asp-action="Garlic" class="portfolio-card-hero p-4 text-white text-decoration-none d-flex flex-column justify-content-between h-100" style="background: linear-gradient(135deg, #0D131F 0%, #182232 100%);">
+        <div class="col-12 col-md-6">
+            <a asp-controller="Catalog" asp-action="Garlic" class="portfolio-card-hero p-3.5 p-md-4 text-white text-decoration-none d-flex flex-column justify-content-between h-100">
                 <div class="d-flex justify-content-between align-items-start position-relative z-1">
-                    <span class="p-3 rounded-4 bg-glass text-gold anim-float-icon">
-                        <span class="material-symbols-outlined display-6">eco</span>
+                    <span class="p-2.5 rounded-3 bg-glass text-gold anim-float-icon">
+                        <span class="material-symbols-outlined fs-3">eco</span>
                     </span>
-                    <span class="badge text-dark fw-bold px-3 py-2 rounded-pill bg-gold">Primary Supply</span>
+                    <span class="badge text-dark fw-bold px-3 py-1.5 rounded-pill bg-gold extra-small">Primary Sourcing</span>
                 </div>
-                <div class="mt-4 position-relative z-1">
-                    <h3 class="fw-bold text-white mb-2">Garlic Mandi</h3>
-                    <p class="small text-light opacity-75 mb-3">All grades of garlic bulbs, cloves, raw, and processed varieties suited for wholesale.</p>
-                    <span class="text-gold fw-semibold d-inline-flex align-items-center gap-1">
-                        Explore Garlic Section <span class="material-symbols-outlined fs-6 arrow-icon">arrow_forward</span>
+                <div class="mt-3 position-relative z-1">
+                    <h3 class="fw-bold text-white fs-4 mb-1">Garlic Mandi</h3>
+                    <p class="extra-small text-light opacity-75 mb-2">Bulbs, cloves, raw, and processed garlic varieties in wholesale volume.</p>
+                    <span class="text-gold fw-semibold extra-small d-inline-flex align-items-center gap-1">
+                        Explore Garlic Section <span class="material-symbols-outlined fs-6">arrow_forward</span>
                     </span>
                 </div>
             </a>
         </div>
         <!-- Grocery Essentials Card -->
-        <div class="col-lg-6 fade-in-up">
-            <a asp-controller="Catalog" asp-action="Grocery" class="portfolio-card-hero p-4 text-white text-decoration-none d-flex flex-column justify-content-between h-100" style="background: linear-gradient(135deg, #182232 0%, #253347 100%);">
+        <div class="col-12 col-md-6">
+            <a asp-controller="Catalog" asp-action="Grocery" class="portfolio-card-hero p-3.5 p-md-4 text-white text-decoration-none d-flex flex-column justify-content-between h-100">
                 <div class="d-flex justify-content-between align-items-start position-relative z-1">
-                    <span class="p-3 rounded-4 bg-glass text-gold anim-float-icon">
-                        <span class="material-symbols-outlined display-6">shopping_cart_checkout</span>
+                    <span class="p-2.5 rounded-3 bg-glass text-gold anim-float-icon">
+                        <span class="material-symbols-outlined fs-3">shopping_cart_checkout</span>
                     </span>
-                    <span class="badge bg-light text-dark fw-bold px-3 py-2 rounded-pill">Grocery Staples</span>
+                    <span class="badge bg-light text-dark fw-bold px-3 py-1.5 rounded-pill extra-small">Grocery Staples</span>
                 </div>
-                <div class="mt-4 position-relative z-1">
-                    <h3 class="fw-bold text-white mb-2">Grocery Essentials</h3>
-                    <p class="small text-light opacity-75 mb-3">Top quality pulses, spices, rice, and commercial kitchen staples direct from mandi.</p>
-                    <span class="text-gold fw-semibold d-inline-flex align-items-center gap-1">
-                        Explore Grocery Catalog <span class="material-symbols-outlined fs-6 arrow-icon">arrow_forward</span>
+                <div class="mt-3 position-relative z-1">
+                    <h3 class="fw-bold text-white fs-4 mb-1">Grocery Essentials</h3>
+                    <p class="extra-small text-light opacity-75 mb-2">High grade pulses, spices, rice, and kitchen staples straight from mandi.</p>
+                    <span class="text-gold fw-semibold extra-small d-inline-flex align-items-center gap-1">
+                        Explore Grocery Catalog <span class="material-symbols-outlined fs-6">arrow_forward</span>
                     </span>
                 </div>
             </a>
         </div>
         <!-- Loose Packs Card -->
-        <div class="col-lg-6 fade-in-up">
-            <a asp-controller="Catalog" asp-action="Loose" class="portfolio-card-hero p-4 text-white text-decoration-none d-flex flex-column justify-content-between h-100" style="background: linear-gradient(135deg, #253347 0%, #0D131F 100%);">
+        <div class="col-12 col-md-6">
+            <a asp-controller="Catalog" asp-action="Loose" class="portfolio-card-hero p-3.5 p-md-4 text-white text-decoration-none d-flex flex-column justify-content-between h-100">
                 <div class="d-flex justify-content-between align-items-start position-relative z-1">
-                    <span class="p-3 rounded-4 bg-glass text-gold anim-float-icon">
-                        <span class="material-symbols-outlined display-6">inventory_2</span>
+                    <span class="p-2.5 rounded-3 bg-glass text-gold anim-float-icon">
+                        <span class="material-symbols-outlined fs-3">inventory_2</span>
                     </span>
-                    <span class="badge bg-secondary text-white fw-medium px-3 py-1 rounded-pill">Retail Packs</span>
+                    <span class="badge bg-secondary text-white fw-medium px-3 py-1.5 rounded-pill extra-small">Retail Packs</span>
                 </div>
-                <div class="mt-4 position-relative z-1">
-                    <h3 class="fw-bold text-white mb-2">Loose &amp; Custom Packing</h3>
-                    <p class="small text-light opacity-75 mb-3">Custom weight packaging for retail stores &amp; direct distribution.</p>
-                    <span class="text-gold fw-semibold d-inline-flex align-items-center gap-1">
-                        View Packing Options <span class="material-symbols-outlined fs-6 arrow-icon">arrow_forward</span>
+                <div class="mt-3 position-relative z-1">
+                    <h3 class="fw-bold text-white fs-4 mb-1">Loose &amp; Custom Packing</h3>
+                    <p class="extra-small text-light opacity-75 mb-2">Flexible weight packaging options for retail outlets &amp; regional traders.</p>
+                    <span class="text-gold fw-semibold extra-small d-inline-flex align-items-center gap-1">
+                        View Packing Options <span class="material-symbols-outlined fs-6">arrow_forward</span>
                     </span>
                 </div>
             </a>
         </div>
         <!-- Bulk Inquiry Card -->
-        <div class="col-lg-6 fade-in-up">
-            <a asp-controller="Order" asp-action="Request" class="portfolio-card-hero p-4 text-dark text-decoration-none d-flex flex-column justify-content-between h-100" style="background: linear-gradient(135deg, #D4AF37 0%, #C59B27 100%);">
+        <div class="col-12 col-md-6">
+            <a asp-controller="Order" asp-action="Request" class="portfolio-card-hero p-3.5 p-md-4 text-dark text-decoration-none d-flex flex-column justify-content-between h-100" style="background: linear-gradient(135deg, #D4AF37 0%, #C59B27 100%);">
                 <div class="d-flex justify-content-between align-items-start position-relative z-1">
-                    <span class="p-3 rounded-4 bg-white text-dark anim-float-icon shadow-sm">
-                        <span class="material-symbols-outlined display-6">handshake</span>
+                    <span class="p-2.5 rounded-3 bg-white text-dark anim-float-icon shadow-sm">
+                        <span class="material-symbols-outlined fs-3">handshake</span>
                     </span>
-                    <span class="badge bg-dark text-white fw-medium px-3 py-1 rounded-pill">Direct Mandi</span>
+                    <span class="badge bg-dark text-white fw-medium px-3 py-1.5 rounded-pill extra-small">Direct Mandi</span>
                 </div>
-                <div class="mt-4 position-relative z-1">
-                    <h3 class="fw-bold text-dark mb-2">Bulk Wholesale Inquiry</h3>
-                    <p class="small text-dark opacity-75 mb-3">Get daily customized quotation based on volume and transport setup.</p>
-                    <span class="text-dark fw-bold d-inline-flex align-items-center gap-1">
-                        Request Quote Now <span class="material-symbols-outlined fs-6 arrow-icon">arrow_forward</span>
+                <div class="mt-3 position-relative z-1">
+                    <h3 class="fw-bold text-dark fs-4 mb-1">Bulk Wholesale Inquiry</h3>
+                    <p class="extra-small text-dark opacity-75 mb-2">Get daily market estimates tailored for volume orders and transport setup.</p>
+                    <span class="text-dark fw-bold extra-small d-inline-flex align-items-center gap-1">
+                        Request Quote Now <span class="material-symbols-outlined fs-6">arrow_forward</span>
                     </span>
                 </div>
             </a>
@@ -506,74 +519,74 @@
     </div>
 </section>
 
-<!-- ===== Why Choose BRT ===== -->
-<section class="container my-5 py-4">
-    <div class="row g-5 align-items-center">
-        <div class="col-lg-6 fade-in-up">
+<!-- ===== Why Choose BRT Section ===== -->
+<section class="container my-4 my-md-5 py-2">
+    <div class="row g-4 align-items-center">
+        <div class="col-lg-6">
             <span class="hero-eyebrow fw-semibold text-uppercase tracking-wider small d-inline-flex align-items-center gap-1.5 text-gold">
                 <span class="material-symbols-outlined fs-6 anim-float-icon">handshake</span> WHY CHOOSE BRT
             </span>
-            <h2 class="fw-bold mt-2 mb-3 text-navy">Trusted Wholesale Partner Since 2000</h2>
-            <p class="text-muted mb-4">We supply premium-grade garlic and grocery staples with complete price transparency, reliable nationwide transport, and dedicated support for long-term partners.</p>
+            <h2 class="fw-bold mt-1 mb-2 text-navy fs-3 fs-md-2">Trusted Mandi Partner Since 2000</h2>
+            <p class="text-muted extra-small fs-md-6 mb-3">We supply commercial-grade garlic and grocery staples with complete price transparency, nationwide transport, and dedicated dealer support.</p>
             
-            <div class="row g-3 mb-4">
+            <div class="row g-2 mb-3">
                 <div class="col-6">
-                    <div class="d-flex align-items-center gap-2">
-                        <span class="material-symbols-outlined text-gold fs-5">check_circle</span>
-                        <span class="fw-medium text-dark small">Premium Grade Quality</span>
+                    <div class="d-flex align-items-center gap-1.5">
+                        <span class="material-symbols-outlined text-gold fs-6">check_circle</span>
+                        <span class="fw-medium text-dark extra-small">Strict Quality Control</span>
                     </div>
                 </div>
                 <div class="col-6">
-                    <div class="d-flex align-items-center gap-2">
-                        <span class="material-symbols-outlined text-gold fs-5">check_circle</span>
-                        <span class="fw-medium text-dark small">Live Market Rates</span>
+                    <div class="d-flex align-items-center gap-1.5">
+                        <span class="material-symbols-outlined text-gold fs-6">check_circle</span>
+                        <span class="fw-medium text-dark extra-small">Live Sourcing Rates</span>
                     </div>
                 </div>
                 <div class="col-6">
-                    <div class="d-flex align-items-center gap-2">
-                        <span class="material-symbols-outlined text-gold fs-5">check_circle</span>
-                        <span class="fw-medium text-dark small">Direct Mandi Sourcing</span>
+                    <div class="d-flex align-items-center gap-1.5">
+                        <span class="material-symbols-outlined text-gold fs-6">check_circle</span>
+                        <span class="fw-medium text-dark extra-small">Direct Commission Mandi</span>
                     </div>
                 </div>
                 <div class="col-6">
-                    <div class="d-flex align-items-center gap-2">
-                        <span class="material-symbols-outlined text-gold fs-5">check_circle</span>
-                        <span class="fw-medium text-dark small">Fast Dispatch Network</span>
+                    <div class="d-flex align-items-center gap-1.5">
+                        <span class="material-symbols-outlined text-gold fs-6">check_circle</span>
+                        <span class="fw-medium text-dark extra-small">Fast Dispatch Network</span>
                     </div>
                 </div>
             </div>
             
-            <a asp-controller="Home" asp-action="WhyChooseUs" class="btn btn-brt-outline px-4 fw-semibold">Learn More About Us</a>
+            <a asp-controller="Home" asp-action="WhyChooseUs" class="btn btn-brt-outline px-4 py-2 extra-small fw-semibold">Learn More About Us</a>
         </div>
         
-        <div class="col-lg-6">
-            <div class="row g-3 row-equal-height">
-                <div class="col-6 fade-in-up">
-                    <div class="innovative-card text-center p-4 h-100">
-                        <span class="material-symbols-outlined display-6 text-gold mb-2 anim-float-icon">workspace_premium</span>
-                        <h6 class="fw-bold text-navy">Strict Grading</h6>
-                        <p class="text-muted extra-small mb-0">Consistently graded for uniform size &amp; purity</p>
+        <div class="col-lg-6 mt-3 mt-lg-0">
+            <div class="row g-2 g-md-3 row-equal-height">
+                <div class="col-6">
+                    <div class="innovative-card text-center p-3 h-100">
+                        <span class="material-symbols-outlined fs-3 text-gold mb-1 anim-float-icon">workspace_premium</span>
+                        <h6 class="fw-bold text-navy extra-small mb-1">Strict Grading</h6>
+                        <p class="text-muted" style="font-size:0.7rem;">Consistently graded for uniform size &amp; purity</p>
                     </div>
                 </div>
-                <div class="col-6 fade-in-up">
-                    <div class="innovative-card text-center p-4 h-100">
-                        <span class="material-symbols-outlined display-6 text-gold mb-2 anim-float-icon">local_shipping</span>
-                        <h6 class="fw-bold text-navy">Safe Transport</h6>
-                        <p class="text-muted extra-small mb-0">Moisture-proof packing &amp; door delivery</p>
+                <div class="col-6">
+                    <div class="innovative-card text-center p-3 h-100">
+                        <span class="material-symbols-outlined fs-3 text-gold mb-1 anim-float-icon">local_shipping</span>
+                        <h6 class="fw-bold text-navy extra-small mb-1">Safe Transport</h6>
+                        <p class="text-muted" style="font-size:0.7rem;">Moisture-proof packing &amp; door dispatch</p>
                     </div>
                 </div>
-                <div class="col-6 fade-in-up">
-                    <div class="innovative-card text-center p-4 h-100">
-                        <span class="material-symbols-outlined display-6 text-gold mb-2 anim-float-icon">trending_up</span>
-                        <h6 class="fw-bold text-navy">Fair Pricing</h6>
-                        <p class="text-muted extra-small mb-0">Real-time daily competitive market prices</p>
+                <div class="col-6">
+                    <div class="innovative-card text-center p-3 h-100">
+                        <span class="material-symbols-outlined fs-3 text-gold mb-1 anim-float-icon">trending_up</span>
+                        <h6 class="fw-bold text-navy extra-small mb-1">Fair Pricing</h6>
+                        <p class="text-muted" style="font-size:0.7rem;">Real-time daily competitive market pricing</p>
                     </div>
                 </div>
-                <div class="col-6 fade-in-up">
-                    <div class="innovative-card text-center p-4 h-100">
-                        <span class="material-symbols-outlined display-6 text-gold mb-2 anim-float-icon">support_agent</span>
-                        <h6 class="fw-bold text-navy">24/7 Desk</h6>
-                        <p class="text-muted extra-small mb-0">Instant response via call or WhatsApp</p>
+                <div class="col-6">
+                    <div class="innovative-card text-center p-3 h-100">
+                        <span class="material-symbols-outlined fs-3 text-gold mb-1 anim-float-icon">support_agent</span>
+                        <h6 class="fw-bold text-navy extra-small mb-1">Direct Desk</h6>
+                        <p class="text-muted" style="font-size:0.7rem;">Instant response via phone or WhatsApp</p>
                     </div>
                 </div>
             </div>
@@ -582,14 +595,14 @@
 </section>
 
 <!-- ===== Industries We Serve ===== -->
-<section class="container my-5 py-4">
-    <div class="text-center mb-5 fade-in-up">
+<section class="container my-4 my-md-5 py-2">
+    <div class="text-center mb-4">
         <span class="hero-eyebrow fw-semibold text-uppercase tracking-wider small d-inline-flex align-items-center gap-1.5 text-gold">
             <span class="material-symbols-outlined fs-6 anim-float-icon">domain</span> INDUSTRIES WE SERVE
         </span>
-        <h2 class="fw-bold mt-2 text-navy">Commercial Clients &amp; Partners</h2>
+        <h2 class="fw-bold mt-1 text-navy fs-3 fs-md-2">Commercial Clients &amp; Partners</h2>
     </div>
-    <div class="row g-3 text-center row-equal-height">
+    <div class="row g-2 g-md-3 text-center row-equal-height">
         @{
             var industries = new[] {
                 (Icon: "storefront", Name: "Supermarkets"),
@@ -604,10 +617,10 @@
         }
         @foreach (var ind in industries)
         {
-            <div class="col-6 col-md-3 fade-in-up">
-                <div class="innovative-card p-3 d-flex flex-column align-items-center justify-content-center h-100">
-                    <span class="material-symbols-outlined text-navy fs-3 mb-2 anim-float-icon">@ind.Icon</span>
-                    <h6 class="fw-semibold mb-0 text-dark small">@ind.Name</h6>
+            <div class="col-6 col-sm-4 col-md-3">
+                <div class="innovative-card p-2.5 d-flex flex-column align-items-center justify-content-center h-100">
+                    <span class="material-symbols-outlined text-navy fs-4 mb-1 anim-float-icon">@ind.Icon</span>
+                    <h6 class="fw-semibold mb-0 text-dark extra-small">@ind.Name</h6>
                 </div>
             </div>
         }
@@ -615,12 +628,12 @@
 </section>
 
 <!-- ===== Footer Disclaimer ===== -->
-<section class="container my-5 py-3">
-    <div class="innovative-card p-3 text-center d-flex flex-wrap justify-content-center align-items-center gap-3 gap-md-4 text-muted small fade-in-up">
-        <span class="d-inline-flex align-items-center gap-1.5"><span class="material-symbols-outlined text-gold fs-6">check_circle</span> Bulk Orders Preferred</span>
-        <span class="d-inline-flex align-items-center gap-1.5"><span class="material-symbols-outlined text-gold fs-6">check_circle</span> Garlic Wholesale</span>
-        <span class="d-inline-flex align-items-center gap-1.5"><span class="material-symbols-outlined text-gold fs-6">check_circle</span> Grocery Wholesale</span>
-        <span class="d-inline-flex align-items-center gap-1.5"><span class="material-symbols-outlined text-gold fs-6">check_circle</span> Live Daily Market Rates</span>
-        <span class="d-inline-flex align-items-center gap-1.5"><span class="material-symbols-outlined text-gold fs-6">check_circle</span> Tax/GST Included</span>
+<section class="container my-4 py-2">
+    <div class="innovative-card p-3 text-center d-flex flex-wrap justify-content-center align-items-center gap-2 gap-md-4 text-muted extra-small">
+        <span class="d-inline-flex align-items-center gap-1"><span class="material-symbols-outlined text-gold fs-6">check_circle</span> Bulk Preferred</span>
+        <span class="d-inline-flex align-items-center gap-1"><span class="material-symbols-outlined text-gold fs-6">check_circle</span> Garlic Mandi</span>
+        <span class="d-inline-flex align-items-center gap-1"><span class="material-symbols-outlined text-gold fs-6">check_circle</span> Grocery Wholesale</span>
+        <span class="d-inline-flex align-items-center gap-1"><span class="material-symbols-outlined text-gold fs-6">check_circle</span> Live Rates</span>
+        <span class="d-inline-flex align-items-center gap-1"><span class="material-symbols-outlined text-gold fs-6">check_circle</span> Tax/GST Included</span>
     </div>
 </section>
