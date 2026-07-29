@@ -203,14 +203,18 @@
 
                     <tr>
                         <td>
-                            <div class="fw-bold text-dark">
+                            <div class="fw-bold text-dark fs-6">
                                 @p.Name
                                 @if (!string.IsNullOrEmpty(p.Grade))
                                 {
                                     <span class="grade-badge-inline">@p.Grade</span>
                                 }
                             </div>
-                            <span class="text-muted small">@p.SubCategory?.Name</span>
+                            @if (!string.IsNullOrEmpty(p.NameTamil))
+                            {
+                                <div class="text-muted small">@p.NameTamil</div>
+                            }
+                            <span class="text-muted extra-small opacity-75 d-block mt-0.5">@(p.SubCategory?.Name ?? "—")</span>
                         </td>
                         <td class="font-monospace">
                             @(mp != null ? "₹" + mp.PreviousPrice.ToString("N2") : "—")
