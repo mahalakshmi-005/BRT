@@ -87,20 +87,21 @@
             box-shadow: inset 0 0 0 1px rgba(179, 143, 67, 0.3);
         }
 
-        /* DYNAMIC ON/OFF LANGUAGE TOGGLE SLIDER */
+        /* DYNAMIC ON/OFF LANGUAGE TOGGLE SLIDER (FIXED) */
         .lang-switch-container {
             display: inline-flex;
             align-items: center;
-            background: rgba(255, 255, 255, 0.06);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            padding: 4px;
-            border-radius: 100px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(179, 143, 67, 0.4);
+            padding: 3px;
+            border-radius: 50px;
             position: relative;
             cursor: pointer;
             user-select: none;
             margin-left: 8px;
-            width: 90px;
-            height: 34px;
+            width: 100px;
+            height: 36px;
+            overflow: hidden; /* Stops Gold Pill from spilling outside */
         }
 
         .lang-option {
@@ -108,10 +109,11 @@
             font-weight: 700;
             width: 50%;
             text-align: center;
-            color: rgba(255, 255, 255, 0.7);
-            border-radius: 100px;
-            transition: all 0.25s ease;
+            color: rgba(255, 255, 255, 0.75) !important; /* Clearly readable inactive text */
+            border-radius: 50px;
+            transition: color 0.3s ease;
             z-index: 2;
+            line-height: 30px;
         }
 
         .lang-switch-container .active-slider {
@@ -119,23 +121,24 @@
             top: 3px;
             bottom: 3px;
             left: 3px;
-            width: 40px;
+            width: 47px;
             background: var(--brt-gold-pure);
-            border-radius: 100px;
+            border-radius: 50px;
             transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
             z-index: 1;
         }
 
+        /* Position Adjustment when Tamil Selected */
         body.lang-ta .active-slider {
-            transform: translateX(42px);
+            transform: translateX(47px);
         }
 
         .lang-option.active {
-            color: #111827 !important;
+            color: #0B0F19 !important; /* Bold Dark text on active gold background */
         }
 
         /* Responsive Mobile Layout Fixes */
-        @@media (max-width: 991.98px) {
+        @media (max-width: 991.98px) {
             .site-nav-premium {
                 border-radius: 24px !important;
                 padding: 12px 20px !important;
@@ -305,7 +308,7 @@
                         <li class="nav-item">
                             <div class="lang-switch-container" id="langContainer" onclick="toggleLanguage()">
                                 <div class="active-slider" id="langSlider"></div>
-                                <div class="lang-option" id="optEN">EN</div>
+                                <div class="lang-option active" id="optEN">EN</div>
                                 <div class="lang-option" id="optTN">தமிழ்</div>
                             </div>
                         </li>
