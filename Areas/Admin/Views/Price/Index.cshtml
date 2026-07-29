@@ -15,7 +15,6 @@
         --brt-text-muted: #64748B;
     }
 
-    /* Header Section */
     .page-header-container {
         margin-bottom: 1.5rem;
     }
@@ -38,7 +37,6 @@
         margin: 0;
     }
 
-    /* Table Container Styling */
     .table-card-container {
         background: #FFFFFF;
         border: 1px solid var(--brt-border-color);
@@ -82,7 +80,20 @@
         background-color: #F8FAFC;
     }
 
-    /* Price Movements Badges */
+    /* Grade badge next to product name */
+    .grade-badge-inline {
+        display: inline-block;
+        background: #FFF7ED;
+        color: var(--brt-gold-accent);
+        border: 1px solid #FDBA74;
+        font-size: 0.68rem;
+        font-weight: 700;
+        padding: 0.05rem 0.5rem;
+        border-radius: 20px;
+        margin-left: 0.4rem;
+        vertical-align: middle;
+    }
+
     .price-diff-badge {
         padding: 0.25rem 0.6rem;
         border-radius: 20px;
@@ -97,7 +108,6 @@
     .diff-down { background: #FEE2E2; color: #B91C1C; }
     .diff-neutral { background: #F1F5F9; color: #475569; }
 
-    /* Custom Form Controls */
     .input-price-custom {
         width: 110px;
         height: 36px;
@@ -193,7 +203,13 @@
 
                     <tr>
                         <td>
-                            <div class="fw-bold text-dark">@p.Name</div>
+                            <div class="fw-bold text-dark">
+                                @p.Name
+                                @if (!string.IsNullOrEmpty(p.Grade))
+                                {
+                                    <span class="grade-badge-inline">@p.Grade</span>
+                                }
+                            </div>
                             <span class="text-muted small">@p.SubCategory?.Name</span>
                         </td>
                         <td class="font-monospace">
@@ -235,16 +251,16 @@
                             <form asp-action="UpdatePrice" method="post" class="d-flex align-items-center gap-2">
                                 @Html.AntiForgeryToken()
                                 <input type="hidden" name="productId" value="@p.Id" />
-                                
+
                                 <input type="number" step="0.01" name="todayPrice" class="form-control input-price-custom" placeholder="Price (₹)" value="@mp?.TodayPrice" required />
-                                
+
                                 <div class="form-check m-0 d-flex align-items-center gap-1" title="GST Included">
                                     <input type="checkbox" name="gstIncluded" value="true" class="form-check-input mt-0" id="gst_@p.Id" @(mp?.GSTIncluded != false ? "checked" : "") />
                                     <label class="form-check-label text-muted small" for="gst_@p.Id">GST</label>
                                 </div>
-                                
+
                                 <input type="hidden" name="updatedBy" value="@User.Identity!.Name" />
-                                
+
                                 <button type="submit" class="btn btn-brt-gold-sm">
                                     <span class="material-symbols-outlined fs-6">sync</span>
                                     <span>Save</span>
