@@ -18,7 +18,7 @@
         --brt-bg-cream: #FFFDF9;
         --text-main: #1F2937;
         --text-muted: #6B7280;
-        --border-refined: rgba(179, 143, 67, 0.2);
+        --border-refined: rgba(179, 143, 67, 0.18);
         --price-up-bg: rgba(16, 185, 129, 0.08);
         --price-up-text: #059669;
         --price-down-bg: rgba(239, 68, 68, 0.08);
@@ -30,6 +30,7 @@
         font-family: 'Plus Jakarta Sans', sans-serif;
         background-color: var(--brt-bg-cream);
         color: var(--text-main);
+        padding-bottom: 90px; /* Space for Sticky Mobile Bar */
     }
 
     /* AUTOMATIC DYNAMIC LANGUAGE CONTROLLER */
@@ -41,35 +42,53 @@
         display: none !important;
     }
 
-    /* CORPORATE MEDIA SHOWCASE */
-    .corporate-media-showcase {
-        background: var(--brt-surface-white);
-        border: 1px solid var(--border-refined);
-        border-radius: 28px;
-        padding: 16px;
-        position: relative;
-        box-shadow: 0 20px 40px -20px rgba(11, 15, 25, 0.08);
-        overflow: hidden;
+    /* APP TOP HEADER BAR (Mobile First) */
+    .app-top-nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 20px;
     }
 
-        .corporate-media-showcase img {
-            width: 100%;
-            height: auto;
-            object-fit: cover;
-            border-radius: 20px;
-            transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
-        }
-
-        .corporate-media-showcase:hover img {
-            transform: scale(1.03);
-        }
-
-    .detail-fallback-frame {
-        height: 420px;
+    .app-back-btn {
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        background: var(--brt-surface-white);
+        border: 1px solid var(--border-refined);
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 5rem;
+        color: var(--brt-dark-navy);
+        text-decoration: none;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
+    }
+
+    /* HERO SHOWCASE CARD (Matches Wholesale Products Clean Light Vibe) */
+    .app-hero-card {
+        background: var(--brt-surface-white);
+        border: 1px solid var(--border-refined);
+        border-radius: 28px;
+        padding: 24px;
+        box-shadow: 0 15px 35px -10px rgba(11, 15, 25, 0.05);
+        text-align: center;
+        position: relative;
+    }
+
+    .app-product-img {
+        max-height: 280px;
+        width: auto;
+        object-fit: contain;
+        border-radius: 18px;
+        transition: transform 0.4s ease;
+    }
+
+    .detail-fallback-frame {
+        height: 260px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 4rem;
         color: var(--brt-gold-pure);
         background: var(--brt-gold-light);
         border-radius: 20px;
@@ -79,111 +98,91 @@
     .corporate-path-capsule {
         display: inline-flex;
         align-items: center;
-        background: var(--brt-dark-navy);
+        background: var(--brt-gold-light);
         border: 1px solid var(--border-refined);
-        color: var(--brt-gold-pure);
-        padding: 6px 18px;
+        color: var(--brt-gold-dark);
+        padding: 5px 14px;
         border-radius: 100px;
-        font-size: 0.75rem;
+        font-size: 0.72rem;
         font-weight: 700;
-        letter-spacing: 0.8px;
+        letter-spacing: 0.6px;
         text-transform: uppercase;
-        margin-bottom: 20px;
-        box-shadow: 0 4px 15px rgba(11, 15, 25, 0.1);
     }
 
-    /* TYPOGRAPHY */
+    /* TYPOGRAPHY (LIGHT BACKGROUND STYLE) */
     .detail-corporate-title {
-        font-family: 'Space Grotesk', sans-serif;
+        font-family: 'Playfair Display', serif;
         font-weight: 700;
-        font-size: 2.8rem;
+        font-size: 2.2rem;
         color: var(--brt-dark-navy);
-        line-height: 1.15;
-        margin-bottom: 12px;
-        letter-spacing: -0.5px;
+        line-height: 1.2;
+        margin: 12px 0 8px 0;
+        letter-spacing: -0.3px;
     }
 
     .detail-corporate-title-ta {
         font-family: 'Plus Jakarta Sans', sans-serif;
         font-weight: 800;
-        font-size: 2.3rem;
+        font-size: 1.9rem;
         color: var(--brt-dark-navy);
         line-height: 1.3;
-        margin-bottom: 12px;
+        margin: 12px 0 8px 0;
     }
 
     .premium-grade-badge {
         display: inline-flex;
         align-items: center;
-        background: var(--brt-gold-light);
-        color: var(--brt-gold-dark);
+        background: var(--brt-dark-navy);
+        color: var(--brt-gold-pure);
         font-weight: 800;
-        font-size: 0.75rem;
-        padding: 6px 16px;
-        border-radius: 8px;
-        letter-spacing: 1.5px;
+        font-size: 0.7rem;
+        padding: 5px 12px;
+        border-radius: 6px;
+        letter-spacing: 1.2px;
         text-transform: uppercase;
-        border: 1px solid rgba(179, 143, 67, 0.3);
-        margin-bottom: 24px;
+        margin-bottom: 18px;
     }
 
-    /* FINANCIAL TRADING TERMINAL WIDGET */
+    /* FINANCIAL TRADING TICKER WIDGET */
     .detail-ticker-panel {
-        border-radius: 24px;
-        padding: 24px 28px;
-        margin: 24px 0;
+        border-radius: 20px;
+        padding: 20px;
+        margin: 20px 0;
         border: 1px solid var(--border-refined);
         background: var(--brt-surface-white);
-        box-shadow: 0 12px 30px -10px rgba(11, 15, 25, 0.05);
+        box-shadow: 0 10px 25px -5px rgba(11, 15, 25, 0.04);
         position: relative;
     }
 
-        .detail-ticker-panel::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 6px;
-            height: 100%;
-            border-radius: 24px 0 0 24px;
-        }
+    .detail-ticker-panel::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 5px;
+        height: 100%;
+        border-radius: 20px 0 0 20px;
+    }
 
-        .detail-ticker-panel.state-up::before {
-            background: var(--price-up-text);
-        }
-
-        .detail-ticker-panel.state-down::before {
-            background: var(--price-down-text);
-        }
-
-        .detail-ticker-panel.state-stable::before {
-            background: var(--brt-gold-pure);
-        }
+    .detail-ticker-panel.state-up::before { background: var(--price-up-text); }
+    .detail-ticker-panel.state-down::before { background: var(--price-down-text); }
+    .detail-ticker-panel.state-stable::before { background: var(--brt-gold-pure); }
 
     .panel-price-row {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        flex-wrap: wrap;
-        gap: 16px;
-    }
-
-    .panel-price-left {
-        display: flex;
-        align-items: baseline;
-        gap: 8px;
     }
 
     .panel-live-amount {
-        font-size: 2.8rem;
+        font-size: 2.2rem;
         font-weight: 800;
         color: var(--brt-dark-navy);
-        letter-spacing: -1.5px;
-        line-height: 1;
+        letter-spacing: -1px;
     }
 
     .panel-live-unit {
-        font-size: 0.95rem;
+        font-size: 0.85rem;
         color: var(--text-muted);
         font-weight: 600;
     }
@@ -191,256 +190,252 @@
     .panel-status-pill {
         display: inline-flex;
         align-items: center;
-        gap: 6px;
-        font-size: 0.88rem;
+        gap: 4px;
+        font-size: 0.8rem;
         font-weight: 800;
-        padding: 8px 16px;
-        border-radius: 12px;
+        padding: 6px 12px;
+        border-radius: 10px;
     }
 
-        .panel-status-pill.up {
-            background: var(--price-up-bg);
-            color: var(--price-up-text);
-        }
-
-        .panel-status-pill.down {
-            background: var(--price-down-bg);
-            color: var(--price-down-text);
-        }
-
-        .panel-status-pill.stable {
-            background: var(--brt-gold-light);
-            color: var(--brt-gold-dark);
-        }
+    .panel-status-pill.up { background: var(--price-up-bg); color: var(--price-up-text); }
+    .panel-status-pill.down { background: var(--price-down-bg); color: var(--price-down-text); }
+    .panel-status-pill.stable { background: var(--brt-gold-light); color: var(--brt-gold-dark); }
 
     .panel-ticker-footer {
-        margin-top: 16px;
-        font-size: 0.78rem;
+        margin-top: 12px;
+        font-size: 0.75rem;
         font-weight: 600;
         color: var(--text-muted);
         display: flex;
         justify-content: space-between;
-        flex-wrap: wrap;
-        gap: 10px;
         border-top: 1px solid var(--border-refined);
-        padding-top: 14px;
+        padding-top: 10px;
     }
 
     /* B2B CUSTOM REQUEST PANEL */
     .detail-quote-panel {
         background: var(--brt-gold-light);
         border: 1px dashed var(--brt-gold-pure);
-        border-radius: 24px;
-        padding: 28px;
+        border-radius: 20px;
+        padding: 20px;
         text-align: center;
-        margin: 24px 0;
+        margin: 20px 0;
     }
 
     .detail-quote-title {
-        font-size: 1.05rem;
+        font-size: 0.95rem;
         font-weight: 800;
         color: var(--brt-dark-navy);
-        letter-spacing: 0.5px;
         text-transform: uppercase;
-        margin-bottom: 6px;
+        margin-bottom: 4px;
         display: flex;
         align-items: center;
         justify-content: center;
-        gap: 8px;
+        gap: 6px;
     }
 
     .detail-quote-desc {
-        font-size: 0.88rem;
+        font-size: 0.82rem;
         color: var(--brt-gold-dark);
         margin: 0;
         font-weight: 600;
     }
 
-    /* DESCRIPTION BLOCK */
-    .detail-description-block {
-        font-size: 1rem;
-        line-height: 1.7;
-        color: var(--text-main);
-        margin-bottom: 28px;
-    }
-
     /* PACKAGING INFRASTRUCTURE */
     .quantum-pack-heading {
-        font-size: 0.82rem;
+        font-size: 0.78rem;
         font-weight: 800;
         color: var(--brt-gold-dark);
         text-transform: uppercase;
-        letter-spacing: 1.5px;
-        margin-bottom: 14px;
+        letter-spacing: 1px;
+        margin-bottom: 10px;
     }
 
     .quantum-pack-vault {
         display: flex;
         flex-wrap: wrap;
-        gap: 10px;
-        margin-bottom: 32px;
+        gap: 8px;
+        margin-bottom: 24px;
     }
 
     .quantum-pack-chip {
         background: var(--brt-surface-white);
         border: 1px solid var(--border-refined);
         color: var(--brt-dark-navy);
-        font-size: 0.85rem;
+        font-size: 0.8rem;
         font-weight: 700;
-        padding: 8px 18px;
-        border-radius: 12px;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+        padding: 6px 14px;
+        border-radius: 10px;
     }
 
-        .quantum-pack-chip.is-loose {
-            border-style: dashed;
-            background: var(--brt-gold-light);
-            color: var(--brt-gold-dark);
-            border-color: var(--brt-gold-pure);
-        }
-
-    /* STRATEGIC CONVERSION CONTROLS */
-    .btn-quantum-core {
-        font-weight: 800;
-        font-size: 0.95rem;
-        padding: 14px 24px;
-        border-radius: 50px;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        gap: 8px;
-        transition: all 0.3s ease;
-        text-decoration: none !important;
+    .quantum-pack-chip.is-loose {
+        border-style: dashed;
+        background: var(--brt-gold-light);
+        color: var(--brt-gold-dark);
     }
-
-    .btn-matrix-gold {
-        background: var(--brt-dark-navy);
-        color: var(--brt-surface-white) !important;
-        border: 1px solid var(--brt-gold-pure);
-        box-shadow: 0 8px 20px rgba(11, 15, 25, 0.2);
-    }
-
-        .btn-matrix-gold:hover {
-            background: var(--brt-gold-pure);
-            color: var(--brt-dark-navy) !important;
-            transform: translateY(-2px);
-        }
-
-    .btn-matrix-call {
-        background: var(--brt-surface-white);
-        border: 1.5px solid var(--brt-dark-navy);
-        color: var(--brt-dark-navy) !important;
-    }
-
-        .btn-matrix-call:hover {
-            background: var(--brt-dark-navy);
-            color: var(--brt-surface-white) !important;
-            transform: translateY(-2px);
-        }
-
-    .btn-matrix-whatsapp {
-        background: transparent;
-        border: 1.5px solid var(--whatsapp-green);
-        color: var(--whatsapp-green) !important;
-    }
-
-        .btn-matrix-whatsapp:hover {
-            background: var(--whatsapp-green);
-            color: var(--brt-surface-white) !important;
-            transform: translateY(-2px);
-        }
 
     /* REGULATORY INFORMATION GRID */
     .cyber-disclaimer-vault {
         background: var(--brt-surface-white);
         border: 1px solid var(--border-refined);
-        border-radius: 24px;
-        padding: 24px;
-        margin-top: 36px;
+        border-radius: 20px;
+        padding: 16px;
         display: grid;
         grid-template-columns: repeat(2, 1fr);
-        gap: 16px;
-        box-shadow: 0 10px 25px -15px rgba(11, 15, 25, 0.05);
+        gap: 12px;
+        margin-bottom: 20px;
     }
 
     .cyber-disclaimer-item {
         display: flex;
         align-items: center;
-        gap: 12px;
+        gap: 10px;
     }
 
-        .cyber-disclaimer-item .icon-wrapper {
-            width: 40px;
-            height: 40px;
-            background: var(--brt-gold-light);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--brt-gold-dark);
-            flex-shrink: 0;
-        }
-
-            .cyber-disclaimer-item .icon-wrapper span {
-                font-size: 1.3rem;
-            }
+    .cyber-disclaimer-item .icon-wrapper {
+        width: 36px;
+        height: 36px;
+        background: var(--brt-gold-light);
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--brt-gold-dark);
+        flex-shrink: 0;
+    }
 
     .cyber-text-title {
-        font-size: 0.85rem;
+        font-size: 0.78rem;
         font-weight: 700;
         color: var(--brt-dark-navy);
         display: block;
-        margin-bottom: 2px;
     }
 
     .cyber-text-subtitle {
-        font-size: 0.75rem;
+        font-size: 0.7rem;
         color: var(--text-muted);
         display: block;
     }
 
-    /* RESPONSIVE CSS */
-    @@media (max-width: 991px) {
-        .detail-corporate-title { font-size: 2.2rem; }
-        .detail-corporate-title-ta { font-size: 1.8rem; }
+    /* APP STICKY FOOTER ACTION BAR */
+    .app-sticky-bar {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: var(--brt-surface-white);
+        border-top: 1px solid var(--border-refined);
+        padding: 12px 16px;
+        box-shadow: 0 -10px 25px rgba(0,0,0,0.06);
+        z-index: 1000;
+        display: flex;
+        gap: 10px;
+        align-items: center;
     }
 
-    @@media (max-width: 768px) {
+    .btn-app-action {
+        height: 48px;
+        border-radius: 14px;
+        font-weight: 800;
+        font-size: 0.88rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        text-decoration: none !important;
+        transition: transform 0.2s ease;
+    }
+
+    .btn-app-action:active {
+        transform: scale(0.97);
+    }
+
+    .btn-app-gold {
+        background: var(--brt-dark-navy);
+        color: var(--brt-surface-white) !important;
+        border: 1px solid var(--brt-gold-pure);
+        flex: 2;
+    }
+
+    .btn-app-icon {
+        width: 48px;
+        background: var(--brt-bg-cream);
+        border: 1px solid var(--border-refined);
+        color: var(--brt-dark-navy) !important;
+        flex: 0 0 48px;
+    }
+
+    .btn-app-whatsapp {
+        width: 48px;
+        background: rgba(37, 211, 102, 0.1);
+        border: 1px solid var(--whatsapp-green);
+        color: var(--whatsapp-green) !important;
+        flex: 0 0 48px;
+    }
+
+    /* RESPONSIVE CSS */
+    @@media (min-width: 992px) {
+        .app-sticky-bar {
+            position: static;
+            box-shadow: none;
+            background: transparent;
+            padding: 0;
+            border: none;
+        }
+        .btn-app-icon, .btn-app-whatsapp {
+            width: auto;
+            padding: 0 20px;
+            flex: 1;
+        }
+        body {
+            padding-bottom: 0;
+        }
+    }
+
+    @@media (max-width: 576px) {
         .cyber-disclaimer-vault { grid-template-columns: 1fr; }
-        .panel-price-row { justify-content: flex-start; }
+        .detail-corporate-title { font-size: 1.8rem; }
+        .detail-corporate-title-ta { font-size: 1.5rem; }
     }
 </style>
 
-<div class="container my-5 py-2">
-    <div class="row g-5">
+<div class="container my-3 my-md-4">
 
-        <!-- Showcase (Left side) -->
+    <!-- Top App Bar Navigation -->
+    <div class="app-top-nav">
+        <a href="javascript:history.back()" class="app-back-btn">
+            <span class="material-symbols-outlined">arrow_back</span>
+        </a>
+        <div class="corporate-path-capsule">
+            @Model.SubCategory?.Category?.Name &rarr; @Model.SubCategory?.Name
+        </div>
+        <button class="app-back-btn" onclick="navigator.share ? navigator.share({title: '@Model.Name', url: window.location.href}) : null">
+            <span class="material-symbols-outlined" style="font-size: 20px;">share</span>
+        </button>
+    </div>
+
+    <div class="row g-4">
+
+        <!-- Showcase Image Section -->
         <div class="col-lg-6">
-            <div class="corporate-media-showcase text-center">
+            <div class="app-hero-card">
                 @if (!string.IsNullOrEmpty(Model.ImageUrl))
                 {
-                    <img src="@Model.ImageUrl" alt="@Model.Name" class="img-fluid" />
+                    <img src="@Model.ImageUrl" alt="@Model.Name" class="img-fluid app-product-img" />
                 }
                 else
                 {
                     <div class="detail-fallback-frame">
-                        <span class="material-symbols-outlined" style="font-size: 5rem;">eco</span>
+                        <span class="material-symbols-outlined">eco</span>
                     </div>
                 }
             </div>
         </div>
 
-        <!-- Spec Terminal (Right side) -->
+        <!-- Spec Terminal -->
         <div class="col-lg-6">
 
-            <!-- Context Path -->
-            <div>
-                <div class="corporate-path-capsule">
-                    @Model.SubCategory?.Category?.Name <span class="mx-2" style="font-size: 10px;">&rarr;</span> @Model.SubCategory?.Name
-                </div>
-            </div>
-
-            <!-- Title Isolation Engine -->
+            <!-- Titles -->
             <h1 class="detail-corporate-title lang-en">@Model.Name</h1>
             @if (!string.IsNullOrEmpty(Model.NameTamil))
             {
@@ -462,39 +457,37 @@
 
                 <div class="detail-ticker-panel @boxState">
                     <div class="panel-price-row">
-                        <div class="panel-price-left">
+                        <div>
                             <span class="panel-live-amount">₹@mp.TodayPrice.ToString("F2")</span>
                             <span class="panel-live-unit">/ KG</span>
                         </div>
                         <span class="panel-status-pill @diffClass">
-                            <span class="material-symbols-outlined" style="font-size: 16px;">@diffIcon</span>
+                            <span class="material-symbols-outlined" style="font-size: 15px;">@diffIcon</span>
                             <strong>₹@Math.Abs(diff).ToString("F2")</strong>
                         </span>
                     </div>
                     <div class="panel-ticker-footer">
                         <span>
-                            <span class="lang-en">GST Net Valuation Included</span>
+                            <span class="lang-en">GST Net Included</span>
                             <span class="lang-ta">GST வரிகள் உட்பட</span>
                         </span>
                         <span>
-                            <span class="lang-en">Index Updated:</span>
-                            <span class="lang-ta">புதுப்பிக்கப்பட்டது:</span> @mp.UpdatedAt.ToString("dd MMM, hh:mm tt")
+                            @mp.UpdatedAt.ToString("dd MMM, hh:mm tt")
                         </span>
                     </div>
                 </div>
             }
             else
             {
-                <!-- Clean B2B Custom Requested State -->
                 <div class="detail-quote-panel">
                     <div class="detail-quote-title">
-                        <span class="material-symbols-outlined" style="color: var(--brt-gold-dark);">analytics</span>
+                        <span class="material-symbols-outlined">analytics</span>
                         <span class="lang-en">Custom Price Requested</span>
-                        <span class="lang-ta">பிரத்தியேக விலை விவரம் தேவை</span>
+                        <span class="lang-ta">பிரத்தியேக விலை தேவை</span>
                     </div>
                     <p class="detail-quote-desc">
-                        <span class="lang-en">Wholesale Supply Matrix — High Volume Orders Only</span>
-                        <span class="lang-ta">பெரிய அளவிலான பல்க் ஆர்டர்களுக்கு மட்டும் விலை வழங்கப்படும்</span>
+                        <span class="lang-en">Wholesale Supply Matrix — High Volume Orders</span>
+                        <span class="lang-ta">பெரிய பல்க் ஆர்டர்களுக்கு மட்டும் விலை</span>
                     </p>
                 </div>
             }
@@ -502,12 +495,14 @@
             <!-- Description -->
             @if (!string.IsNullOrEmpty(Model.Description))
             {
-                <p class="detail-description-block">@Model.Description</p>
+                <p style="font-size: 0.92rem; color: var(--text-main); line-height: 1.6; margin-bottom: 20px;">
+                    @Model.Description
+                </p>
             }
 
             <!-- Configured Packing Tags -->
             <h6 class="quantum-pack-heading">
-                <span class="lang-en">Verified Configured Packing</span>
+                <span class="lang-en">Available Packings</span>
                 <span class="lang-ta">கிடைக்கும் பேக்கிங் அளவுகள்</span>
             </h6>
             <div class="quantum-pack-vault">
@@ -525,30 +520,6 @@
                 }
             </div>
 
-            <!-- Action Convertors Layout -->
-            <div class="row g-3">
-                <div class="col-sm-12 col-md-6 flex-fill">
-                    <a asp-controller="Order" asp-action="Request" asp-route-productId="@Model.Id" class="btn-quantum-core btn-matrix-gold w-100">
-                        <span class="material-symbols-outlined">shopping_cart</span>
-                        <span class="lang-en">Request Bulk Order</span>
-                        <span class="lang-ta">பல்க் ஆர்டர் செய்க</span>
-                    </a>
-                </div>
-                <div class="col-sm-6 col-md-3">
-                    <a href="tel:9865680694" class="btn-quantum-core btn-matrix-call w-100">
-                        <span class="material-symbols-outlined">call</span>
-                        <span class="lang-en">Call</span>
-                        <span class="lang-ta">அழைக்க</span>
-                    </a>
-                </div>
-                <div class="col-sm-6 col-md-3">
-                    <a href="https://api.whatsapp.com/send?phone=919865680694&text=Enquiry%20about%20@Model.Name" class="btn-quantum-core btn-matrix-whatsapp w-100">
-                        <span class="material-symbols-outlined">chat</span>
-                        <span>WhatsApp</span>
-                    </a>
-                </div>
-            </div>
-
             <!-- Safe Trade Vault Layout -->
             <div class="cyber-disclaimer-vault">
                 <div class="cyber-disclaimer-item">
@@ -558,8 +529,8 @@
                     <div>
                         <span class="cyber-text-title lang-en">Bulk Preferred</span>
                         <span class="cyber-text-title lang-ta">மொத்த விற்பனை</span>
-                        <span class="cyber-text-subtitle lang-en">High volume supply</span>
-                        <span class="cyber-text-subtitle lang-ta">பெரிய அளவிலான விநியோகம்</span>
+                        <span class="cyber-text-subtitle lang-en">High volume</span>
+                        <span class="cyber-text-subtitle lang-ta">பெரிய அளவு</span>
                     </div>
                 </div>
                 <div class="cyber-disclaimer-item">
@@ -569,8 +540,8 @@
                     <div>
                         <span class="cyber-text-title lang-en">GST/Taxes Inc.</span>
                         <span class="cyber-text-title lang-ta">GST வரிகள் உட்பட</span>
-                        <span class="cyber-text-subtitle lang-en">Standard tax invoicing</span>
-                        <span class="cyber-text-subtitle lang-ta">முறையான வரி விலைப்பட்டியல்</span>
+                        <span class="cyber-text-subtitle lang-en">Tax Invoicing</span>
+                        <span class="cyber-text-subtitle lang-ta">வரி சீட்டுடன்</span>
                     </div>
                 </div>
                 <div class="cyber-disclaimer-item">
@@ -580,8 +551,8 @@
                     <div>
                         <span class="cyber-text-title lang-en">Transport Extra</span>
                         <span class="cyber-text-title lang-ta">போக்குவரத்து தனி</span>
-                        <span class="cyber-text-subtitle lang-en">Ex-Warehouse rates</span>
-                        <span class="cyber-text-subtitle lang-ta">கிடங்கு விநியோக விலை மட்டும்</span>
+                        <span class="cyber-text-subtitle lang-en">Ex-Warehouse</span>
+                        <span class="cyber-text-subtitle lang-ta">கிடங்கு விலை</span>
                     </div>
                 </div>
                 <div class="cyber-disclaimer-item">
@@ -589,12 +560,27 @@
                         <span class="material-symbols-outlined">gavel</span>
                     </div>
                     <div>
-                        <span class="cyber-text-title lang-en">Admin Dispatch</span>
-                        <span class="cyber-text-title lang-ta">அங்கீகரிக்கப்பட்ட விநியோகம்</span>
-                        <span class="cyber-text-subtitle lang-en">Verified clearance</span>
-                        <span class="cyber-text-subtitle lang-ta">சரிபார்க்கப்பட்ட அனுமதி</span>
+                        <span class="cyber-text-title lang-en">Admin Clearance</span>
+                        <span class="cyber-text-title lang-ta">அங்கீகரிக்கப்பட்டது</span>
+                        <span class="cyber-text-subtitle lang-en">Verified Order</span>
+                        <span class="cyber-text-subtitle lang-ta">சரிபார்க்கப்பட்டது</span>
                     </div>
                 </div>
+            </div>
+
+            <!-- App Sticky Action Bar (Mobile native action bar) -->
+            <div class="app-sticky-bar">
+                <a asp-controller="Order" asp-action="Request" asp-route-productId="@Model.Id" class="btn-app-action btn-app-gold">
+                    <span class="material-symbols-outlined">shopping_cart</span>
+                    <span class="lang-en">Request Bulk Order</span>
+                    <span class="lang-ta">பல்க் ஆர்டர் செய்க</span>
+                </a>
+                <a href="tel:9865680694" class="btn-app-action btn-app-icon" title="Call">
+                    <span class="material-symbols-outlined">call</span>
+                </a>
+                <a href="https://api.whatsapp.com/send?phone=919865680694&text=Enquiry%20about%20@Model.Name" class="btn-app-action btn-app-whatsapp" title="WhatsApp">
+                    <span class="material-symbols-outlined">chat</span>
+                </a>
             </div>
 
         </div>
