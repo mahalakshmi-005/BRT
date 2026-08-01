@@ -1,36 +1,35 @@
 @model List<BRT.Models.Product>
 @{
+    // மீண்டும் மாஸ்டர் லேஅவுட்டை இணைக்கிறோம்
     Layout = "_Layout";
 
+    // NullReferenceException எரர் வராமல் தடுக்க பாதுகாப்பான டிக்ஸ்னரி ஹேண்ட்லிங்
     var todaysPrices = ViewBag.TodaysPrices as Dictionary<int, BRT.Models.MarketPrice>
-                        ?? new Dictionary<int, BRT.Models.MarketPrice>();
+                       ?? new Dictionary<int, BRT.Models.MarketPrice>();
 }
 
-<!-- Premium Corporate Fonts & Icons Core -->
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+<!-- Premium Corporate Fonts Core Setup -->
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 
 <style>
     :root {
-        --brt-gold-pure: #B38F43;
-        --brt-gold-dark: #8C6D2D;
-        --brt-gold-light: #FBF4E4;
-        --brt-dark-navy: #0B0F19;
-        --brt-surface-white: #FFFFFF;
-        --brt-bg-cream: #FFFDF9;
-        --text-main: #1F2937;
-        --text-muted: #6B7280;
-        --border-refined: rgba(179, 143, 67, 0.18);
-        --price-bg: rgba(179, 143, 67, 0.08);
+        --brt-green-dark: #1B4332;
+        --brt-gold: #D4AF37;
+        --brt-gold-muted: #AA820A;
+        --text-main: #0F172A;
+        --text-muted: #64748B;
+        --card-border: #F1F5F9;
+        --badge-bg: #F8FAFC;
     }
 
     body {
         font-family: 'Plus Jakarta Sans', sans-serif;
-        background-color: var(--brt-bg-cream);
+        background-color: #FAFAFA;
         color: var(--text-main);
     }
 
-    /* AUTOMATIC DYNAMIC LANGUAGE CONTROLLER */
+    /* DYNAMIC LANGUAGE SWITCH SYSTEM WITH LAYOUT INTEGRATION */
     html[lang="en"] .lang-en, body[lang="en"] .lang-en {
         display: inline-block !important;
     }
@@ -47,54 +46,50 @@
         display: inline-block !important;
     }
 
-    /* HERO SECTION (LIGHT/CREAM CORPORATE THEME) */
+    /* HERO SECTION ALIGNMENT FIX */
     .page-hero {
-        background: var(--brt-surface-white);
-        border-bottom: 1px solid var(--border-refined);
-        padding: 40px 20px;
-        margin-bottom: 30px;
+        background-color: var(--brt-green-dark);
+        padding: 60px 20px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        margin-bottom: 40px;
         text-align: center;
-        box-shadow: 0 4px 15px rgba(11, 15, 25, 0.02);
     }
 
     .page-hero h1 {
-        font-family: 'Playfair Display', serif;
-        font-weight: 700;
-        font-size: 2.2rem;
-        color: var(--brt-dark-navy) !important;
-        margin-bottom: 8px;
+        font-weight: 800;
+        font-size: 2.5rem;
+        color: #FFFFFF !important;
+        margin-bottom: 12px;
     }
 
     .page-hero p {
-        color: var(--text-muted) !important;
-        font-size: 0.95rem;
-        max-width: 650px;
+        color: rgba(255, 255, 255, 0.9) !important;
+        font-size: 1.05rem;
+        max-width: 700px;
         margin: 0 auto;
         font-weight: 500;
-        line-height: 1.5;
     }
 
-    /* EQUAL HEIGHT RETAIL CARD STRUCTURE */
+    /* EQUAL HEIGHT CARD STRUCTURE FIX */
     .brt-retail-card {
-        background: var(--brt-surface-white);
-        border: 1px solid var(--border-refined);
-        border-radius: 20px;
-        padding: 20px;
+        background: #FFFFFF;
+        border: 2px solid #F8FAFC;
+        border-radius: 16px;
+        padding: 24px;
         height: 100%;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        box-shadow: 0 10px 25px -5px rgba(11, 15, 25, 0.03);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.01);
         transition: all 0.3s ease;
     }
 
     .brt-retail-card:hover {
-        border-color: var(--brt-gold-pure);
-        transform: translateY(-3px);
-        box-shadow: 0 15px 35px -10px rgba(11, 15, 25, 0.08);
+        border-color: rgba(212, 175, 55, 0.3);
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.04);
     }
 
-    /* CARD BODY WRAPPER */
+    /* CARD BODY WRAPPER TO STRETCH INNER CONTENT */
     .card-body-content {
         display: flex;
         flex-direction: column;
@@ -104,112 +99,102 @@
     /* MEDIA CONTAINER ALIGNMENT */
     .product-media-frame {
         width: 100%;
-        height: 200px;
-        background-color: var(--brt-bg-cream);
-        border: 1px solid var(--border-refined);
-        border-radius: 14px;
+        height: 220px;
+        background-color: #FAFAFA;
+        border-radius: 12px;
         display: flex;
         align-items: center;
         justify-content: center;
         overflow: hidden;
-        margin-bottom: 16px;
+        margin-bottom: 20px;
         position: relative;
     }
 
     .product-media-frame img {
         width: 100%;
         height: 100%;
-        object-fit: contain;
-        padding: 10px;
-        transition: transform 0.3s ease;
+        object-fit: cover;
     }
 
-    .brt-retail-card:hover .product-media-frame img {
-        transform: scale(1.04);
+    .placeholder-svg {
+        width: 70px;
+        height: 70px;
+        opacity: 0.15;
     }
 
-    .detail-fallback-frame {
-        font-size: 3rem;
-        color: var(--brt-gold-pure);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    /* TYPOGRAPHY */
+    /* TYPOGRAPHY FIX */
     .product-title-text {
-        font-family: 'Playfair Display', serif;
-        font-size: 1.3rem;
+        font-size: 1.4rem;
         font-weight: 700;
-        color: var(--brt-dark-navy);
-        margin-bottom: 12px;
-        letter-spacing: -0.2px;
-        min-height: 2.6rem;
+        color: var(--text-main);
+        margin-bottom: 16px;
+        letter-spacing: -0.3px;
+        min-height: 2.8rem;
         display: flex;
         align-items: center;
     }
 
     /* PRICE INSIGHT BOX */
     .price-insight-box {
-        background-color: var(--brt-gold-light);
-        border: 1px dashed var(--brt-gold-pure);
+        background-color: #FFFDF6;
+        border: 1px dashed rgba(212, 175, 55, 0.4);
         border-radius: 12px;
-        padding: 12px;
+        padding: 14px;
         text-align: center;
         margin-bottom: 16px;
     }
 
     .price-insight-box .price-label {
-        font-size: 0.72rem;
-        font-weight: 800;
+        font-size: 0.75rem;
+        font-weight: 700;
         text-transform: uppercase;
-        color: var(--brt-gold-dark);
+        color: var(--brt-gold-muted);
         letter-spacing: 0.8px;
-        margin-bottom: 2px;
+        margin-bottom: 4px;
     }
 
     .price-insight-box .live-price-value {
-        font-size: 1.35rem;
+        font-size: 1.4rem;
         font-weight: 800;
-        color: var(--brt-dark-navy);
+        color: var(--text-main);
     }
 
-    /* PACK TILES / BADGES */
+    /* PACK TILES / BADGES ALIGNMENT FIX */
     .pack-chips-wrapper {
         display: flex;
         flex-wrap: wrap;
-        gap: 6px;
-        margin-bottom: 20px;
-        min-height: 32px;
+        gap: 8px;
+        margin-bottom: 24px;
+        min-height: 34px;
         align-items: flex-start;
     }
 
     .pack-chip-tile {
-        background-color: var(--brt-surface-white);
-        border: 1px solid var(--border-refined);
-        border-radius: 6px;
-        padding: 3px 10px;
-        font-size: 0.75rem;
-        font-weight: 700;
-        color: var(--brt-dark-navy);
+        background-color: #F8FAFC;
+        border: 1px solid #E2E8F0;
+        border-radius: 8px;
+        padding: 4px 12px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: #475569;
     }
 
-    /* DUAL BUTTON ACTION MATRIX */
+    /* DUAL BUTTON ACTION MATRIX FIX */
     .card-action-matrix {
         display: flex;
-        gap: 10px;
+        gap: 12px;
         margin-top: auto;
         width: 100%;
     }
 
     .btn-brt-secondary {
         flex: 1;
-        background-color: var(--brt-surface-white);
-        border: 1px solid var(--border-refined);
-        color: var(--brt-dark-navy);
+        background-color: #FFFFFF;
+        border: 1px solid #E2E8F0;
+        color: var(--text-main);
         font-weight: 700;
-        font-size: 0.85rem;
-        padding: 10px 12px;
+        font-size: 0.9rem;
+        padding: 12px 14px;
         border-radius: 10px;
         text-align: center;
         text-decoration: none !important;
@@ -220,19 +205,18 @@
     }
 
     .btn-brt-secondary:hover {
-        background-color: var(--brt-gold-light);
-        border-color: var(--brt-gold-pure);
-        color: var(--brt-dark-navy);
+        background-color: #F8FAFC;
+        border-color: #CBD5E1;
+        color: var(--text-main);
     }
 
     .btn-brt-primary-dark {
         flex: 1;
-        background-color: var(--brt-dark-navy);
-        border: 1px solid var(--brt-gold-pure);
-        color: var(--brt-surface-white) !important;
+        background-color: #0B0F19;
+        color: #FFFFFF !important;
         font-weight: 700;
-        font-size: 0.85rem;
-        padding: 10px 12px;
+        font-size: 0.9rem;
+        padding: 12px 14px;
         border-radius: 10px;
         text-align: center;
         text-decoration: none !important;
@@ -246,34 +230,15 @@
         opacity: 0.9;
     }
 
-    /* MOBILE OPTIMIZATION (Razor Safe @@media) */
+    /* Razor எரரைத் தவிர்க்க @@media பயன்படுத்தப்பட்டுள்ளது */
     @@media (max-width: 576px) {
-        .page-hero {
-            padding: 25px 15px;
-            margin-bottom: 20px;
-        }
-
-        .page-hero h1 {
-            font-size: 1.6rem;
-        }
-
-        .product-media-frame {
-            height: 160px;
-        }
-
         .card-action-matrix {
             flex-direction: column;
             gap: 8px;
         }
-
-        .btn-brt-secondary, .btn-brt-primary-dark {
-            height: 46px;
-            font-size: 0.9rem;
-        }
-
+        
         .product-title-text {
             min-height: auto;
-            font-size: 1.15rem;
         }
     }
 </style>
@@ -281,7 +246,7 @@
 <!-- Retail Clean Hero Section -->
 <section class="page-hero">
     <div class="container">
-        <h1 class="lang-en">Retail Products</h1>
+        <h1 class="lang-en">Retail Products</h1><br>
         <h1 class="lang-ta">சில்லறை விற்பனை தயாரிப்புகள்</h1>
 
         <p class="lang-en">Small retail packs — 50g / 100g / 250g / 500g / 1Kg. Retail pack availability depends on stock.</p>
@@ -290,8 +255,8 @@
 </section>
 
 <!-- Main Inventory Grid Layout -->
-<div class="container my-4">
-    <div class="row g-3 g-md-4 d-flex align-items-stretch">
+<div class="container my-5">
+    <div class="row g-4 d-flex align-items-stretch">
         @if (Model != null && Model.Any())
         {
             @foreach (var p in Model)
@@ -310,9 +275,10 @@
                                 }
                                 else
                                 {
-                                    <div class="detail-fallback-frame">
-                                        <span class="material-symbols-outlined">eco</span>
-                                    </div>
+                                    <svg class="placeholder-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+                                        <path d="M2 22C2 22 6 18 12 18C18 18 22 22 22 22" stroke-linecap="round" />
+                                        <path d="M12 2C6.5 2 2 6.5 2 12C2 15.5 4 16.5 6 16C12 14.5 13.5 9 20 4C21.5 7.5 20.5 12 18 14.5C15.5 17 12 18 12 18" stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
                                 }
                             </div>
 
@@ -338,7 +304,7 @@
                                     }
                                     else
                                     {
-                                        <span style="font-size:1rem; color:var(--text-muted);">—</span>
+                                        <span style="font-size:1.05rem; color:var(--text-muted);">—</span>
                                     }
                                 </div>
                             </div>
