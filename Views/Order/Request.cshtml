@@ -166,9 +166,18 @@
      =================================================== -->
 <section class="page-hero-brt">
     <div class="container">
-        <div class="brt-wholesale-badge">B2B Wholesale Partner</div>
-        <h1>Request Bulk Order</h1>
-        <p>What makes BRT the trusted wholesale partner for dealers across the region — submit your dynamic container loads and item metrics below.</p>
+        <div class="brt-wholesale-badge">
+            <span class="lang-en-text">B2B Wholesale Partner</span>
+            <span class="lang-ta-text">B2B மொத்த விற்பனை பங்குதாரர்</span>
+        </div>
+        <h1>
+            <span class="lang-en-text">Request Bulk Order</span>
+            <span class="lang-ta-text">மொத்த ஆர்டர் கோருங்கள்</span>
+        </h1>
+        <p>
+            <span class="lang-en-text">What makes BRT the trusted wholesale partner for dealers across the region — submit your dynamic container loads and item metrics below.</span>
+            <span class="lang-ta-text">பிராந்தியம் முழுவதும் உள்ள டீலர்களுக்கு BRT-ஐ நம்பகமான மொத்த விற்பனை பங்குதாரராக ஆக்குவது என்ன — உங்கள் தேவையான பொருட்கள் மற்றும் அளவுகளை கீழே சமர்ப்பிக்கவும்.</span>
+        </p>
     </div>
 </section>
 
@@ -186,34 +195,58 @@
                     @Html.AntiForgeryToken()
                     
                     <!-- Section: Details -->
-                    <div class="form-section-header mb-4">Your Professional Details</div>
+                    <div class="form-section-header mb-4">
+                        <span class="lang-en-text">Your Professional Details</span>
+                        <span class="lang-ta-text">உங்கள் தொழில்முறை விவரங்கள்</span>
+                    </div>
                     
                     <div class="row g-4 mb-5">
                         <div class="col-md-6 form-group-brt">
-                            <label class="form-label">Your Name</label>
+                            <label class="form-label">
+                                <span class="lang-en-text">Your Name</span>
+                                <span class="lang-ta-text">உங்கள் பெயர்</span>
+                            </label>
                             <input asp-for="BuyerName" class="form-control form-input-brt" placeholder="Enter your full name" required />
                         </div>
                         <div class="col-md-6 form-group-brt">
-                            <label class="form-label">Business Name</label>
+                            <label class="form-label">
+                                <span class="lang-en-text">Business Name</span>
+                                <span class="lang-ta-text">வணிக பெயர்</span>
+                            </label>
                             <input asp-for="BusinessName" class="form-control form-input-brt" placeholder="Company registration title" required />
                         </div>
                         <div class="col-md-6 form-group-brt">
-                            <label class="form-label">Phone Number</label>
+                            <label class="form-label">
+                                <span class="lang-en-text">Phone Number</span>
+                                <span class="lang-ta-text">தொலைபேசி எண்</span>
+                            </label>
                             <input asp-for="PhoneNumber" class="form-control form-input-brt" placeholder="10-digit enterprise mobile" required />
                         </div>
                         <div class="col-md-6 form-group-brt">
-                            <label class="form-label">City</label>
+                            <label class="form-label">
+                                <span class="lang-en-text">City</span>
+                                <span class="lang-ta-text">நகரம்</span>
+                            </label>
                             <input asp-for="City" class="form-control form-input-brt" placeholder="e.g. Pondicherry, Cochin" />
                         </div>
                         <div class="col-12 form-group-brt">
-                            <label class="form-label">Delivery Address</label>
+                            <label class="form-label">
+                                <span class="lang-en-text">Delivery Address</span>
+                                <span class="lang-ta-text">டெலிவரி முகவரி</span>
+                            </label>
                             <input asp-for="BuyerAddress" class="form-control form-input-brt" placeholder="Complete destination logistics address" />
                         </div>
                     </div>
 
                     <!-- Section: Products -->
-                    <div class="form-section-header mb-2">Products Required</div>
-                    <p class="text-muted small mb-4">Fill in the products you need — leave unused rows completely blank.</p>
+                    <div class="form-section-header mb-2">
+                        <span class="lang-en-text">Products Required</span>
+                        <span class="lang-ta-text">தேவையான பொருட்கள்</span>
+                    </div>
+                    <p class="text-muted small mb-4">
+                        <span class="lang-en-text">Fill in the products you need — leave unused rows completely blank.</span>
+                        <span class="lang-ta-text">உங்களுக்கு தேவையான பொருட்களை நிரப்பவும் — பயன்படுத்தாத வரிசைகளை காலியாக விடவும்.</span>
+                    </p>
                     
                     <div class="d-flex flex-column gap-3 mb-4">
                         @for (int i = 0; i < Model.Items.Count; i++)
@@ -221,7 +254,10 @@
                             <div class="product-manifest-item">
                                 <div class="row g-3 align-items-center">
                                     <div class="col-md-6">
-                                        <label class="form-label small text-muted fw-bold d-md-none">Select Product</label>
+                                        <label class="form-label small text-muted fw-bold d-md-none">
+                                            <span class="lang-en-text">Select Product</span>
+                                            <span class="lang-ta-text">பொருளைத் தேர்ந்தெடுக்கவும்</span>
+                                        </label>
                                         <select name="Items[@i].ProductId" class="form-select form-input-brt py-2">
                                             <option value="">-- Select Product --</option>
                                             @foreach (var p in products)
@@ -232,13 +268,19 @@
                                         </select>
                                     </div>
                                     <div class="col-md-3">
-                                        <label class="form-label small text-muted fw-bold d-md-none">Quantity</label>
+                                        <label class="form-label small text-muted fw-bold d-md-none">
+                                            <span class="lang-en-text">Quantity</span>
+                                            <span class="lang-ta-text">அளவு</span>
+                                        </label>
                                         <input name="Items[@i].Quantity" type="number" step="0.01" class="form-control form-input-brt py-2" placeholder="Quantity" value="@Model.Items[i].Quantity" />
                                     </div>
                                     <div class="col-md-3">
                                         <div class="d-flex align-items-center gap-1 text-muted small" style="font-weight: 500;">
                                             <span class="material-symbols-outlined text-secondary" style="font-size:1rem;">help_outline</span>
-                                            <span>bags/kg as per packing</span>
+                                            <span>
+                                                <span class="lang-en-text">bags/kg as per packing</span>
+                                                <span class="lang-ta-text">பேக்கிங் படி பைகள்/கிலோ</span>
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
@@ -248,7 +290,8 @@
 
                     <!-- Submission Trigger -->
                     <button type="submit" class="btn-brt-dark-submit mt-3">
-                        Submit Order Request
+                        <span class="lang-en-text">Submit Order Request</span>
+                        <span class="lang-ta-text">ஆர்டர் கோரிக்கையை சமர்ப்பிக்க</span>
                     </button>
                 </form>
             </div>
@@ -261,8 +304,20 @@
      =================================================== -->
 <section class="container my-5">
     <div class="compliance-strip-brt">
-        <div class="compliance-unit"><span class="material-symbols-outlined icon">verified</span> Live Market Pricing</div>
-        <div class="compliance-unit"><span class="material-symbols-outlined icon">verified</span> Graded Quality Assured</div>
-        <div class="compliance-unit"><span class="material-symbols-outlined icon">verified</span> Bulk Packing Options</div>
+        <div class="compliance-unit">
+            <span class="material-symbols-outlined icon">verified</span>
+            <span class="lang-en-text">Live Market Pricing</span>
+            <span class="lang-ta-text">நேரடி சந்தை விலை</span>
+        </div>
+        <div class="compliance-unit">
+            <span class="material-symbols-outlined icon">verified</span>
+            <span class="lang-en-text">Graded Quality Assured</span>
+            <span class="lang-ta-text">தரம் பிரிக்கப்பட்ட தர உத்தரவாதம்</span>
+        </div>
+        <div class="compliance-unit">
+            <span class="material-symbols-outlined icon">verified</span>
+            <span class="lang-en-text">Bulk Packing Options</span>
+            <span class="lang-ta-text">மொத்த பேக்கிங் விருப்பங்கள்</span>
+        </div>
     </div>
 </section>
