@@ -21,6 +21,7 @@
             --brt-gold-glow: rgba(212, 175, 55, 0.25);
             --nav-text-white: rgba(255, 255, 255, 0.9);
             --app-bottom-nav-height: 65px;
+            --app-top-header-height: 62px;
         }
 
         /* Base Styles */
@@ -34,13 +35,6 @@
             touch-action: manipulation;
         }
 
-        /* Padding bottom for Native Bottom Bar on Mobile */
-        @@media (max-width: 991.98px) {
-            body {
-                padding-bottom: calc(var(--app-bottom-nav-height) + 15px);
-            }
-        }
-
         /* Multi-language Logic */
         .lang-ta-text { display: none !important; }
         .lang-en-text { display: inline-block; }
@@ -48,42 +42,52 @@
         body.lang-ta .lang-ta-text { display: inline-block !important; }
 
         /* ===================================================
-           1. TOP HEADER - MOBILE APP & DESKTOP DUAL DESIGN
+           1. TOP HEADER - MOBILE & DESKTOP DUAL DESIGN
            =================================================== */
         .app-top-header-wrapper {
-            position: fixed; /* Fixed position for non-stop sticky behavior on Mobile */
+            position: fixed;
             top: 0;
             left: 0;
             right: 0;
+            width: 100%;
             z-index: 1040;
             transition: all 0.3s ease;
         }
 
-        /* Mobile View Header Floating Bar */
+        /* MOBILE VIEW HEADER (Full Width Sticky App Bar) */
         @@media (max-width: 991.98px) {
+            body {
+                padding-top: var(--app-top-header-height);
+                padding-bottom: calc(var(--app-bottom-nav-height) + 15px);
+            }
+
             .app-top-header-wrapper {
-                padding: 10px 12px;
-                background: rgba(255, 253, 249, 0.88);
-                backdrop-filter: blur(14px);
-                -webkit-backdrop-filter: blur(14px);
-                border-bottom: 1px solid rgba(13, 19, 31, 0.05);
+                background: rgba(13, 19, 31, 0.95);
+                backdrop-filter: blur(12px);
+                -webkit-backdrop-filter: blur(12px);
+                border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
             }
 
             .app-nav-container {
-                background-color: var(--brt-dark-navy) !important;
-                padding: 8px 16px !important;
-                border-radius: 28px;
-                box-shadow: 0 10px 25px rgba(13, 19, 31, 0.25);
-                border: 1px solid rgba(212, 175, 55, 0.3);
+                padding: 10px 14px !important;
+                background: transparent !important;
+            }
+
+            .brand-text-badge {
+                font-size: 1.15rem !important;
+            }
+
+            .nav-logo-graphic {
+                max-height: 34px !important;
             }
         }
 
-        /* Desktop View Professional Full Width Header Bar */
+        /* DESKTOP VIEW HEADER */
         @@media (min-width: 992px) {
             .app-top-header-wrapper {
                 position: sticky;
                 top: 0;
-                padding: 0;
                 background: var(--brt-dark-navy);
                 box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
                 border-bottom: 2px solid var(--brt-gold-pure);
@@ -92,37 +96,34 @@
             .app-nav-container {
                 background: transparent !important;
                 padding: 12px 0 !important;
-                border-radius: 0;
-                border: none;
-                box-shadow: none;
             }
         }
 
         .brt-brand-logo-wrap {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 8px;
             text-decoration: none;
         }
 
         .nav-logo-graphic {
-            max-height: 42px;
+            max-height: 40px;
             width: auto;
-            border-radius: 10px;
+            border-radius: 8px;
             border: 1px solid rgba(212, 175, 55, 0.4);
             object-fit: cover;
         }
 
-        /* Stylish Typography for Brand Name */
         .brand-text-badge {
             font-family: 'Playfair Display', serif;
             color: #FFFFFF;
             font-weight: 700;
             font-size: 1.35rem;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.3px;
             background: linear-gradient(135deg, #FFFFFF 0%, #F3E5AB 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            white-space: nowrap;
         }
 
         /* NAV LINKS FOR DESKTOP */
@@ -130,7 +131,7 @@
             font-size: 0.92rem;
             font-weight: 600;
             color: var(--nav-text-white) !important;
-            padding: 8px 16px !important;
+            padding: 8px 14px !important;
             border-radius: 8px;
             transition: all 0.25s ease;
             display: flex;
@@ -148,21 +149,21 @@
         .lang-switch-container {
             display: inline-flex;
             align-items: center;
-            background: rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.1);
             border: 1px solid rgba(212, 175, 55, 0.4);
             padding: 2px;
             border-radius: 50px;
             position: relative;
             cursor: pointer;
             user-select: none;
-            width: 86px;
-            height: 32px;
+            width: 78px;
+            height: 30px;
             overflow: hidden;
             flex-shrink: 0;
         }
 
         .lang-option {
-            font-size: 0.72rem;
+            font-size: 0.7rem;
             font-weight: 700;
             width: 50%;
             text-align: center;
@@ -170,7 +171,7 @@
             border-radius: 50px;
             transition: color 0.3s ease;
             z-index: 2;
-            line-height: 28px;
+            line-height: 26px;
         }
 
         .lang-switch-container .active-slider {
@@ -178,7 +179,7 @@
             top: 2px;
             bottom: 2px;
             left: 2px;
-            width: 41px;
+            width: 37px;
             background: var(--brt-gold-pure);
             border-radius: 50px;
             transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
@@ -186,18 +187,11 @@
         }
 
         body.lang-ta .active-slider {
-            transform: translateX(41px);
+            transform: translateX(37px);
         }
 
         .lang-option.active {
             color: #0D131F !important;
-        }
-
-        /* Body Offset compensation for fixed header on mobile */
-        @@media (max-width: 991.98px) {
-            main[role="main"] {
-                padding-top: 75px;
-            }
         }
 
         /* ===================================================
@@ -241,7 +235,6 @@
         .app-bottom-nav-item span.material-symbols-outlined {
             font-size: 1.35rem;
             margin-bottom: 2px;
-            transition: transform 0.2s ease;
         }
 
         .app-bottom-nav-item:active,
@@ -249,7 +242,6 @@
             color: var(--brt-gold-pure);
         }
 
-        /* Action Central Button */
         .app-bottom-cta {
             background: linear-gradient(135deg, #D4AF37 0%, #C59B27 100%);
             color: #0D131F !important;
@@ -272,29 +264,25 @@
         }
 
         /* ===================================================
-           3. FOOTER UI - DUAL DESIGN (APP CARD & DESKTOP GRID)
+           3. FOOTER UI - DESKTOP GRID & MOBILE COMPACT CARD
            =================================================== */
-        /* Footer Base */
         footer.site-footer {
             background-color: var(--brt-dark-navy);
             color: #F3F4F6;
             border-top: 1px solid rgba(212, 175, 55, 0.2);
         }
 
-        /* Mobile Footer Style: Rounded App Card */
         @@media (max-width: 991.98px) {
             footer.site-footer {
-                border-radius: 30px;
-                padding: 30px 20px 25px 20px;
-                margin: 40px 12px 15px 12px;
-                box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+                border-radius: 24px;
+                padding: 28px 18px 20px 18px;
+                margin: 30px 12px 15px 12px;
             }
             .footer-quick-actions-col {
-                display: none !important; /* Hide on mobile */
+                display: none !important;
             }
         }
 
-        /* Desktop Footer Style: Professional Clean Layout */
         @@media (min-width: 992px) {
             footer.site-footer {
                 border-radius: 0;
@@ -302,7 +290,7 @@
                 padding: 60px 0 30px 0;
             }
             .app-bottom-nav {
-                display: none !important; /* Hide bottom nav on desktop */
+                display: none !important;
             }
         }
 
@@ -360,9 +348,9 @@
         }
 
         .footer-logo-graphic {
-            max-width: 140px;
+            max-width: 130px;
             height: auto;
-            border-radius: 12px;
+            border-radius: 10px;
             border: 1px solid rgba(212, 175, 55, 0.3);
         }
     </style>
@@ -385,21 +373,22 @@
                         </div>
                     </a>
 
-                    <!-- Desktop & Mobile Right Actions (Language Switcher & Nav Menu) -->
-                    <div class="d-flex align-items-center gap-3 order-lg-last">
-                        <!-- Dynamic Language Switcher -->
+                    <!-- Mobile & Desktop Right Action Bar -->
+                    <div class="d-flex align-items-center gap-2 gap-md-3 order-lg-last">
+                        <!-- Language Switcher -->
                         <div class="lang-switch-container" id="langContainer" onclick="toggleLanguage()" title="Switch Language">
                             <div class="active-slider" id="langSlider"></div>
                             <div class="lang-option active" id="optEN">EN</div>
                             <div class="lang-option" id="optTN">தமிழ்</div>
                         </div>
 
-                        <button class="navbar-toggler border-0 p-1 ms-1 d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#navMain" aria-controls="navMain" aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="material-symbols-outlined text-white fs-2 align-middle">menu_open</span>
+                        <!-- Hamburger Menu Button -->
+                        <button class="navbar-toggler border-0 p-1 d-lg-none text-white" type="button" data-bs-toggle="collapse" data-bs-target="#navMain" aria-controls="navMain" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="material-symbols-outlined fs-2 align-middle">menu</span>
                         </button>
                     </div>
 
-                    <!-- Collapsible Menu (Desk Nav Items) -->
+                    <!-- Collapsible Nav Items -->
                     <div class="collapse navbar-collapse mt-3 mt-lg-0" id="navMain">
                         <ul class="navbar-nav ms-auto align-items-start align-items-lg-center gap-1 gap-lg-2 pt-2 pt-lg-0 border-top border-secondary border-opacity-25 border-lg-0">
                             <li class="nav-item w-100 w-lg-auto">
@@ -453,14 +442,14 @@
     </header>
 
     <!-- ===================================================
-         2. MAIN BODY CONTENT ROUTER
+         2. MAIN BODY CONTENT
          =================================================== -->
     <main role="main" class="pb-2">
         @RenderBody()
     </main>
 
     <!-- ===================================================
-         3. MOBILE APP BOTTOM NAVIGATION BAR (Mobile Only)
+         3. MOBILE APP BOTTOM NAVIGATION BAR
          =================================================== -->
     <div class="app-bottom-nav">
         <a asp-controller="Home" asp-action="Index" class="app-bottom-nav-item">
@@ -474,7 +463,7 @@
             <span class="lang-ta-text">மொத்தம்</span>
         </a>
         
-        <!-- Central Floating CTA for Bulk Request -->
+        <!-- Central Floating Bulk Order Request CTA -->
         <a asp-controller="Order" asp-action="Request" class="app-bottom-nav-item" title="Request Bulk Order">
             <div class="app-bottom-cta">
                 <span class="material-symbols-outlined">shopping_bag</span>
@@ -500,7 +489,7 @@
         <div class="container-xl">
             <div class="row g-4">
 
-                <!-- Section A: Identity Space -->
+                <!-- Section A: Brand Info -->
                 <div class="col-12 col-md-3 text-center text-md-start">
                     <div class="mb-3">
                         <a asp-controller="Home" asp-action="Index" class="d-inline-block">
@@ -513,7 +502,7 @@
                     </p>
                 </div>
 
-                <!-- Section B: Direct Infrastructure -->
+                <!-- Section B: Direct Contact Info -->
                 <div class="col-12 col-md-3">
                     <h6 class="footer-heading-premium">
                         <span class="lang-en-text">Contact Infrastructure</span>
@@ -533,7 +522,7 @@
                     </div>
                 </div>
 
-                <!-- Section C: Quick Navigation Links (Visible ON DESKTOP ONLY) -->
+                <!-- Section C: Quick Links (Desktop Only) -->
                 <div class="col-12 col-md-3 footer-quick-actions-col">
                     <h6 class="footer-heading-premium">
                         <span class="lang-en-text">Quick Actions</span>
@@ -573,7 +562,7 @@
                     </div>
                 </div>
 
-                <!-- Section D: Coverage Area Badge -->
+                <!-- Section D: Coverage Area -->
                 <div class="col-12 col-md-3">
                     <h6 class="footer-heading-premium">
                         <span class="lang-en-text">Service Coverage Map</span>
@@ -604,7 +593,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
 
-    <!-- Global Language Toggle Mechanism Script -->
+    <!-- Global Language Toggle Script -->
     <script>
         function toggleLanguage() {
             document.body.classList.toggle('lang-ta');
@@ -625,7 +614,6 @@
             }
         }
 
-        // On Page Load - Restore Selected Language
         document.addEventListener('DOMContentLoaded', () => {
             const savedLang = localStorage.getItem('brt_lang');
             if (savedLang === 'ta') {
