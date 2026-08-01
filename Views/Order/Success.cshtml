@@ -100,27 +100,35 @@
     </div>
 
     <!-- Title and Manifest Tracker -->
-    <h2 class="success-title mt-3 mb-3">Order Request Submitted!</h2>
+    <h2 class="success-title mt-3 mb-3">
+        <span class="lang-en-text">Order Request Submitted!</span>
+        <span class="lang-ta-text">ஆர்டர் கோரிக்கை சமர்ப்பிக்கப்பட்டது!</span>
+    </h2>
     
     <div class="mb-4">
         <div class="order-badge-ticker">
-            Order Number: <span style="color: var(--brt-gold-text); font-weight: 700;">@ViewBag.OrderNumber</span>
+            <span class="lang-en-text">Order Number:</span>
+            <span class="lang-ta-text">ஆர்டர் எண்:</span>
+            <span style="color: var(--brt-gold-text); font-weight: 700;">@ViewBag.OrderNumber</span>
         </div>
     </div>
 
     <p class="success-desc mb-4">
-        Our admin will review your request and confirm pricing &amp; dispatch details shortly via WhatsApp / phone call.
+        <span class="lang-en-text">Our admin will review your request and confirm pricing &amp; dispatch details shortly via WhatsApp / phone call.</span>
+        <span class="lang-ta-text">எங்கள் நிர்வாகி உங்கள் கோரிக்கையை மறுஆய்வு செய்து, விலை &amp; அனுப்புகை விவரங்களை வாட்ஸ்அப் / தொலைபேசி அழைப்பு மூலம் விரைவில் உறுதிப்படுத்துவார்.</span>
     </p>
 
     @if (!string.IsNullOrEmpty((string)ViewBag.WhatsAppUrl))
     {
         <p class="success-desc mb-4" style="font-size:0.95rem">
-            Tap below to send your order details to us on WhatsApp so we can confirm it faster.
+            <span class="lang-en-text">Tap below to send your order details to us on WhatsApp so we can confirm it faster.</span>
+            <span class="lang-ta-text">உங்கள் ஆர்டர் விவரங்களை வாட்ஸ்அப் மூலம் எங்களுக்கு அனுப்ப கீழே தட்டவும், அதனால் நாங்கள் வேகமாக உறுதிப்படுத்த முடியும்.</span>
         </p>
         <a href="@ViewBag.WhatsAppUrl" target="_blank" id="waConfirmBtn"
            style="display:inline-flex;align-items:center;gap:8px;background:#25D366;color:#fff;font-weight:600;padding:14px 32px;border-radius:10px;text-decoration:none;margin-bottom:20px;">
             <span class="material-symbols-outlined" style="font-size:1.1rem;">chat</span>
-            Confirm via WhatsApp
+            <span class="lang-en-text">Confirm via WhatsApp</span>
+            <span class="lang-ta-text">வாட்ஸ்அப் மூலம் உறுதிப்படுத்த</span>
         </a>
         <br />
         <script>
@@ -136,6 +144,7 @@
     <!-- Action Pipeline Trigger -->
     <a asp-controller="Home" asp-action="Index" class="btn-brt-dark-home">
         <span class="material-symbols-outlined" style="font-size: 1.1rem;">arrow_back</span>
-        Back to Home
+        <span class="lang-en-text">Back to Home</span>
+        <span class="lang-ta-text">முகப்புக்கு திரும்ப</span>
     </a>
 </div>
