@@ -23,7 +23,7 @@
             --app-bottom-nav-height: 65px;
         }
 
-        /* App Base Styles */
+        /* Base Styles */
         html, body {
             width: 100%;
             max-width: 100%;
@@ -48,25 +48,54 @@
         body.lang-ta .lang-ta-text { display: inline-block !important; }
 
         /* ===================================================
-           1. MODERN APP TOP HEADER (Adaptive Desktop / App)
+           1. TOP HEADER - MOBILE APP & DESKTOP DUAL DESIGN
            =================================================== */
         .app-top-header-wrapper {
-            position: sticky;
+            position: fixed; /* Fixed position for non-stop sticky behavior on Mobile */
             top: 0;
+            left: 0;
+            right: 0;
             z-index: 1040;
-            padding: 10px 12px;
-            background: rgba(255, 253, 249, 0.88);
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
-            border-bottom: 1px solid rgba(13, 19, 31, 0.05);
+            transition: all 0.3s ease;
         }
 
-        .app-nav-container {
-            background-color: var(--brt-dark-navy) !important;
-            padding: 8px 18px !important;
-            border-radius: 28px;
-            box-shadow: 0 10px 30px rgba(13, 19, 31, 0.25), 0 0 15px rgba(212, 175, 55, 0.15);
-            border: 1px solid rgba(212, 175, 55, 0.3);
+        /* Mobile View Header Floating Bar */
+        @@media (max-width: 991.98px) {
+            .app-top-header-wrapper {
+                padding: 10px 12px;
+                background: rgba(255, 253, 249, 0.88);
+                backdrop-filter: blur(14px);
+                -webkit-backdrop-filter: blur(14px);
+                border-bottom: 1px solid rgba(13, 19, 31, 0.05);
+            }
+
+            .app-nav-container {
+                background-color: var(--brt-dark-navy) !important;
+                padding: 8px 16px !important;
+                border-radius: 28px;
+                box-shadow: 0 10px 25px rgba(13, 19, 31, 0.25);
+                border: 1px solid rgba(212, 175, 55, 0.3);
+            }
+        }
+
+        /* Desktop View Professional Full Width Header Bar */
+        @@media (min-width: 992px) {
+            .app-top-header-wrapper {
+                position: sticky;
+                top: 0;
+                padding: 0;
+                background: var(--brt-dark-navy);
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+                border-bottom: 2px solid var(--brt-gold-pure);
+            }
+
+            .app-nav-container {
+                background: transparent !important;
+                padding: 12px 0 !important;
+                border-radius: 0;
+                border: none;
+                box-shadow: none;
+            }
         }
 
         .brt-brand-logo-wrap {
@@ -77,7 +106,7 @@
         }
 
         .nav-logo-graphic {
-            max-height: 40px;
+            max-height: 42px;
             width: auto;
             border-radius: 10px;
             border: 1px solid rgba(212, 175, 55, 0.4);
@@ -89,22 +118,21 @@
             font-family: 'Playfair Display', serif;
             color: #FFFFFF;
             font-weight: 700;
-            font-size: 1.25rem;
+            font-size: 1.35rem;
             letter-spacing: 0.5px;
             background: linear-gradient(135deg, #FFFFFF 0%, #F3E5AB 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
         }
 
-        /* NAV LINKS FOR DESKTOP AND EXPANDED MENU */
+        /* NAV LINKS FOR DESKTOP */
         .app-nav-container .nav-link {
-            font-size: 0.9rem;
+            font-size: 0.92rem;
             font-weight: 600;
             color: var(--nav-text-white) !important;
-            padding: 8px 14px !important;
-            border-radius: 12px;
-            transition: all 0.2s ease;
+            padding: 8px 16px !important;
+            border-radius: 8px;
+            transition: all 0.25s ease;
             display: flex;
             align-items: center;
             gap: 8px;
@@ -116,7 +144,7 @@
             background: rgba(212, 175, 55, 0.12);
         }
 
-        /* APP LANGUAGE TOGGLE SWITCH */
+        /* LANGUAGE TOGGLE SWITCH */
         .lang-switch-container {
             display: inline-flex;
             align-items: center;
@@ -163,6 +191,13 @@
 
         .lang-option.active {
             color: #0D131F !important;
+        }
+
+        /* Body Offset compensation for fixed header on mobile */
+        @@media (max-width: 991.98px) {
+            main[role="main"] {
+                padding-top: 75px;
+            }
         }
 
         /* ===================================================
@@ -237,33 +272,55 @@
         }
 
         /* ===================================================
-           3. FOOTER UI REDESIGN
+           3. FOOTER UI - DUAL DESIGN (APP CARD & DESKTOP GRID)
            =================================================== */
-        .app-footer-card {
+        /* Footer Base */
+        footer.site-footer {
             background-color: var(--brt-dark-navy);
             color: #F3F4F6;
-            border-radius: 30px;
-            padding: 30px 20px 25px 20px;
-            margin: 40px 12px 15px 12px;
-            border: 1px solid rgba(212, 175, 55, 0.2);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        /* Mobile Footer Style: Rounded App Card */
+        @@media (max-width: 991.98px) {
+            footer.site-footer {
+                border-radius: 30px;
+                padding: 30px 20px 25px 20px;
+                margin: 40px 12px 15px 12px;
+                box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            }
+            .footer-quick-actions-col {
+                display: none !important; /* Hide on mobile */
+            }
+        }
+
+        /* Desktop Footer Style: Professional Clean Layout */
+        @@media (min-width: 992px) {
+            footer.site-footer {
+                border-radius: 0;
+                margin-top: 80px;
+                padding: 60px 0 30px 0;
+            }
+            .app-bottom-nav {
+                display: none !important; /* Hide bottom nav on desktop */
+            }
         }
 
         .footer-heading-premium {
             font-family: 'Space Grotesk', sans-serif;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 1.2px;
             color: var(--brt-gold-pure);
-            margin-bottom: 16px;
+            margin-bottom: 20px;
         }
 
         .footer-contact-item {
             display: flex;
             align-items: flex-start;
             gap: 12px;
-            font-size: 0.85rem;
+            font-size: 0.88rem;
             color: #9CA3AF;
             line-height: 1.5;
             margin-bottom: 14px;
@@ -280,63 +337,43 @@
             font-size: 0.88rem;
             color: #9CA3AF;
             text-decoration: none;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
             display: flex;
             align-items: center;
             gap: 8px;
             transition: all 0.2s ease;
         }
 
-        .footer-links-matrix a:active,
         .footer-links-matrix a:hover {
             color: #FFFFFF;
-            transform: translateX(4px);
+            transform: translateX(5px);
         }
 
         .coverage-badge-pill {
             background: rgba(255, 255, 255, 0.04);
             border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 20px;
-            padding: 16px;
+            border-radius: 16px;
+            padding: 20px;
             font-size: 0.82rem;
             color: #9CA3AF;
-            line-height: 1.5;
+            line-height: 1.6;
         }
 
         .footer-logo-graphic {
-            max-width: 130px;
+            max-width: 140px;
             height: auto;
             border-radius: 12px;
             border: 1px solid rgba(212, 175, 55, 0.3);
-        }
-
-        /* Desktop vs Mobile Media Queries */
-        @@media (min-width: 992px) {
-            .app-bottom-nav {
-                display: none !important; /* Hide Bottom Navigation on Desktop */
-            }
-            .app-footer-card {
-                margin: 60px auto 30px auto;
-                max-width: 1280px;
-                padding: 45px;
-            }
-        }
-
-        @@media (max-width: 991.98px) {
-            /* Hide Quick Actions section in Footer on Mobile View */
-            .footer-quick-actions-col {
-                display: none !important;
-            }
         }
     </style>
 </head>
 <body>
 
     <!-- ===================================================
-         1. TOP HEADER (Adaptive Floating App Bar)
+         1. TOP HEADER (Mobile Fixed & Desktop Professional)
          =================================================== -->
     <header class="app-top-header-wrapper">
-        <div class="container-fluid max-w-xl p-0">
+        <div class="container-xl p-lg-0">
             <nav class="navbar navbar-expand-lg navbar-dark app-nav-container">
                 <div class="container-fluid p-0 d-flex align-items-center justify-content-between">
                     
@@ -348,8 +385,8 @@
                         </div>
                     </a>
 
-                    <!-- Header Right Section: Language Toggle & Menu Toggle -->
-                    <div class="d-flex align-items-center gap-2 ms-auto">
+                    <!-- Desktop & Mobile Right Actions (Language Switcher & Nav Menu) -->
+                    <div class="d-flex align-items-center gap-3 order-lg-last">
                         <!-- Dynamic Language Switcher -->
                         <div class="lang-switch-container" id="langContainer" onclick="toggleLanguage()" title="Switch Language">
                             <div class="active-slider" id="langSlider"></div>
@@ -357,14 +394,14 @@
                             <div class="lang-option" id="optTN">தமிழ்</div>
                         </div>
 
-                        <button class="navbar-toggler border-0 p-1 ms-1" type="button" data-bs-toggle="collapse" data-bs-target="#navMain" aria-controls="navMain" aria-expanded="false" aria-label="Toggle navigation">
+                        <button class="navbar-toggler border-0 p-1 ms-1 d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#navMain" aria-controls="navMain" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="material-symbols-outlined text-white fs-2 align-middle">menu_open</span>
                         </button>
                     </div>
 
-                    <!-- Collapsible Desktop Navigation -->
-                    <div class="collapse navbar-collapse mt-3 mt-lg-0 ms-lg-4" id="navMain">
-                        <ul class="navbar-nav ms-auto align-items-start align-items-lg-center gap-1 pt-2 pt-lg-0 border-top border-secondary border-opacity-25 border-lg-0">
+                    <!-- Collapsible Menu (Desk Nav Items) -->
+                    <div class="collapse navbar-collapse mt-3 mt-lg-0" id="navMain">
+                        <ul class="navbar-nav ms-auto align-items-start align-items-lg-center gap-1 gap-lg-2 pt-2 pt-lg-0 border-top border-secondary border-opacity-25 border-lg-0">
                             <li class="nav-item w-100 w-lg-auto">
                                 <a class="nav-link" asp-controller="Home" asp-action="Index">
                                     <span class="material-symbols-outlined fs-5 text-gold d-lg-none">home</span>
@@ -457,107 +494,109 @@
     </div>
 
     <!-- ===================================================
-         4. APP FOOTER CONTAINER
+         4. SITE FOOTER CONTAINER
          =================================================== -->
-    <footer class="app-footer-card">
-        <div class="row g-4">
+    <footer class="site-footer">
+        <div class="container-xl">
+            <div class="row g-4">
 
-            <!-- Section A: Identity Space -->
-            <div class="col-12 col-md-3 text-center text-md-start">
-                <div class="mb-2">
-                    <a asp-controller="Home" asp-action="Index" class="d-inline-block">
-                        <img src="~/images/brt-logo.jpeg" alt="B Raj Traders Logo" class="footer-logo-graphic" />
-                    </a>
-                </div>
-                <p style="font-size:0.82rem; color:#9CA3AF; line-height:1.5;" class="mt-2 mb-0">
-                    <span class="lang-en-text">Your trusted supply and trading partner providing quality commodities since 2000.</span>
-                    <span class="lang-ta-text">2000 ஆம் ஆண்டு முதல் உயர்தர பொருட்களை வழங்கும் உங்கள் நம்பிக்கையான வணிக பங்குதாரர்.</span>
-                </p>
-            </div>
-
-            <!-- Section B: Direct Infrastructure -->
-            <div class="col-12 col-md-3">
-                <h6 class="footer-heading-premium">
-                    <span class="lang-en-text">Contact Infrastructure</span>
-                    <span class="lang-ta-text">தொடர்பு விவரங்கள்</span>
-                </h6>
-                <div class="footer-contact-item">
-                    <span class="material-symbols-outlined icon">location_on</span>
-                    <span>B Raj Traders, TCA complex, Periyakulam road, Vadugapatti, Tamil Nadu 625603</span>
-                </div>
-                <div class="footer-contact-item">
-                    <span class="material-symbols-outlined icon">call</span>
-                    <span>+91 98656 80694</span>
-                </div>
-                <div class="footer-contact-item mb-0">
-                    <span class="material-symbols-outlined icon">mail</span>
-                    <span style="word-break: break-all;">brajtraders2000@gmail.com</span>
-                </div>
-            </div>
-
-            <!-- Section C: Quick Navigation Links (Visible ON DESKTOP ONLY) -->
-            <div class="col-12 col-md-3 footer-quick-actions-col">
-                <h6 class="footer-heading-premium">
-                    <span class="lang-en-text">Quick Actions</span>
-                    <span class="lang-ta-text">விரைவு இணைப்புகள்</span>
-                </h6>
-                <div class="footer-links-matrix">
-                    <a asp-controller="Home" asp-action="About">
-                        <span class="material-symbols-outlined fs-6">chevron_right</span>
-                        <span class="lang-en-text">About Us</span>
-                        <span class="lang-ta-text">எங்களைப் பற்றி</span>
-                    </a>
-                    <a asp-controller="Home" asp-action="WhyChooseUs">
-                        <span class="material-symbols-outlined fs-6">chevron_right</span>
-                        <span class="lang-en-text">Why Choose Us</span>
-                        <span class="lang-ta-text">ஏன் எங்களை தேர்வு செய்ய வேண்டும்</span>
-                    </a>
-                    <a asp-controller="Catalog" asp-action="Index">
-                        <span class="material-symbols-outlined fs-6">chevron_right</span>
-                        <span class="lang-en-text">Wholesale Products</span>
-                        <span class="lang-ta-text">மொத்த விற்பனை பொருட்கள்</span>
-                    </a>
-                    <a asp-controller="Catalog" asp-action="Loose">
-                        <span class="material-symbols-outlined fs-6">chevron_right</span>
-                        <span class="lang-en-text">Retail Products</span>
-                        <span class="lang-ta-text">சில்லறை விற்பனை பொருட்கள்</span>
-                    </a>
-                    <a asp-controller="Order" asp-action="Request" style="color: var(--brt-gold-pure); font-weight:700;">
-                        <span class="material-symbols-outlined fs-6">shopping_bag</span>
-                        <span class="lang-en-text">Request Bulk Order</span>
-                        <span class="lang-ta-text">மொத்த ஆர்டர் செய்ய</span>
-                    </a>
-                    <a asp-controller="Contact" asp-action="Index">
-                        <span class="material-symbols-outlined fs-6">chevron_right</span>
-                        <span class="lang-en-text">Contact Us</span>
-                        <span class="lang-ta-text">தொடர்பு கொள்ள</span>
-                    </a>
-                </div>
-            </div>
-
-            <!-- Section D: Coverage Area Badge -->
-            <div class="col-12 col-md-3">
-                <h6 class="footer-heading-premium">
-                    <span class="lang-en-text">Service Coverage Map</span>
-                    <span class="lang-ta-text">சேவை பகுதிகள்</span>
-                </h6>
-                <div class="coverage-badge-pill">
-                    <div class="d-flex align-items-center gap-2 mb-2" style="color: #FFFFFF; font-weight:700; font-size:0.82rem;">
-                        <span class="material-symbols-outlined" style="color:var(--brt-gold-pure); font-size:1.1rem;">local_shipping</span>
-                        <span class="lang-en-text">PAN INDIA LOGISTICS</span>
-                        <span class="lang-ta-text">இந்தியா முழுவதும் விநியோகம்</span>
+                <!-- Section A: Identity Space -->
+                <div class="col-12 col-md-3 text-center text-md-start">
+                    <div class="mb-3">
+                        <a asp-controller="Home" asp-action="Index" class="d-inline-block">
+                            <img src="~/images/brt-logo.jpeg" alt="B Raj Traders Logo" class="footer-logo-graphic" />
+                        </a>
                     </div>
-                    <span class="lang-en-text">Supplying across mainland India, with highly optimized daily dispatch routes covering Pondicherry and over 15+ primary districts across Tamil Nadu.</span>
-                    <span class="lang-ta-text">புதுச்சேரி மற்றும் தமிழ்நாட்டின் 15+ மாவட்டங்கள் உட்பட இந்தியா முழுவதும் தினமும் பொருட்கள் அனுப்பி வைக்கப்படுகின்றன.</span>
+                    <p style="font-size:0.85rem; color:#9CA3AF; line-height:1.6;" class="mb-0">
+                        <span class="lang-en-text">Your trusted supply and trading partner providing quality commodities since 2000.</span>
+                        <span class="lang-ta-text">2000 ஆம் ஆண்டு முதல் உயர்தர பொருட்களை வழங்கும் உங்கள் நம்பிக்கையான வணிக பங்குதாரர்.</span>
+                    </p>
                 </div>
+
+                <!-- Section B: Direct Infrastructure -->
+                <div class="col-12 col-md-3">
+                    <h6 class="footer-heading-premium">
+                        <span class="lang-en-text">Contact Infrastructure</span>
+                        <span class="lang-ta-text">தொடர்பு விவரங்கள்</span>
+                    </h6>
+                    <div class="footer-contact-item">
+                        <span class="material-symbols-outlined icon">location_on</span>
+                        <span>B Raj Traders, TCA complex, Periyakulam road, Vadugapatti, Tamil Nadu 625603</span>
+                    </div>
+                    <div class="footer-contact-item">
+                        <span class="material-symbols-outlined icon">call</span>
+                        <span>+91 98656 80694</span>
+                    </div>
+                    <div class="footer-contact-item mb-0">
+                        <span class="material-symbols-outlined icon">mail</span>
+                        <span style="word-break: break-all;">brajtraders2000@gmail.com</span>
+                    </div>
+                </div>
+
+                <!-- Section C: Quick Navigation Links (Visible ON DESKTOP ONLY) -->
+                <div class="col-12 col-md-3 footer-quick-actions-col">
+                    <h6 class="footer-heading-premium">
+                        <span class="lang-en-text">Quick Actions</span>
+                        <span class="lang-ta-text">விரைவு இணைப்புகள்</span>
+                    </h6>
+                    <div class="footer-links-matrix">
+                        <a asp-controller="Home" asp-action="About">
+                            <span class="material-symbols-outlined fs-6">chevron_right</span>
+                            <span class="lang-en-text">About Us</span>
+                            <span class="lang-ta-text">எங்களைப் பற்றி</span>
+                        </a>
+                        <a asp-controller="Home" asp-action="WhyChooseUs">
+                            <span class="material-symbols-outlined fs-6">chevron_right</span>
+                            <span class="lang-en-text">Why Choose Us</span>
+                            <span class="lang-ta-text">ஏன் எங்களை தேர்வு செய்ய வேண்டும்</span>
+                        </a>
+                        <a asp-controller="Catalog" asp-action="Index">
+                            <span class="material-symbols-outlined fs-6">chevron_right</span>
+                            <span class="lang-en-text">Wholesale Products</span>
+                            <span class="lang-ta-text">மொத்த விற்பனை பொருட்கள்</span>
+                        </a>
+                        <a asp-controller="Catalog" asp-action="Loose">
+                            <span class="material-symbols-outlined fs-6">chevron_right</span>
+                            <span class="lang-en-text">Retail Products</span>
+                            <span class="lang-ta-text">சில்லறை விற்பனை பொருட்கள்</span>
+                        </a>
+                        <a asp-controller="Order" asp-action="Request" style="color: var(--brt-gold-pure); font-weight:700;">
+                            <span class="material-symbols-outlined fs-6">shopping_bag</span>
+                            <span class="lang-en-text">Request Bulk Order</span>
+                            <span class="lang-ta-text">மொத்த ஆர்டர் செய்ய</span>
+                        </a>
+                        <a asp-controller="Contact" asp-action="Index">
+                            <span class="material-symbols-outlined fs-6">chevron_right</span>
+                            <span class="lang-en-text">Contact Us</span>
+                            <span class="lang-ta-text">தொடர்பு கொள்ள</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Section D: Coverage Area Badge -->
+                <div class="col-12 col-md-3">
+                    <h6 class="footer-heading-premium">
+                        <span class="lang-en-text">Service Coverage Map</span>
+                        <span class="lang-ta-text">சேவை பகுதிகள்</span>
+                    </h6>
+                    <div class="coverage-badge-pill">
+                        <div class="d-flex align-items-center gap-2 mb-2" style="color: #FFFFFF; font-weight:700; font-size:0.85rem;">
+                            <span class="material-symbols-outlined" style="color:var(--brt-gold-pure); font-size:1.1rem;">local_shipping</span>
+                            <span class="lang-en-text">PAN INDIA LOGISTICS</span>
+                            <span class="lang-ta-text">இந்தியா முழுவதும் விநியோகம்</span>
+                        </div>
+                        <span class="lang-en-text">Supplying across mainland India, with highly optimized daily dispatch routes covering Pondicherry and over 15+ primary districts across Tamil Nadu.</span>
+                        <span class="lang-ta-text">புதுச்சேரி மற்றும் தமிழ்நாட்டின் 15+ மாவட்டங்கள் உட்பட இந்தியா முழுவதும் தினமும் பொருட்கள் அனுப்பி வைக்கப்படுகின்றன.</span>
+                    </div>
+                </div>
+
             </div>
 
-        </div>
-
-        <hr class="my-4" style="border-color: rgba(255, 255, 255, 0.1);" />
-        
-        <div class="text-center" style="font-size: 0.72rem; color: #6B7280; font-weight: 500;">
-            &copy; @DateTime.Now.Year B Raj Traders. All Rights Preserved.
+            <hr class="my-4" style="border-color: rgba(255, 255, 255, 0.1);" />
+            
+            <div class="text-center" style="font-size: 0.75rem; color: #6B7280; font-weight: 500;">
+                &copy; @DateTime.Now.Year B Raj Traders. All Rights Preserved.
+            </div>
         </div>
     </footer>
 
