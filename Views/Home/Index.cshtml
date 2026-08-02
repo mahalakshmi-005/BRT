@@ -368,16 +368,17 @@
                 <div class="mobile-scroll-item p-1">
                     <div class="pro-product-card p-3 d-flex flex-column justify-content-between h-100">
                         <div>
-                            <div class="bg-light rounded-3 p-3 text-center d-flex align-items-center justify-content-center position-relative" style="height: 150px; background-color: #F8FAFC !important;">
+                            <!-- Fixed Image Container -->
+                            <div class="rounded-3 text-center d-flex align-items-center justify-content-center position-relative overflow-hidden" style="height: 180px; background-color: #F8FAFC;">
                                 @if (!string.IsNullOrEmpty(p.ImageUrl))
                                 {
-                                    <img src="@p.ImageUrl" alt="@p.Name" class="img-fluid object-fit-contain" style="max-height: 120px;" />
+                                    <img src="@p.ImageUrl" alt="@p.Name" class="w-100 h-100 object-fit-cover rounded-3" />
                                 }
                                 else
                                 {
                                     <span class="material-symbols-outlined fs-1 text-gold">inventory_2</span>
                                 }
-                                <span class="badge position-absolute top-0 start-0 m-2 px-2.5 py-1 rounded-pill bg-navy text-gold fw-bold extra-small">
+                                <span class="badge position-absolute top-0 start-0 m-2 px-2.5 py-1 rounded-pill bg-navy text-gold fw-bold extra-small shadow-sm" style="z-index: 2;">
                                     @(p.SubCategory?.Name ?? "General")
                                 </span>
                             </div>
