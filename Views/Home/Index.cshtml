@@ -2,19 +2,17 @@
     ViewData["Title"] = "B RAJ TRADERS | Premium Wholesale Mandi";
 }
 
+<!-- Google Fonts & Material Symbols Explicit Import -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap">
+
 <style>
     :root {
-        /* Light & Modern Premium Palette */
         --brt-navy: #0D131F;
+        --brt-navy-card: #151D2A;
         --brt-gold: #C59B27;
         --brt-gold-light: #FFF9E6;
-        --brt-gold-glow: rgba(197, 155, 39, 0.2);
         --brt-bg-light: #F8FAFC;
-        --brt-card-bg: #FFFFFF;
-        
-        /* Modern Soft Glass Themes */
-        --brt-surface-dark: #121A29;
-        --brt-surface-card: #1A2436;
         --brt-border-soft: rgba(0, 0, 0, 0.08);
     }
 
@@ -24,6 +22,22 @@
         padding-bottom: 70px;
         -webkit-tap-highlight-color: transparent;
         font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    }
+
+    .material-symbols-outlined {
+        font-family: 'Material Symbols Outlined' !important;
+        font-weight: normal;
+        font-style: normal;
+        font-size: 20px;
+        display: inline-block;
+        line-height: 1;
+        text-transform: none;
+        letter-spacing: normal;
+        word-wrap: normal;
+        white-space: nowrap;
+        direction: ltr;
+        vertical-align: middle;
+        -webkit-font-smoothing: antialiased;
     }
 
     /* Navigation Chips */
@@ -51,131 +65,119 @@
         box-shadow: 0 2px 4px rgba(0,0,0,0.02);
         transition: all 0.2s ease;
     }
-    .app-chip:active {
-        transform: scale(0.95);
-        background: var(--brt-gold);
-        color: #FFFFFF;
-    }
 
     /* ===================================================
-       1. FIXED: LIVE MARKET DASHBOARD (CLEAN & MODERN)
+       1. TODAY'S LIVE MARKET RATES (DARK & CLEAN)
     =================================================== */
-    .live-market-wrapper {
-        background: linear-gradient(145deg, #182232 0%, #0F172A 100%);
-        border-radius: 20px;
-        border: 1px solid rgba(212, 175, 55, 0.25);
-        box-shadow: 0 10px 25px rgba(15, 23, 42, 0.15);
-        padding: 1.25rem;
+    .live-market-container {
+        background-color: #0B111E;
+        border-radius: 18px;
+        padding: 18px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.15);
     }
-    .live-rate-app-card {
-        background: rgba(255, 255, 255, 0.06);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.12);
-        border-radius: 14px;
+    .live-dot {
+        width: 8px;
+        height: 8px;
+        background-color: #EF4444;
+        border-radius: 50%;
+        display: inline-block;
+        animation: blink 1.2s infinite;
+    }
+    @@keyframes blink {
+        0% { opacity: 1; }
+        50% { opacity: 0.3; }
+        100% { opacity: 1; }
+    }
+
+    .live-item-card {
+        background: #141C2B;
+        border: 1px solid rgba(255, 255, 255, 0.07);
+        border-radius: 12px;
         padding: 12px;
         height: 100%;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
     }
-    .live-rate-app-card:hover {
+    .live-item-card:hover {
         border-color: var(--brt-gold);
-        background: rgba(255, 255, 255, 0.1);
-    }
-    .live-badge-pulse {
-        width: 8px;
-        height: 8px;
-        background-color: #22C55E;
-        border-radius: 50%;
-        display: inline-block;
-        box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
-        animation: pulseGreen 1.6s infinite;
-    }
-    @@keyframes pulseGreen {
-        0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); }
-        70% { box-shadow: 0 0 0 6px rgba(34, 197, 94, 0); }
-        100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
     }
 
     /* ===================================================
-       2. FIXED: PORTFOLIO SECTION (CLEAN & BALANCED)
+       2. WHOLESALE CATALOG HORIZONTAL SLIDER
     =================================================== */
-    .portfolio-card-modern {
-        background: #FFFFFF;
-        border: 1px solid rgba(0, 0, 0, 0.08);
-        border-radius: 18px;
-        padding: 1.25rem;
-        transition: all 0.25s ease;
-        height: 100%;
+    .catalog-scroll-wrapper {
         display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        position: relative;
-        overflow: hidden;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+        gap: 12px;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        padding-bottom: 8px;
+        scrollbar-width: none; /* Firefox */
     }
-    .portfolio-card-modern:hover {
-        transform: translateY(-3px);
-        border-color: var(--brt-gold);
-        box-shadow: 0 10px 20px rgba(0,0,0,0.06);
+    .catalog-scroll-wrapper::-webkit-scrollbar {
+        display: none; /* Chrome/Safari */
     }
-    .portfolio-card-modern.accent-gold {
-        background: linear-gradient(135deg, #FFFDF5 0%, #FFF8E7 100%);
-        border-color: rgba(197, 155, 39, 0.3);
+    .catalog-scroll-item {
+        flex: 0 0 160px;
+        scroll-snap-align: start;
     }
-    .portfolio-icon-box {
-        width: 42px;
-        height: 42px;
-        border-radius: 12px;
-        background: rgba(197, 155, 39, 0.12);
-        color: var(--brt-gold);
-        display: flex;
-        align-items: center;
-        justify-content: center;
+    @@media (min-width: 768px) {
+        .catalog-scroll-item {
+            flex: 0 0 220px;
+        }
     }
-
-    /* Catalog Cards */
     .app-catalog-card {
         background: #FFFFFF;
-        border-radius: 16px;
+        border-radius: 14px;
         border: 1px solid var(--brt-border-soft);
-        transition: all 0.2s ease;
+        padding: 10px;
         height: 100%;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.02);
     }
-    .app-catalog-card:hover {
-        border-color: var(--brt-gold);
-        box-shadow: 0 8px 18px rgba(0,0,0,0.05);
+
+    /* ===================================================
+       3. PORTFOLIO CATEGORIES SECTION
+    =================================================== */
+    .portfolio-box {
+        background: #141C2B;
+        border-radius: 16px;
+        padding: 16px;
+        color: #FFFFFF;
+        text-decoration: none;
+        display: block;
+        height: 100%;
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        transition: transform 0.2s ease;
+    }
+    .portfolio-box:hover {
+        transform: translateY(-2px);
+        color: #FFFFFF;
     }
 
     /* Partner Grid Cards */
     .partner-app-card {
         background: #FFFFFF;
         border: 1px solid var(--brt-border-soft);
-        border-radius: 14px;
-        padding: 12px 8px;
+        border-radius: 12px;
+        padding: 10px 6px;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        gap: 6px;
+        gap: 4px;
         height: 100%;
-        transition: all 0.2s ease;
-    }
-    .partner-app-card:hover {
-        border-color: var(--brt-gold);
-        transform: translateY(-2px);
     }
 
-    /* Typography & Utilities */
+    /* Typography Utilities */
     .extra-small { font-size: 0.78rem; }
     .text-navy { color: var(--brt-navy) !important; }
     .text-gold { color: var(--brt-gold) !important; }
     .btn-brt-gold {
-        background: linear-gradient(135deg, #D4AF37 0%, #C59B27 100%);
+        background: var(--brt-gold);
         color: #0D131F !important;
         font-weight: 700;
         border: none;
@@ -189,17 +191,19 @@
     }
 </style>
 
-<!-- ===== TOP ANNOUNCEMENT BAR ===== -->
-<div class="top-announcement-bar text-white py-2 px-3" style="background: #0F172A; border-bottom: 1px solid rgba(212,175,55,0.2);">
+<!-- ===== ANNOUNCEMENT ===== -->
+<div class="top-announcement-bar text-white py-2 px-3" style="background: #0B111E; border-bottom: 1px solid rgba(255,255,255,0.08);">
     <div class="container-fluid d-flex justify-content-between align-items-center">
         <div class="d-flex align-items-center gap-2 overflow-hidden me-2">
+            <span class="material-symbols-outlined text-gold fs-6">campaign</span>
             <div class="text-truncate extra-small text-warning fw-bold">
-                <span class="lang-en-text">✨ For Dealership &amp; Wholesale:</span>
-                <span class="lang-ta-text">✨ டீலர்ஷிப் &amp; மொத்த விற்பனைக்கு:</span>
+                <span class="lang-en-text">For Dealership &amp; Enquiries</span>
+                <span class="lang-ta-text">டீலர்ஷிப் &amp; விசாரணைக்குு</span>
             </div>
         </div>
-        <div class="flex-shrink-0">
-            <a href="tel:9865680694" class="btn btn-sm btn-brt-gold py-1 px-3 d-inline-flex align-items-center gap-1 extra-small fw-bold rounded-pill shadow-sm">
+        <div>
+            <a href="tel:9865680694" class="btn btn-sm btn-brt-gold py-1 px-3 d-inline-flex align-items-center gap-1 extra-small fw-bold">
+                <span class="material-symbols-outlined fs-6">call</span>
                 <span>Call</span>
             </a>
         </div>
@@ -209,20 +213,20 @@
 <!-- ===== QUICK CHIPS ===== -->
 <div class="bg-white border-bottom shadow-sm">
     <div class="app-chip-bar">
-        <a href="#live-rates" class="app-chip">📈 Live Rates</a>
-        <a href="#products" class="app-chip">📦 Catalog</a>
-        <a href="#portfolio" class="app-chip">🗂️ Categories</a>
-        <a href="#partners" class="app-chip">🏢 Clients</a>
-        <a href="#why-us" class="app-chip">⭐ Why Us</a>
+        <a href="#live-rates" class="app-chip"><span class="material-symbols-outlined text-gold">trending_up</span> Live Rates</a>
+        <a href="#products" class="app-chip"><span class="material-symbols-outlined text-gold">inventory_2</span> Catalog</a>
+        <a href="#portfolio" class="app-chip"><span class="material-symbols-outlined text-gold">category</span> Categories</a>
+        <a href="#partners" class="app-chip"><span class="material-symbols-outlined text-gold">corporate_fare</span> Clients</a>
+        <a href="#why-us" class="app-chip"><span class="material-symbols-outlined text-gold">verified</span> Why Us</a>
     </div>
 </div>
 
 <!-- ===== HERO SECTION ===== -->
-<section class="hero-modern-premium position-relative py-4 py-lg-5 overflow-hidden" style="background: radial-gradient(circle at 15% 20%, rgba(212, 175, 55, 0.08) 0%, transparent 45%), linear-gradient(135deg, #FAFBFD 0%, #F1F5F9 100%);">
+<section class="py-4 py-lg-5 overflow-hidden" style="background: linear-gradient(135deg, #FAFBFD 0%, #F1F5F9 100%);">
     <div class="container py-2">
         <div class="row align-items-center g-4">
             <div class="col-lg-6 text-center text-lg-start">
-                <div class="d-inline-flex align-items-center gap-1.5 px-3 py-1 rounded-pill mb-2 border bg-white shadow-sm" style="border-color: rgba(212, 175, 55, 0.3) !important;">
+                <div class="d-inline-flex align-items-center gap-1.5 px-3 py-1 rounded-pill mb-2 border bg-white shadow-sm" style="border-color: rgba(197, 155, 39, 0.3) !important;">
                     <span class="fw-bold extra-small text-uppercase text-navy">
                         <span class="lang-en-text">Trusted Wholesale Mandi Since 2000</span>
                         <span class="lang-ta-text">2000 முதல் நம்பகமான கமிஷன் மண்டி</span>
@@ -240,24 +244,25 @@
 
                 <div class="hero-cta d-flex flex-column flex-sm-row gap-2 mb-3">
                     <a asp-controller="Order" asp-action="Request" class="btn btn-brt-gold px-4 py-2.5 shadow-sm d-inline-flex align-items-center justify-content-center gap-2">
-                        <span>Secure Bulk Supply</span> ➔
+                        <span>Secure Bulk Supply</span>
+                        <span class="material-symbols-outlined fs-6">arrow_forward</span>
                     </a>
                     <a asp-controller="Catalog" asp-action="Index" class="btn btn-brt-outline px-4 py-2.5 d-inline-flex align-items-center justify-content-center">
                         <span>Explore Catalog</span>
                     </a>
                 </div>
 
-                <div class="d-flex align-items-center gap-4 pt-3 border-top border-secondary border-opacity-10 justify-content-center justify-content-lg-start">
+                <div class="d-flex align-items-center gap-4 pt-3 border-top justify-content-center justify-content-lg-start">
                     <div>
                         <div class="fw-bold fs-4 text-navy">25+</div>
                         <div class="text-muted extra-small">Years Legacy</div>
                     </div>
-                    <div class="border-end border-dark opacity-25" style="height: 20px;"></div>
+                    <div class="border-end opacity-25" style="height: 20px;"></div>
                     <div>
                         <div class="fw-bold fs-4 text-navy">500+</div>
                         <div class="text-muted extra-small">Dealers</div>
                     </div>
-                    <div class="border-end border-dark opacity-25" style="height: 20px;"></div>
+                    <div class="border-end opacity-25" style="height: 20px;"></div>
                     <div>
                         <div class="fw-bold fs-4 text-navy">30+</div>
                         <div class="text-muted extra-small">Varieties</div>
@@ -267,42 +272,43 @@
 
             <div class="col-lg-6 text-center">
                 <div class="p-1 rounded-4 shadow-sm bg-white border">
-                    <img src="~/images/hero.png" alt="Garlic Wholesale Mandi" class="img-fluid rounded-3 object-fit-cover" style="max-height: 240px; width: 100%;" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1618160702438-9b02ab6515c9?auto=format&fit=crop&w=800&q=80';" />
+                    <img src="~/images/hero.png" alt="Garlic Wholesale Mandi" class="img-fluid rounded-3 object-fit-cover" style="max-height: 250px; width: 100%;" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1618160702438-9b02ab6515c9?auto=format&fit=crop&w=800&q=80';" />
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- ===== 1. FIXED: LIVE MARKET DASHBOARD ===== -->
+<!-- ===== 1. TODAY'S LIVE MANDI RATES (CORRECTED) ===== -->
 @{
     var dashboard = ViewBag.MarketDashboard as List<BRT.Models.MarketPrice>;
 }
 <section id="live-rates" class="container my-4">
-    <div class="live-market-wrapper">
-        <!-- Live Header -->
+    <div class="live-market-container">
         <div class="d-flex align-items-center justify-content-between mb-3 pb-2 border-bottom border-secondary border-opacity-25">
             <div class="d-flex align-items-center gap-2">
-                <span class="live-badge-pulse"></span>
+                <span class="live-dot"></span>
                 <h2 class="fw-bold text-white fs-5 mb-0" style="font-family: 'Playfair Display', serif;">
                     Today's Live Mandi Rates
                 </h2>
             </div>
-            <span class="badge bg-warning text-dark extra-small fw-bold">LIVE INDEX</span>
+            <span class="badge bg-warning text-dark extra-small fw-bold d-inline-flex align-items-center gap-1">
+                <span class="material-symbols-outlined fs-6">sync</span> REALTIME
+            </span>
         </div>
 
-        <!-- Live Cards Grid -->
         <div class="row g-2.5">
             @if (dashboard != null && dashboard.Any())
             {
                 foreach (var m in dashboard)
                 {
                     <div class="col-6 col-md-4 col-lg-3">
-                        <div class="live-rate-app-card">
+                        <div class="live-item-card">
                             <div>
                                 <div class="d-flex align-items-center justify-content-between mb-1">
-                                    <span class="badge bg-warning bg-opacity-20 text-warning extra-small px-2 py-0.5">Verified</span>
-                                    <span class="text-muted extra-small" style="font-size:0.65rem;">Daily</span>
+                                    <span class="text-warning extra-small d-inline-flex align-items-center gap-1" style="font-size:0.68rem;">
+                                        <span class="material-symbols-outlined fs-6">verified</span> Verified
+                                    </span>
                                 </div>
                                 <h6 class="fw-bold text-white text-truncate mb-0 extra-small">@m.Product?.Name</h6>
                                 <span class="text-muted d-block text-truncate extra-small mb-2" style="font-size:0.65rem;">@m.Product?.NameTamil</span>
@@ -317,10 +323,11 @@
                 }
             }
             <div class="col-12 col-md-4 col-lg-3">
-                <div class="live-rate-app-card d-flex flex-row flex-md-column align-items-center justify-content-between p-2.5" style="background: rgba(212,175,55,0.12);">
+                <div class="live-item-card d-flex flex-row flex-md-column align-items-center justify-content-between p-2.5" style="background: rgba(197, 155, 39, 0.15);">
                     <div class="text-start text-md-center">
-                        <h6 class="fw-bold text-white extra-small mb-0">Custom Bulk Quote?</h6>
-                        <span class="text-muted extra-small" style="font-size:0.65rem;">Direct Mandi Price</span>
+                        <h6 class="fw-bold text-white extra-small mb-0 d-inline-flex align-items-center gap-1">
+                            <span class="material-symbols-outlined text-warning fs-6">request_quote</span> Custom Bulk Quote?
+                        </h6>
                     </div>
                     <a asp-controller="Order" asp-action="Request" class="btn btn-sm btn-brt-gold px-3 py-1 extra-small fw-bold">Get Price</a>
                 </div>
@@ -329,7 +336,7 @@
     </div>
 </section>
 
-<!-- ===== 2. CATALOG SECTION ===== -->
+<!-- ===== 2. WHOLESALE CATALOG (HORIZONTAL SLIDE) ===== -->
 @{
     var featured = ViewBag.FeaturedProducts as List<BRT.Models.Product>;
 }
@@ -338,17 +345,20 @@
     <section id="products" class="container my-4">
         <div class="d-flex justify-content-between align-items-end mb-3">
             <div>
-                <span class="fw-bold extra-small text-gold">WHOLESALE CATALOG</span>
+                <span class="fw-bold extra-small text-gold d-inline-flex align-items-center gap-1">
+                    <span class="material-symbols-outlined fs-6">workspace_premium</span> WHOLESALE CATALOG
+                </span>
                 <h2 class="fw-bold text-navy fs-4 mb-0">Featured Stock Produce</h2>
             </div>
             <a asp-controller="Catalog" asp-action="Index" class="btn btn-sm btn-brt-outline px-3 py-1 extra-small fw-bold">View All</a>
         </div>
 
-        <div class="row g-2.5 g-md-3">
+        <!-- Horizontal Slide Container -->
+        <div class="catalog-scroll-wrapper">
             @foreach (var p in featured)
             {
-                <div class="col-6 col-md-4 col-lg-3">
-                    <div class="app-catalog-card p-2.5">
+                <div class="catalog-scroll-item">
+                    <div class="app-catalog-card">
                         <div>
                             <div class="bg-light rounded-3 p-2 text-center mb-2" style="height: 100px; display: flex; align-items: center; justify-content: center;">
                                 @if (!string.IsNullOrEmpty(p.ImageUrl))
@@ -357,7 +367,7 @@
                                 }
                                 else
                                 {
-                                    <span class="fs-2">📦</span>
+                                    <span class="material-symbols-outlined fs-1 text-muted">inventory_2</span>
                                 }
                             </div>
                             <h6 class="fw-bold text-navy mb-0 text-truncate extra-small">@p.Name</h6>
@@ -366,7 +376,7 @@
 
                         <div class="pt-2 border-top d-flex align-items-center justify-content-between">
                             <span class="badge bg-success bg-opacity-10 text-success extra-small rounded-pill px-2" style="font-size:0.65rem;">In Stock</span>
-                            <a asp-controller="Catalog" asp-action="Product" asp-route-slug="@p.Slug" class="btn btn-sm btn-brt-gold px-2.5 py-1 extra-small fw-bold">Inquire</a>
+                            <a asp-controller="Catalog" asp-action="Product" asp-route-slug="@p.Slug" class="btn btn-sm btn-brt-gold px-2 py-0.5 extra-small fw-bold">Inquire</a>
                         </div>
                     </div>
                 </div>
@@ -375,112 +385,131 @@
     </section>
 }
 
-<!-- ===== 3. FIXED: PORTFOLIO SECTION (CLEAN LIGHT DESIGN) ===== -->
+<!-- ===== 3. PORTFOLIO CATEGORIES ===== -->
 <section id="portfolio" class="container my-4">
     <div class="text-center mb-3">
-        <span class="fw-bold extra-small text-gold">PORTFOLIO CATEGORIES</span>
+        <span class="fw-bold extra-small text-gold d-inline-flex align-items-center gap-1">
+            <span class="material-symbols-outlined fs-6">grid_view</span> PORTFOLIO CATEGORIES
+        </span>
         <h2 class="fw-bold text-navy fs-4 mb-0">Explore Supply Sections</h2>
     </div>
 
     <div class="row g-2.5 g-md-3">
-        <!-- Garlic Mandi -->
         <div class="col-12 col-md-6">
-            <a asp-controller="Catalog" asp-action="Garlic" class="portfolio-card-modern text-decoration-none">
+            <a asp-controller="Catalog" asp-action="Garlic" class="portfolio-box">
                 <div class="d-flex justify-content-between align-items-start mb-2">
-                    <div class="portfolio-icon-box">🧄</div>
-                    <span class="badge bg-dark text-warning fw-bold px-2 py-1 rounded-pill extra-small">Core Specialty</span>
+                    <span class="material-symbols-outlined text-warning fs-3">eco</span>
+                    <span class="badge bg-warning text-dark fw-bold extra-small">Core Specialty</span>
                 </div>
-                <div>
-                    <h3 class="fw-bold text-navy fs-5 mb-1">Garlic Mandi Supply</h3>
-                    <p class="extra-small text-muted mb-2">Raw, Ooty, Desi, and processed garlic cloves directly from farm roots.</p>
-                    <span class="text-gold fw-bold extra-small d-inline-flex align-items-center gap-1">
-                        View Garlic Section ➔
-                    </span>
-                </div>
+                <h3 class="fw-bold fs-5 mb-1">Garlic Mandi Supply</h3>
+                <p class="extra-small text-muted mb-2">Raw, Ooty, Desi, and processed garlic cloves directly from farm roots.</p>
+                <span class="text-warning fw-bold extra-small d-inline-flex align-items-center gap-1">
+                    View Garlic Section <span class="material-symbols-outlined fs-6">arrow_forward</span>
+                </span>
             </a>
         </div>
 
-        <!-- Grocery Essentials -->
         <div class="col-12 col-md-6">
-            <a asp-controller="Catalog" asp-action="Grocery" class="portfolio-card-modern text-decoration-none">
+            <a asp-controller="Catalog" asp-action="Grocery" class="portfolio-box">
                 <div class="d-flex justify-content-between align-items-start mb-2">
-                    <div class="portfolio-icon-box">🛒</div>
-                    <span class="badge bg-light text-dark border fw-bold px-2 py-1 rounded-pill extra-small">Bulk Staples</span>
+                    <span class="material-symbols-outlined text-warning fs-3">shopping_cart</span>
+                    <span class="badge bg-secondary text-white fw-bold extra-small">Bulk Staples</span>
                 </div>
-                <div>
-                    <h3 class="fw-bold text-navy fs-5 mb-1">Grocery &amp; Staples</h3>
-                    <p class="extra-small text-muted mb-2">High-grade pulses, whole spices, grains, and kitchen wholesale supplies.</p>
-                    <span class="text-gold fw-bold extra-small d-inline-flex align-items-center gap-1">
-                        View Grocery Staples ➔
-                    </span>
-                </div>
+                <h3 class="fw-bold fs-5 mb-1">Grocery &amp; Staples</h3>
+                <p class="extra-small text-muted mb-2">High-grade pulses, whole spices, grains, and kitchen wholesale supplies.</p>
+                <span class="text-warning fw-bold extra-small d-inline-flex align-items-center gap-1">
+                    View Grocery Staples <span class="material-symbols-outlined fs-6">arrow_forward</span>
+                </span>
             </a>
         </div>
 
-        <!-- Loose Packing -->
         <div class="col-12 col-md-6">
-            <a asp-controller="Catalog" asp-action="Loose" class="portfolio-card-modern text-decoration-none">
+            <a asp-controller="Catalog" asp-action="Loose" class="portfolio-box">
                 <div class="d-flex justify-content-between align-items-start mb-2">
-                    <div class="portfolio-icon-box">📦</div>
-                    <span class="badge bg-light text-dark border fw-medium px-2 py-1 rounded-pill extra-small">Custom Packing</span>
+                    <span class="material-symbols-outlined text-warning fs-3">inventory</span>
+                    <span class="badge bg-secondary text-white fw-bold extra-small">Custom Packing</span>
                 </div>
-                <div>
-                    <h4 class="fw-bold text-navy fs-6 mb-1">Loose &amp; Retail Packaging</h4>
-                    <p class="extra-small text-muted mb-2">Custom bag weights tailored for supermarkets and retail store stocks.</p>
-                    <span class="text-gold fw-bold extra-small d-inline-flex align-items-center gap-1">
-                        Explore Loose Packs ➔
-                    </span>
-                </div>
+                <h4 class="fw-bold fs-6 mb-1">Loose &amp; Retail Packaging</h4>
+                <p class="extra-small text-muted mb-2">Custom bag weights tailored for supermarkets and retail store stocks.</p>
+                <span class="text-warning fw-bold extra-small d-inline-flex align-items-center gap-1">
+                    Explore Loose Packs <span class="material-symbols-outlined fs-6">arrow_forward</span>
+                </span>
             </a>
         </div>
 
-        <!-- Truck-Load Wholesale -->
         <div class="col-12 col-md-6">
-            <a asp-controller="Order" asp-action="Request" class="portfolio-card-modern accent-gold text-decoration-none">
+            <a asp-controller="Order" asp-action="Request" class="portfolio-box" style="background: linear-gradient(135deg, #1C2638 0%, #141C2B 100%); border-color: rgba(197,155,39,0.3);">
                 <div class="d-flex justify-content-between align-items-start mb-2">
-                    <div class="portfolio-icon-box" style="background: rgba(13,19,31,0.1); color: #0D131F;">🚛</div>
-                    <span class="badge bg-warning text-dark fw-bold px-2 py-1 rounded-pill extra-small">Direct Mandi</span>
+                    <span class="material-symbols-outlined text-warning fs-3">local_shipping</span>
+                    <span class="badge bg-warning text-dark fw-bold extra-small">Direct Mandi</span>
                 </div>
-                <div>
-                    <h4 class="fw-bold text-navy fs-6 mb-1">Truck-Load Wholesale</h4>
-                    <p class="extra-small text-muted mb-2">Special rates for bulk transport loading &amp; major regional dealers.</p>
-                    <span class="text-navy fw-bold extra-small d-inline-flex align-items-center gap-1">
-                        Book Lorry Load ➔
-                    </span>
-                </div>
+                <h4 class="fw-bold fs-6 mb-1">Truck-Load Wholesale</h4>
+                <p class="extra-small text-muted mb-2">Special rates for bulk transport loading &amp; major regional dealers.</p>
+                <span class="text-warning fw-bold extra-small d-inline-flex align-items-center gap-1">
+                    Book Lorry Load <span class="material-symbols-outlined fs-6">arrow_forward</span>
+                </span>
             </a>
         </div>
     </div>
 </section>
 
-<!-- ===== 4. CLIENTS WE SUPPLY ===== -->
+<!-- ===== 4. COMMERCIAL PARTNERS ===== -->
 <section id="partners" class="container my-4">
     <div class="text-center mb-3">
-        <span class="fw-bold extra-small text-gold">COMMERCIAL PARTNERS</span>
+        <span class="fw-bold extra-small text-gold d-inline-flex align-items-center gap-1">
+            <span class="material-symbols-outlined fs-6">storefront</span> COMMERCIAL PARTNERS
+        </span>
         <h2 class="fw-bold text-navy fs-4">Industries &amp; Clients We Supply</h2>
     </div>
 
     <div class="row g-2 g-md-3">
-        <div class="col-4 col-md-3"><div class="partner-app-card"><span class="fs-4">🏪</span><h6 class="fw-bold text-navy mb-0 extra-small">Supermarkets</h6></div></div>
-        <div class="col-4 col-md-3"><div class="partner-app-card"><span class="fs-4">🛒</span><h6 class="fw-bold text-navy mb-0 extra-small">Grocery Mandis</h6></div></div>
-        <div class="col-4 col-md-3"><div class="partner-app-card"><span class="fs-4">🏨</span><h6 class="fw-bold text-navy mb-0 extra-small">Hotels &amp; Resorts</h6></div></div>
-        <div class="col-4 col-md-3"><div class="partner-app-card"><span class="fs-4">🌐</span><h6 class="fw-bold text-navy mb-0 extra-small">Exporters</h6></div></div>
-        <div class="col-4 col-md-4"><div class="partner-app-card"><span class="fs-4">🏭</span><h6 class="fw-bold text-navy mb-0 extra-small">Food Processors</h6></div></div>
-        <div class="col-4 col-md-4"><div class="partner-app-card"><span class="fs-4">🍽️</span><h6 class="fw-bold text-navy mb-0 extra-small">Catering &amp; Mess</h6></div></div>
-        <div class="col-4 col-md-4"><div class="partner-app-card"><span class="fs-4">🏫</span><h6 class="fw-bold text-navy mb-0 extra-small">Hostel Canteens</h6></div></div>
+        <div class="col-4 col-md-3"><div class="partner-app-card"><span class="material-symbols-outlined text-gold fs-4">store</span><h6 class="fw-bold text-navy mb-0 extra-small">Supermarkets</h6></div></div>
+        <div class="col-4 col-md-3"><div class="partner-app-card"><span class="material-symbols-outlined text-gold fs-4">shopping_bag</span><h6 class="fw-bold text-navy mb-0 extra-small">Grocery Mandis</h6></div></div>
+        <div class="col-4 col-md-3"><div class="partner-app-card"><span class="material-symbols-outlined text-gold fs-4">hotel</span><h6 class="fw-bold text-navy mb-0 extra-small">Hotels &amp; Resorts</h6></div></div>
+        <div class="col-4 col-md-3"><div class="partner-app-card"><span class="material-symbols-outlined text-gold fs-4">public</span><h6 class="fw-bold text-navy mb-0 extra-small">Exporters</h6></div></div>
+        <div class="col-4 col-md-4"><div class="partner-app-card"><span class="material-symbols-outlined text-gold fs-4">factory</span><h6 class="fw-bold text-navy mb-0 extra-small">Food Processors</h6></div></div>
+        <div class="col-4 col-md-4"><div class="partner-app-card"><span class="material-symbols-outlined text-gold fs-4">flatware</span><h6 class="fw-bold text-navy mb-0 extra-small">Catering &amp; Mess</h6></div></div>
+        <div class="col-4 col-md-4"><div class="partner-app-card"><span class="material-symbols-outlined text-gold fs-4">domain</span><h6 class="fw-bold text-navy mb-0 extra-small">Hostel Canteens</h6></div></div>
     </div>
 </section>
 
 <!-- ===== WHY CHOOSE US ===== -->
 <section id="why-us" class="container my-4">
     <div class="p-3.5 bg-white border rounded-4 shadow-sm">
-        <span class="fw-bold extra-small text-gold">WHY BRT TRADERS</span>
+        <span class="fw-bold extra-small text-gold d-inline-flex align-items-center gap-1">
+            <span class="material-symbols-outlined fs-6">verified</span> WHY BRT TRADERS
+        </span>
         <h2 class="fw-bold text-navy fs-4 mb-2">Trusted Wholesale Partner Since 2000</h2>
         <p class="text-muted extra-small mb-3">We supply commercial-grade garlic and grocery staples with complete price transparency.</p>
         
         <div class="row g-2">
-            <div class="col-6"><div class="p-2 border rounded text-center"><span class="fs-5">✨</span><h6 class="fw-bold text-navy extra-small mb-0">Strict Grading</h6></div></div>
-            <div class="col-6"><div class="p-2 border rounded text-center"><span class="fs-5">🚚</span><h6 class="fw-bold text-navy extra-small mb-0">Safe Transport</h6></div></div>
+            <div class="col-6">
+                <div class="p-2 border rounded text-center">
+                    <span class="material-symbols-outlined text-gold fs-4">high_quality</span>
+                    <h6 class="fw-bold text-navy extra-small mb-0">Strict Grading</h6>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="p-2 border rounded text-center">
+                    <span class="material-symbols-outlined text-gold fs-4">local_shipping</span>
+                    <h6 class="fw-bold text-navy extra-small mb-0">Safe Transport</h6>
+                </div>
+            </div>
         </div>
+    </div>
+</section>
+
+<!-- ===== FOOTER DISCLAIMER BAR ===== -->
+<section class="container my-3 py-2">
+    <div class="p-3 bg-white border rounded-4 text-center d-flex flex-wrap justify-content-center align-items-center gap-3 text-muted extra-small shadow-sm">
+        <span class="d-inline-flex align-items-center gap-1">
+            <span class="material-symbols-outlined text-gold fs-6">check_circle</span> Bulk Preferred
+        </span>
+        <span class="d-inline-flex align-items-center gap-1">
+            <span class="material-symbols-outlined text-gold fs-6">check_circle</span> Daily Live Mandi Rates
+        </span>
+        <span class="d-inline-flex align-items-center gap-1">
+            <span class="material-symbols-outlined text-gold fs-6">check_circle</span> Tax/GST Standard Included
+        </span>
     </div>
 </section>
