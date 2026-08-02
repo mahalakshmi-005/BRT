@@ -2,7 +2,7 @@
     ViewData["Title"] = "B RAJ TRADERS | Premium Wholesale Mandi";
 }
 
-<!-- ===== Ultra-Luxury Modern Executive UI (Mobile-First Engineered) ===== -->
+<!-- ===== Ultra-Luxury Modern Executive UI (Mobile App + Desktop Dual Engineered) ===== -->
 <style>
     :root {
         /* Color Palette */
@@ -18,7 +18,7 @@
         --brt-glass-bg: rgba(13, 19, 31, 0.85);
     }
 
-    /* Keyframe Animations (Razor Escaped @@) */
+    /* Keyframe Animations */
     @@keyframes floatIcon {
         0%, 100% { transform: translateY(0px) rotate(0deg); }
         50% { transform: translateY(-5px) rotate(1deg); }
@@ -29,12 +29,9 @@
         100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); }
     }
 
-    /* Base Layout Hacks - Mobile Screen Adaptive Fit */
-    html, body {
-        width: 100%;
-        max-width: 100%;
+    /* Base Layout Hacks */
+    body {
         overflow-x: hidden;
-        -webkit-tap-highlight-color: transparent;
     }
     .row-equal-height {
         display: flex;
@@ -56,13 +53,16 @@
         padding-bottom: 1rem;
         padding-left: 0.25rem;
         padding-right: 0.25rem;
-        scrollbar-width: none; /* Hide scrollbar for native app feel */
     }
     .mobile-scroll-container::-webkit-scrollbar {
-        display: none;
+        height: 4px;
+    }
+    .mobile-scroll-container::-webkit-scrollbar-thumb {
+        background: var(--brt-gold);
+        border-radius: 10px;
     }
     .mobile-scroll-item {
-        flex: 0 0 85%; /* Optimized width for perfect edge preview on mobile */
+        flex: 0 0 82%;
         scroll-snap-align: center;
     }
     @@media (min-width: 768px) {
@@ -91,8 +91,8 @@
         flex-direction: column;
         justify-content: space-between;
     }
-    .innovative-card:hover, .innovative-card:active {
-        transform: translateY(-4px);
+    .innovative-card:hover {
+        transform: translateY(-6px);
         border-color: var(--brt-gold) !important;
         box-shadow: 0 15px 30px -10px rgba(13, 19, 31, 0.08), 0 0 20px var(--brt-gold-glow) !important;
     }
@@ -116,8 +116,8 @@
         background: radial-gradient(circle at top right, rgba(212, 175, 55, 0.15), transparent 60%);
         z-index: 0;
     }
-    .portfolio-card-hero:hover, .portfolio-card-hero:active {
-        transform: translateY(-4px);
+    .portfolio-card-hero:hover {
+        transform: translateY(-5px);
         border-color: var(--brt-gold);
         box-shadow: 0 20px 40px -12px rgba(13, 19, 31, 0.35);
     }
@@ -164,7 +164,7 @@
         transition: all 0.3s ease;
         box-shadow: 0 6px 18px rgba(212, 175, 55, 0.25);
     }
-    .btn-brt-gold:hover, .btn-brt-gold:active {
+    .btn-brt-gold:hover {
         background: linear-gradient(135deg, #E2BD45 0%, #D4AF37 100%);
         transform: translateY(-2px);
         box-shadow: 0 10px 25px rgba(212, 175, 55, 0.35);
@@ -176,21 +176,13 @@
         border-radius: 50px;
         transition: all 0.3s ease;
     }
-    .btn-brt-outline:hover, .btn-brt-outline:active {
+    .btn-brt-outline:hover {
         background: var(--brt-navy);
         color: #FFFFFF !important;
     }
 
     /* Mobile Responsive Specific Adjustments */
     @@media (max-width: 576px) {
-        body {
-            padding-left: 0px;
-            padding-right: 0px;
-        }
-        .container {
-            padding-left: 14px;
-            padding-right: 14px;
-        }
         .display-4 { font-size: 2.1rem !important; }
         .hero-cta .btn { width: 100%; text-align: center; justify-content: center; }
         .hero-inline-stats { justify-content: space-between; }
@@ -199,8 +191,6 @@
             position: relative !important;
             transform: none !important;
             margin-top: 10px !important;
-            width: 100%;
-            justify-content: center;
         }
     }
 </style>
@@ -232,13 +222,12 @@
 </div>
 
 <!-- ===== Responsive Mobile-Optimized Hero Section ===== -->
-<section class="hero-modern-premium position-relative py-4 py-lg-5 overflow-hidden" style="font-family: 'Plus Jakarta Sans', sans-serif; background: radial-gradient(circle at 15% 20%, rgba(212, 175, 55, 0.06) 0%, transparent 45%), linear-gradient(135deg, #FAFBFD 0%, #F1F5F9 100%);">
+<section class="hero-modern-premium position-relative py-3 py-lg-5 overflow-hidden" style="font-family: 'Plus Jakarta Sans', sans-serif; background: radial-gradient(circle at 15% 20%, rgba(212, 175, 55, 0.06) 0%, transparent 45%), linear-gradient(135deg, #FAFBFD 0%, #F1F5F9 100%);">
     <div class="hero-inner container py-2 py-lg-4 position-relative z-1">
         <div class="row align-items-center g-4 g-lg-5">
             
             <!-- Left Column: Primary Content -->
             <div class="col-lg-6 text-center text-lg-start">
-                <!-- Trust Badge -->
                 <div class="d-inline-flex align-items-center gap-2 px-3 py-1.5 rounded-pill mb-3 border bg-white shadow-sm" style="border-color: rgba(212, 175, 55, 0.3) !important;">
                     <span class="material-symbols-outlined fs-6 text-gold">verified_user</span> 
                     <span class="fw-bold extra-small text-uppercase tracking-wider text-navy" style="font-size: 0.7rem;">
@@ -247,12 +236,10 @@
                     </span>
                 </div>
 
-                <!-- Main Headline -->
                 <h1 class="display-4 fw-bold mb-2 text-navy" style="font-family: 'Playfair Display', serif; letter-spacing: -0.5px;">
                     B RAJ <span class="text-gold" style="font-style: italic;">TRADERS</span>
                 </h1>
 
-                <!-- Tagline -->
                 <p class="hero-tagline fs-6 fs-md-5 text-muted mb-3 mb-md-4 fw-normal" style="line-height: 1.6;">
                     <span class="lang-en-text">
                         Garlic &amp; Grocery Commission Mandi<br class="d-none d-md-block" />
@@ -318,9 +305,8 @@
             <!-- Right Column: Visual Showcase Card -->
             <div class="col-lg-6 text-center position-relative mt-4 mt-lg-0">
                 <div class="position-relative d-inline-block w-100 z-1" style="max-width: 500px;">
-                    <!-- Image Wrapper -->
                     <div class="p-2 rounded-5 shadow-lg bg-white" style="border: 1px solid rgba(212, 175, 55, 0.2);">
-                        <img src="~/images/hero.png" alt="Garlic Wholesale Mandi" class="img-fluid rounded-4 object-fit-cover" style="max-height: 380px; width: 100%;" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1618160702438-9b02ab6515c9?auto=format&fit=crop&w=800&q=80';" />
+                        <img src="~/images/hero.png" alt="Garlic Wholesale Mandi" class="img-fluid rounded-4 object-fit-cover" style="max-height: 360px; width: 100%;" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1618160702438-9b02ab6515c9?auto=format&fit=crop&w=800&q=80';" />
                     </div>
 
                     <!-- Top Left Glass Floating Badge -->
@@ -388,10 +374,10 @@
                 <div class="mobile-scroll-item col-lg-4 col-md-6">
                     <div class="innovative-card p-3 d-flex flex-column justify-content-between h-100">
                         <div>
-                            <div class="img-zoom-container bg-light text-center py-3 px-2 position-relative d-flex align-items-center justify-content-center" style="min-height: 180px; background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);">
+                            <div class="img-zoom-container bg-light text-center py-3 px-2 position-relative d-flex align-items-center justify-content-center" style="min-height: 170px; background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);">
                                 @if (!string.IsNullOrEmpty(p.ImageUrl))
                                 {
-                                    <img src="@p.ImageUrl" alt="@p.Name" class="img-fluid object-fit-contain" style="max-height: 150px;" />
+                                    <img src="@p.ImageUrl" alt="@p.Name" class="img-fluid object-fit-contain" style="max-height: 140px;" />
                                 }
                                 else
                                 {
@@ -441,7 +427,7 @@
                 </div>
             }
         </div>
-        <div class="text-center mt-4">
+        <div class="text-center mt-3">
             <a asp-controller="Catalog" asp-action="Index" class="btn btn-brt-outline px-4 py-2 shadow-sm extra-small fw-bold">
                 <span class="lang-en-text">View Full Catalog</span>
                 <span class="lang-ta-text">முழு கேட்டலாகைப் பார்க்க</span>
@@ -450,7 +436,7 @@
     </section>
 }
 
-<!-- ===== Live Market Dashboard (Adaptive Matrix Grid) ===== -->
+<!-- ===== Live Market Dashboard ===== -->
 @{
     var dashboard = ViewBag.MarketDashboard as List<BRT.Models.MarketPrice>;
 }
