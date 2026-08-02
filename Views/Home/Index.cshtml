@@ -374,7 +374,7 @@
                     <div class="pro-product-card p-2.5 d-flex flex-column justify-content-between h-100">
                         <div>
                             <!-- Compact Image Container -->
-                            <div class="rounded-3 text-center d-flex align-items-center justify-content-center position-relative overflow-hidden" style="height: 130px; background-color: #F8FAFC;">
+                            <div class="rounded-3 text-center d-flex align-items-center justify-content-center position-relative overflow-hidden" style="height: 120px; background-color: #F8FAFC;">
                                 @if (!string.IsNullOrEmpty(p.ImageUrl))
                                 {
                                     <img src="@p.ImageUrl" alt="@p.Name" class="w-100 h-100 object-fit-cover rounded-3" />
@@ -383,28 +383,29 @@
                                 {
                                     <span class="material-symbols-outlined fs-1 text-gold">inventory_2</span>
                                 }
-                                <span class="badge position-absolute top-0 start-0 m-1.5 px-2 py-0.5 rounded-pill bg-navy text-gold fw-bold" style="z-index: 2; font-size: 0.65rem;">
+                                <span class="badge position-absolute top-0 start-0 m-1 px-2 py-0.5 rounded-pill bg-navy text-gold fw-bold" style="z-index: 2; font-size: 0.6rem;">
                                     @(p.SubCategory?.Name ?? "General")
                                 </span>
                             </div>
 
                             <div class="pt-2">
-                                <h6 class="fw-bold text-navy mb-0 fs-6 text-truncate">@p.Name</h6>
+                                <h6 class="fw-bold text-navy mb-0 text-truncate" style="font-size: 0.85rem;">@p.Name</h6>
                                 @if (!string.IsNullOrEmpty(p.NameTamil))
                                 {
-                                    <span class="text-muted extra-small d-block fw-medium mb-1 text-truncate" style="font-size:0.7rem;">@p.NameTamil</span>
+                                    <span class="text-muted d-block fw-medium mb-1 text-truncate" style="font-size:0.68rem;">@p.NameTamil</span>
                                 }
-                                <p class="text-muted extra-small lh-sm mb-0 text-truncate" style="font-size:0.7rem;">
-                                    @(string.IsNullOrEmpty(p.Description) ? "Commercial bulk packaging directly sourced." : p.Description)
+                                <p class="text-muted lh-sm mb-0 text-truncate" style="font-size:0.65rem;">
+                                    @(string.IsNullOrEmpty(p.Description) ? "Commercial bulk packaging." : p.Description)
                                 </p>
                             </div>
                         </div>
 
-                        <div class="pt-2 mt-2 border-top d-flex justify-content-between align-items-center">
-                            <span class="badge bg-success bg-opacity-10 text-success fw-bold rounded-pill px-2 py-0.5" style="font-size:0.65rem;">Ready Bulk</span>
-                            <a asp-controller="Catalog" asp-action="Product" asp-route-slug="@p.Slug" class="btn btn-sm btn-brt-gold px-2.5 py-1 fw-bold d-inline-flex align-items-center gap-1" style="font-size:0.7rem;">
+                        <!-- Fixed Footer Layout for Compact Card -->
+                        <div class="pt-2 mt-2 border-top d-flex justify-content-between align-items-center flex-nowrap gap-1">
+                            <span class="badge bg-success bg-opacity-10 text-success fw-bold rounded-pill px-1.5 py-1 flex-shrink-0" style="font-size:0.6rem;">Ready Bulk</span>
+                            <a asp-controller="Catalog" asp-action="Product" asp-route-slug="@p.Slug" class="btn btn-sm btn-brt-gold px-2 py-1 fw-bold d-inline-flex align-items-center gap-0.5 text-nowrap flex-shrink-0" style="font-size:0.65rem;">
                                 <span>Inquire</span>
-                                <span class="material-symbols-outlined" style="font-size:14px;">arrow_forward</span>
+                                <span class="material-symbols-outlined" style="font-size:12px;">arrow_forward</span>
                             </a>
                         </div>
                     </div>
