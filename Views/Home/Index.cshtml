@@ -1,327 +1,798 @@
 @{
-    ViewData["Title"] = "Home";
+    ViewData["Title"] = "B RAJ TRADERS | Premium Wholesale Mandi";
 }
 
-<!-- Custom Styles for Home Page Sections -->
+<!-- ===== Original Native Mobile App UI & UX Layer ===== -->
 <style>
-    /* Hero Section Styles */
-    .brt-hero-section {
-        background: linear-gradient(135deg, var(--brt-dark-navy) 0%, #1A2332 100%);
-        color: #FFFFFF;
-        padding: 60px 0 80px 0;
-        position: relative;
-        overflow: hidden;
+    :root {
+        /* Premium Color Palette */
+        --brt-navy: #0D131F;
+        --brt-navy-light: #182232;
+        --brt-gold: #D4AF37;
+        --brt-gold-light: #F3E5AB;
+        --brt-gold-glow: rgba(212, 175, 55, 0.25);
+        --brt-card-bg: #FFFFFF;
+        
+        /* Native App Variables */
+        --brt-app-radius: 20px;
+        --brt-glass-border: rgba(212, 175, 55, 0.2);
+        --brt-glass-bg: rgba(13, 19, 31, 0.88);
     }
 
-    .brt-hero-section::before {
-        content: '';
-        position: absolute;
-        top: -50%;
-        right: -10%;
-        width: 500px;
-        height: 500px;
-        background: radial-gradient(circle, var(--brt-gold-glow) 0%, transparent 70%);
-        pointer-events: none;
+    /* Keyframe Animations */
+    @@keyframes floatIcon {
+        0%, 100% { transform: translateY(0px) rotate(0deg); }
+        50% { transform: translateY(-4px) rotate(1deg); }
+    }
+    @@keyframes pulseGlow {
+        0% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.5); }
+        70% { box-shadow: 0 0 0 8px rgba(212, 175, 55, 0); }
+        100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); }
     }
 
-    .hero-badge {
+    /* Reset & Base UI Setup */
+    body {
+        overflow-x: hidden;
+        background-color: #F8FAFC;
+        padding-bottom: 70px; /* Space for Mobile App Bottom Bar */
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    /* Native App Bar / Sticky Top Bar */
+    .app-top-header {
+        position: sticky;
+        top: 0;
+        z-index: 1040;
+        background: rgba(13, 19, 31, 0.92);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border-bottom: 1px solid var(--brt-glass-border);
+    }
+
+    /* Native Horizontal App Chip Tabs */
+    .app-chip-bar {
+        display: flex;
+        overflow-x: auto;
+        white-space: nowrap;
+        gap: 8px;
+        padding: 8px 16px;
+        scrollbar-width: none; /* Hide Scrollbar Firefox */
+    }
+    .app-chip-bar::-webkit-scrollbar {
+        display: none; /* Hide Scrollbar Chrome/Safari */
+    }
+    .app-chip {
+        background: #FFFFFF;
+        border: 1px solid rgba(0,0,0,0.08);
+        border-radius: 50px;
+        padding: 6px 14px;
+        font-size: 0.78rem;
+        font-weight: 600;
+        color: var(--brt-navy);
+        text-decoration: none;
         display: inline-flex;
         align-items: center;
         gap: 6px;
-        background: rgba(212, 175, 55, 0.15);
-        border: 1px solid rgba(212, 175, 55, 0.4);
-        color: var(--brt-gold-pure);
-        padding: 6px 16px;
-        border-radius: 50px;
-        font-size: 0.85rem;
-        font-weight: 700;
-        margin-bottom: 20px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+        transition: all 0.2s ease;
+    }
+    .app-chip:active {
+        transform: scale(0.95);
+        background: var(--brt-gold);
+        color: var(--brt-navy);
     }
 
-    .hero-title {
-        font-family: 'Playfair Display', serif;
-        font-size: 2.8rem;
-        font-weight: 800;
-        line-height: 1.2;
-        margin-bottom: 20px;
-    }
-
-    .hero-subtitle {
-        color: #9CA3AF;
-        font-size: 1.1rem;
-        line-height: 1.6;
-        margin-bottom: 30px;
-        max-width: 600px;
-    }
-
-    /* Custom Buttons */
-    .btn-gold-primary {
-        background: linear-gradient(135deg, #D4AF37 0%, #C59B27 100%);
-        color: #0D131F !important;
-        font-weight: 700;
-        padding: 12px 28px;
-        border-radius: 12px;
-        border: none;
-        box-shadow: 0 6px 20px rgba(212, 175, 55, 0.3);
-        transition: all 0.3s ease;
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        text-decoration: none;
-    }
-
-    .btn-gold-primary:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4);
-    }
-
-    .btn-outline-custom {
-        background: transparent;
-        color: #FFFFFF !important;
-        border: 1px solid rgba(255, 255, 255, 0.3);
-        font-weight: 600;
-        padding: 12px 28px;
-        border-radius: 12px;
-        transition: all 0.3s ease;
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        text-decoration: none;
-    }
-
-    .btn-outline-custom:hover {
-        background: rgba(255, 255, 255, 0.1);
-        border-color: #FFFFFF;
-    }
-
-    /* Feature Cards Section */
-    .feature-card {
-        background: #FFFFFF;
-        border: 1px solid rgba(0, 0, 0, 0.06);
-        border-radius: 20px;
-        padding: 30px 24px;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
-        transition: all 0.3s ease;
-        height: 100%;
-    }
-
-    .feature-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
-        border-color: var(--brt-gold-pure);
-    }
-
-    .feature-icon-wrap {
-        width: 55px;
-        height: 55px;
-        border-radius: 14px;
-        background: rgba(212, 175, 55, 0.12);
-        color: var(--brt-gold-pure);
+    /* Equal Height Helper Layout */
+    .row-equal-height {
         display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-bottom: 20px;
+        flex-wrap: wrap;
+    }
+    .row-equal-height > [class*='col-'] {
+        display: flex;
+        flex-direction: column;
     }
 
-    /* Category Cards */
-    .category-card {
-        background: var(--brt-navy-card);
-        border-radius: 20px;
-        padding: 35px 25px;
-        border: 1px solid rgba(212, 175, 55, 0.2);
-        color: #FFFFFF;
-        text-decoration: none;
-        display: block;
+    /* Native App Horizontal Carousel */
+    .mobile-scroll-container {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        gap: 12px;
+        padding: 4px 16px 12px 16px;
+        scrollbar-width: none;
+    }
+    .mobile-scroll-container::-webkit-scrollbar {
+        display: none;
+    }
+    .mobile-scroll-item {
+        flex: 0 0 85%;
+        scroll-snap-align: center;
+    }
+    @@media (min-width: 768px) {
+        .mobile-scroll-container {
+            display: flex;
+            flex-wrap: wrap;
+            overflow-x: visible;
+            padding: 0;
+            gap: 0;
+        }
+        .mobile-scroll-item {
+            flex: 0 0 auto;
+        }
+    }
+
+    /* High-End Touch Native Card */
+    .innovative-card {
+        background: var(--brt-card-bg);
+        border: 1px solid rgba(13, 19, 31, 0.08);
+        border-radius: var(--brt-app-radius);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        position: relative;
+        overflow: hidden;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    .innovative-card:active {
+        transform: scale(0.98);
+    }
+    @@media (min-width: 992px) {
+        .innovative-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--brt-gold) !important;
+            box-shadow: 0 15px 30px -10px rgba(13, 19, 31, 0.08), 0 0 20px var(--brt-gold-glow) !important;
+        }
+    }
+
+    /* Bento Hero Card */
+    .portfolio-card-hero {
+        background: var(--brt-navy);
+        border-radius: 22px;
         transition: all 0.3s ease;
         position: relative;
         overflow: hidden;
+        z-index: 1;
+        width: 100%;
+        min-height: 220px;
+        border: 1px solid var(--brt-glass-border);
+    }
+    .portfolio-card-hero::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle at top right, rgba(212, 175, 55, 0.18), transparent 60%);
+        z-index: 0;
+    }
+    .portfolio-card-hero:active {
+        transform: scale(0.98);
     }
 
-    .category-card:hover {
-        border-color: var(--brt-gold-pure);
-        transform: translateY(-4px);
+    /* Image Zoom Box */
+    .img-zoom-container {
+        overflow: hidden;
+        border-radius: 16px;
+        position: relative;
+    }
+    .img-zoom-container img {
+        transition: transform 0.5s ease;
+        width: 100%;
+        object-fit: cover;
     }
 
-    /* Responsive Spacing for Mobile View */
-    @@media (max-width: 991.98px) {
-        .hero-title {
-            font-size: 2rem;
-        }
-        .brt-hero-section {
-            padding: 40px 0 50px 0;
-            text-align: center;
-        }
-        .hero-subtitle {
-            margin-left: auto;
-            margin-right: auto;
-        }
-        .hero-btns {
-            justify-content: center;
-        }
+    /* Utility Helpers */
+    .anim-float-icon { animation: floatIcon 4s ease-in-out infinite; display: inline-block; }
+    .pulse-badge { animation: pulseGlow 2.5s infinite; }
+    .text-navy { color: var(--brt-navy) !important; }
+    .text-gold { color: var(--brt-gold) !important; }
+    .bg-navy { background-color: var(--brt-navy) !important; }
+    .bg-gold { background-color: var(--brt-gold) !important; }
+    .extra-small { font-size: 0.78rem; letter-spacing: 0.02em; }
+
+    /* Custom Glass Effect */
+    .bg-glass {
+        background: var(--brt-glass-bg);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid var(--brt-glass-border);
+    }
+
+    /* Mobile Buttons */
+    .btn-brt-gold {
+        background: linear-gradient(135deg, #D4AF37 0%, #C59B27 100%);
+        color: #0D131F !important;
+        font-weight: 700;
+        border: none;
+        border-radius: 50px;
+        transition: all 0.2s ease;
+        box-shadow: 0 4px 14px rgba(212, 175, 55, 0.3);
+    }
+    .btn-brt-gold:active {
+        transform: scale(0.96);
+    }
+    .btn-brt-outline {
+        border: 1.5px solid var(--brt-navy);
+        color: var(--brt-navy) !important;
+        font-weight: 600;
+        border-radius: 50px;
+        transition: all 0.2s ease;
+    }
+    .btn-brt-outline:active {
+        transform: scale(0.96);
+        background: var(--brt-navy);
+        color: #FFFFFF !important;
+    }
+
+    /* Mobile App Responsive Specifics */
+    @@media (max-width: 576px) {
+        .display-4 { font-size: 2.1rem !important; }
+        .hero-cta .btn { width: 100%; text-align: center; justify-content: center; }
+        .hero-inline-stats { justify-content: space-around; }
+        .hero-inline-stats .fs-2 { font-size: 1.4rem !important; }
     }
 </style>
 
-<!-- ==========================================
-     1. HERO SECTION
-     ========================================== -->
-<section class="brt-hero-section">
-    <div class="container-xl">
-        <div class="row align-items-center g-4">
-            <div class="col-lg-7">
-                <div class="hero-badge">
-                    <span class="material-symbols-outlined fs-6">verified</span>
-                    <span class="lang-en-text">Trusted Trading Partner Since 2000</span>
-                    <span class="lang-ta-text">2000 முதல் நம்பகமான வணிக பங்குதாரர்</span>
+<!-- ===== Mobile App Header (Fixed Bar) ===== -->
+<div class="app-top-header py-2.5 px-3 text-white">
+    <div class="container-fluid d-flex justify-content-between align-items-center p-0">
+        <div class="d-flex align-items-center gap-2">
+            <span class="material-symbols-outlined text-gold fs-5">store</span>
+            <span class="fw-bold tracking-tight text-gold fs-6" style="font-family: 'Playfair Display', serif;">
+                B RAJ TRADERS
+            </span>
+        </div>
+        <div class="d-flex align-items-center gap-2">
+            <a href="tel:9865680694" class="btn btn-sm btn-brt-gold py-1 px-2.5 d-inline-flex align-items-center gap-1 extra-small">
+                <span class="material-symbols-outlined fs-6">call</span>
+                <span>Call</span>
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- ===== Quick Category App Bar ===== -->
+<div class="bg-white border-bottom shadow-sm">
+    <div class="app-chip-bar">
+        <a href="#live-rates" class="app-chip">
+            <span class="material-symbols-outlined fs-6 text-gold">trending_up</span> Live Rates
+        </a>
+        <a href="#products" class="app-chip">
+            <span class="material-symbols-outlined fs-6 text-gold">inventory_2</span> Products
+        </a>
+        <a href="#portfolio" class="app-chip">
+            <span class="material-symbols-outlined fs-6 text-gold">grid_view</span> Categories
+        </a>
+        <a href="#why-us" class="app-chip">
+            <span class="material-symbols-outlined fs-6 text-gold">verified</span> Why Us
+        </a>
+    </div>
+</div>
+
+<!-- ===== Responsive Mobile-Optimized Hero Section ===== -->
+<section class="hero-modern-premium position-relative py-3 py-lg-5 overflow-hidden" style="font-family: 'Plus Jakarta Sans', sans-serif; background: radial-gradient(circle at 15% 20%, rgba(212, 175, 55, 0.08) 0%, transparent 45%), linear-gradient(135deg, #FAFBFD 0%, #F1F5F9 100%);">
+    <div class="hero-inner container py-2 position-relative z-1">
+        <div class="row align-items-center g-3 g-lg-5">
+            
+            <!-- Left Column: Primary Content -->
+            <div class="col-lg-6 text-center text-lg-start">
+                <!-- Trust Badge -->
+                <div class="d-inline-flex align-items-center gap-1.5 px-3 py-1 rounded-pill mb-2.5 border bg-white shadow-sm" style="border-color: rgba(212, 175, 55, 0.3) !important;">
+                    <span class="material-symbols-outlined fs-6 text-gold">verified_user</span> 
+                    <span class="fw-bold extra-small text-uppercase tracking-wider text-navy" style="font-size: 0.68rem;">
+                        <span class="lang-en-text">Trusted Wholesale Mandi Since 2000</span>
+                        <span class="lang-ta-text">2000 முதல் நம்பகமான கமிஷன் மண்டி</span>
+                    </span>
                 </div>
-                <h1 class="hero-title">
-                    <span class="lang-en-text">Premium Quality Wholesale & Retail Supply Solutions</span>
-                    <span class="lang-ta-text">உயர்தர மொத்த மற்றும் சில்லறை விநியோக சேவைகள்</span>
+
+                <!-- Main Headline -->
+                <h1 class="display-4 fw-bold mb-1 text-navy" style="font-family: 'Playfair Display', serif; letter-spacing: -0.5px;">
+                    B RAJ <span class="text-gold" style="font-style: italic;">TRADERS</span>
                 </h1>
-                <p class="hero-subtitle">
-                    <span class="lang-en-text">Directly connecting top suppliers to markets with efficient logistics across Tamil Nadu & Pondicherry.</span>
-                    <span class="lang-ta-text">தமிழ்நாடு மற்றும் புதுச்சேரி முழுவதும் வேகமான விநியோகத்துடன் சிறந்த பொருட்களை வழங்கி வருகிறோம்.</span>
+
+                <!-- Tagline -->
+                <p class="hero-tagline fs-6 text-muted mb-3 fw-normal" style="line-height: 1.5;">
+                    <span class="lang-en-text">
+                        Garlic &amp; Grocery Commission Mandi<br class="d-none d-md-block" />
+                        <span class="fw-semibold text-dark">Premium Dealer Wholesale Supplier</span>
+                    </span>
+                    <span class="lang-ta-text">
+                        பூண்டு &amp; மளிகை கமிஷன் மண்டி<br class="d-none d-md-block" />
+                        <span class="fw-semibold text-dark">உயர்தர டீலர் மொத்த விற்பனை</span>
+                    </span>
                 </p>
-                <div class="d-flex flex-wrap gap-3 hero-btns">
-                    <a asp-controller="Catalog" asp-action="Index" class="btn-gold-primary">
-                        <span class="material-symbols-outlined">storefront</span>
-                        <span class="lang-en-text">Explore Wholesale</span>
-                        <span class="lang-ta-text">மொத்த விற்பனை</span>
+
+                <!-- Luxury Quote Card -->
+                <div class="p-2.5 rounded-3 shadow-sm my-2.5 text-start" style="font-family: 'Playfair Display', serif; background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(8px); border-left: 4px solid var(--brt-gold) !important;">
+                    <p class="m-0 extra-small fs-md-6 text-secondary fst-italic">
+                        <span class="text-gold fs-5 align-middle me-1">&ldquo;</span>
+                        <span class="lang-en-text">Purity in every clove, trust in every deal.</span>
+                        <span class="lang-ta-text">ஒவ்வொரு பல்லிலும் தூய்மை, ஒவ்வொரு ஒப்பந்தத்திலும் நம்பிக்கை.</span>
+                        <span class="text-gold fs-5 align-middle ms-1">&rdquo;</span>
+                    </p>
+                </div>
+
+                <!-- CTA Action Buttons -->
+                <div class="hero-cta d-flex flex-column flex-sm-row gap-2 mb-3 mt-3">
+                    <a asp-controller="Order" asp-action="Request" class="btn btn-brt-gold px-4 py-2.5 shadow-sm d-inline-flex align-items-center justify-content-center gap-2">
+                        <span class="lang-en-text">Secure Bulk Supply</span>
+                        <span class="lang-ta-text">மொத்த விநியோகம் ஆர்டர் செய்ய</span>
+                        <span class="material-symbols-outlined fs-6">arrow_forward</span>
                     </a>
-                    <a asp-controller="Order" asp-action="Request" class="btn-outline-custom">
-                        <span class="material-symbols-outlined">shopping_bag</span>
-                        <span class="lang-en-text">Request Bulk Order</span>
-                        <span class="lang-ta-text">மொத்த ஆர்டர் செய்ய</span>
+                    <a asp-controller="Catalog" asp-action="Index" class="btn btn-brt-outline px-4 py-2.5 d-inline-flex align-items-center justify-content-center">
+                        <span class="lang-en-text">Explore Catalog</span>
+                        <span class="lang-ta-text">கேட்டலாக் பார்க்க</span>
                     </a>
+                </div>
+
+                <!-- Inline Metric Numbers -->
+                <div class="hero-inline-stats d-flex align-items-center gap-2 gap-md-5 pt-3 border-top border-secondary border-opacity-10">
+                    <div>
+                        <div class="fw-bold fs-3 text-navy" style="font-family: 'Playfair Display', serif;">25+</div>
+                        <div class="stat-label text-muted extra-small text-uppercase" style="font-size:0.65rem;">
+                            <span class="lang-en-text">Years Legacy</span>
+                            <span class="lang-ta-text">ஆண்டு பாரம்பரியம்</span>
+                        </div>
+                    </div>
+                    <div class="border-end opacity-25 border-dark" style="height: 25px;"></div>
+                    <div>
+                        <div class="fw-bold fs-3 text-navy" style="font-family: 'Playfair Display', serif;">500+</div>
+                        <div class="stat-label text-muted extra-small text-uppercase" style="font-size:0.65rem;">
+                            <span class="lang-en-text">Dealers</span>
+                            <span class="lang-ta-text">டீலர்கள்</span>
+                        </div>
+                    </div>
+                    <div class="border-end opacity-25 border-dark" style="height: 25px;"></div>
+                    <div>
+                        <div class="fw-bold fs-3 text-navy" style="font-family: 'Playfair Display', serif;">30+</div>
+                        <div class="stat-label text-muted extra-small text-uppercase" style="font-size:0.65rem;">
+                            <span class="lang-en-text">Varieties</span>
+                            <span class="lang-ta-text">வகைகள்</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: Visual Showcase Card -->
+            <div class="col-lg-6 text-center position-relative mt-3 mt-lg-0">
+                <div class="position-relative d-inline-block w-100 z-1" style="max-width: 480px;">
+                    <!-- Image Wrapper -->
+                    <div class="p-1.5 rounded-4 shadow-md bg-white" style="border: 1px solid rgba(212, 175, 55, 0.25);">
+                        <img src="~/images/hero.png" alt="Garlic Wholesale Mandi" class="img-fluid rounded-3 object-fit-cover" style="max-height: 260px; width: 100%;" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1618160702438-9b02ab6515c9?auto=format&fit=crop&w=800&q=80';" />
+                    </div>
+
+                    <!-- Top Floating Badge -->
+                    <div class="position-absolute top-0 start-0 translate-middle-y p-2 rounded-3 shadow-sm d-flex align-items-center gap-2" style="background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border: 1px solid rgba(212, 175, 55, 0.3); z-index: 2;">
+                        <span class="material-symbols-outlined fs-5 text-gold">workspace_premium</span>
+                        <div class="text-start">
+                            <span class="d-block fw-bold text-dark extra-small" style="font-size:0.7rem;">
+                                <span class="lang-en-text">100% Quality</span>
+                                <span class="lang-ta-text">100% தரம்</span>
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Bottom Floating Badge -->
+                    <div class="position-absolute bottom-0 end-0 translate-middle-y p-2 rounded-3 shadow-md d-flex align-items-center gap-2" style="background: rgba(13, 19, 31, 0.92); backdrop-filter: blur(10px); border: 1px solid rgba(212, 175, 55, 0.3); z-index: 2;">
+                        <span class="material-symbols-outlined fs-5 text-gold">local_shipping</span>
+                        <div class="text-start">
+                            <span class="d-block fw-bold text-white extra-small" style="font-size:0.7rem;">
+                                <span class="lang-en-text">Fast Dispatch</span>
+                                <span class="lang-ta-text">வேகமான அனுப்புகை</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ===== Featured Products Showcase ===== -->
+@{
+    var featured = ViewBag.FeaturedProducts as List<BRT.Models.Product>;
+}
+@if (featured != null && featured.Any())
+{
+    <section id="products" class="container my-3 my-md-5 py-2">
+        <div class="text-center mb-3 mb-md-4">
+            <span class="hero-eyebrow fw-semibold text-uppercase tracking-wider small d-inline-flex align-items-center gap-1 text-gold">
+                <span class="material-symbols-outlined fs-6 anim-float-icon">workspace_premium</span>
+                <span class="lang-en-text">OUR PRODUCTS</span>
+                <span class="lang-ta-text">எங்கள் தயாரிப்புகள்</span>
+            </span>
+            <h2 class="fw-bold mt-1 text-navy fs-4 fs-md-2">
+                <span class="lang-en-text">Premium Wholesale Selection</span>
+                <span class="lang-ta-text">மொத்த விற்பனை தேர்வு</span>
+            </h2>
+        </div>
+
+        <div class="mobile-scroll-container row-equal-height">
+            @foreach (var p in featured)
+            {
+                <div class="mobile-scroll-item col-lg-4 col-md-6">
+                    <div class="innovative-card p-3 d-flex flex-column justify-content-between h-100">
+                        <div>
+                            <div class="img-zoom-container bg-light text-center py-2 px-2 position-relative d-flex align-items-center justify-content-center" style="min-height: 150px; background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);">
+                                @if (!string.IsNullOrEmpty(p.ImageUrl))
+                                {
+                                    <img src="@p.ImageUrl" alt="@p.Name" class="img-fluid object-fit-contain" style="max-height: 130px;" />
+                                }
+                                else
+                                {
+                                    <div class="rounded-circle p-2.5 bg-white shadow-sm text-navy anim-float-icon">
+                                        <span class="material-symbols-outlined fs-2">
+                                            @(p.SubCategory?.Category?.Type == BRT.Models.CategoryType.Garlic ? "eco" : "shopping_cart_checkout")
+                                        </span>
+                                    </div>
+                                }
+                                <span class="badge position-absolute top-0 start-0 m-2 px-2 py-1 rounded-pill shadow-sm bg-navy text-white" style="font-size: 0.65rem; border: 1px solid rgba(212,175,55,0.3);">
+                                    @(p.SubCategory?.Name ?? "General")
+                                </span>
+                            </div>
+                            <div class="pt-2 px-1">
+                                <h4 class="card-title h6 fw-bold mb-0.5 text-navy">
+                                    <span>@p.Name</span>
+                                </h4>
+                                @if (!string.IsNullOrEmpty(p.NameTamil))
+                                {
+                                    <span class="d-block text-muted extra-small fw-medium mb-1">@p.NameTamil</span>
+                                }
+                                <p class="card-text text-muted extra-small lh-sm" style="font-size: 0.73rem;">
+                                    @if (string.IsNullOrEmpty(p.Description))
+                                    {
+                                        <span class="lang-en-text">Standard commercial bulk packaging with fresh stock.</span>
+                                        <span class="lang-ta-text">புத்தம்புதிய மண்டி இருப்புடன் கூடிய மொத்த பேக்கிங்.</span>
+                                    }
+                                    else
+                                    {
+                                        @p.Description
+                                    }
+                                </p>
+                            </div>
+                        </div>
+                        <div class="pt-2 px-1 mt-2 border-top d-flex justify-content-between align-items-center">
+                            <span class="badge bg-light text-dark border px-2 py-1 rounded-pill extra-small fw-semibold" style="font-size: 0.68rem;">
+                                <span class="lang-en-text">Fresh Stock</span>
+                                <span class="lang-ta-text">புதிய இருப்பு</span>
+                            </span>
+                            <a asp-controller="Catalog" asp-action="Product" asp-route-slug="@p.Slug" class="btn btn-sm btn-outline-dark rounded-pill px-2.5 py-1 extra-small fw-semibold d-inline-flex align-items-center gap-1">
+                                <span class="lang-en-text">Details</span>
+                                <span class="lang-ta-text">விவரங்கள்</span>
+                                <span class="material-symbols-outlined fs-6">arrow_forward</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="text-center mt-3">
+            <a asp-controller="Catalog" asp-action="Index" class="btn btn-brt-outline px-4 py-2 shadow-sm extra-small fw-bold">
+                <span class="lang-en-text">View Full Catalog</span>
+                <span class="lang-ta-text">முழு கேட்டலாகைப் பார்க்க</span>
+            </a>
+        </div>
+    </section>
+}
+
+<!-- ===== Live Market Dashboard ===== -->
+@{
+    var dashboard = ViewBag.MarketDashboard as List<BRT.Models.MarketPrice>;
+}
+<section id="live-rates" class="container my-3 my-md-5 py-2">
+    <div class="p-3 p-md-4 rounded-4 shadow-sm border" style="background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%); border-color: rgba(212, 175, 55, 0.15) !important;">
+        <div class="text-center mb-3">
+            <span class="hero-eyebrow fw-semibold text-uppercase tracking-wider small d-inline-flex align-items-center gap-1 text-gold">
+                <span class="material-symbols-outlined fs-6 anim-float-icon">trending_up</span>
+                <span class="lang-en-text">LIVE MARKET</span>
+                <span class="lang-ta-text">நேரடி சந்தை</span>
+            </span>
+            <h2 class="fw-bold mt-1 text-navy fs-4 fs-md-2">
+                <span class="lang-en-text">Today's Mandi Wholesale Rates</span>
+                <span class="lang-ta-text">இன்றைய மண்டி மொத்த விற்பனை விலைகள்</span>
+            </h2>
+        </div>
+
+        <div class="row g-2 row-equal-height">
+            @if (dashboard != null && dashboard.Any())
+            {
+                foreach (var m in dashboard)
+                {
+                    <div class="col-6 col-md-4 col-lg-3">
+                        <div class="innovative-card p-2.5 h-100 d-flex flex-column justify-content-between">
+                            <div>
+                                <div class="d-flex align-items-center justify-content-between mb-1">
+                                    <span class="p-1 rounded-circle bg-light text-gold d-inline-flex align-items-center">
+                                        <span class="material-symbols-outlined fs-6">
+                                            @(m.Product?.SubCategory?.Category?.Type == BRT.Models.CategoryType.Garlic ? "eco" : "shopping_cart_checkout")
+                                        </span>
+                                    </span>
+                                    <span class="badge bg-danger text-white extra-small fw-semibold pulse-badge" style="font-size:0.6rem;">LIVE</span>
+                                </div>
+                                <h6 class="fw-bold mb-0 text-navy text-truncate extra-small">@m.Product?.Name</h6>
+                                <span class="text-muted extra-small d-block" style="font-size: 0.65rem;">@m.Product?.NameTamil</span>
+                            </div>
+                            <div class="mt-2 pt-1 border-top">
+                                <div class="fw-bold text-navy fs-6">
+                                    ₹@m.TodayPrice.ToString("N2")
+                                    <span class="extra-small text-muted fw-normal" style="font-size:0.65rem;">
+                                        <span class="lang-en-text">/ unit</span>
+                                        <span class="lang-ta-text">/ அலகு</span>
+                                    </span>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center mt-0.5 text-muted" style="font-size:0.65rem;">
+                                    <span>Updated Today</span>
+                                    <span class="material-symbols-outlined text-gold" style="font-size: 0.75rem">verified</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+            <div class="col-12 col-md-4 col-lg-3 mt-2 mt-md-0">
+                <div class="portfolio-card-hero p-3 text-center d-flex flex-column align-items-center justify-content-center text-white bg-navy h-100">
+                    <span class="material-symbols-outlined fs-3 mb-1 text-gold anim-float-icon">forum</span>
+                    <h6 class="fw-bold mb-1 extra-small">
+                        <span class="lang-en-text">Custom Quotation?</span>
+                        <span class="lang-ta-text">தனிப்பயன் மேற்கோள்?</span>
+                    </h6>
+                    <a asp-controller="Order" asp-action="Request" class="btn btn-sm btn-brt-gold px-3 py-1 extra-small fw-bold mt-1">
+                        <span class="lang-en-text">Get Quote</span>
+                        <span class="lang-ta-text">மேற்கோள் பெற</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Category Portfolio ===== -->
+<section id="portfolio" class="container my-3 my-md-5 py-2">
+    <div class="text-center mb-3 mb-md-4">
+        <span class="hero-eyebrow fw-semibold text-uppercase tracking-wider small d-inline-flex align-items-center gap-1 text-gold">
+            <span class="material-symbols-outlined fs-6 anim-float-icon">grid_view</span>
+            <span class="lang-en-text">PORTFOLIO</span>
+            <span class="lang-ta-text">போர்ட்ஃபோலியோ</span>
+        </span>
+        <h2 class="fw-bold mt-1 text-navy fs-4 fs-md-2">
+            <span class="lang-en-text">Explore Product Portfolio</span>
+            <span class="lang-ta-text">தயாரிப்பு பிரிவுகள்</span>
+        </h2>
+    </div>
+    
+    <div class="row g-2.5 g-md-3 row-equal-height">
+        <!-- Garlic Mandi Card -->
+        <div class="col-12 col-md-6">
+            <a asp-controller="Catalog" asp-action="Garlic" class="portfolio-card-hero p-3 text-white text-decoration-none d-flex flex-column justify-content-between h-100">
+                <div class="d-flex justify-content-between align-items-start position-relative z-1">
+                    <span class="p-2 rounded-3 bg-glass text-gold anim-float-icon">
+                        <span class="material-symbols-outlined fs-4">eco</span>
+                    </span>
+                    <span class="badge text-dark fw-bold px-2.5 py-1 rounded-pill bg-gold extra-small">
+                        <span class="lang-en-text">Primary Sourcing</span>
+                        <span class="lang-ta-text">முதன்மை சேகரிப்பு</span>
+                    </span>
+                </div>
+                <div class="mt-2.5 position-relative z-1">
+                    <h3 class="fw-bold text-white fs-5 mb-0.5">
+                        <span class="lang-en-text">Garlic Mandi</span>
+                        <span class="lang-ta-text">பூண்டு மண்டி</span>
+                    </h3>
+                    <p class="extra-small text-light opacity-75 mb-1.5" style="font-size:0.73rem;">
+                        <span class="lang-en-text">Bulbs, cloves, raw, and processed garlic varieties in wholesale volume.</span>
+                        <span class="lang-ta-text">மொத்த அளவில் அனைத்து வகை பூண்டுகள்.</span>
+                    </p>
+                    <span class="text-gold fw-semibold extra-small d-inline-flex align-items-center gap-1">
+                        <span class="lang-en-text">Explore Section</span>
+                        <span class="lang-ta-text">பிரிவைப் பார்க்க</span>
+                        <span class="material-symbols-outlined fs-6">arrow_forward</span>
+                    </span>
+                </div>
+            </a>
+        </div>
+
+        <!-- Grocery Essentials Card -->
+        <div class="col-12 col-md-6">
+            <a asp-controller="Catalog" asp-action="Grocery" class="portfolio-card-hero p-3 text-white text-decoration-none d-flex flex-column justify-content-between h-100">
+                <div class="d-flex justify-content-between align-items-start position-relative z-1">
+                    <span class="p-2 rounded-3 bg-glass text-gold anim-float-icon">
+                        <span class="material-symbols-outlined fs-4">shopping_cart_checkout</span>
+                    </span>
+                    <span class="badge bg-light text-dark fw-bold px-2.5 py-1 rounded-pill extra-small">
+                        <span class="lang-en-text">Grocery Staples</span>
+                        <span class="lang-ta-text">மளிகை பொருட்கள்</span>
+                    </span>
+                </div>
+                <div class="mt-2.5 position-relative z-1">
+                    <h3 class="fw-bold text-white fs-5 mb-0.5">
+                        <span class="lang-en-text">Grocery Essentials</span>
+                        <span class="lang-ta-text">மளிகை அத்தியாவசியங்கள்</span>
+                    </h3>
+                    <p class="extra-small text-light opacity-75 mb-1.5" style="font-size:0.73rem;">
+                        <span class="lang-en-text">High grade pulses, spices, rice, and kitchen staples straight from mandi.</span>
+                        <span class="lang-ta-text">மண்டியிலிருந்து நேரடியாக உயர்தர மளிகை பொருட்கள்.</span>
+                    </p>
+                    <span class="text-gold fw-semibold extra-small d-inline-flex align-items-center gap-1">
+                        <span class="lang-en-text">Explore Catalog</span>
+                        <span class="lang-ta-text">கேட்டலாகைப் பார்க்க</span>
+                        <span class="material-symbols-outlined fs-6">arrow_forward</span>
+                    </span>
+                </div>
+            </a>
+        </div>
+
+        <!-- Loose Packs Card -->
+        <div class="col-12 col-md-6">
+            <a asp-controller="Catalog" asp-action="Loose" class="portfolio-card-hero p-3 text-white text-decoration-none d-flex flex-column justify-content-between h-100">
+                <div class="d-flex justify-content-between align-items-start position-relative z-1">
+                    <span class="p-2 rounded-3 bg-glass text-gold anim-float-icon">
+                        <span class="material-symbols-outlined fs-4">inventory_2</span>
+                    </span>
+                    <span class="badge bg-secondary text-white fw-medium px-2.5 py-1 rounded-pill extra-small">
+                        <span class="lang-en-text">Retail Packs</span>
+                        <span class="lang-ta-text">சில்லறை பேக்குகள்</span>
+                    </span>
+                </div>
+                <div class="mt-2.5 position-relative z-1">
+                    <h3 class="fw-bold text-white fs-5 mb-0.5">
+                        <span class="lang-en-text">Loose &amp; Custom Packing</span>
+                        <span class="lang-ta-text">தளர்வான &amp; தனிப்பயன் பேக்கிங்</span>
+                    </h3>
+                    <p class="extra-small text-light opacity-75 mb-1.5" style="font-size:0.73rem;">
+                        <span class="lang-en-text">Flexible weight packaging options for retail outlets &amp; traders.</span>
+                        <span class="lang-ta-text">சிறிய கடைகளுக்கான தனிப்பயன் எடை பேக்கிங் வசதிகள்.</span>
+                    </p>
+                    <span class="text-gold fw-semibold extra-small d-inline-flex align-items-center gap-1">
+                        <span class="lang-en-text">View Packing</span>
+                        <span class="lang-ta-text">பேக்கிங் பார்க்க</span>
+                        <span class="material-symbols-outlined fs-6">arrow_forward</span>
+                    </span>
+                </div>
+            </a>
+        </div>
+
+        <!-- Bulk Inquiry Card -->
+        <div class="col-12 col-md-6">
+            <a asp-controller="Order" asp-action="Request" class="portfolio-card-hero p-3 text-dark text-decoration-none d-flex flex-column justify-content-between h-100" style="background: linear-gradient(135deg, #D4AF37 0%, #C59B27 100%);">
+                <div class="d-flex justify-content-between align-items-start position-relative z-1">
+                    <span class="p-2 rounded-3 bg-white text-dark anim-float-icon shadow-sm">
+                        <span class="material-symbols-outlined fs-4">handshake</span>
+                    </span>
+                    <span class="badge bg-dark text-white fw-medium px-2.5 py-1 rounded-pill extra-small">
+                        <span class="lang-en-text">Direct Mandi</span>
+                        <span class="lang-ta-text">நேரடி மண்டி</span>
+                    </span>
+                </div>
+                <div class="mt-2.5 position-relative z-1">
+                    <h3 class="fw-bold text-dark fs-5 mb-0.5">
+                        <span class="lang-en-text">Bulk Wholesale Inquiry</span>
+                        <span class="lang-ta-text">மொத்த விற்பனை விசாரணை</span>
+                    </h3>
+                    <p class="extra-small text-dark opacity-75 mb-1.5" style="font-size:0.73rem;">
+                        <span class="lang-en-text">Get daily market estimates tailored for volume orders and transport.</span>
+                        <span class="lang-ta-text">பெரிய அளவிலான ஆர்டர்களுக்கு தினசரி விலை மதிப்பீடு.</span>
+                    </p>
+                    <span class="text-dark fw-bold extra-small d-inline-flex align-items-center gap-1">
+                        <span class="lang-en-text">Request Quote</span>
+                        <span class="lang-ta-text">மேற்கோள் கேளுங்கள்</span>
+                        <span class="material-symbols-outlined fs-6">arrow_forward</span>
+                    </span>
+                </div>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Why Choose BRT Section ===== -->
+<section id="why-us" class="container my-3 my-md-5 py-2">
+    <div class="row g-3 align-items-center">
+        <div class="col-lg-6">
+            <span class="hero-eyebrow fw-semibold text-uppercase tracking-wider small d-inline-flex align-items-center gap-1 text-gold">
+                <span class="material-symbols-outlined fs-6 anim-float-icon">handshake</span>
+                <span class="lang-en-text">WHY CHOOSE BRT</span>
+                <span class="lang-ta-text">ஏன் BRT-ஐ தேர்வு செய்ய வேண்டும்</span>
+            </span>
+            <h2 class="fw-bold mt-1 mb-2 text-navy fs-4 fs-md-2">
+                <span class="lang-en-text">Trusted Mandi Partner Since 2000</span>
+                <span class="lang-ta-text">2000 முதல் நம்பகமான மண்டி பங்குதாரர்</span>
+            </h2>
+            <p class="text-muted extra-small fs-md-6 mb-2.5">
+                <span class="lang-en-text">We supply commercial-grade garlic and grocery staples with complete price transparency and fast transport.</span>
+                <span class="lang-ta-text">பூண்டு மற்றும் மளிகை பொருட்களை வெளிப்படையான விலையில் வேகமான விநியோகத்துடன் வழங்குகிறோம்.</span>
+            </p>
+            
+            <div class="row g-2 mb-3">
+                <div class="col-6">
+                    <div class="d-flex align-items-center gap-1">
+                        <span class="material-symbols-outlined text-gold fs-6">check_circle</span>
+                        <span class="fw-medium text-dark extra-small">Strict Quality Control</span>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="d-flex align-items-center gap-1">
+                        <span class="material-symbols-outlined text-gold fs-6">check_circle</span>
+                        <span class="fw-medium text-dark extra-small">Live Sourcing Rates</span>
+                    </div>
                 </div>
             </div>
             
-            <div class="col-lg-5 text-center d-none d-lg-block">
-                <img src="~/images/brt-logo.jpeg" alt="B Raj Traders" class="img-fluid rounded-4 shadow-lg border border-warning border-opacity-25" style="max-height: 380px; object-fit: cover;" />
+            <a asp-controller="Home" asp-action="WhyChooseUs" class="btn btn-brt-outline px-3.5 py-1.5 extra-small fw-semibold">
+                <span class="lang-en-text">Learn More</span>
+                <span class="lang-ta-text">மேலும் அறிய</span>
+            </a>
+        </div>
+        
+        <div class="col-lg-6 mt-2 mt-lg-0">
+            <div class="row g-2 row-equal-height">
+                <div class="col-6">
+                    <div class="innovative-card text-center p-2.5 h-100">
+                        <span class="material-symbols-outlined fs-4 text-gold mb-1 anim-float-icon">workspace_premium</span>
+                        <h6 class="fw-bold text-navy extra-small mb-0.5">Strict Grading</h6>
+                        <p class="text-muted m-0" style="font-size:0.68rem;">Uniform size &amp; purity</p>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="innovative-card text-center p-2.5 h-100">
+                        <span class="material-symbols-outlined fs-4 text-gold mb-1 anim-float-icon">local_shipping</span>
+                        <h6 class="fw-bold text-navy extra-small mb-0.5">Safe Transport</h6>
+                        <p class="text-muted m-0" style="font-size:0.68rem;">Moisture-proof packing</p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- ==========================================
-     2. PRODUCT CATEGORIES (Wholesale & Retail)
-     ========================================== -->
-<section class="py-5">
-    <div class="container-xl">
-        <div class="text-center mb-5">
-            <h2 class="fw-bold" style="font-family: 'Space Grotesk', sans-serif;">
-                <span class="lang-en-text">Our Supply Categories</span>
-                <span class="lang-ta-text">எங்கள் விற்பனை பிரிவுகள்</span>
-            </h2>
-            <p class="text-muted">
-                <span class="lang-en-text">Select your preferred purchasing mode below</span>
-                <span class="lang-ta-text">உங்களுக்கு தேவையான பிரிவை தேர்வு செய்யவும்</span>
-            </p>
-        </div>
-
-        <div class="row g-4">
-            <!-- Wholesale Card -->
-            <div class="col-md-6">
-                <a asp-controller="Catalog" asp-action="Index" class="category-card">
-                    <div class="d-flex align-items-center gap-3 mb-3">
-                        <span class="material-symbols-outlined fs-1 text-warning">grid_view</span>
-                        <div>
-                            <h3 class="h4 fw-bold mb-1">
-                                <span class="lang-en-text">Wholesale Supply</span>
-                                <span class="lang-ta-text">மொத்த விற்பனை</span>
-                            </h3>
-                            <span class="badge bg-warning text-dark">Bulk Volume</span>
-                        </div>
-                    </div>
-                    <p class="text-secondary mb-0">
-                        <span class="lang-en-text">Best pricing for commercial buyers, businesses, and large distributors.</span>
-                        <span class="lang-ta-text">வியாபாரிகள் மற்றும் பெரிய நிறுவனங்களுக்கான சிறந்த மொத்த விலை பட்டியல்.</span>
-                    </p>
-                </a>
+<!-- ===== Industries We Serve ===== -->
+<section class="container my-3 my-md-5 py-2">
+    <div class="text-center mb-3">
+        <span class="hero-eyebrow fw-semibold text-uppercase tracking-wider small d-inline-flex align-items-center gap-1 text-gold">
+            <span class="material-symbols-outlined fs-6 anim-float-icon">domain</span>
+            <span class="lang-en-text">INDUSTRIES WE SERVE</span>
+            <span class="lang-ta-text">எங்கள் வாடிக்கையாளர்கள்</span>
+        </span>
+        <h2 class="fw-bold mt-1 text-navy fs-4 fs-md-2">
+            <span class="lang-en-text">Commercial Clients &amp; Partners</span>
+            <span class="lang-ta-text">வணிக வாடிக்கையாளர்கள்</span>
+        </h2>
+    </div>
+    <div class="row g-2 text-center row-equal-height">
+        @{
+            var industries = new[] {
+                (Icon: "storefront", NameEn: "Supermarkets", NameTa: "சூப்பர்மார்க்கெட்"),
+                (Icon: "shopping_cart_checkout", NameEn: "Grocery Mandis", NameTa: "மளிகை மண்டி"),
+                (Icon: "hotel", NameEn: "Hotels & Resorts", NameTa: "ஹோட்டல்கள்"),
+                (Icon: "public", NameEn: "Exporters", NameTa: "ஏற்றுமதியாளர்கள்")
+            };
+        }
+        @foreach (var ind in industries)
+        {
+            <div class="col-6 col-sm-3">
+                <div class="innovative-card p-2.5 d-flex flex-column align-items-center justify-content-center h-100">
+                    <span class="material-symbols-outlined text-navy fs-4 mb-1 anim-float-icon">@ind.Icon</span>
+                    <h6 class="fw-semibold mb-0 text-dark extra-small">
+                        <span class="lang-en-text">@ind.NameEn</span>
+                        <span class="lang-ta-text">@ind.NameTa</span>
+                    </h6>
+                </div>
             </div>
-
-            <!-- Retail Card -->
-            <div class="col-md-6">
-                <a asp-controller="Catalog" asp-action="Loose" class="category-card">
-                    <div class="d-flex align-items-center gap-3 mb-3">
-                        <span class="material-symbols-outlined fs-1 text-warning">package_2</span>
-                        <div>
-                            <h3 class="h4 fw-bold mb-1">
-                                <span class="lang-en-text">Retail / Loose Quantities</span>
-                                <span class="lang-ta-text">சில்லறை விற்பனை</span>
-                            </h3>
-                            <span class="badge bg-secondary">Flexible Packs</span>
-                        </div>
-                    </div>
-                    <p class="text-secondary mb-0">
-                        <span class="lang-en-text">Flexible quantity options tailored for smaller orders and individual requirements.</span>
-                        <span class="lang-ta-text">சிறிய அளவிலான தேவைகள் மற்றும் தனிநபர் ஆர்டர்களுக்கான வசதியான சேவைகள்.</span>
-                    </p>
-                </a>
-            </div>
-        </div>
+        }
     </div>
 </section>
 
-<!-- ==========================================
-     3. KEY HIGHLIGHTS / WHY CHOOSE US
-     ========================================== -->
-<section class="py-5 bg-light rounded-4 my-4">
-    <div class="container-xl">
-        <div class="text-center mb-5">
-            <h2 class="fw-bold" style="font-family: 'Space Grotesk', sans-serif;">
-                <span class="lang-en-text">Why Choose B Raj Traders?</span>
-                <span class="lang-ta-text">ஏன் பி ராஜ் டிரேடர்ஸை தேர்வு செய்ய வேண்டும்?</span>
-            </h2>
-        </div>
-
-        <div class="row g-4">
-            <div class="col-md-4">
-                <div class="feature-card">
-                    <div class="feature-icon-wrap">
-                        <span class="material-symbols-outlined fs-3">high_quality</span>
-                    </div>
-                    <h4 class="h5 fw-bold mb-2">
-                        <span class="lang-en-text">Uncompromised Quality</span>
-                        <span class="lang-ta-text">உயர்தர தரம்</span>
-                    </h4>
-                    <p class="text-muted small mb-0">
-                        <span class="lang-en-text">Every commodity is strictly checked for purity and standard guidelines before distribution.</span>
-                        <span class="lang-ta-text">ஒவ்வொரு பொருளும் தரக்கட்டுப்பாடுகளுக்கு உட்படுத்தப்பட்ட பின்னரே விநியோகிக்கப்படுகிறது.</span>
-                    </p>
-                </div>
-            </div>
-
-            <div class="col-md-4">
-                <div class="feature-card">
-                    <div class="feature-icon-wrap">
-                        <span class="material-symbols-outlined fs-3">local_shipping</span>
-                    </div>
-                    <h4 class="h5 fw-bold mb-2">
-                        <span class="lang-en-text">Pan-India Logistics</span>
-                        <span class="lang-ta-text">வேகமான விநியோகம்</span>
-                    </h4>
-                    <p class="text-muted small mb-0">
-                        <span class="lang-en-text">Daily optimized dispatches covering Pondicherry and 15+ districts in Tamil Nadu.</span>
-                        <span class="lang-ta-text">புதுச்சேரி மற்றும் தமிழ்நாட்டின் 15+ மாவட்டங்களுக்கு தினமும் உடனுக்குடன் அனுப்பி வைக்கப்படும்.</span>
-                    </p>
-                </div>
-            </div>
-
-            <div class="col-md-4">
-                <div class="feature-card">
-                    <div class="feature-icon-wrap">
-                        <span class="material-symbols-outlined fs-3">handshake</span>
-                    </div>
-                    <h4 class="h5 fw-bold mb-2">
-                        <span class="lang-en-text">24+ Years Trust</span>
-                        <span class="lang-ta-text">24+ ஆண்டுகள் நம்பிக்கை</span>
-                    </h4>
-                    <p class="text-muted small mb-0">
-                        <span class="lang-en-text">Delivering reliable trading services with maximum transparency since the year 2000.</span>
-                        <span class="lang-ta-text">2000 ஆம் ஆண்டு முதல் வாடிக்கையாளர்களின் நம்பிக்கையை பெற்று வெற்றிகரமாக இயங்கி வருகிறது.</span>
-                    </p>
-                </div>
-            </div>
-        </div>
+<!-- ===== Footer Disclaimer Bar ===== -->
+<section class="container my-3 py-2">
+    <div class="innovative-card p-2.5 text-center d-flex flex-wrap justify-content-center align-items-center gap-2 text-muted extra-small">
+        <span class="d-inline-flex align-items-center gap-1">
+            <span class="material-symbols-outlined text-gold fs-6">check_circle</span> Bulk Preferred
+        </span>
+        <span class="d-inline-flex align-items-center gap-1">
+            <span class="material-symbols-outlined text-gold fs-6">check_circle</span> Live Rates
+        </span>
+        <span class="d-inline-flex align-items-center gap-1">
+            <span class="material-symbols-outlined text-gold fs-6">check_circle</span> Tax/GST Included
+        </span>
     </div>
 </section>
