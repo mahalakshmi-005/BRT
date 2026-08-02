@@ -117,21 +117,26 @@
     }
 
     /* Horizontal Scroll Container (Mobile Friendly) */
+  /* Horizontal Scroll Container (Mobile Friendly) */
     .mobile-scroll-container {
         display: flex;
         flex-wrap: nowrap;
         overflow-x: auto;
         scroll-snap-type: x mandatory;
         -webkit-overflow-scrolling: touch;
-        gap: 14px;
+        gap: 12px;
         padding: 8px 4px 16px 4px;
         scrollbar-width: none;
     }
     .mobile-scroll-container::-webkit-scrollbar { display: none; }
+    
+    /* Mobile View: Decreased card width for compact look */
     .mobile-scroll-item {
-        flex: 0 0 260px;
+        flex: 0 0 200px;
         scroll-snap-align: start;
     }
+
+    /* Desktop View Fix */
     @@media (min-width: 992px) {
         .mobile-scroll-container {
             display: flex;
@@ -366,10 +371,10 @@
             @foreach (var p in featured)
             {
                 <div class="mobile-scroll-item p-1">
-                    <div class="pro-product-card p-3 d-flex flex-column justify-content-between h-100">
+                    <div class="pro-product-card p-2.5 d-flex flex-column justify-content-between h-100">
                         <div>
-                            <!-- Fixed Image Container -->
-                            <div class="rounded-3 text-center d-flex align-items-center justify-content-center position-relative overflow-hidden" style="height: 180px; background-color: #F8FAFC;">
+                            <!-- Compact Image Container -->
+                            <div class="rounded-3 text-center d-flex align-items-center justify-content-center position-relative overflow-hidden" style="height: 130px; background-color: #F8FAFC;">
                                 @if (!string.IsNullOrEmpty(p.ImageUrl))
                                 {
                                     <img src="@p.ImageUrl" alt="@p.Name" class="w-100 h-100 object-fit-cover rounded-3" />
@@ -378,28 +383,28 @@
                                 {
                                     <span class="material-symbols-outlined fs-1 text-gold">inventory_2</span>
                                 }
-                                <span class="badge position-absolute top-0 start-0 m-2 px-2.5 py-1 rounded-pill bg-navy text-gold fw-bold extra-small shadow-sm" style="z-index: 2;">
+                                <span class="badge position-absolute top-0 start-0 m-1.5 px-2 py-0.5 rounded-pill bg-navy text-gold fw-bold" style="z-index: 2; font-size: 0.65rem;">
                                     @(p.SubCategory?.Name ?? "General")
                                 </span>
                             </div>
 
-                            <div class="pt-3">
-                                <h5 class="fw-bold text-navy mb-0 fs-6 text-truncate">@p.Name</h5>
+                            <div class="pt-2">
+                                <h6 class="fw-bold text-navy mb-0 fs-6 text-truncate">@p.Name</h6>
                                 @if (!string.IsNullOrEmpty(p.NameTamil))
                                 {
-                                    <span class="text-muted extra-small d-block fw-medium mb-2 text-truncate">@p.NameTamil</span>
+                                    <span class="text-muted extra-small d-block fw-medium mb-1 text-truncate" style="font-size:0.7rem;">@p.NameTamil</span>
                                 }
-                                <p class="text-muted extra-small lh-sm mb-0 text-truncate" style="font-size:0.75rem;">
-                                    @(string.IsNullOrEmpty(p.Description) ? "Commercial bulk packaging directly sourced from verified Mandi roots." : p.Description)
+                                <p class="text-muted extra-small lh-sm mb-0 text-truncate" style="font-size:0.7rem;">
+                                    @(string.IsNullOrEmpty(p.Description) ? "Commercial bulk packaging directly sourced." : p.Description)
                                 </p>
                             </div>
                         </div>
 
-                        <div class="pt-3 mt-3 border-top d-flex justify-content-between align-items-center">
-                            <span class="badge bg-success bg-opacity-10 text-success fw-bold extra-small rounded-pill px-2.5 py-1">Ready Bulk</span>
-                            <a asp-controller="Catalog" asp-action="Product" asp-route-slug="@p.Slug" class="btn btn-sm btn-brt-gold px-3 py-1.5 extra-small fw-bold d-inline-flex align-items-center gap-1">
+                        <div class="pt-2 mt-2 border-top d-flex justify-content-between align-items-center">
+                            <span class="badge bg-success bg-opacity-10 text-success fw-bold rounded-pill px-2 py-0.5" style="font-size:0.65rem;">Ready Bulk</span>
+                            <a asp-controller="Catalog" asp-action="Product" asp-route-slug="@p.Slug" class="btn btn-sm btn-brt-gold px-2.5 py-1 fw-bold d-inline-flex align-items-center gap-1" style="font-size:0.7rem;">
                                 <span>Inquire</span>
-                                <span class="material-symbols-outlined fs-6">arrow_forward</span>
+                                <span class="material-symbols-outlined" style="font-size:14px;">arrow_forward</span>
                             </a>
                         </div>
                     </div>
