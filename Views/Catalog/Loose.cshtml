@@ -21,6 +21,7 @@
         --text-muted: #64748B;
         --border-color: #E2E8F0;
         --down-red: #EF4444;
+        --up-green: #10B981;
     }
 
     body {
@@ -34,11 +35,11 @@
     html[lang="en"] .lang-ta-text, body[lang="en"] .lang-ta-text { display: none !important; }
     html[lang="ta"] .lang-en-text, body[lang="ta"] .lang-en-text { display: none !important; }
 
-    /* CLEAN WHITE HERO HEADER WITH BLACK TEXT */
+    /* CLEAN WHITE HERO HEADER WITH FIXED ALIGNMENT */
     .hero-header-white {
         background-color: var(--solid-white);
         color: var(--solid-black);
-        padding: 35px 20px 25px 20px;
+        padding: 40px 20px 30px 20px;
         text-align: center;
         border-bottom: 1px solid var(--border-color);
     }
@@ -47,16 +48,18 @@
         font-family: 'Cinzel', serif;
         font-size: 2.2rem;
         font-weight: 900;
-        margin: 0;
+        margin: 0 0 8px 0;
+        display: block; /* Fixes inline bleeding */
         color: var(--solid-black);
         letter-spacing: -0.5px;
     }
 
     .hero-header-white p {
         color: var(--text-muted);
-        font-size: 0.9rem;
+        font-size: 0.95rem;
         font-weight: 600;
-        margin-top: 6px;
+        margin: 0;
+        display: block; /* Fixes inline bleeding */
     }
 
     /* STICKY CONTROL DOCK */
@@ -104,7 +107,7 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        margin: 20px 0 12px 0;
+        margin: 24px 0 14px 0;
     }
 
     .carousel-top-bar h2 {
@@ -171,7 +174,7 @@
         border-color: var(--solid-black);
     }
 
-    /* HOT DEAL PULSE BADGE */
+    /* PRICE DROP ANIMATED BADGE */
     .pulse-badge {
         position: absolute;
         top: 10px;
@@ -251,6 +254,18 @@
         color: var(--solid-black);
     }
 
+    /* DYNAMIC PRICE BADGES (GREEN FOR UP, RED FOR DOWN) */
+    .price-tag-badge {
+        font-size: 0.68rem;
+        font-weight: 800;
+        padding: 2px 6px;
+        border-radius: 4px;
+        color: #FFFFFF;
+    }
+
+    .price-tag-badge.down { background-color: var(--down-red); }
+    .price-tag-badge.up { background-color: var(--up-green); }
+
     /* SOLID BUTTONS */
     .btn-solid-action {
         width: 100%;
@@ -276,20 +291,22 @@
 
     @@media (max-width: 576px) {
         .carousel-card-item { flex: 0 0 210px; }
+        .hero-header-white h1 { font-size: 1.8rem; }
+        .hero-header-white p { font-size: 0.85rem; }
     }
 </style>
 
-<!-- Solid White Hero Header -->
+<!-- Properly Aligned Hero Header -->
 <header class="hero-header-white">
     <div class="container">
-        <h1 class="lang-en-text">Retail Products</h1>
+        <h1 class="lang-en-text">RETAIL PRODUCTS</h1>
         <h1 class="lang-ta-text">சில்லறை விற்பனை</h1>
         <p class="lang-en-text">Small retail packs — 50g / 100g / 250g / 500g / 1Kg</p>
         <p class="lang-ta-text">சிறிய சில்லறைப் பொட்டலங்கள் — 50கி / 100கி / 250கி / 500கி / 1கிலோ</p>
     </div>
 </header>
 
-<!-- Sticky Search Dock -->
+<!-- Sticky Search Bar -->
 <div class="sticky-dock-wrapper">
     <div class="container">
         <div class="search-box-wrap">
@@ -299,9 +316,9 @@
     </div>
 </div>
 
-<!-- Main Section -->
+<!-- Main Content -->
 <main class="container my-3">
-    <!-- Top Bar with Navigation Controls (< >) -->
+    <!-- Carousel Control Bar -->
     <div class="carousel-top-bar">
         <div>
             <h2 class="lang-en-text">All Items</h2>
@@ -317,7 +334,7 @@
         </div>
     </div>
 
-    <!-- Single Horizontal Scroll Container (No Grade Breakdown) -->
+    <!-- Product Carousel Container -->
     @if (Model != null && Model.Any())
     {
         <div class="horizontal-product-scroll" id="retailCarousel">
@@ -327,10 +344,10 @@
                 var mp = hasPrice ? todaysPrices[p.Id] : null;
 
                 <div class="carousel-card-item product-item" data-name="@p.Name @p.NameTamil">
-                    <!-- Hot Deal Pulse Badge -->
+                    <!-- Price Drop Pulse Badge -->
                     @if (mp != null && mp.PriceDifference < 0)
                     {
-                        <span class="pulse-badge">HOT DEAL</span>
+                        <span class="pulse-badge">PRICE DROP</span>
                     }
 
                     <div>
@@ -353,15 +370,34 @@
                         <h3 class="product-name lang-en-text">@p.Name</h3>
                         <h3 class="product-name lang-ta-text">@(!string.IsNullOrEmpty(p.NameTamil) ? p.NameTamil : p.Name)</h3>
 
-                        <!-- Price Info -->
+                        <!-- Price Ticker Box -->
                         @if (mp != null)
                         {
+                            var isDrop = mp.PriceDifference < 0;
+                            var isIncrease = mp.PriceDifference > 0;
+
                             <div class="price-box" onclick="openPriceModal('@p.Name', '@mp.TodayPrice', '@mp.PriceDifference')" style="cursor:pointer;">
                                 <div class="d-flex justify-content-between align-items-center">
                                     <span class="price-num">₹@mp.TodayPrice.ToString("F2")</span>
-                                    <span class="badge @(mp.PriceDifference <= 0 ? "bg-success" : "bg-danger")" style="font-size: 0.65rem;">
-                                        @(mp.PriceDifference <= 0 ? "▼" : "▲") ₹@Math.Abs(mp.PriceDifference).ToString("F2")
-                                    </span>
+                                    
+                                    @if (isDrop)
+                                    {
+                                        <!-- Red for Price Drop -->
+                                        <span class="price-tag-badge down">
+                                            ▼ ₹@Math.Abs(mp.PriceDifference).ToString("F2")
+                                        </span>
+                                    }
+                                    else if (isIncrease)
+                                    {
+                                        <!-- Green for Price Increase -->
+                                        <span class="price-tag-badge up">
+                                            ▲ ₹@Math.Abs(mp.PriceDifference).ToString("F2")
+                                        </span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-secondary" style="font-size: 0.65rem;">-</span>
+                                    }
                                 </div>
                                 <div class="text-muted" style="font-size: 0.65rem; margin-top: 2px;">GST Inc. • Tap for history</div>
                             </div>
@@ -423,14 +459,14 @@
         });
     }
 
-    // WhatsApp Share Button
+    // WhatsApp Share
     function shareToWhatsApp(name, price) {
         const text = `*${name}*\nToday's Retail Rate: ₹${price}/KG\nOrder link: ${window.location.href}`;
         window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`, '_blank');
     }
 
-    // Interactive Price History Modal Trigger
+    // Interactive Price History Trigger
     function openPriceModal(name, price, diff) {
-        alert(`Price Details for ${name}:\nCurrent Rate: ₹${price}\nChange: ₹${diff}`);
+        alert(`Price Details for ${name}:\nCurrent Rate: ₹${price}\nRecent Change: ₹${diff}`);
     }
 </script>
