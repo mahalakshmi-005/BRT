@@ -21,7 +21,6 @@
         --text-muted: #6B7280;
         --border-refined: rgba(179, 143, 67, 0.18);
         
-        /* Dynamic Price Box Colors */
         --price-down-border: #DC2626;
         --price-down-bg: #FEF2F2;
         --price-down-text: #991B1B;
@@ -37,24 +36,23 @@
         font-family: 'Plus Jakarta Sans', sans-serif;
         background-color: var(--brt-bg-cream);
         color: var(--text-main);
-        padding-bottom: 90px;
     }
 
     /* DYNAMIC LANGUAGE CONTROLLER */
     html[lang="en"] .lang-ta, body[lang="en"] .lang-ta { display: none !important; }
-    html[lang="ta"] .lang-en, body[lang="ta"] .lang-en { display: none !important; }
+    html[lang="ta"] .lang-en, body[lang="ta"] .lang-ta { display: none !important; }
 
     /* APP TOP NAV BAR */
     .app-top-nav {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        margin-bottom: 24px;
+        margin-bottom: 16px;
     }
 
     .app-back-btn {
-        width: 42px;
-        height: 42px;
+        width: 40px;
+        height: 40px;
         border-radius: 50%;
         background: var(--brt-surface-white);
         border: 1px solid var(--border-refined);
@@ -63,7 +61,7 @@
         justify-content: center;
         color: var(--brt-dark-navy);
         text-decoration: none !important;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
     }
 
     .corporate-path-capsule {
@@ -72,96 +70,81 @@
         background: var(--brt-gold-light);
         border: 1px solid var(--border-refined);
         color: var(--brt-gold-dark);
-        padding: 6px 18px;
+        padding: 5px 14px;
         border-radius: 100px;
         font-size: 0.72rem;
         font-weight: 800;
-        letter-spacing: 0.6px;
+        letter-spacing: 0.5px;
         text-transform: uppercase;
     }
 
-    /* LEFT HERO IMAGE SHOWCASE */
+    /* HERO IMAGE SHOWCASE (OPTIMIZED FOR MOBILE & DESKTOP) */
     .app-hero-card {
         background: var(--brt-surface-white);
         border: 1px solid var(--border-refined);
-        border-radius: 28px;
-        padding: 24px;
-        box-shadow: 0 10px 30px -10px rgba(11, 15, 25, 0.03);
+        border-radius: 20px;
+        padding: 16px;
+        box-shadow: 0 6px 20px -5px rgba(11, 15, 25, 0.03);
         text-align: center;
         display: flex;
         align-items: center;
         justify-content: center;
-        min-height: 380px;
+        width: 100%;
     }
 
     .app-product-img {
-        max-height: 320px;
         width: 100%;
+        max-height: 320px;
         object-fit: cover;
-        border-radius: 20px;
+        border-radius: 14px;
+        display: block;
     }
 
     /* TYPOGRAPHY */
     .detail-corporate-title {
         font-family: 'Playfair Display', serif;
         font-weight: 700;
-        font-size: 2.5rem;
+        font-size: 2.2rem;
         color: var(--brt-dark-navy);
         line-height: 1.1;
-        margin: 0 0 8px 0;
+        margin: 0 0 6px 0;
     }
 
     .detail-corporate-title-ta {
-        font-size: 2rem;
+        font-size: 1.8rem;
         font-weight: 800;
         color: var(--brt-dark-navy);
-        margin: 0 0 8px 0;
+        margin: 0 0 6px 0;
     }
 
-    .premium-grade-badge {
-        display: inline-flex;
-        align-items: center;
-        background: var(--brt-dark-navy);
-        color: var(--brt-gold-pure);
-        font-weight: 800;
-        font-size: 0.68rem;
-        padding: 5px 12px;
-        border-radius: 6px;
-        letter-spacing: 1.2px;
-        text-transform: uppercase;
-        margin-bottom: 20px;
-    }
-
-    /* EXACT FINANCIAL PRICE WIDGET (MATCHING SCREENSHOT) */
+    /* TICKER PANEL */
     .detail-ticker-panel {
-        border-radius: 20px;
-        padding: 20px 24px;
-        margin: 20px 0;
+        border-radius: 16px;
+        padding: 16px 20px;
+        margin: 16px 0;
         border: 1px solid var(--border-refined);
         background: var(--brt-surface-white);
-        box-shadow: 0 8px 20px -5px rgba(11, 15, 25, 0.03);
+        box-shadow: 0 6px 16px -4px rgba(11, 15, 25, 0.03);
         position: relative;
         overflow: hidden;
     }
 
-    /* RED ACCENT LINE LEFT (PRICE DROP) */
     .detail-ticker-panel.state-down::before {
         content: '';
         position: absolute;
         top: 0;
         left: 0;
-        width: 6px;
+        width: 5px;
         height: 100%;
         background: var(--price-down-border);
     }
 
-    /* GREEN ACCENT LINE LEFT (PRICE UP) */
     .detail-ticker-panel.state-up::before {
         content: '';
         position: absolute;
         top: 0;
         left: 0;
-        width: 6px;
+        width: 5px;
         height: 100%;
         background: var(--price-up-border);
     }
@@ -173,14 +156,14 @@
     }
 
     .panel-live-amount {
-        font-size: 2.5rem;
+        font-size: 2.2rem;
         font-weight: 800;
         color: var(--brt-dark-navy);
         letter-spacing: -1px;
     }
 
     .panel-live-unit {
-        font-size: 0.9rem;
+        font-size: 0.85rem;
         color: var(--text-muted);
         font-weight: 700;
     }
@@ -189,10 +172,10 @@
         display: inline-flex;
         align-items: center;
         gap: 4px;
-        font-size: 0.82rem;
+        font-size: 0.8rem;
         font-weight: 800;
-        padding: 6px 14px;
-        border-radius: 10px;
+        padding: 5px 12px;
+        border-radius: 8px;
     }
 
     .panel-status-pill.down {
@@ -206,66 +189,66 @@
     }
 
     .panel-ticker-footer {
-        margin-top: 14px;
-        font-size: 0.78rem;
+        margin-top: 10px;
+        font-size: 0.75rem;
         font-weight: 600;
         color: var(--text-muted);
         display: flex;
         justify-content: space-between;
         border-top: 1px solid var(--border-refined);
-        padding-top: 12px;
+        padding-top: 10px;
     }
 
-    /* PACKAGING TAGS (CAPSULE CHIPS) */
+    /* PACKAGING TAGS */
     .quantum-pack-heading {
-        font-size: 0.75rem;
+        font-size: 0.72rem;
         font-weight: 800;
         color: var(--brt-gold-dark);
         text-transform: uppercase;
-        letter-spacing: 1px;
-        margin-bottom: 12px;
+        letter-spacing: 0.8px;
+        margin-bottom: 10px;
     }
 
     .quantum-pack-vault {
         display: flex;
         flex-wrap: wrap;
-        gap: 10px;
-        margin-bottom: 24px;
+        gap: 8px;
+        margin-bottom: 20px;
     }
 
     .quantum-pack-chip {
         background: var(--brt-gold-light);
         border: 1px solid var(--border-refined);
         color: var(--brt-dark-navy);
-        font-size: 0.82rem;
+        font-size: 0.8rem;
         font-weight: 700;
-        padding: 8px 18px;
-        border-radius: 12px;
+        padding: 6px 14px;
+        border-radius: 10px;
     }
 
-    /* 2x2 DISCLAIMER GRID */
+    /* DISCLAIMER GRID */
     .cyber-disclaimer-vault {
         background: var(--brt-surface-white);
         border: 1px solid var(--border-refined);
-        border-radius: 20px;
-        padding: 20px;
+        border-radius: 16px;
+        padding: 16px;
         display: grid;
         grid-template-columns: repeat(2, 1fr);
-        gap: 16px;
-        margin-bottom: 24px;
+        gap: 12px;
+        margin-bottom: 20px;
     }
 
     .cyber-disclaimer-item {
         display: flex;
         align-items: center;
-        gap: 12px;
+        gap: 10px;
     }
 
     .cyber-disclaimer-item .icon-wrapper {
-        width: 38px;
-        height: 38px;
+        width: 34px;
+        height: 34px;
         background: var(--brt-gold-light);
-        border-radius: 10px;
+        border-radius: 8px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -274,43 +257,35 @@
     }
 
     .cyber-text-title {
-        font-size: 0.8rem;
+        font-size: 0.78rem;
         font-weight: 800;
         color: var(--brt-dark-navy);
         display: block;
     }
 
     .cyber-text-subtitle {
-        font-size: 0.72rem;
+        font-size: 0.7rem;
         color: var(--text-muted);
         display: block;
     }
 
-    /* STICKY FOOTER BAR FOR MOBILE & DESKTOP */
+    /* ACTION BUTTONS DOCK */
     .app-sticky-bar {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        background: var(--brt-surface-white);
-        border-top: 1px solid var(--border-refined);
-        padding: 14px 20px;
-        box-shadow: 0 -10px 25px rgba(0,0,0,0.04);
-        z-index: 1000;
-        display: flex;
-        gap: 12px;
-        align-items: center;
+        display: flex !important;
+        gap: 10px !important;
+        align-items: center !important;
+        width: 100% !important;
     }
 
     .btn-app-action {
-        height: 52px;
-        border-radius: 14px;
+        height: 48px;
+        border-radius: 12px;
         font-weight: 800;
-        font-size: 0.9rem;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 8px;
+        font-size: 0.88rem;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 6px;
         text-decoration: none !important;
         transition: transform 0.2s ease;
     }
@@ -318,44 +293,78 @@
     .btn-app-gold {
         background: var(--brt-dark-navy);
         color: var(--brt-surface-white) !important;
-        flex: 3;
+        flex: 1 1 auto;
     }
 
     .btn-app-icon {
-        width: 52px;
+        width: 48px;
+        height: 48px;
         background: var(--brt-surface-white);
         border: 1px solid var(--border-refined);
         color: var(--brt-dark-navy) !important;
-        flex: 0 0 52px;
+        flex: 0 0 48px;
     }
 
     .btn-app-whatsapp {
-        width: 52px;
+        width: 48px;
+        height: 48px;
         background: rgba(37, 211, 102, 0.12);
         border: 1px solid var(--whatsapp-green);
         color: var(--whatsapp-green) !important;
-        flex: 0 0 52px;
+        flex: 0 0 48px;
     }
 
-    /* RESPONSIVE CSS */
-    @@media (min-width: 992px) {
-        .app-sticky-bar {
-            position: static;
-            box-shadow: none;
-            background: transparent;
-            padding: 0;
-            border: none;
+    /* MOBILE SPECIFIC REFINEMENTS */
+    @@media (max-width: 991px) {
+        body {
+            padding-bottom: 85px !important;
         }
-        body { padding-bottom: 20px; }
+
+        .app-hero-card {
+            padding: 10px;
+            border-radius: 16px;
+        }
+
+        .app-product-img {
+            max-height: 220px; /* Reduced excess space on mobile */
+            object-fit: contain;
+        }
+
+        .app-sticky-bar {
+            position: fixed !important;
+            bottom: 0 !important;
+            left: 0 !important;
+            right: 0 !important;
+            background: var(--brt-surface-white) !important;
+            border-top: 1px solid var(--border-refined) !important;
+            padding: 10px 14px !important;
+            box-shadow: 0 -8px 20px rgba(0,0,0,0.06) !important;
+            z-index: 99999 !important;
+        }
+    }
+
+    /* DESKTOP RULES */
+    @@media (min-width: 992px) {
+        body {
+            padding-bottom: 20px !important;
+        }
+        .app-sticky-bar {
+            position: static !important;
+            box-shadow: none !important;
+            background: transparent !important;
+            padding: 0 !important;
+            border: none !important;
+            margin-top: 10px;
+        }
     }
 
     @@media (max-width: 576px) {
         .cyber-disclaimer-vault { grid-template-columns: 1fr; }
-        .detail-corporate-title { font-size: 2rem; }
+        .detail-corporate-title { font-size: 1.8rem; }
     }
 </style>
 
-<div class="container my-3 my-md-4">
+<div class="container my-2 my-md-4">
 
     <!-- Top Navigation Bar -->
     <div class="app-top-nav">
@@ -368,13 +377,13 @@
         </div>
 
         <button class="app-back-btn" onclick="navigator.share ? navigator.share({title: '@Model.Name', url: window.location.href}) : null">
-            <span class="material-symbols-outlined" style="font-size: 20px;">share</span>
+            <span class="material-symbols-outlined" style="font-size: 18px;">share</span>
         </button>
     </div>
 
-    <div class="row g-4 align-items-center">
+    <div class="row g-3 g-md-4 align-items-center">
 
-        <!-- Showcase Image Section (Left) -->
+        <!-- Image Showcase (No extra vertical space) -->
         <div class="col-lg-6">
             <div class="app-hero-card">
                 @if (!string.IsNullOrEmpty(Model.ImageUrl))
@@ -383,29 +392,24 @@
                 }
                 else
                 {
-                    <div class="py-5 text-center">
-                        <span class="material-symbols-outlined text-muted" style="font-size: 4rem;">eco</span>
+                    <div class="py-4 text-center">
+                        <span class="material-symbols-outlined text-muted" style="font-size: 3rem;">eco</span>
                     </div>
                 }
             </div>
         </div>
 
-        <!-- Details & Pricing Engine (Right) -->
+        <!-- Product Details -->
         <div class="col-lg-6">
 
-            <!-- Titles -->
+            <!-- Title Only (Grade Removed) -->
             <h1 class="detail-corporate-title lang-en">@Model.Name</h1>
             @if (!string.IsNullOrEmpty(Model.NameTamil))
             {
                 <h1 class="detail-corporate-title-ta lang-ta">@Model.NameTamil</h1>
             }
 
-            @if (!string.IsNullOrEmpty(Model.Grade))
-            {
-                <span class="premium-grade-badge">@Model.Grade</span>
-            }
-
-            <!-- Screenshot Style Ticker Panel -->
+            <!-- Price Ticker Panel -->
             @if (mp != null)
             {
                 var diff = mp.PriceDifference;
@@ -420,14 +424,12 @@
 
                         @if (diff < 0)
                         {
-                            <!-- Red Drop Badge -->
                             <span class="panel-status-pill down">
                                 ↓ ₹@Math.Abs(diff).ToString("F2")
                             </span>
                         }
                         else if (diff > 0)
                         {
-                            <!-- Green Up Badge -->
                             <span class="panel-status-pill up">
                                 ↑ ₹@Math.Abs(diff).ToString("F2")
                             </span>
@@ -442,15 +444,18 @@
             }
 
             <!-- Packaging Sizes -->
-            <h6 class="quantum-pack-heading">Available Packings</h6>
-            <div class="quantum-pack-vault">
-                @foreach (var pt in Model.PackingTypes.Where(x => x.IsActive))
-                {
-                    <span class="quantum-pack-chip">
-                        @pt.PackSize @(pt.IsLoose ? "(Loose)" : "")
-                    </span>
-                }
-            </div>
+            @if (Model.PackingTypes != null && Model.PackingTypes.Any(x => x.IsActive))
+            {
+                <h6 class="quantum-pack-heading">Available Packings</h6>
+                <div class="quantum-pack-vault">
+                    @foreach (var pt in Model.PackingTypes.Where(x => x.IsActive))
+                    {
+                        <span class="quantum-pack-chip">
+                            @pt.PackSize @(pt.IsLoose ? "(Loose)" : "")
+                        </span>
+                    }
+                </div>
+            }
 
             <!-- 2x2 Regulatory Vault -->
             <div class="cyber-disclaimer-vault">
@@ -495,11 +500,12 @@
                 </div>
             </div>
 
-            <!-- Sticky Action Buttons -->
+            <!-- Sticky 3 Action Buttons -->
             <div class="app-sticky-bar">
                 <a asp-controller="Order" asp-action="Request" asp-route-productId="@Model.Id" class="btn-app-action btn-app-gold">
                     <span class="material-symbols-outlined">shopping_cart</span>
-                    <span>Request Bulk Order</span>
+                    <span class="lang-en">Request Bulk Order</span>
+                    <span class="lang-ta">பல்க் ஆர்டர் செய்க</span>
                 </a>
                 <a href="tel:9865680694" class="btn-app-action btn-app-icon" title="Call">
                     <span class="material-symbols-outlined">call</span>
