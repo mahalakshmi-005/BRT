@@ -1,115 +1,128 @@
-<!-- Google Icons & Fonts CDN (Head section la illana add pannikonga) -->
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<!-- Material Symbols Google CDN -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Cinzel:wght@700;800;900&display=swap" rel="stylesheet">
 
 <style>
-    /* Premium Design System Custom CSS */
     :root {
         --brt-gold: #D4AF37;
         --brt-gold-dark: #AA820A;
+        --brt-gold-light: #FBF5E8;
         --dark-bg: #0F172A;
         --card-bg: #FFFFFF;
         --text-main: #1E293B;
         --text-muted: #64748B;
         --border-color: #E2E8F0;
+        --glow-shadow: 0 20px 40px -15px rgba(212, 175, 55, 0.25);
     }
 
     body {
         font-family: 'Plus Jakarta Sans', sans-serif;
+        color: var(--text-main);
+        background-color: #FAFAFA;
+        overflow-x: hidden;
     }
 
-    /* Hero Section Innovation */
+    /* Modern Hero Section */
     .premium-hero {
-        padding: 80px 0 60px;
-        background: radial-gradient(circle at top right, rgba(212, 175, 55, 0.08), transparent 40%), radial-gradient(circle at bottom left, rgba(15, 23, 42, 0.03), transparent 50%);
+        padding: 70px 20px 50px;
+        background: radial-gradient(circle at 50% 0%, rgba(212, 175, 55, 0.15) 0%, transparent 60%),
+                    radial-gradient(circle at 90% 80%, rgba(15, 23, 42, 0.05) 0%, transparent 50%);
         position: relative;
     }
 
     .hero-badge {
-        background: rgba(212, 175, 55, 0.1);
+        background: linear-gradient(135deg, rgba(212, 175, 55, 0.15) 0%, rgba(170, 130, 10, 0.1) 100%);
+        border: 1px solid rgba(212, 175, 55, 0.3);
         color: var(--brt-gold-dark);
-        padding: 6px 16px;
-        border-radius: 30px;
-        font-weight: 600;
+        padding: 8px 20px;
+        border-radius: 50px;
+        font-weight: 700;
         font-size: 0.85rem;
         display: inline-block;
-        margin-bottom: 1.5rem;
+        margin-bottom: 1.2rem;
         text-transform: uppercase;
-        letter-spacing: 1px;
+        letter-spacing: 1.2px;
+        box-shadow: 0 4px 15px rgba(212, 175, 55, 0.1);
     }
 
     .premium-hero h1 {
+        font-family: 'Plus Jakarta Sans', sans-serif;
         font-weight: 800;
         color: var(--dark-bg);
-        font-size: 2.8rem;
-        letter-spacing: -0.5px;
+        font-size: clamp(2.2rem, 5vw, 3.2rem);
+        letter-spacing: -0.8px;
+        line-height: 1.2;
     }
 
-    /* Feature Cards - Floating Minimal Design */
+    /* Innovative Grid & Floating Glass Cards */
     .innovative-grid .category-card {
         background: var(--card-bg);
         border: 1px solid var(--border-color);
-        border-radius: 20px;
-        padding: 2.5rem 2rem;
+        border-radius: 24px;
+        padding: 2.2rem 1.8rem;
         transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         position: relative;
         overflow: hidden;
         z-index: 1;
+        box-shadow: 0 10px 30px rgba(15, 23, 42, 0.03);
     }
 
-        .innovative-grid .category-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, var(--dark-bg) 0%, #1E293B 100%);
-            z-index: -1;
-            opacity: 0;
-            transition: opacity 0.4s ease;
-        }
+    .innovative-grid .category-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
+        z-index: -1;
+        opacity: 0;
+        transition: opacity 0.4s ease;
+    }
 
-        .innovative-grid .category-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(15, 23, 42, 0.12);
-            border-color: transparent;
-        }
+    .innovative-grid .category-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.25);
+        border-color: transparent;
+    }
 
-            .innovative-grid .category-card:hover::before {
-                opacity: 1;
-            }
+    .innovative-grid .category-card:hover::before {
+        opacity: 1;
+    }
 
-    /* Icon Transformation */
+    /* Category Icon Design */
     .category-icon {
-        width: 60px;
-        height: 60px;
-        background: rgba(15, 23, 42, 0.04);
-        border-radius: 16px;
+        width: 64px;
+        height: 64px;
+        background: var(--brt-gold-light);
+        border: 1px solid rgba(212, 175, 55, 0.3);
+        border-radius: 18px;
         display: flex;
         align-items: center;
         justify-content: center;
-        margin-bottom: 1.8rem;
+        margin-bottom: 1.5rem;
         transition: all 0.4s ease;
     }
 
-        .category-icon span {
-            font-size: 1.8rem;
-            color: var(--dark-bg);
-            transition: all 0.4s ease;
-        }
-
-    .category-card:hover .category-icon {
-        background: rgba(212, 175, 55, 0.2);
+    .category-icon span {
+        font-size: 2rem;
+        color: var(--brt-gold-dark);
+        transition: all 0.4s ease;
     }
 
-        .category-card:hover .category-icon span {
-            color: var(--brt-gold);
-            transform: scale(1.1);
-        }
+    .category-card:hover .category-icon {
+        background: rgba(212, 175, 55, 0.25);
+        border-color: var(--brt-gold);
+        transform: scale(1.08) rotate(-3deg);
+    }
 
-    /* Text Toggles on Hover */
+    .category-card:hover .category-icon span {
+        color: var(--brt-gold);
+    }
+
     .category-card h5 {
         font-weight: 700;
+        font-size: 1.25rem;
         margin-bottom: 0.8rem;
         color: var(--dark-bg);
         transition: color 0.3s ease;
@@ -130,48 +143,69 @@
         color: #94A3B8;
     }
 
-    /* QA Process - Modern Horizontal Connected Pipeline Layout */
+    /* Pipeline Workflow Layout */
     .qa-section-title {
         font-weight: 800;
-        font-size: 2.2rem;
+        font-size: clamp(1.8rem, 4vw, 2.4rem);
         color: var(--dark-bg);
-        margin-bottom: 3.5rem;
+        margin-bottom: 3rem;
     }
 
     .pipeline-wrapper {
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
-        gap: 2rem;
+        gap: 1.5rem;
+        position: relative;
     }
 
     .pipeline-node {
         flex: 1;
-        min-width: 220px;
-        max-width: 260px;
+        min-width: 200px;
+        max-width: 240px;
         text-align: center;
         position: relative;
+        background: #FFFFFF;
+        border: 1px solid var(--border-color);
+        padding: 1.8rem 1.2rem;
+        border-radius: 20px;
+        transition: all 0.3s ease;
+    }
+
+    .pipeline-node:hover {
+        border-color: var(--brt-gold);
+        box-shadow: var(--glow-shadow);
+        transform: translateY(-5px);
     }
 
     .info-icon-circle {
-        width: 80px;
-        height: 80px;
-        background: #F8FAFC;
-        border: 2px dashed rgba(212, 175, 55, 0.4);
+        width: 70px;
+        height: 70px;
+        background: linear-gradient(135deg, #FBF5E8 0%, #FFFFFF 100%);
+        border: 2px dashed var(--brt-gold);
         border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
-        margin: 0 auto 1.5rem;
+        margin: 0 auto 1.2rem;
         position: relative;
-        transition: all 0.3s ease;
-        z-index: 2;
+        transition: all 0.4s ease;
     }
 
-        .info-icon-circle span {
-            font-size: 2.2rem;
-            color: var(--brt-gold-dark);
-        }
+    .info-icon-circle span {
+        font-size: 2.2rem;
+        color: var(--brt-gold-dark);
+    }
+
+    .pipeline-node:hover .info-icon-circle {
+        background: var(--dark-bg);
+        border-style: solid;
+        transform: rotate(360deg);
+    }
+
+    .pipeline-node:hover .info-icon-circle span {
+        color: var(--brt-gold);
+    }
 
     .pipeline-node h5 {
         font-weight: 700;
@@ -184,27 +218,75 @@
         font-size: 0.88rem;
         color: var(--text-muted);
         line-height: 1.5;
+        margin: 0;
     }
 
-    /* Modern CTA Button */
+    /* CTA Button Design */
     .btn-brt-gold {
         background: linear-gradient(135deg, var(--brt-gold) 0%, var(--brt-gold-dark) 100%);
         color: #FFFFFF !important;
-        font-weight: 700;
-        padding: 14px 36px;
+        font-weight: 800;
+        padding: 16px 42px;
         border-radius: 50px;
         border: none;
         letter-spacing: 0.5px;
-        box-shadow: 0 10px 20px rgba(212, 175, 55, 0.25);
-        transition: all 0.3s ease;
+        box-shadow: 0 12px 25px rgba(212, 175, 55, 0.3);
+        transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        display: inline-block;
+        text-decoration: none;
     }
 
-        .btn-brt-gold:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 30px rgba(212, 175, 55, 0.4);
+    .btn-brt-gold:hover {
+        transform: translateY(-4px) scale(1.02);
+        box-shadow: 0 18px 35px rgba(212, 175, 55, 0.45);
+    }
+
+    /* ==========================================================
+       📱 MOBILE APP HORIZONTAL SCROLL ENGINE (ULTRA SMOOTH)
+       ========================================================== */
+    @@media (max-width: 991.98px) {
+        .premium-hero {
+            padding: 50px 15px 35px;
         }
+
+        .brt-mobile-scroll {
+            display: flex !important;
+            flex-direction: row !important;
+            flex-wrap: nowrap !important;
+            overflow-x: auto !important;
+            overflow-y: hidden !important;
+            -webkit-overflow-scrolling: touch !important;
+            scroll-snap-type: x mandatory !important;
+            padding: 15px 5px 25px 5px !important;
+            gap: 15px !important;
+            width: 100% !important;
+            box-sizing: border-box !important;
+        }
+
+        .brt-mobile-scroll::-webkit-scrollbar {
+            display: none !important; /* Visual scrollbar hide */
+        }
+
+        .brt-mobile-card {
+            flex: 0 0 85% !important;
+            max-width: 85% !important;
+            width: 85% !important;
+            scroll-snap-align: center !important;
+            box-sizing: border-box !important;
+        }
+
+        .pipeline-node {
+            max-width: 100%;
+        }
+
+        .btn-brt-gold {
+            width: 100%;
+            text-align: center;
+        }
+    }
 </style>
 
+<!-- Hero Section -->
 <section class="page-hero text-center premium-hero">
     <div class="hero-badge">
         <span class="lang-en-text">B2B Wholesale Partner</span>
@@ -220,10 +302,10 @@
     </p>
 </section>
 
-<div class="container my-5">
-    <!-- Grid System with Hover Effects -->
-    <div class="row g-4 innovative-grid">
-        <div class="col-lg-4 col-md-6 fade-in-up">
+<div class="container my-4 my-md-5">
+    <!-- Grid System with Hover Effects & Mobile Carousel -->
+    <div class="row g-4 innovative-grid brt-mobile-scroll">
+        <div class="col-lg-4 col-md-6 brt-mobile-card fade-in-up">
             <div class="category-card h-100">
                 <div class="category-icon"><span class="material-symbols-outlined">trending_up</span></div>
                 <h5>
@@ -236,7 +318,7 @@
                 </p>
             </div>
         </div>
-        <div class="col-lg-4 col-md-6 fade-in-up">
+        <div class="col-lg-4 col-md-6 brt-mobile-card fade-in-up">
             <div class="category-card h-100">
                 <div class="category-icon"><span class="material-symbols-outlined">workspace_premium</span></div>
                 <h5>
@@ -249,7 +331,7 @@
                 </p>
             </div>
         </div>
-        <div class="col-lg-4 col-md-6 fade-in-up">
+        <div class="col-lg-4 col-md-6 brt-mobile-card fade-in-up">
             <div class="category-card h-100">
                 <div class="category-icon"><span class="material-symbols-outlined">inventory_2</span></div>
                 <h5>
@@ -262,7 +344,7 @@
                 </p>
             </div>
         </div>
-        <div class="col-lg-4 col-md-6 fade-in-up">
+        <div class="col-lg-4 col-md-6 brt-mobile-card fade-in-up">
             <div class="category-card h-100">
                 <div class="category-icon"><span class="material-symbols-outlined">handshake</span></div>
                 <h5>
@@ -275,7 +357,7 @@
                 </p>
             </div>
         </div>
-        <div class="col-lg-4 col-md-6 fade-in-up">
+        <div class="col-lg-4 col-md-6 brt-mobile-card fade-in-up">
             <div class="category-card h-100">
                 <div class="category-icon"><span class="material-symbols-outlined">forum</span></div>
                 <h5>
@@ -288,7 +370,7 @@
                 </p>
             </div>
         </div>
-        <div class="col-lg-4 col-md-6 fade-in-up">
+        <div class="col-lg-4 col-md-6 brt-mobile-card fade-in-up">
             <div class="category-card h-100">
                 <div class="category-icon"><span class="material-symbols-outlined">verified</span></div>
                 <h5>
@@ -311,8 +393,8 @@
         <span class="lang-ta-text">எங்கள் தரக் கட்டுப்பாட்டு செயல்முறை</span>
     </h3>
 
-    <div class="pipeline-wrapper my-4">
-        <div class="pipeline-node fade-in-up">
+    <div class="pipeline-wrapper brt-mobile-scroll my-4">
+        <div class="pipeline-node brt-mobile-card fade-in-up">
             <div class="info-icon-circle"><span class="material-symbols-outlined">agriculture</span></div>
             <h5>
                 <span class="lang-en-text">Fresh Sourcing</span>
@@ -324,7 +406,7 @@
             </p>
         </div>
 
-        <div class="pipeline-node fade-in-up">
+        <div class="pipeline-node brt-mobile-card fade-in-up">
             <div class="info-icon-circle"><span class="material-symbols-outlined">cleaning_services</span></div>
             <h5>
                 <span class="lang-en-text">Hygienic Handling</span>
@@ -336,7 +418,7 @@
             </p>
         </div>
 
-        <div class="pipeline-node fade-in-up">
+        <div class="pipeline-node brt-mobile-card fade-in-up">
             <div class="info-icon-circle"><span class="material-symbols-outlined">fact_check</span></div>
             <h5>
                 <span class="lang-en-text">Quality Inspection</span>
@@ -348,7 +430,7 @@
             </p>
         </div>
 
-        <div class="pipeline-node fade-in-up">
+        <div class="pipeline-node brt-mobile-card fade-in-up">
             <div class="info-icon-circle"><span class="material-symbols-outlined">warehouse</span></div>
             <h5>
                 <span class="lang-en-text">Proper Storage</span>
@@ -360,7 +442,7 @@
             </p>
         </div>
 
-        <div class="pipeline-node fade-in-up">
+        <div class="pipeline-node brt-mobile-card fade-in-up">
             <div class="info-icon-circle"><span class="material-symbols-outlined">local_shipping</span></div>
             <h5>
                 <span class="lang-en-text">Timely Delivery</span>
