@@ -53,8 +53,15 @@
         line-height: 1.2;
     }
 
+    /* Desktop Grid System */
+    .innovative-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1.5rem;
+    }
+
     /* Feature Cards Design */
-    .innovative-grid .category-card {
+    .category-card {
         background: var(--card-bg);
         border: 1px solid var(--border-color);
         border-radius: 24px;
@@ -64,9 +71,11 @@
         overflow: hidden;
         z-index: 1;
         box-shadow: 0 10px 30px rgba(15, 23, 42, 0.03);
+        height: 100%;
+        box-sizing: border-box;
     }
 
-    .innovative-grid .category-card::before {
+    .category-card::before {
         content: '';
         position: absolute;
         top: 0;
@@ -79,13 +88,13 @@
         transition: opacity 0.4s ease;
     }
 
-    .innovative-grid .category-card:hover {
+    .category-card:hover {
         transform: translateY(-8px);
         box-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.25);
         border-color: transparent;
     }
 
-    .innovative-grid .category-card:hover::before {
+    .category-card:hover::before {
         opacity: 1;
     }
 
@@ -132,6 +141,7 @@
         font-size: 0.95rem;
         line-height: 1.6;
         transition: color 0.3s ease;
+        margin: 0;
     }
 
     .category-card:hover h5 {
@@ -142,7 +152,7 @@
         color: #94A3B8;
     }
 
-    /* Pipeline Desktop Layout */
+    /* Desktop QA Pipeline Container */
     .qa-section-title {
         font-weight: 800;
         font-size: clamp(1.8rem, 4vw, 2.4rem);
@@ -169,6 +179,7 @@
         padding: 1.8rem 1.2rem;
         border-radius: 20px;
         transition: all 0.3s ease;
+        box-sizing: border-box;
     }
 
     .pipeline-node:hover {
@@ -241,14 +252,14 @@
     }
 
     /* ==========================================================
-       📱 MOBILE APP HORIZONTAL SCROLL ENGINE (100% FIXED)
+       📱 ULTRA FORCE MOBILE HORIZONTAL SCROLL ENGINE
        ========================================================== */
-    @@media (max-width: 991.98px) {
+    @media (max-width: 991.98px) {
         .premium-hero {
             padding: 50px 15px 35px;
         }
 
-        /* Mobile Scroll Engine Container Override */
+        /* 1. Force Scroll Container */
         .brt-mobile-scroll {
             display: flex !important;
             flex-direction: row !important;
@@ -260,27 +271,31 @@
             padding: 15px 15px 25px 15px !important;
             gap: 16px !important;
             width: 100% !important;
+            max-width: 100vw !important;
+            box-sizing: border-box !important;
             margin-left: 0 !important;
             margin-right: 0 !important;
-            box-sizing: border-box !important;
         }
 
         /* Hide Scrollbar */
         .brt-mobile-scroll::-webkit-scrollbar {
             display: none !important;
+            height: 0 !important;
         }
 
-        /* Mobile Slide Card Engine Override */
+        /* 2. Force Fixed Item Cards for Scrolling */
         .brt-mobile-card {
-            flex: 0 0 82% !important;
-            max-width: 82% !important;
-            width: 82% !important;
+            flex: 0 0 80% !important;
+            min-width: 80% !important;
+            max-width: 80% !important;
             scroll-snap-align: start !important;
             box-sizing: border-box !important;
         }
 
-        .pipeline-node {
-            max-width: 82% !important;
+        /* Override Pipeline Node Specific Constraints in Mobile */
+        .pipeline-wrapper .pipeline-node {
+            min-width: 80% !important;
+            max-width: 80% !important;
         }
 
         .btn-brt-gold {
@@ -307,10 +322,10 @@
 </section>
 
 <div class="container my-4 my-md-5">
-    <!-- Grid System with Hover Effects & Mobile Horizontal Carousel -->
-    <div class="row g-4 innovative-grid brt-mobile-scroll">
-        <div class="col-lg-4 col-md-6 brt-mobile-card fade-in-up">
-            <div class="category-card h-100">
+    <!-- Grid System with Mobile Horizontal Carousel -->
+    <div class="innovative-grid brt-mobile-scroll">
+        <div class="brt-mobile-card fade-in-up">
+            <div class="category-card">
                 <div class="category-icon"><span class="material-symbols-outlined">trending_up</span></div>
                 <h5>
                     <span class="lang-en-text">Live Market Pricing</span>
@@ -322,8 +337,8 @@
                 </p>
             </div>
         </div>
-        <div class="col-lg-4 col-md-6 brt-mobile-card fade-in-up">
-            <div class="category-card h-100">
+        <div class="brt-mobile-card fade-in-up">
+            <div class="category-card">
                 <div class="category-icon"><span class="material-symbols-outlined">workspace_premium</span></div>
                 <h5>
                     <span class="lang-en-text">Graded Quality</span>
@@ -335,8 +350,8 @@
                 </p>
             </div>
         </div>
-        <div class="col-lg-4 col-md-6 brt-mobile-card fade-in-up">
-            <div class="category-card h-100">
+        <div class="brt-mobile-card fade-in-up">
+            <div class="category-card">
                 <div class="category-icon"><span class="material-symbols-outlined">inventory_2</span></div>
                 <h5>
                     <span class="lang-en-text">Bulk Packing Options</span>
@@ -348,8 +363,8 @@
                 </p>
             </div>
         </div>
-        <div class="col-lg-4 col-md-6 brt-mobile-card fade-in-up">
-            <div class="category-card h-100">
+        <div class="brt-mobile-card fade-in-up">
+            <div class="category-card">
                 <div class="category-icon"><span class="material-symbols-outlined">handshake</span></div>
                 <h5>
                     <span class="lang-en-text">25+ Years of Trust</span>
@@ -361,8 +376,8 @@
                 </p>
             </div>
         </div>
-        <div class="col-lg-4 col-md-6 brt-mobile-card fade-in-up">
-            <div class="category-card h-100">
+        <div class="brt-mobile-card fade-in-up">
+            <div class="category-card">
                 <div class="category-icon"><span class="material-symbols-outlined">forum</span></div>
                 <h5>
                     <span class="lang-en-text">Direct WhatsApp Support</span>
@@ -374,8 +389,8 @@
                 </p>
             </div>
         </div>
-        <div class="col-lg-4 col-md-6 brt-mobile-card fade-in-up">
-            <div class="category-card h-100">
+        <div class="brt-mobile-card fade-in-up">
+            <div class="category-card">
                 <div class="category-icon"><span class="material-symbols-outlined">verified</span></div>
                 <h5>
                     <span class="lang-en-text">Admin-Verified Orders</span>
