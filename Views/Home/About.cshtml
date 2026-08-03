@@ -2,7 +2,7 @@
     ViewData["Title"] = "About Us";
 }
 
-<!-- Fonts & Material Icons CDN (Ensure these are in your Shared Layout) -->
+<!-- Fonts & Material Icons CDN -->
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Cinzel:wght@600;700;800&display=swap" rel="stylesheet">
 
 <style>
@@ -21,12 +21,13 @@
         font-family: 'Plus Jakarta Sans', sans-serif;
         color: var(--text-main);
         background-color: #FAFAFA;
+        overflow-x: hidden;
     }
 
-    /* Innovative Sacred Symbol Wrapper */
+    /* Sacred Symbol Wrapper */
     .sacred-band-wrapper {
         background: linear-gradient(180deg, rgba(212, 175, 55, 0.08) 0%, #FFFFFF 100%);
-        padding: 24px 0 16px;
+        padding: 24px 16px 16px;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -50,96 +51,76 @@
         letter-spacing: 3px;
         margin: 0;
         text-transform: uppercase;
+        text-align: center;
     }
 
     @@keyframes pulseGlow {
-        0% {
-            transform: scale(1);
-            filter: drop-shadow(0 2px 4px rgba(212, 175, 55, 0.2));
-        }
-
-        50% {
-            transform: scale(1.06);
-            filter: drop-shadow(0 4px 12px rgba(212, 175, 55, 0.4));
-        }
-
-        100% {
-            transform: scale(1);
-            filter: drop-shadow(0 2px 4px rgba(212, 175, 55, 0.2));
-        }
+        0% { transform: scale(1); filter: drop-shadow(0 2px 4px rgba(212, 175, 55, 0.2)); }
+        50% { transform: scale(1.06); filter: drop-shadow(0 4px 12px rgba(212, 175, 55, 0.4)); }
+        100% { transform: scale(1); filter: drop-shadow(0 2px 4px rgba(212, 175, 55, 0.2)); }
     }
 
     /* Enhanced About Hero Layout */
     .about-hero {
-        padding: 50px 0 40px;
+        padding: 40px 16px;
         background: radial-gradient(circle at center, rgba(212, 175, 55, 0.06) 0%, transparent 70%);
         position: relative;
     }
 
     .about-logo-badge-giant {
-        max-width: 220px;
+        max-width: 180px;
         width: 100%;
         border-radius: 28px;
-        box-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.18);
-        border: 5px solid #FFFFFF;
-        margin-bottom: 2rem;
+        box-shadow: 0 20px 40px -10px rgba(15, 23, 42, 0.15);
+        border: 4px solid #FFFFFF;
+        margin-bottom: 1.5rem;
         transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
-        .about-logo-badge-giant:hover {
-            transform: scale(1.06) translateY(-4px);
-            box-shadow: 0 35px 60px -10px rgba(212, 175, 55, 0.25);
-        }
+    .about-logo-badge-giant:hover {
+        transform: scale(1.05) translateY(-4px);
+        box-shadow: 0 30px 50px -10px rgba(212, 175, 55, 0.25);
+    }
 
     .about-hero-tagline {
         font-weight: 800;
-        font-size: 2.8rem;
+        font-size: 2.2rem;
         letter-spacing: -1px;
         color: var(--dark-bg);
         margin-bottom: 0.5rem;
     }
 
-    /* High-End Monochromatic Luxury Typographic Ribbon */
+    /* Monochromatic Ribbon */
     .luxury-motto-ribbon {
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        gap: 20px;
+        gap: 16px;
         margin: 1.2rem auto;
-        padding: 14px 36px;
+        padding: 12px 28px;
         background: linear-gradient(135deg, #FFFFFF 0%, #F8FAFC 100%);
-        border: 1px solid rgba(212, 175, 55, 0.2);
+        border: 1px solid rgba(212, 175, 55, 0.25);
         border-radius: 100px;
-        box-shadow: 0 15px 35px rgba(15, 23, 42, 0.04);
-        flex-wrap: wrap;
+        box-shadow: 0 10px 25px rgba(15, 23, 42, 0.04);
     }
 
     .luxury-motto-text {
         font-family: 'Cinzel', serif;
-        font-size: 1.35rem;
+        font-size: 1.1rem;
         font-weight: 700;
-        letter-spacing: 2px;
-        color: #1E293B; /* Monochromatic Rich Slate Dark Tone */
+        letter-spacing: 1.5px;
+        color: #1E293B;
         text-transform: uppercase;
-        text-shadow: 0 1px 2px rgba(0,0,0,0.05);
-        transition: color 0.3s ease;
-    }
-
-    .luxury-motto-ribbon:hover .luxury-motto-text {
-        color: #0F172A; /* Refined focus shift */
     }
 
     .luxury-motto-divider {
         color: var(--brt-gold);
-        font-size: 1.1rem;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
+        font-size: 1rem;
     }
 
-    /* Asymmetric Section Intro */
+    /* Headings & Eyebrows */
     .hero-eyebrow {
-        font-size: 0.85rem;
+        font-size: 0.8rem;
         font-weight: 700;
         letter-spacing: 1.5px;
         display: inline-flex;
@@ -148,190 +129,184 @@
         text-transform: uppercase;
     }
 
-        .hero-eyebrow span {
-            font-size: 1.2rem;
-        }
-
     .section-title-premium {
         font-weight: 800;
-        font-size: 2.5rem;
+        font-size: 2.2rem;
         color: var(--dark-bg);
         letter-spacing: -0.5px;
     }
 
-    /* Interactive Stat Stack Layout */
+    /* Stat Cards */
     .stat-card-stack {
         display: flex;
         flex-direction: column;
-        gap: 1.2rem;
+        gap: 1rem;
     }
 
     .stat-premium-box {
         background: #FFFFFF;
         border-radius: 20px;
-        padding: 1.8rem;
+        padding: 1.5rem;
         border: 1px solid var(--border-color);
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
         display: flex;
         align-items: center;
         justify-content: space-between;
-        transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        transition: all 0.3s ease;
     }
 
-        .stat-premium-box:hover {
-            transform: translateX(-8px);
-            border-color: var(--brt-gold);
-            box-shadow: 0 12px 24px rgba(212, 175, 55, 0.1);
-        }
+    .stat-premium-box:hover {
+        transform: translateY(-3px);
+        border-color: var(--brt-gold);
+        box-shadow: 0 12px 24px rgba(212, 175, 55, 0.12);
+    }
 
-        .stat-premium-box .stat-num {
-            font-size: 2.5rem;
-            font-weight: 800;
-            color: var(--dark-bg);
-            background: linear-gradient(135deg, var(--dark-bg) 0%, var(--brt-gold-dark) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+    .stat-premium-box .stat-num {
+        font-size: 2.2rem;
+        font-weight: 800;
+        color: var(--dark-bg);
+        background: linear-gradient(135deg, var(--dark-bg) 0%, var(--brt-gold-dark) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
 
-        .stat-premium-box .stat-label {
-            font-weight: 600;
-            color: var(--text-muted);
-            text-align: right;
-            font-size: 1rem;
-        }
+    .stat-premium-box .stat-label {
+        font-weight: 600;
+        color: var(--text-muted);
+        text-align: right;
+        font-size: 0.95rem;
+    }
 
-    /* Modern Chronological Timeline Track */
+    /* Modern Timeline Track */
     .modern-timeline {
         position: relative;
-        padding: 2rem 0;
+        padding: 1.5rem 0;
     }
 
-        .modern-timeline::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(90deg, rgba(212, 175, 55, 0.1) 0%, var(--brt-gold) 50%, rgba(15, 23, 42, 0.1) 100%);
-            transform: translateY(-50%);
-            z-index: 1;
-        }
+    .modern-timeline::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: linear-gradient(90deg, rgba(212, 175, 55, 0.1) 0%, var(--brt-gold) 50%, rgba(15, 23, 42, 0.1) 100%);
+        transform: translateY(-50%);
+        z-index: 1;
+    }
 
     .timeline-node-premium {
         background: #FFFFFF;
         border: 1px solid var(--border-color);
-        border-radius: 16px;
-        padding: 1.5rem 1rem;
+        border-radius: 18px;
+        padding: 1.2rem 1rem;
         text-align: center;
         position: relative;
         z-index: 2;
-        box-shadow: 0 10px 20px rgba(0,0,0,0.03);
+        box-shadow: 0 8px 16px rgba(0,0,0,0.03);
         transition: all 0.3s ease;
+        height: 100%;
     }
 
-        .timeline-node-premium:hover {
-            transform: translateY(-6px);
-            border-color: var(--dark-bg);
-            box-shadow: 0 15px 30px rgba(15, 23, 42, 0.08);
-        }
+    .timeline-node-premium:hover {
+        transform: translateY(-5px);
+        border-color: var(--brt-gold);
+        box-shadow: 0 14px 28px rgba(212, 175, 55, 0.12);
+    }
 
     .node-year {
-        font-size: 1.3rem;
+        font-size: 1.25rem;
         font-weight: 800;
         color: var(--brt-gold-dark);
-        margin-bottom: 4px;
+        margin-bottom: 2px;
     }
 
     .node-dot {
-        width: 12px;
-        height: 12px;
+        width: 10px;
+        height: 10px;
         background: var(--dark-bg);
         border-radius: 50%;
-        margin: 8px auto;
+        margin: 6px auto;
         border: 2px solid #FFFFFF;
-        box-shadow: 0 0 0 4px rgba(15,23,42,0.1);
+        box-shadow: 0 0 0 3px rgba(15,23,42,0.1);
     }
 
     .node-desc {
-        font-size: 0.88rem;
+        font-size: 0.85rem;
         font-weight: 600;
         color: var(--text-main);
     }
 
-    /* Mission/Vision Split Cards */
+    /* Mission / Vision Cards */
     .mv-container-premium .mv-card-new {
         background: #FFFFFF;
-        border-radius: 24px;
-        padding: 3rem 2.5rem;
+        border-radius: 20px;
+        padding: 2.2rem 1.8rem;
         border: 1px solid var(--border-color);
-        min-height: 220px;
         height: 100%;
-        transition: all 0.4s ease;
+        transition: all 0.3s ease;
         position: relative;
         overflow: hidden;
     }
 
-        .mv-container-premium .mv-card-new::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 4px;
-            height: 100%;
-            background: var(--brt-gold);
-            transition: width 0.3s ease;
-            z-index: 1;
-        }
+    .mv-container-premium .mv-card-new::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 4px;
+        height: 100%;
+        background: var(--brt-gold);
+        transition: width 0.3s ease;
+    }
 
-        .mv-container-premium .mv-card-new:hover::after {
-            width: 8px;
-        }
+    .mv-container-premium .mv-card-new:hover::after {
+        width: 8px;
+    }
 
     .mv-card-new span.material-symbols-outlined {
-        font-size: 2.5rem;
+        font-size: 2.2rem;
         color: var(--dark-bg);
-        margin-bottom: 1.5rem;
-        display: inline-block;
+        margin-bottom: 1rem;
     }
 
     .mv-card-new h4 {
         font-weight: 700;
-        margin-bottom: 1rem;
+        margin-bottom: 0.8rem;
         color: var(--dark-bg);
+        font-size: 1.3rem;
     }
 
     .mv-card-new p {
         color: var(--text-muted);
-        font-size: 1rem;
+        font-size: 0.95rem;
         line-height: 1.6;
         margin: 0;
     }
 
-    /* Fixed Layout for Trust Rows */
+    /* Trust Box Layout */
     .trust-box-premium {
         background: #FFFFFF;
-        padding: 2.2rem;
-        border-radius: 24px;
+        padding: 1.8rem;
+        border-radius: 20px;
         border: 1px solid var(--border-color);
         display: flex;
-        gap: 1.5rem;
-        min-height: 150px;
+        gap: 1.2rem;
         height: 100%;
-        transition: all 0.35s ease;
+        transition: all 0.3s ease;
     }
 
-        .trust-box-premium:hover {
-            box-shadow: 0 20px 35px rgba(15, 23, 42, 0.05);
-            transform: translateY(-5px);
-            border-color: rgba(212, 175, 55, 0.4);
-        }
+    .trust-box-premium:hover {
+        box-shadow: 0 15px 30px rgba(15, 23, 42, 0.06);
+        transform: translateY(-4px);
+        border-color: rgba(212, 175, 55, 0.4);
+    }
 
     .trust-icon-wrapper {
-        width: 58px;
-        height: 58px;
+        width: 50px;
+        height: 50px;
         background: rgba(212, 175, 55, 0.08);
-        border-radius: 16px;
+        border-radius: 14px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -343,63 +318,64 @@
         background: var(--dark-bg);
     }
 
-        .trust-box-premium:hover .trust-icon-wrapper span {
-            color: #FFFFFF;
-        }
+    .trust-box-premium:hover .trust-icon-wrapper span {
+        color: #FFFFFF;
+    }
 
     .trust-icon-wrapper span {
-        font-size: 1.8rem;
+        font-size: 1.6rem;
         color: var(--brt-gold-dark);
     }
 
     .trust-box-premium h5 {
         font-weight: 700;
         color: var(--dark-bg);
-        margin-bottom: 0.6rem;
+        margin-bottom: 0.4rem;
+        font-size: 1.1rem;
     }
 
     .trust-box-premium p {
-        font-size: 0.94rem;
+        font-size: 0.9rem;
         color: var(--text-muted);
-        line-height: 1.6;
+        line-height: 1.5;
         margin: 0;
     }
 
-    /* Innovative Supply Chain Grading Cards */
+    /* Mandi Process Cards */
     .process-card {
         background: #FFFFFF;
         border: 1px solid var(--border-color);
-        border-radius: 24px;
-        padding: 2rem;
+        border-radius: 20px;
+        padding: 1.8rem;
         height: 100%;
         position: relative;
         transition: all 0.3s ease;
     }
 
-        .process-card:hover {
-            border-color: var(--brt-gold);
-            box-shadow: 0 15px 30px rgba(212, 175, 55, 0.08);
-            transform: translateY(-4px);
-        }
+    .process-card:hover {
+        border-color: var(--brt-gold);
+        box-shadow: 0 12px 25px rgba(212, 175, 55, 0.1);
+        transform: translateY(-4px);
+    }
 
     .process-badge {
         position: absolute;
-        top: -15px;
-        left: 25px;
+        top: -12px;
+        left: 20px;
         background: var(--dark-bg);
         color: #FFFFFF;
         font-weight: 800;
-        padding: 4px 14px;
+        padding: 3px 12px;
         border-radius: 50px;
-        font-size: 0.8rem;
+        font-size: 0.75rem;
         border: 2px solid #FFFFFF;
     }
 
     .process-card h4 {
-        font-size: 1.15rem;
+        font-size: 1.1rem;
         font-weight: 700;
         color: var(--dark-bg);
-        margin: 0.8rem 0 0.5rem 0;
+        margin: 0.8rem 0 0.4rem 0;
     }
 
     .process-card p {
@@ -414,57 +390,60 @@
         background: linear-gradient(135deg, var(--brt-gold) 0%, var(--brt-gold-dark) 100%);
         color: #FFFFFF !important;
         font-weight: 700;
-        padding: 14px 36px;
+        padding: 12px 32px;
         border-radius: 50px;
         border: none;
-        box-shadow: 0 10px 20px rgba(212, 175, 55, 0.2);
+        box-shadow: 0 8px 18px rgba(212, 175, 55, 0.25);
         transition: all 0.3s ease;
+        display: inline-block;
     }
 
-        .btn-brt-gold:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 15px 25px rgba(212, 175, 55, 0.35);
-        }
+    .btn-brt-gold:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 22px rgba(212, 175, 55, 0.4);
+    }
 
     .btn-brt-outline-dark {
         background: transparent;
         color: var(--dark-bg) !important;
         font-weight: 700;
-        padding: 14px 36px;
+        padding: 12px 32px;
         border-radius: 50px;
         border: 2px solid var(--dark-bg);
         transition: all 0.3s ease;
+        display: inline-block;
     }
 
-        .btn-brt-outline-dark:hover {
-            background: var(--dark-bg);
-            color: #FFFFFF !important;
-            transform: translateY(-2px);
+    .btn-brt-outline-dark:hover {
+        background: var(--dark-bg);
+        color: #FFFFFF !important;
+        transform: translateY(-2px);
+    }
+
+    /* ==========================================================
+       📱 INNOVATIVE MOBILE APP STYLING (max-width: 767.88px)
+       ========================================================== */
+    @@media (max-width: 767.88px) {
+        .about-hero {
+            padding: 30px 12px 20px;
         }
 
-    @@media (max-width: 768px) {
-        .modern-timeline::before {
-            display: none;
+        .about-logo-badge-giant {
+            max-width: 140px;
+            border-radius: 20px;
+            margin-bottom: 1rem;
         }
 
-        .modern-timeline .row {
-            gap: 1rem;
-        }
-
-        .stat-premium-box:hover {
-            transform: none;
-        }
-
-        .trust-box-premium {
-            min-height: auto;
+        .about-hero-tagline {
+            font-size: 1.75rem;
         }
 
         .luxury-motto-ribbon {
             flex-direction: column;
-            gap: 12px;
-            border-radius: 24px;
-            padding: 20px 24px;
-            width: 90%;
+            gap: 6px;
+            border-radius: 16px;
+            padding: 12px 16px;
+            width: 100%;
         }
 
         .luxury-motto-divider {
@@ -472,8 +451,56 @@
         }
 
         .luxury-motto-text {
-            font-size: 1.15rem;
+            font-size: 0.95rem;
             letter-spacing: 1px;
+        }
+
+        .section-title-premium {
+            font-size: 1.6rem;
+        }
+
+        /* Mobile Native App Touch Horizontal Scroll for Timeline & Mandi Workflow */
+        .mobile-app-scroll-container {
+            display: flex;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            gap: 12px;
+            padding: 10px 4px 20px 4px;
+            scrollbar-width: none;
+        }
+        
+        .mobile-app-scroll-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        .mobile-app-scroll-item {
+            flex: 0 0 82%;
+            scroll-snap-align: center;
+        }
+
+        .modern-timeline::before {
+            display: none;
+        }
+
+        .stat-premium-box {
+            padding: 1.2rem;
+        }
+
+        .stat-premium-box .stat-num {
+            font-size: 1.8rem;
+        }
+
+        .trust-box-premium {
+            padding: 1.2rem;
+            gap: 1rem;
+        }
+
+        .btn-brt-gold, .btn-brt-outline-dark {
+            width: 100%;
+            margin: 6px 0 !important;
+            text-align: center;
         }
     }
 </style>
@@ -484,7 +511,7 @@
     <h1 class="sacred-text-below">ॐ Om Shanti ॐ</h1>
 </div>
 
-<!-- ===== Re-Engineered Hero Layout (Mandi Text Removed & Monochromatic Gold Layout Applied) ===== -->
+<!-- ===== Re-Engineered Hero Layout ===== -->
 <section class="page-hero about-hero text-center">
     <div class="container">
         <img src="/images/brt-logo.jpeg" alt="B Raj Traders Logo" class="about-logo-badge giant about-logo-badge-giant fade-in-up" />
@@ -510,17 +537,17 @@
     </div>
 </section>
 
-<div class="container my-5">
+<div class="container my-4 my-md-5">
 
     <!-- ===== Our Story ===== -->
-    <div class="row g-5 align-items-center info-section mb-5">
+    <div class="row g-4 g-lg-5 align-items-center info-section mb-5">
         <div class="col-lg-7 col-md-12 fade-left">
             <span class="hero-eyebrow" style="color:var(--brt-gold)">
                 <span class="material-symbols-outlined">history_edu</span>
                 <span class="lang-en-text">OUR STORY</span>
                 <span class="lang-ta-text">எங்கள் வரலாறு</span>
             </span>
-            <h3 class="section-title-premium mt-2 mb-4">
+            <h3 class="section-title-premium mt-2 mb-3 mb-md-4">
                 <span class="lang-en-text">A Legacy Built on Trust</span>
                 <span class="lang-ta-text">நம்பிக்கையின் மீது கட்டப்பட்ட பாரம்பரியம்</span>
             </h3>
@@ -597,9 +624,9 @@
     </div>
 
     <!-- ===== Journey Timeline ===== -->
-    <div class="modern-timeline my-5 pt-4 pb-5">
-        <div class="row g-3 justify-content-center">
-            <div class="col-lg-3 col-md-6">
+    <div class="modern-timeline my-4 my-md-5 pt-3 pb-4">
+        <div class="row g-3 justify-content-center mobile-app-scroll-container">
+            <div class="col-lg-3 col-md-6 mobile-app-scroll-item">
                 <div class="timeline-node-premium">
                     <div class="node-year">2000</div>
                     <div class="node-dot"></div>
@@ -609,7 +636,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6">
+            <div class="col-lg-3 col-md-6 mobile-app-scroll-item">
                 <div class="timeline-node-premium">
                     <div class="node-year">2012</div>
                     <div class="node-dot"></div>
@@ -619,7 +646,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6">
+            <div class="col-lg-3 col-md-6 mobile-app-scroll-item">
                 <div class="timeline-node-premium">
                     <div class="node-year">2018</div>
                     <div class="node-dot"></div>
@@ -629,7 +656,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6">
+            <div class="col-lg-3 col-md-6 mobile-app-scroll-item">
                 <div class="timeline-node-premium">
                     <div class="node-year">
                         <span class="lang-en-text">Today</span>
@@ -645,10 +672,10 @@
         </div>
     </div>
 
-    <hr class="my-5 opacity-25" />
+    <hr class="my-4 my-md-5 opacity-25" />
 
     <!-- ===== Mission / Vision ===== -->
-    <div class="row g-4 info-section mv-container-premium my-5">
+    <div class="row g-4 info-section mv-container-premium my-4 my-md-5">
         <div class="col-md-6 fade-in-up">
             <div class="mv-card-new">
                 <span class="material-symbols-outlined">flag</span>
@@ -677,22 +704,22 @@
         </div>
     </div>
 
-    <hr class="my-5 opacity-25" />
+    <hr class="my-4 my-md-5 opacity-25" />
 
     <!-- ===== Why Trust Us ===== -->
-    <div class="text-center mb-5 fade-in-up">
+    <div class="text-center mb-4 mb-md-5 fade-in-up">
         <span class="hero-eyebrow" style="color:var(--brt-gold)">
             <span class="material-symbols-outlined">verified_user</span>
             <span class="lang-en-text">WHY DEALERS TRUST US</span>
             <span class="lang-ta-text">டீலர்கள் ஏன் எங்களை நம்புகிறார்கள்</span>
         </span>
-        <h3 class="fw-bold mt-2">
+        <h3 class="fw-bold mt-2 section-title-premium" style="font-size: 1.8rem;">
             <span class="lang-en-text">Core Commitments To The Trade</span>
             <span class="lang-ta-text">வர்த்தகத்திற்கான முக்கிய உறுதிப்பாடுகள்</span>
         </h3>
     </div>
 
-    <div class="row g-4 info-section mb-5">
+    <div class="row g-3 g-md-4 info-section mb-5">
         <div class="col-md-6">
             <div class="trust-box-premium fade-left">
                 <div class="trust-icon-wrapper"><span class="material-symbols-outlined">eco</span></div>
@@ -755,23 +782,23 @@
         </div>
     </div>
 
-    <hr class="my-5 opacity-25" />
+    <hr class="my-4 my-md-5 opacity-25" />
 
     <!-- ===== INNOVATIVE MANDI WORKFLOW TRACK ===== -->
-    <div class="text-center mb-5 fade-in-up">
+    <div class="text-center mb-4 mb-md-5 fade-in-up">
         <span class="hero-eyebrow" style="color:var(--brt-gold)">
             <span class="material-symbols-outlined">published_with_changes</span>
             <span class="lang-en-text">MANDI WORKFLOW</span>
             <span class="lang-ta-text">மண்டி பணிப்பாய்வு</span>
         </span>
-        <h3 class="fw-bold mt-2">
+        <h3 class="fw-bold mt-2 section-title-premium" style="font-size: 1.8rem;">
             <span class="lang-en-text">Our Premium Sourcing &amp; Grading Standards</span>
             <span class="lang-ta-text">எங்கள் உயர்தர சேகரிப்பு &amp; தர வகைப்பாட்டு தரநிலைகள்</span>
         </h3>
     </div>
 
-    <div class="row g-4 justify-content-center mb-5">
-        <div class="col-md-4 col-sm-6">
+    <div class="row g-3 g-md-4 justify-content-center mb-5 mobile-app-scroll-container">
+        <div class="col-md-4 col-sm-6 mobile-app-scroll-item">
             <div class="process-card">
                 <div class="process-badge">01</div>
                 <span class="material-symbols-outlined text-success fs-2 mt-2">agriculture</span>
@@ -785,7 +812,7 @@
                 </p>
             </div>
         </div>
-        <div class="col-md-4 col-sm-6">
+        <div class="col-md-4 col-sm-6 mobile-app-scroll-item">
             <div class="process-card">
                 <div class="process-badge" style="background:var(--brt-gold-dark)">02</div>
                 <span class="material-symbols-outlined text-warning fs-2 mt-2">layers</span>
@@ -799,7 +826,7 @@
                 </p>
             </div>
         </div>
-        <div class="col-md-4 col-sm-6">
+        <div class="col-md-4 col-sm-6 mobile-app-scroll-item">
             <div class="process-card">
                 <div class="process-badge" style="background: #E11D48;">03</div>
                 <span class="material-symbols-outlined text-danger fs-2 mt-2">local_shipping</span>
@@ -815,18 +842,21 @@
         </div>
     </div>
 
-    <div class="text-center mt-5 pt-3 fade-in-up">
-        <p class="text-muted mb-4 fw-medium">
+    <!-- ===== Action Call Footer ===== -->
+    <div class="text-center mt-4 mt-md-5 pt-3 fade-in-up">
+        <p class="text-muted mb-4 fw-medium fs-6">
             <span class="lang-en-text">We supply across India, with direct dedicated supply to Pondicherry and 15+ districts in Tamil Nadu.</span>
             <span class="lang-ta-text">நாங்கள் இந்தியா முழுவதும் வழங்குகிறோம், புதுச்சேரி மற்றும் தமிழ்நாட்டின் 15+ மாவட்டங்களுக்கு நேரடி பிரத்யேக விநியோகத்துடன்.</span>
         </p>
-        <a asp-controller="Order" asp-action="Request" class="btn btn-brt-gold mx-2 my-2 px-4 py-3 text-uppercase fs-7">
-            <span class="lang-en-text">Request Bulk Order</span>
-            <span class="lang-ta-text">மொத்த ஆர்டர் செய்ய</span>
-        </a>
-        <a asp-controller="Contact" asp-action="Index" class="btn btn-brt-outline-dark mx-2 my-2 px-4 py-3 text-uppercase fs-7">
-            <span class="lang-en-text">Contact Us</span>
-            <span class="lang-ta-text">தொடர்பு கொள்ள</span>
-        </a>
+        <div class="d-flex flex-column flex-sm-row justify-content-center gap-2">
+            <a asp-controller="Order" asp-action="Request" class="btn btn-brt-gold px-4 py-3 text-uppercase fs-7">
+                <span class="lang-en-text">Request Bulk Order</span>
+                <span class="lang-ta-text">மொத்த ஆர்டர் செய்ய</span>
+            </a>
+            <a asp-controller="Contact" asp-action="Index" class="btn btn-brt-outline-dark px-4 py-3 text-uppercase fs-7">
+                <span class="lang-en-text">Contact Us</span>
+                <span class="lang-ta-text">தொடர்பு கொள்ள</span>
+            </a>
+        </div>
     </div>
 </div>
