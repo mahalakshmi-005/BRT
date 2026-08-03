@@ -38,7 +38,7 @@
 
     /* NATIVE APP HERO HEADER */
     .app-hero-header {
-        background: #F8FAFC; /* Light background to make pure black title pop */
+        background: #F8FAFC;
         color: #000000;
         padding: 30px 20px 50px 20px;
         border-radius: 0 0 28px 28px;
@@ -50,7 +50,7 @@
         font-family: 'Plus Jakarta Sans', sans-serif;
         font-size: 2.2rem;
         font-weight: 900;
-        color: #000000 !important; /* Pure Black Colour */
+        color: #000000 !important;
         margin: 0;
         letter-spacing: -0.5px;
     }
@@ -499,7 +499,7 @@
                             <div class="products-horizontal-scroll" id="@scrollId">
                                 @foreach (var p in gradeGroup)
                                 {
-                                    @Html.Partial("_ProductCardPartial", p, new ViewDataDictionary(ViewData) { { "TodaysPrices", todaysPrices } })
+                                    @RenderProductCard(p, todaysPrices)
                                 }
                             </div>
                         </div>
@@ -511,7 +511,7 @@
                     <div class="products-horizontal-scroll" id="scroll-@sub.Id">
                         @foreach (var p in sub.Products)
                         {
-                            @Html.Partial("_ProductCardPartial", p, new ViewDataDictionary(ViewData) { { "TodaysPrices", todaysPrices } })
+                            @RenderProductCard(p, todaysPrices)
                         }
                     </div>
                 }
@@ -541,85 +541,97 @@
     </a>
 </nav>
 
-<!-- Inline Helper Partial rendering for Product Card -->
-@helper RenderProductCard(Product p, Dictionary<int, MarketPrice> todaysPrices)
-{
-    var hasPrice = todaysPrices.ContainsKey(p.Id);
-    var mp = hasPrice ? todaysPrices[p.Id] : null;
+<!-- ASP.NET CORE VALID RAZOR FUNCTION HELPER -->
+@functions {
+    public Microsoft.AspNetCore.Mvc.Razor.HelperResult RenderProductCard(Product p, Dictionary<int, MarketPrice> todaysPrices)
+    {
+        return new Microsoft.AspNetCore.Mvc.Razor.HelperResult(async writer =>
+        {
+            var hasPrice = todaysPrices.ContainsKey(p.Id);
+            var mp = hasPrice ? todaysPrices[p.Id] : null;
 
-    <div class="horizontal-product-card-item col-product" data-product-name="@p.Name @p.NameTamil">
-        <div class="product-app-card">
-            <div>
-                <div class="card-media-wrapper">
-                    @if (!string.IsNullOrEmpty(p.ImageUrl))
-                    {
-                        <img src="@p.ImageUrl" alt="@p.Name" loading="lazy" />
-                    }
-                    else
-                    {
-                        <span class="material-symbols-outlined fallback-media-icon">eco</span>
-                    }
+            writer.Write($@"
+            <div class=""horizontal-product-card-item col-product"" data-product-name=""{p.Name} {p.NameTamil}"">
+                <div class=""product-app-card"">
+                    <div>
+                        <div class=""card-media-wrapper"">");
 
-                    @if (mp != null && mp.PriceDifference < 0)
-                    {
-                        <span class="hot-deal-tag">Price Drop</span>
-                    }
+            if (!string.IsNullOrEmpty(p.ImageUrl))
+            {
+                writer.Write($@"<img src=""{p.ImageUrl}"" alt=""{p.Name}"" loading=""lazy"" />");
+            }
+            else
+            {
+                writer.Write(@"<span class=""material-symbols-outlined fallback-media-icon"">eco</span>");
+            }
 
-                    <button class="share-quick-btn" onclick="shareProduct('@p.Name', '@(mp != null ? mp.TodayPrice.ToString("F2") : "N/A")')" title="Share">
-                        <span class="material-symbols-outlined" style="font-size: 16px;">share</span>
-                    </button>
-                </div>
+            if (mp != null && mp.PriceDifference < 0)
+            {
+                writer.Write(@"<span class=""hot-deal-tag"">Price Drop</span>");
+            }
 
-                <h3 class="product-title lang-en-text">@p.Name</h3>
-                <h3 class="product-title lang-ta-text">@(!string.IsNullOrEmpty(p.NameTamil) ? p.NameTamil : p.Name)</h3>
+            writer.Write($@"
+                            <button class=""share-quick-btn"" onclick=""shareProduct('{p.Name}', '{(mp != null ? mp.TodayPrice.ToString("F2") : "N/A")}')"" title=""Share"">
+                                <span class=""material-symbols-outlined"" style=""font-size: 16px;"">share</span>
+                            </button>
+                        </div>
 
-                @if (!string.IsNullOrEmpty(p.Grade))
-                {
-                    <span class="grade-chip">@p.Grade</span>
-                }
+                        <h3 class=""product-title lang-en-text"">{p.Name}</h3>
+                        <h3 class=""product-title lang-ta-text"">{(!string.IsNullOrEmpty(p.NameTamil) ? p.NameTamil : p.Name)}</h3>");
 
-                @if (mp != null)
-                {
-                    var diff = mp.PriceDifference;
-                    var diffClass = diff > 0 ? "up" : diff < 0 ? "down" : "stable";
-                    var diffIcon = diff > 0 ? "north_east" : diff < 0 ? "south_east" : "remove";
+            if (!string.IsNullOrEmpty(p.Grade))
+            {
+                writer.Write($@"<span class=""grade-chip"">{p.Grade}</span>");
+            }
 
-                    <div class="price-ticker-box">
-                        <div class="d-flex align-items-center justify-content-between">
-                            <div>
-                                <span class="price-value">₹@mp.TodayPrice.ToString("F2")</span>
-                                <span class="price-unit">/ KG</span>
-                            </div>
-                            <div class="price-badge @diffClass">
-                                <span class="material-symbols-outlined" style="font-size: 12px;">@diffIcon</span>
-                                <span>₹@Math.Abs(diff).ToString("F2")</span>
-                            </div>
+            if (mp != null)
+            {
+                var diff = mp.PriceDifference;
+                var diffClass = diff > 0 ? "up" : diff < 0 ? "down" : "stable";
+                var diffIcon = diff > 0 ? "north_east" : diff < 0 ? "south_east" : "remove";
+
+                writer.Write($@"
+                <div class=""price-ticker-box"">
+                    <div class=""d-flex align-items-center justify-content-between"">
+                        <div>
+                            <span class=""price-value"">₹{mp.TodayPrice:F2}</span>
+                            <span class=""price-unit"">/ KG</span>
+                        </div>
+                        <div class=""price-badge {diffClass}"">
+                            <span class=""material-symbols-outlined"" style=""font-size: 12px;"">{diffIcon}</span>
+                            <span>₹{Math.Abs(diff):F2}</span>
                         </div>
                     </div>
-                }
-                else
-                {
-                    <div class="price-ticker-box text-center py-2">
-                        <span class="text-muted small fw-bold lang-en-text">Price on Request</span>
-                        <span class="text-muted small fw-bold lang-ta-text">கேட்கப்படும் போது வழங்கப்படும்</span>
-                    </div>
-                }
-            </div>
+                </div>");
+            }
+            else
+            {
+                writer.Write(@"
+                <div class=""price-ticker-box text-center py-2"">
+                    <span class=""text-muted small fw-bold lang-en-text"">Price on Request</span>
+                    <span class=""text-muted small fw-bold lang-ta-text"">கேட்கப்படும் போது வழங்கப்படும்</span>
+                </div>");
+            }
 
-            <div class="action-btn-grid mt-2">
-                <a asp-controller="Catalog" asp-action="Product" asp-route-slug="@p.Slug" class="btn-app btn-app-outline">
-                    <span class="material-symbols-outlined" style="font-size: 15px;">visibility</span>
-                    <span class="lang-en-text">View</span>
-                    <span class="lang-ta-text">விவரம்</span>
-                </a>
-                <a asp-controller="Order" asp-action="Request" asp-route-productId="@p.Id" class="btn-app btn-app-primary">
-                    <span class="material-symbols-outlined" style="font-size: 15px;">shopping_bag</span>
-                    <span class="lang-en-text">Order</span>
-                    <span class="lang-ta-text">ஆர்டர்</span>
-                </a>
-            </div>
-        </div>
-    </div>
+            writer.Write($@"
+                    </div>
+
+                    <div class=""action-btn-grid mt-2"">
+                        <a href=""/Catalog/Product/{p.Slug}"" class=""btn-app btn-app-outline"">
+                            <span class=""material-symbols-outlined"" style=""font-size: 15px;"">visibility</span>
+                            <span class=""lang-en-text"">View</span>
+                            <span class=""lang-ta-text"">விவரம்</span>
+                        </a>
+                        <a href=""/Order/Request?productId={p.Id}"" class=""btn-app btn-app-primary"">
+                            <span class=""material-symbols-outlined"" style=""font-size: 15px;"">shopping_bag</span>
+                            <span class=""lang-en-text"">Order</span>
+                            <span class=""lang-ta-text"">ஆர்டர்</span>
+                        </a>
+                    </div>
+                </div>
+            </div>");
+        });
+    }
 }
 
 <script>
