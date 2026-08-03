@@ -40,7 +40,7 @@
 
     /* DYNAMIC LANGUAGE CONTROLLER */
     html[lang="en"] .lang-ta, body[lang="en"] .lang-ta { display: none !important; }
-    html[lang="ta"] .lang-en, body[lang="ta"] .lang-ta { display: none !important; }
+    html[lang="ta"] .lang-en, body[lang="ta"] .lang-en { display: none !important; }
 
     /* APP TOP NAV BAR */
     .app-top-nav {
@@ -78,7 +78,7 @@
         text-transform: uppercase;
     }
 
-    /* HERO IMAGE SHOWCASE (OPTIMIZED FOR MOBILE & DESKTOP) */
+    /* HERO IMAGE SHOWCASE */
     .app-hero-card {
         background: var(--brt-surface-white);
         border: 1px solid var(--border-refined);
@@ -226,7 +226,7 @@
         border-radius: 10px;
     }
 
-    /* DISCLAIMER GRID */
+    /* 2x2 DISCLAIMER GRID */
     .cyber-disclaimer-vault {
         background: var(--brt-surface-white);
         border: 1px solid var(--border-refined);
@@ -269,12 +269,16 @@
         display: block;
     }
 
-    /* ACTION BUTTONS DOCK */
-    .app-sticky-bar {
-        display: flex !important;
-        gap: 10px !important;
-        align-items: center !important;
-        width: 100% !important;
+    /* ==========================================================================
+       IN-FLOW ACTION BUTTONS (NO FIXED / STICKY POSITIONING)
+       ========================================================================== */
+    .app-action-dock {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        width: 100%;
+        margin-top: 8px;
+        margin-bottom: 24px;
     }
 
     .btn-app-action {
@@ -282,9 +286,9 @@
         border-radius: 12px;
         font-weight: 800;
         font-size: 0.88rem;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         gap: 6px;
         text-decoration: none !important;
         transition: transform 0.2s ease;
@@ -314,47 +318,16 @@
         flex: 0 0 48px;
     }
 
-    /* MOBILE SPECIFIC REFINEMENTS */
+    /* MOBILE RESPONSIVE ADJUSTMENTS */
     @@media (max-width: 991px) {
-        body {
-            padding-bottom: 85px !important;
-        }
-
         .app-hero-card {
             padding: 10px;
             border-radius: 16px;
         }
 
         .app-product-img {
-            max-height: 220px; /* Reduced excess space on mobile */
+            max-height: 220px;
             object-fit: contain;
-        }
-
-        .app-sticky-bar {
-            position: fixed !important;
-            bottom: 0 !important;
-            left: 0 !important;
-            right: 0 !important;
-            background: var(--brt-surface-white) !important;
-            border-top: 1px solid var(--border-refined) !important;
-            padding: 10px 14px !important;
-            box-shadow: 0 -8px 20px rgba(0,0,0,0.06) !important;
-            z-index: 99999 !important;
-        }
-    }
-
-    /* DESKTOP RULES */
-    @@media (min-width: 992px) {
-        body {
-            padding-bottom: 20px !important;
-        }
-        .app-sticky-bar {
-            position: static !important;
-            box-shadow: none !important;
-            background: transparent !important;
-            padding: 0 !important;
-            border: none !important;
-            margin-top: 10px;
         }
     }
 
@@ -383,7 +356,7 @@
 
     <div class="row g-3 g-md-4 align-items-center">
 
-        <!-- Image Showcase (No extra vertical space) -->
+        <!-- Image Showcase -->
         <div class="col-lg-6">
             <div class="app-hero-card">
                 @if (!string.IsNullOrEmpty(Model.ImageUrl))
@@ -402,7 +375,7 @@
         <!-- Product Details -->
         <div class="col-lg-6">
 
-            <!-- Title Only (Grade Removed) -->
+            <!-- Title -->
             <h1 class="detail-corporate-title lang-en">@Model.Name</h1>
             @if (!string.IsNullOrEmpty(Model.NameTamil))
             {
@@ -500,8 +473,8 @@
                 </div>
             </div>
 
-            <!-- Sticky 3 Action Buttons -->
-            <div class="app-sticky-bar">
+            <!-- IN-LINE ACTION BUTTONS (PLACED EXACTLY BELOW 2x2 GRID, ABOVE FOOTER) -->
+            <div class="app-action-dock">
                 <a asp-controller="Order" asp-action="Request" asp-route-productId="@Model.Id" class="btn-app-action btn-app-gold">
                     <span class="material-symbols-outlined">shopping_cart</span>
                     <span class="lang-en">Request Bulk Order</span>
