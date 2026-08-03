@@ -3,12 +3,13 @@
 }
 
 <!-- Fonts & Material Icons CDN -->
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Cinzel:wght@600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Cinzel:wght@700;800;900&display=swap" rel="stylesheet">
 
 <style>
     :root {
         --brt-gold: #D4AF37;
         --brt-gold-dark: #AA820A;
+        --brt-gold-light: #FBF5E8;
         --brt-green: #10B981;
         --dark-bg: #0F172A;
         --slate-cool: #F8FAFC;
@@ -63,17 +64,17 @@
     /* Enhanced About Hero Layout */
     .about-hero {
         padding: 40px 16px;
-        background: radial-gradient(circle at center, rgba(212, 175, 55, 0.06) 0%, transparent 70%);
+        background: radial-gradient(circle at center, rgba(212, 175, 55, 0.08) 0%, transparent 70%);
         position: relative;
     }
 
     .about-logo-badge-giant {
-        max-width: 180px;
+        max-width: 170px;
         width: 100%;
         border-radius: 28px;
         box-shadow: 0 20px 40px -10px rgba(15, 23, 42, 0.15);
         border: 4px solid #FFFFFF;
-        margin-bottom: 1.5rem;
+        margin-bottom: 1rem;
         transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
@@ -82,12 +83,18 @@
         box-shadow: 0 30px 50px -10px rgba(212, 175, 55, 0.25);
     }
 
+    /* ✨ Royal Branding Font Style for B Raj Traders ✨ */
     .about-hero-tagline {
-        font-weight: 800;
-        font-size: 2.2rem;
-        letter-spacing: -1px;
-        color: var(--dark-bg);
+        font-family: 'Cinzel', serif;
+        font-weight: 900;
+        font-size: 2.8rem;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        background: linear-gradient(135deg, #0F172A 0%, #AA820A 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
         margin-bottom: 0.5rem;
+        text-shadow: 0 2px 10px rgba(212, 175, 55, 0.15);
     }
 
     /* Monochromatic Ribbon */
@@ -99,14 +106,14 @@
         margin: 1.2rem auto;
         padding: 12px 28px;
         background: linear-gradient(135deg, #FFFFFF 0%, #F8FAFC 100%);
-        border: 1px solid rgba(212, 175, 55, 0.25);
+        border: 1px solid rgba(212, 175, 55, 0.3);
         border-radius: 100px;
         box-shadow: 0 10px 25px rgba(15, 23, 42, 0.04);
     }
 
     .luxury-motto-text {
         font-family: 'Cinzel', serif;
-        font-size: 1.1rem;
+        font-size: 1.05rem;
         font-weight: 700;
         letter-spacing: 1.5px;
         color: #1E293B;
@@ -177,7 +184,7 @@
         font-size: 0.95rem;
     }
 
-    /* Modern Timeline Track */
+    /* Modern Timeline Track Desktop */
     .modern-timeline {
         position: relative;
         padding: 1.5rem 0;
@@ -198,12 +205,12 @@
     .timeline-node-premium {
         background: #FFFFFF;
         border: 1px solid var(--border-color);
-        border-radius: 18px;
-        padding: 1.2rem 1rem;
+        border-radius: 20px;
+        padding: 1.4rem 1rem;
         text-align: center;
         position: relative;
         z-index: 2;
-        box-shadow: 0 8px 16px rgba(0,0,0,0.03);
+        box-shadow: 0 8px 18px rgba(0,0,0,0.03);
         transition: all 0.3s ease;
         height: 100%;
     }
@@ -215,7 +222,7 @@
     }
 
     .node-year {
-        font-size: 1.25rem;
+        font-size: 1.35rem;
         font-weight: 800;
         color: var(--brt-gold-dark);
         margin-bottom: 2px;
@@ -232,7 +239,7 @@
     }
 
     .node-desc {
-        font-size: 0.85rem;
+        font-size: 0.88rem;
         font-weight: 600;
         color: var(--text-main);
     }
@@ -421,21 +428,39 @@
     }
 
     /* ==========================================================
-       📱 INNOVATIVE MOBILE APP STYLING (max-width: 767.88px)
+       📱 INNOVATIVE MOBILE APP STYLING & FIXED SCROLL VISIBILITY
        ========================================================== */
-    @@media (max-width: 767.88px) {
-        .about-hero {
-            padding: 30px 12px 20px;
-        }
-
-        .about-logo-badge-giant {
-            max-width: 140px;
-            border-radius: 20px;
-            margin-bottom: 1rem;
-        }
-
+    @@media (max-width: 991.98px) {
         .about-hero-tagline {
-            font-size: 1.75rem;
+            font-size: 2rem;
+            letter-spacing: 1px;
+        }
+
+        /* Fixed Mobile Horizontal Card Scroll Container */
+        .mobile-app-scroll-container {
+            display: flex !important;
+            flex-wrap: nowrap !important;
+            overflow-x: auto !important;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            gap: 14px !important;
+            padding: 12px 6px 20px 6px !important;
+            scrollbar-width: none;
+        }
+
+        .mobile-app-scroll-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        .mobile-app-scroll-item {
+            flex: 0 0 78% !important;
+            min-width: 250px !important;
+            max-width: 280px !important;
+            scroll-snap-align: start;
+        }
+
+        .modern-timeline::before {
+            display: none;
         }
 
         .luxury-motto-ribbon {
@@ -452,49 +477,10 @@
 
         .luxury-motto-text {
             font-size: 0.95rem;
-            letter-spacing: 1px;
         }
 
         .section-title-premium {
             font-size: 1.6rem;
-        }
-
-        /* Mobile Native App Touch Horizontal Scroll for Timeline & Mandi Workflow */
-        .mobile-app-scroll-container {
-            display: flex;
-            flex-wrap: nowrap;
-            overflow-x: auto;
-            scroll-snap-type: x mandatory;
-            -webkit-overflow-scrolling: touch;
-            gap: 12px;
-            padding: 10px 4px 20px 4px;
-            scrollbar-width: none;
-        }
-        
-        .mobile-app-scroll-container::-webkit-scrollbar {
-            display: none;
-        }
-
-        .mobile-app-scroll-item {
-            flex: 0 0 82%;
-            scroll-snap-align: center;
-        }
-
-        .modern-timeline::before {
-            display: none;
-        }
-
-        .stat-premium-box {
-            padding: 1.2rem;
-        }
-
-        .stat-premium-box .stat-num {
-            font-size: 1.8rem;
-        }
-
-        .trust-box-premium {
-            padding: 1.2rem;
-            gap: 1rem;
         }
 
         .btn-brt-gold, .btn-brt-outline-dark {
@@ -511,13 +497,14 @@
     <h1 class="sacred-text-below">ॐ Om Shanti ॐ</h1>
 </div>
 
-<!-- ===== Re-Engineered Hero Layout ===== -->
+<!-- ===== Hero Section with Royal Branding ===== -->
 <section class="page-hero about-hero text-center">
     <div class="container">
         <img src="/images/brt-logo.jpeg" alt="B Raj Traders Logo" class="about-logo-badge giant about-logo-badge-giant fade-in-up" />
+        
+        <!-- Royal Font Styled Title -->
         <h2 class="about-hero-tagline fade-in-up">B Raj Traders</h2>
 
-        <!-- Elegant Monochromatic Structural Layout Block -->
         <div class="luxury-motto-ribbon fade-in-up">
             <span class="luxury-motto-text">
                 <span class="lang-en-text">Honest Pricing</span>
@@ -555,12 +542,12 @@
                 <span class="lang-en-text">
                     For over 25 years, B Raj Traders has been a trusted name in the garlic and grocery industry.
                     Established in 2000 in Theni District, Tamil Nadu, we have built our reputation by delivering
-                    quality products, honest pricing, and dependable service.
+                    quality products, honest pricing, and dependable service.[cite: 3]
                 </span>
                 <span class="lang-ta-text">
                     25 ஆண்டுகளுக்கும் மேலாக, பூண்டு மற்றும் மளிகை தொழிலில் பி ராஜ் டிரேடர்ஸ் ஒரு நம்பகமான பெயராக இருந்து வருகிறது.
                     2000 ஆம் ஆண்டு தேனி மாவட்டம், தமிழ்நாட்டில் தொடங்கப்பட்ட எங்கள் நிறுவனம், தரமான பொருட்கள், நேர்மையான விலை
-                    மற்றும் நம்பகமான சேவையை வழங்குவதன் மூலம் எங்கள் நற்பெயரை உருவாக்கியுள்ளோம்.
+                    மற்றும் நம்பகமான சேவையை வழங்குவதன் மூலம் எங்கள் நற்பெயரை உருவாக்கியுள்ளோம்.[cite: 3]
                 </span>
             </p>
             <p class="fs-6 text-secondary mb-3">
@@ -568,31 +555,31 @@
                     We work closely with farmers, suppliers, wholesalers, retailers, and distributors to ensure
                     every product meets the highest standards of freshness and quality. Our focus is not just on
                     selling products but on helping our business partners grow with a reliable and uninterrupted
-                    supply.
+                    supply.[cite: 3]
                 </span>
                 <span class="lang-ta-text">
                     ஒவ்வொரு பொருளும் உயர்ந்த தரம் மற்றும் புத்தம்புதிய தன்மையை பெறுவதை உறுதி செய்ய, விவசாயிகள், சப்ளையர்கள்,
                     மொத்த விற்பனையாளர்கள், சில்லறை விற்பனையாளர்கள் மற்றும் விநியோகஸ்தர்களுடன் நெருக்கமாக இணைந்து செயல்படுகிறோம்.
                     பொருட்களை விற்பது மட்டுமல்ல, நம்பகமான மற்றும் தடையற்ற வழங்கலின் மூலம் எங்கள் வணிக பங்குதாரர்களின்
-                    வளர்ச்சிக்கு உதவுவதே எங்கள் முக்கிய குறிக்கோள்.
+                    வளர்ச்சிக்கு உதவுவதே எங்கள் முக்கிய குறிக்கோள்.[cite: 3]
                 </span>
             </p>
             <p class="fs-6 text-secondary mb-4">
                 <span class="lang-en-text">
                     With years of market experience and a customer-first approach, we understand the needs of
                     dealers and businesses. Every order is handled with care, transparency, and a commitment to
-                    timely delivery.
+                    timely delivery.[cite: 3]
                 </span>
                 <span class="lang-ta-text">
                     பல ஆண்டுகால சந்தை அனுபவம் மற்றும் வாடிக்கையாளர்-முதன்மை அணுகுமுறையுடன், டீலர்கள் மற்றும் வணிகங்களின்
                     தேவைகளை நாங்கள் நன்கு புரிந்துகொள்கிறோம். ஒவ்வொரு ஆர்டரும் கவனத்துடன், வெளிப்படைத்தன்மையுடன் மற்றும்
-                    சரியான நேரத்தில் டெலிவரி செய்யும் உறுதிப்பாட்டுடன் கையாளப்படுகிறது.
+                    சரியான நேரத்தில் டெலிவரி செய்யும் உறுதிப்பாட்டுடன் கையாளப்படுகிறது.[cite: 3]
                 </span>
             </p>
             <div class="p-3 border-start border-3 rounded-end" style="border-color: var(--brt-gold) !important; background-color: rgba(212, 175, 55, 0.05);">
                 <span class="fw-bold d-block" style="color: var(--dark-bg);">
-                    <span class="lang-en-text">B Raj Traders — Your Trusted Partner in Garlic &amp; Grocery Since 2000.</span>
-                    <span class="lang-ta-text">பி ராஜ் டிரேடர்ஸ் — 2000 ஆம் ஆண்டு முதல் பூண்டு மற்றும் மளிகையில் உங்கள் நம்பகமான பங்குதாரர்.</span>
+                    <span class="lang-en-text">B Raj Traders — Your Trusted Partner in Garlic &amp; Grocery Since 2000.[cite: 3]</span>
+                    <span class="lang-ta-text">பி ராஜ் டிரேடர்ஸ் — 2000 ஆம் ஆண்டு முதல் பூண்டு மற்றும் மளிகையில் உங்கள் நம்பகமான பங்குதாரர்.[cite: 3]</span>
                 </span>
             </div>
         </div>
@@ -623,16 +610,16 @@
         </div>
     </div>
 
-    <!-- ===== Journey Timeline ===== -->
-    <div class="modern-timeline my-4 my-md-5 pt-3 pb-4">
+    <!-- ===== Journey Timeline (Fixed Swipe for Mobile) ===== -->
+    <div class="modern-timeline my-4 my-md-5 pt-3 pb-2">
         <div class="row g-3 justify-content-center mobile-app-scroll-container">
             <div class="col-lg-3 col-md-6 mobile-app-scroll-item">
                 <div class="timeline-node-premium">
                     <div class="node-year">2000</div>
                     <div class="node-dot"></div>
                     <div class="node-desc">
-                        <span class="lang-en-text">Inception in Theni Mandi</span>
-                        <span class="lang-ta-text">தேனி மண்டியில் தொடக்கம்</span>
+                        <span class="lang-en-text">Inception in Theni Mandi[cite: 3]</span>
+                        <span class="lang-ta-text">தேனி மண்டியில் தொடக்கம்[cite: 3]</span>
                     </div>
                 </div>
             </div>
@@ -641,8 +628,8 @@
                     <div class="node-year">2012</div>
                     <div class="node-dot"></div>
                     <div class="node-desc">
-                        <span class="lang-en-text">Expanded Dealer Network</span>
-                        <span class="lang-ta-text">டீலர் நெட்வொர்க் விரிவாக்கம்</span>
+                        <span class="lang-en-text">Expanded Dealer Network[cite: 3]</span>
+                        <span class="lang-ta-text">டீலர் நெட்வொர்க் விரிவாக்கம்[cite: 3]</span>
                     </div>
                 </div>
             </div>
@@ -651,8 +638,8 @@
                     <div class="node-year">2018</div>
                     <div class="node-dot"></div>
                     <div class="node-desc">
-                        <span class="lang-en-text">Full Wholesale Integration</span>
-                        <span class="lang-ta-text">முழுமையான மொத்த விற்பனை ஒருங்கிணைப்பு</span>
+                        <span class="lang-en-text">Full Wholesale Integration[cite: 3]</span>
+                        <span class="lang-ta-text">முழுமையான மொத்த விற்பனை ஒருங்கிணைப்பு[cite: 3]</span>
                     </div>
                 </div>
             </div>
@@ -664,8 +651,8 @@
                     </div>
                     <div class="node-dot"></div>
                     <div class="node-desc">
-                        <span class="lang-en-text">Pan-India Trusted Supply</span>
-                        <span class="lang-ta-text">இந்தியா முழுவதும் நம்பகமான வழங்கல்</span>
+                        <span class="lang-en-text">Pan-India Trusted Supply[cite: 3]</span>
+                        <span class="lang-ta-text">இந்தியா முழுவதும் நம்பகமான வழங்கல்[cite: 3]</span>
                     </div>
                 </div>
             </div>
@@ -680,12 +667,12 @@
             <div class="mv-card-new">
                 <span class="material-symbols-outlined">flag</span>
                 <h4>
-                    <span class="lang-en-text">Our Mission</span>
-                    <span class="lang-ta-text">எங்கள் நோக்கம்</span>
+                    <span class="lang-en-text">Our Mission[cite: 3]</span>
+                    <span class="lang-ta-text">எங்கள் நோக்கம்[cite: 3]</span>
                 </h4>
                 <p>
-                    <span class="lang-en-text">To provide fresh, high-quality garlic and grocery products with integrity, consistency, and exceptional customer service.</span>
-                    <span class="lang-ta-text">நேர்மை, நிலைத்தன்மை மற்றும் சிறந்த வாடிக்கையாளர் சேவையுடன் புத்தம்புதிய, உயர்தர பூண்டு மற்றும் மளிகை பொருட்களை வழங்குவது.</span>
+                    <span class="lang-en-text">To provide fresh, high-quality garlic and grocery products with integrity, consistency, and exceptional customer service.[cite: 3]</span>
+                    <span class="lang-ta-text">நேர்மை, நிலைத்தன்மை மற்றும் சிறந்த வாடிக்கையாளர் சேவையுடன் புத்தம்புதிய, உயர்தர பூண்டு மற்றும் மளிகை பொருட்களை வழங்குவது.[cite: 3]</span>
                 </p>
             </div>
         </div>
@@ -693,12 +680,12 @@
             <div class="mv-card-new">
                 <span class="material-symbols-outlined">visibility</span>
                 <h4>
-                    <span class="lang-en-text">Our Vision</span>
-                    <span class="lang-ta-text">எங்கள் இலக்கு</span>
+                    <span class="lang-en-text">Our Vision[cite: 3]</span>
+                    <span class="lang-ta-text">எங்கள் இலக்கு[cite: 3]</span>
                 </h4>
                 <p>
-                    <span class="lang-en-text">To become a leading and trusted supplier of premium garlic and grocery products in both domestic and international markets.</span>
-                    <span class="lang-ta-text">உள்நாட்டு மற்றும் சர்வதேச சந்தைகளில் உயர்தர பூண்டு மற்றும் மளிகை பொருட்களின் முன்னணி மற்றும் நம்பகமான வழங்குநராக மாறுவது.</span>
+                    <span class="lang-en-text">To become a leading and trusted supplier of premium garlic and grocery products in both domestic and international markets.[cite: 3]</span>
+                    <span class="lang-ta-text">உள்நாட்டு மற்றும் சர்வதேச சந்தைகளில் உயர்தர பூண்டு மற்றும் மளிகை பொருட்களின் முன்னணி மற்றும் நம்பகமான வழங்குநராக மாறுவது.[cite: 3]</span>
                 </p>
             </div>
         </div>
@@ -710,12 +697,12 @@
     <div class="text-center mb-4 mb-md-5 fade-in-up">
         <span class="hero-eyebrow" style="color:var(--brt-gold)">
             <span class="material-symbols-outlined">verified_user</span>
-            <span class="lang-en-text">WHY DEALERS TRUST US</span>
-            <span class="lang-ta-text">டீலர்கள் ஏன் எங்களை நம்புகிறார்கள்</span>
+            <span class="lang-en-text">WHY DEALERS TRUST US[cite: 3]</span>
+            <span class="lang-ta-text">டீலர்கள் ஏன் எங்களை நம்புகிறார்கள்[cite: 3]</span>
         </span>
         <h3 class="fw-bold mt-2 section-title-premium" style="font-size: 1.8rem;">
-            <span class="lang-en-text">Core Commitments To The Trade</span>
-            <span class="lang-ta-text">வர்த்தகத்திற்கான முக்கிய உறுதிப்பாடுகள்</span>
+            <span class="lang-en-text">Core Commitments To The Trade[cite: 3]</span>
+            <span class="lang-ta-text">வர்த்தகத்திற்கான முக்கிய உறுதிப்பாடுகள்[cite: 3]</span>
         </h3>
     </div>
 
@@ -725,12 +712,12 @@
                 <div class="trust-icon-wrapper"><span class="material-symbols-outlined">eco</span></div>
                 <div>
                     <h5>
-                        <span class="lang-en-text">Consistent Product Quality</span>
-                        <span class="lang-ta-text">நிலையான தயாரிப்பு தரம்</span>
+                        <span class="lang-en-text">Consistent Product Quality[cite: 3]</span>
+                        <span class="lang-ta-text">நிலையான தயாரிப்பு தரம்[cite: 3]</span>
                     </h5>
                     <p>
-                        <span class="lang-en-text">Every batch of garlic is graded and sorted — Bomb, Laddu, AAA, Bold and more — so you always know the quality you're buying.</span>
-                        <span class="lang-ta-text">ஒவ்வொரு பூண்டு பேட்சும் தரம் பிரிக்கப்பட்டு வகைப்படுத்தப்படுகிறது — பாம்ப், லட்டு, AAA, போல்ட் மற்றும் பல — எனவே நீங்கள் வாங்கும் தரம் என்னவென்று எப்போதும் தெரியும்.</span>
+                        <span class="lang-en-text">Every batch of garlic is graded and sorted — Bomb, Laddu, AAA, Bold and more — so you always know the quality you're buying.[cite: 3]</span>
+                        <span class="lang-ta-text">ஒவ்வொரு பூண்டு பேட்சும் தரம் பிரிக்கப்பட்டு வகைப்படுத்தப்படுகிறது — பாம்ப், லட்டு, AAA, போல்ட் மற்றும் பல — எனவே நீங்கள் வாங்கும் தரம் என்னவென்று எப்போதும் தெரியும்.[cite: 3]</span>
                     </p>
                 </div>
             </div>
@@ -740,12 +727,12 @@
                 <div class="trust-icon-wrapper"><span class="material-symbols-outlined">verified</span></div>
                 <div>
                     <h5>
-                        <span class="lang-en-text">Transparent &amp; Trustworthy</span>
-                        <span class="lang-ta-text">வெளிப்படைத்தன்மை &amp; நம்பகத்தன்மை</span>
+                        <span class="lang-en-text">Transparent &amp; Trustworthy[cite: 3]</span>
+                        <span class="lang-ta-text">வெளிப்படைத்தன்மை &amp; நம்பகத்தன்மை[cite: 3]</span>
                     </h5>
                     <p>
-                        <span class="lang-en-text">Today's market rate, previous rate, and the difference are shown for every product — no guessing, no hidden margins.</span>
-                        <span class="lang-ta-text">ஒவ்வொரு பொருளுக்கும் இன்றைய சந்தை விலை, முந்தைய விலை மற்றும் வேறுபாடு காட்டப்படுகிறது — யூகிக்க வேண்டியதில்லை, மறைமுக லாபமும் இல்லை.</span>
+                        <span class="lang-en-text">Today's market rate, previous rate, and the difference are shown for every product — no guessing, no hidden margins.[cite: 3]</span>
+                        <span class="lang-ta-text">ஒவ்வொரு பொருளுக்கும் இன்றைய சந்தை விலை, முந்தைய விலை மற்றும் வேறுபாடு காட்டப்படுகிறது — யூகிக்க வேண்டியதில்லை, மறைமுக லாபமும் இல்லை.[cite: 3]</span>
                     </p>
                 </div>
             </div>
@@ -755,12 +742,12 @@
                 <div class="trust-icon-wrapper"><span class="material-symbols-outlined">local_shipping</span></div>
                 <div>
                     <h5>
-                        <span class="lang-en-text">On-Time Dispatch &amp; Delivery</span>
-                        <span class="lang-ta-text">சரியான நேரத்தில் அனுப்புதல் &amp; டெலிவரி</span>
+                        <span class="lang-en-text">On-Time Dispatch &amp; Delivery[cite: 3]</span>
+                        <span class="lang-ta-text">சரியான நேரத்தில் அனுப்புதல் &amp; டெலிவரி[cite: 3]</span>
                     </h5>
                     <p>
-                        <span class="lang-en-text">We work exclusively in bulk B2B trade — no retail shortcuts — so our terms are built around dealer volumes and reliable dispatch schedules.</span>
-                        <span class="lang-ta-text">நாங்கள் மொத்த B2B வர்த்தகத்தில் மட்டுமே செயல்படுகிறோம் — சில்லறை குறுக்கு வழிகள் இல்லை — எனவே எங்கள் நிபந்தனைகள் டீலர் அளவு மற்றும் நம்பகமான அனுப்புகை அட்டவணையை அடிப்படையாகக் கொண்டவை.</span>
+                        <span class="lang-en-text">We work exclusively in bulk B2B trade — no retail shortcuts — so our terms are built around dealer volumes and reliable dispatch schedules.[cite: 3]</span>
+                        <span class="lang-ta-text">நாங்கள் மொத்த B2B வர்த்தகத்தில் மட்டுமே செயல்படுகிறோம் — சில்லறை குறுக்கு வழிகள் இல்லை — எனவே எங்கள் நிபந்தனைகள் டீலர் அளவு மற்றும் நம்பகமான அனுப்புகை அட்டவணையை அடிப்படையாகக் கொண்டவை.[cite: 3]</span>
                     </p>
                 </div>
             </div>
@@ -770,12 +757,12 @@
                 <div class="trust-icon-wrapper"><span class="material-symbols-outlined">support_agent</span></div>
                 <div>
                     <h5>
-                        <span class="lang-en-text">Dedicated Dealer Support</span>
-                        <span class="lang-ta-text">பிரத்யேக டீலர் ஆதரவு</span>
+                        <span class="lang-en-text">Dedicated Dealer Support[cite: 3]</span>
+                        <span class="lang-ta-text">பிரத்யேக டீலர் ஆதரவு[cite: 3]</span>
                     </h5>
                     <p>
-                        <span class="lang-en-text">Direct WhatsApp updates, confirmations, and dispatch details for our dealer network — no call centres, no middlemen.</span>
-                        <span class="lang-ta-text">எங்கள் டீலர் நெட்வொர்க்கிற்கு நேரடி வாட்ஸ்அப் புதுப்பிப்புகள், உறுதிப்படுத்தல்கள் மற்றும் அனுப்புகை விவரங்கள் — கால் சென்டர் இல்லை, இடைத்தரகர் இல்லை.</span>
+                        <span class="lang-en-text">Direct WhatsApp updates, confirmations, and dispatch details for our dealer network — no call centres, no middlemen.[cite: 3]</span>
+                        <span class="lang-ta-text">எங்கள் டீலர் நெட்வொர்க்கிற்கு நேரடி வாட்ஸ்அப் புதுப்பிப்புகள், உறுதிப்படுத்தல்கள் மற்றும் அனுப்புகை விவரங்கள் — கால் சென்டர் இல்லை, இடைத்தரகர் இல்லை.[cite: 3]</span>
                     </p>
                 </div>
             </div>
@@ -784,16 +771,16 @@
 
     <hr class="my-4 my-md-5 opacity-25" />
 
-    <!-- ===== INNOVATIVE MANDI WORKFLOW TRACK ===== -->
+    <!-- ===== MANDI WORKFLOW TRACK ===== -->
     <div class="text-center mb-4 mb-md-5 fade-in-up">
         <span class="hero-eyebrow" style="color:var(--brt-gold)">
             <span class="material-symbols-outlined">published_with_changes</span>
-            <span class="lang-en-text">MANDI WORKFLOW</span>
-            <span class="lang-ta-text">மண்டி பணிப்பாய்வு</span>
+            <span class="lang-en-text">MANDI WORKFLOW[cite: 3]</span>
+            <span class="lang-ta-text">மண்டி பணிப்பாய்வு[cite: 3]</span>
         </span>
         <h3 class="fw-bold mt-2 section-title-premium" style="font-size: 1.8rem;">
-            <span class="lang-en-text">Our Premium Sourcing &amp; Grading Standards</span>
-            <span class="lang-ta-text">எங்கள் உயர்தர சேகரிப்பு &amp; தர வகைப்பாட்டு தரநிலைகள்</span>
+            <span class="lang-en-text">Our Premium Sourcing &amp; Grading Standards[cite: 3]</span>
+            <span class="lang-ta-text">எங்கள் உயர்தர சேகரிப்பு &amp; தர வகைப்பாட்டு தரநிலைகள்[cite: 3]</span>
         </h3>
     </div>
 
@@ -803,12 +790,12 @@
                 <div class="process-badge">01</div>
                 <span class="material-symbols-outlined text-success fs-2 mt-2">agriculture</span>
                 <h4>
-                    <span class="lang-en-text">Direct Farm Sourcing</span>
-                    <span class="lang-ta-text">நேரடி பண்ணை சேகரிப்பு</span>
+                    <span class="lang-en-text">Direct Farm Sourcing[cite: 3]</span>
+                    <span class="lang-ta-text">நேரடி பண்ணை சேகரிப்பு[cite: 3]</span>
                 </h4>
                 <p>
-                    <span class="lang-en-text">Procured directly from handpicked mountain fields &amp; top farmers ensuring maximum natural essence and long shelf life.</span>
-                    <span class="lang-ta-text">தேர்ந்தெடுக்கப்பட்ட மலை வயல்கள் &amp; சிறந்த விவசாயிகளிடமிருந்து நேரடியாக சேகரிக்கப்பட்டு, அதிகபட்ச இயற்கை தன்மையும் நீண்ட நிலைத்தன்மையும் உறுதி செய்யப்படுகிறது.</span>
+                    <span class="lang-en-text">Procured directly from handpicked mountain fields &amp; top farmers ensuring maximum natural essence and long shelf life.[cite: 3]</span>
+                    <span class="lang-ta-text">தேர்ந்தெடுக்கப்பட்ட மலை வயல்கள் &amp; சிறந்த விவசாயிகளிடமிருந்து நேரடியாக சேகரிக்கப்பட்டு, அதிகபட்ச இயற்கை தன்மையும் நீண்ட நிலைத்தன்மையும் உறுதி செய்யப்படுகிறது.[cite: 3]</span>
                 </p>
             </div>
         </div>
@@ -817,12 +804,12 @@
                 <div class="process-badge" style="background:var(--brt-gold-dark)">02</div>
                 <span class="material-symbols-outlined text-warning fs-2 mt-2">layers</span>
                 <h4>
-                    <span class="lang-en-text">Rigorous Size Grading</span>
-                    <span class="lang-ta-text">கடுமையான அளவு தரம் பிரித்தல்</span>
+                    <span class="lang-en-text">Rigorous Size Grading[cite: 3]</span>
+                    <span class="lang-ta-text">கடுமையான அளவு தரம் பிரித்தல்[cite: 3]</span>
                 </h4>
                 <p>
-                    <span class="lang-en-text">Strict structural sizing into clear commercial sets: Bomb, Laddu, AAA, and medium grades for absolute marketplace predictability.</span>
-                    <span class="lang-ta-text">தெளிவான வணிக பிரிவுகளாக கடுமையான அளவு பிரித்தல்: பாம்ப், லட்டு, AAA, மற்றும் நடுத்தர தரங்கள், முழுமையான சந்தை கணிக்கக்கூடிய தன்மைக்காக.</span>
+                    <span class="lang-en-text">Strict structural sizing into clear commercial sets: Bomb, Laddu, AAA, and medium grades for absolute marketplace predictability.[cite: 3]</span>
+                    <span class="lang-ta-text">தெளிவான வணிக பிரிவுகளாக கடுமையான அளவு பிரித்தல்: பாம்ப், லட்டு, AAA, மற்றும் நடுத்தர தரங்கள், முழுமையான சந்தை கணிக்கக்கூடிய தன்மைக்காக.[cite: 3]</span>
                 </p>
             </div>
         </div>
@@ -831,12 +818,12 @@
                 <div class="process-badge" style="background: #E11D48;">03</div>
                 <span class="material-symbols-outlined text-danger fs-2 mt-2">local_shipping</span>
                 <h4>
-                    <span class="lang-en-text">Seamless B2B Delivery</span>
-                    <span class="lang-ta-text">தடையற்ற B2B டெலிவரி</span>
+                    <span class="lang-en-text">Seamless B2B Delivery[cite: 3]</span>
+                    <span class="lang-ta-text">தடையற்ற B2B டெலிவரி[cite: 3]</span>
                 </h4>
                 <p>
-                    <span class="lang-en-text">Bulk moisture-controlled gunny bag packing followed by immediate dispatch across Tamil Nadu, Pondicherry, and Pan-India networks.</span>
-                    <span class="lang-ta-text">ஈரப்பதம் கட்டுப்படுத்தப்பட்ட மொத்த சாக்கு பொதி செய்யப்பட்டு, தமிழ்நாடு, புதுச்சேரி மற்றும் இந்தியா முழுவதும் உடனடியாக அனுப்பப்படுகிறது.</span>
+                    <span class="lang-en-text">Bulk moisture-controlled gunny bag packing followed by immediate dispatch across Tamil Nadu, Pondicherry, and Pan-India networks.[cite: 3]</span>
+                    <span class="lang-ta-text">ஈரப்பதம் கட்டுப்படுத்தப்பட்ட மொத்த சாக்கு பொதி செய்யப்பட்டு, தமிழ்நாடு, புதுச்சேரி மற்றும் இந்தியா முழுவதும் உடனடியாக அனுப்பப்படுகிறது.[cite: 3]</span>
                 </p>
             </div>
         </div>
@@ -845,17 +832,17 @@
     <!-- ===== Action Call Footer ===== -->
     <div class="text-center mt-4 mt-md-5 pt-3 fade-in-up">
         <p class="text-muted mb-4 fw-medium fs-6">
-            <span class="lang-en-text">We supply across India, with direct dedicated supply to Pondicherry and 15+ districts in Tamil Nadu.</span>
-            <span class="lang-ta-text">நாங்கள் இந்தியா முழுவதும் வழங்குகிறோம், புதுச்சேரி மற்றும் தமிழ்நாட்டின் 15+ மாவட்டங்களுக்கு நேரடி பிரத்யேக விநியோகத்துடன்.</span>
+            <span class="lang-en-text">We supply across India, with direct dedicated supply to Pondicherry and 15+ districts in Tamil Nadu.[cite: 3]</span>
+            <span class="lang-ta-text">நாங்கள் இந்தியா முழுவதும் வழங்குகிறோம், புதுச்சேரி மற்றும் தமிழ்நாட்டின் 15+ மாவட்டங்களுக்கு நேரடி பிரத்யேக விநியோகத்துடன்.[cite: 3]</span>
         </p>
         <div class="d-flex flex-column flex-sm-row justify-content-center gap-2">
             <a asp-controller="Order" asp-action="Request" class="btn btn-brt-gold px-4 py-3 text-uppercase fs-7">
-                <span class="lang-en-text">Request Bulk Order</span>
-                <span class="lang-ta-text">மொத்த ஆர்டர் செய்ய</span>
+                <span class="lang-en-text">Request Bulk Order[cite: 3]</span>
+                <span class="lang-ta-text">மொத்த ஆர்டர் செய்ய[cite: 3]</span>
             </a>
             <a asp-controller="Contact" asp-action="Index" class="btn btn-brt-outline-dark px-4 py-3 text-uppercase fs-7">
-                <span class="lang-en-text">Contact Us</span>
-                <span class="lang-ta-text">தொடர்பு கொள்ள</span>
+                <span class="lang-en-text">Contact Us[cite: 3]</span>
+                <span class="lang-ta-text">தொடர்பு கொள்ள[cite: 3]</span>
             </a>
         </div>
     </div>
