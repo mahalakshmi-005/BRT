@@ -173,8 +173,8 @@
         transition: transform 0.5s ease;
     }
 
-    /* Card Hover States (Desktop) */
-    @media (min-width: 992px) {
+    /* Card Hover States (Desktop) - Notice @@media below */
+    @@media (min-width: 992px) {
         .wholesale-corporate-link:hover .b2b-catalog-card {
             transform: translateY(-8px);
             border-color: rgba(212, 175, 55, 0.5);
@@ -246,14 +246,14 @@
         transition: transform 0.3s ease;
     }
 
-    /* Keyframes */
+    /* Keyframes - Notice @@keyframes below */
     @@keyframes tickerBlink {
         0%, 100% { opacity: 0.3; }
         50% { opacity: 1; }
     }
 
-    /* Mobile Responsive Optimizations */
-    @media (max-width: 767.98px) {
+    /* Mobile Responsive Optimizations - Notice @@media below */
+    @@media (max-width: 767.98px) {
         .corporate-hero-block {
             padding: 50px 15px 40px;
         }
