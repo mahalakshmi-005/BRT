@@ -22,7 +22,7 @@
         overflow-x: hidden;
     }
 
-    /* Modern Hero Section */
+    /* Hero Section */
     .premium-hero {
         padding: 70px 20px 50px;
         background: radial-gradient(circle at 50% 0%, rgba(212, 175, 55, 0.15) 0%, transparent 60%),
@@ -46,7 +46,6 @@
     }
 
     .premium-hero h1 {
-        font-family: 'Plus Jakarta Sans', sans-serif;
         font-weight: 800;
         color: var(--dark-bg);
         font-size: clamp(2.2rem, 5vw, 3.2rem);
@@ -54,7 +53,7 @@
         line-height: 1.2;
     }
 
-    /* Innovative Grid & Floating Glass Cards */
+    /* Feature Cards Design */
     .innovative-grid .category-card {
         background: var(--card-bg);
         border: 1px solid var(--border-color);
@@ -90,7 +89,7 @@
         opacity: 1;
     }
 
-    /* Category Icon Design */
+    /* Category Icons */
     .category-icon {
         width: 64px;
         height: 64px;
@@ -143,7 +142,7 @@
         color: #94A3B8;
     }
 
-    /* Pipeline Workflow Layout */
+    /* Pipeline Desktop Layout */
     .qa-section-title {
         font-weight: 800;
         font-size: clamp(1.8rem, 4vw, 2.4rem);
@@ -242,13 +241,14 @@
     }
 
     /* ==========================================================
-       📱 MOBILE APP HORIZONTAL SCROLL ENGINE (ULTRA SMOOTH)
+       📱 MOBILE APP HORIZONTAL SCROLL ENGINE (100% FIXED)
        ========================================================== */
-    @@media (max-width: 991.98px) {
+    @media (max-width: 991.98px) {
         .premium-hero {
             padding: 50px 15px 35px;
         }
 
+        /* Mobile Scroll Engine Container Override */
         .brt-mobile-scroll {
             display: flex !important;
             flex-direction: row !important;
@@ -257,26 +257,30 @@
             overflow-y: hidden !important;
             -webkit-overflow-scrolling: touch !important;
             scroll-snap-type: x mandatory !important;
-            padding: 15px 5px 25px 5px !important;
-            gap: 15px !important;
+            padding: 15px 15px 25px 15px !important;
+            gap: 16px !important;
             width: 100% !important;
+            margin-left: 0 !important;
+            margin-right: 0 !important;
             box-sizing: border-box !important;
         }
 
+        /* Hide Scrollbar */
         .brt-mobile-scroll::-webkit-scrollbar {
-            display: none !important; /* Visual scrollbar hide */
+            display: none !important;
         }
 
+        /* Mobile Slide Card Engine Override */
         .brt-mobile-card {
-            flex: 0 0 85% !important;
-            max-width: 85% !important;
-            width: 85% !important;
-            scroll-snap-align: center !important;
+            flex: 0 0 82% !important;
+            max-width: 82% !important;
+            width: 82% !important;
+            scroll-snap-align: start !important;
             box-sizing: border-box !important;
         }
 
         .pipeline-node {
-            max-width: 100%;
+            max-width: 82% !important;
         }
 
         .btn-brt-gold {
@@ -303,7 +307,7 @@
 </section>
 
 <div class="container my-4 my-md-5">
-    <!-- Grid System with Hover Effects & Mobile Carousel -->
+    <!-- Grid System with Hover Effects & Mobile Horizontal Carousel -->
     <div class="row g-4 innovative-grid brt-mobile-scroll">
         <div class="col-lg-4 col-md-6 brt-mobile-card fade-in-up">
             <div class="category-card h-100">
@@ -393,6 +397,7 @@
         <span class="lang-ta-text">எங்கள் தரக் கட்டுப்பாட்டு செயல்முறை</span>
     </h3>
 
+    <!-- Fixed Horizontal Scrolling Pipeline Container for Mobile -->
     <div class="pipeline-wrapper brt-mobile-scroll my-4">
         <div class="pipeline-node brt-mobile-card fade-in-up">
             <div class="info-icon-circle"><span class="material-symbols-outlined">agriculture</span></div>
