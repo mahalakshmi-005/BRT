@@ -1,6 +1,6 @@
 @model List<SubCategory>
 @{
-    ViewData["Title"] = ViewData["Title"] ?? "Live Market Rates";
+    ViewData["Title"] = "Garlic Wholesale";
     var todaysPrices = (ViewBag.TodaysPrices as Dictionary<int, MarketPrice>) ?? new Dictionary<int, MarketPrice>();
 }
 
@@ -38,22 +38,24 @@
 
     /* NATIVE APP HERO HEADER */
     .app-hero-header {
-        background: radial-gradient(135deg, #1E293B 0%, #0F172A 100%);
-        color: #FFFFFF;
+        background: #F8FAFC; /* Light background to make pure black title pop */
+        color: #000000;
         padding: 30px 20px 50px 20px;
         border-radius: 0 0 28px 28px;
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        border-bottom: 1px solid var(--border-color);
     }
 
-   /* NATIVE APP HERO HEADER */
-.app-hero-header .brand-title {
-    font-family: 'Cinzel', serif;
-    font-size: 2rem;
-    font-weight: 900;
-    color: #000000 !important; /* Text-ஐ சுத்தமான கறுப்பு நிறமாக மாற்றுகிறது */
-    margin: 0;
-}
-    /* STICKY CONTROL DOCK (Search & Categories) */
+    /* MAIN TITLE - PURE SOLID BLACK */
+    .app-hero-header .brand-title {
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        font-size: 2.2rem;
+        font-weight: 900;
+        color: #000000 !important; /* Pure Black Colour */
+        margin: 0;
+        letter-spacing: -0.5px;
+    }
+
+    /* STICKY CONTROL DOCK */
     .app-control-dock {
         margin-top: -30px;
         z-index: 100;
@@ -64,7 +66,7 @@
     .dock-card {
         background: rgba(255, 255, 255, 0.95);
         backdrop-filter: blur(12px);
-        border: 1px solid rgba(255, 255, 255, 0.8);
+        border: 1px solid rgba(226, 232, 240, 0.8);
         border-radius: 20px;
         padding: 10px 14px;
         box-shadow: var(--app-shadow);
@@ -88,7 +90,7 @@
 
     .search-input-group input:focus {
         background: #FFFFFF;
-        box-shadow: 0 0 0 2px var(--primary-gold);
+        box-shadow: 0 0 0 2px #000000;
     }
 
     .search-input-group .search-icon {
@@ -125,12 +127,12 @@
     }
 
     .cat-pill:hover, .cat-pill.active {
-        background: var(--text-dark);
-        color: var(--primary-gold);
-        border-color: var(--text-dark);
+        background: #000000;
+        color: #FFFFFF;
+        border-color: #000000;
     }
 
-    /* SECTION HEADER & NAV CONTROLS */
+    /* SECTION HEADER */
     .category-header-wrap {
         display: flex;
         align-items: center;
@@ -157,6 +159,16 @@
         border-radius: 4px;
     }
 
+    .grade-section-title {
+        font-size: 1rem;
+        font-weight: 800;
+        color: #475569;
+        margin: 10px 0 8px 6px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+
     .scroll-arrow-btn {
         border: none;
         background: #FFFFFF;
@@ -173,11 +185,11 @@
     }
 
     .scroll-arrow-btn:hover {
-        background: var(--text-dark);
+        background: #000000;
         color: #FFFFFF;
     }
 
-    /* HORIZONTAL PRODUCTS SCROLLER (MAIN FEATURE) */
+    /* HORIZONTAL PRODUCTS SCROLLER */
     .products-horizontal-scroll {
         display: flex;
         gap: 16px;
@@ -197,12 +209,12 @@
     }
 
     .horizontal-product-card-item {
-        flex: 0 0 240px; /* Card Width in Horizontal Scroll */
+        flex: 0 0 240px;
     }
 
-    @@media (max-width: 576px) {
+    @media (max-width: 576px) {
         .horizontal-product-card-item {
-            flex: 0 0 200px; /* Mobile Friendly Card Width */
+            flex: 0 0 200px;
         }
     }
 
@@ -223,10 +235,9 @@
     .product-app-card:hover {
         transform: translateY(-4px);
         box-shadow: 0 14px 28px rgba(0,0,0,0.08);
-        border-color: var(--primary-gold);
+        border-color: #000000;
     }
 
-    /* MEDIA CONTAINER WITH BADGE */
     .card-media-wrapper {
         width: 100%;
         height: 140px;
@@ -287,7 +298,6 @@
         height: 100%;
     }
 
-    /* METADATA */
     .product-title {
         font-size: 0.95rem;
         font-weight: 800;
@@ -301,8 +311,8 @@
 
     .grade-chip {
         display: inline-block;
-        background: rgba(212, 175, 55, 0.12);
-        color: var(--primary-gold-dark);
+        background: rgba(0, 0, 0, 0.06);
+        color: #000000;
         font-size: 0.65rem;
         font-weight: 800;
         padding: 2px 6px;
@@ -310,7 +320,6 @@
         text-transform: uppercase;
     }
 
-    /* PRICE TICKER BOX */
     .price-ticker-box {
         background: #F8FAFC;
         border-radius: 12px;
@@ -345,7 +354,6 @@
     .price-badge.down { background: var(--down-bg); color: var(--down-red); }
     .price-badge.stable { background: #E2E8F0; color: var(--text-muted); }
 
-    /* ACTION BUTTONS */
     .action-btn-grid {
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -369,10 +377,9 @@
     .btn-app-outline { background: #F1F5F9; color: var(--text-dark); }
     .btn-app-outline:hover { background: #E2E8F0; }
 
-    .btn-app-primary { background: var(--text-dark); color: #FFFFFF !important; }
+    .btn-app-primary { background: #000000; color: #FFFFFF !important; }
     .btn-app-primary:hover { background: var(--primary-gold-dark); }
 
-    /* MOBILE NATIVE BOTTOM BAR */
     .mobile-bottom-nav {
         display: none;
         position: fixed;
@@ -396,9 +403,9 @@
         font-weight: 600;
     }
 
-    .mobile-nav-item.active { color: var(--primary-gold-dark); }
+    .mobile-nav-item.active { color: #000000; }
 
-    @@media (max-width: 767.98px) {
+    @media (max-width: 767.98px) {
         .mobile-bottom-nav { display: flex; justify-content: space-around; }
         .app-hero-header { padding: 24px 16px 45px 16px; }
     }
@@ -407,8 +414,9 @@
 <!-- Hero Section Header -->
 <header class="app-hero-header text-center">
     <div class="container">
-        <h1 class="brand-title">@ViewData["Title"]</h1>
-        <p class="mb-0 text-white-50 small">Live Market Rates & Instant Bulk Order</p>
+        <!-- BLACK COLOR MAIN HEADING -->
+        <h1 class="brand-title">Garlic Wholesale</h1>
+        <p class="mb-0 text-muted small fw-semibold">Live Market Rates & Instant Bulk Order</p>
     </div>
 </header>
 
@@ -437,114 +445,77 @@
     <div id="productsContainer">
         @foreach (var sub in Model)
         {
+            var isGrocery = sub.Name.Equals("Grocery", StringComparison.OrdinalIgnoreCase) || 
+                            sub.Name.Equals("Groceries", StringComparison.OrdinalIgnoreCase);
+
             <div class="sub-category-block mb-4" id="cat-@sub.Id" data-category-name="@sub.Name @sub.NameTamil">
                 
-                <!-- Category Section Header with Carousel Navigation -->
+                <!-- Category Section Header -->
                 <div class="category-header-wrap">
                     <h2 class="category-section-title">
                         <span class="lang-en-text">@sub.Name</span>
                         <span class="lang-ta-text">@(!string.IsNullOrEmpty(sub.NameTamil) ? sub.NameTamil : sub.Name)</span>
                     </h2>
-                    <div class="d-flex gap-1">
-                        <button class="scroll-arrow-btn" onclick="scrollCarousel('scroll-@sub.Id', -260)" title="Scroll Left">
-                            <span class="material-symbols-outlined" style="font-size: 18px;">arrow_back_ios</span>
-                        </button>
-                        <button class="scroll-arrow-btn" onclick="scrollCarousel('scroll-@sub.Id', 260)" title="Scroll Right">
-                            <span class="material-symbols-outlined" style="font-size: 18px;">arrow_forward_ios</span>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- HORIZONTAL SCROLLING CONTAINER -->
-                <div class="products-horizontal-scroll" id="scroll-@sub.Id">
-                    @foreach (var p in sub.Products)
+                    @if (!isGrocery)
                     {
-                        var hasPrice = todaysPrices.ContainsKey(p.Id);
-                        var mp = hasPrice ? todaysPrices[p.Id] : null;
-
-                        <div class="horizontal-product-card-item col-product" data-product-name="@p.Name @p.NameTamil">
-                            <div class="product-app-card">
-                                
-                                <div>
-                                    <!-- Media Container -->
-                                    <div class="card-media-wrapper">
-                                        @if (!string.IsNullOrEmpty(p.ImageUrl))
-                                        {
-                                            <img src="@p.ImageUrl" alt="@p.Name" loading="lazy" />
-                                        }
-                                        else
-                                        {
-                                            <span class="material-symbols-outlined fallback-media-icon">eco</span>
-                                        }
-
-                                        <!-- Hot Deal Badge if price drop -->
-                                        @if (mp != null && mp.PriceDifference < 0)
-                                        {
-                                            <span class="hot-deal-tag">Price Drop</span>
-                                        }
-
-                                        <!-- WhatsApp Share Button -->
-                                        <button class="share-quick-btn" onclick="shareProduct('@p.Name', '@(mp != null ? mp.TodayPrice.ToString("F2") : "N/A")')" title="Share">
-                                            <span class="material-symbols-outlined" style="font-size: 16px;">share</span>
-                                        </button>
-                                    </div>
-
-                                    <!-- Title & Grade -->
-                                    <h3 class="product-title lang-en-text">@p.Name</h3>
-                                    <h3 class="product-title lang-ta-text">@(!string.IsNullOrEmpty(p.NameTamil) ? p.NameTamil : p.Name)</h3>
-
-                                    @if (!string.IsNullOrEmpty(p.Grade))
-                                    {
-                                        <span class="grade-chip">@p.Grade</span>
-                                    }
-
-                                    <!-- Price Ticker Box -->
-                                    @if (mp != null)
-                                    {
-                                        var diff = mp.PriceDifference;
-                                        var diffClass = diff > 0 ? "up" : diff < 0 ? "down" : "stable";
-                                        var diffIcon = diff > 0 ? "north_east" : diff < 0 ? "south_east" : "remove";
-
-                                        <div class="price-ticker-box">
-                                            <div class="d-flex align-items-center justify-content-between">
-                                                <div>
-                                                    <span class="price-value">₹@mp.TodayPrice.ToString("F2")</span>
-                                                    <span class="price-unit">/ KG</span>
-                                                </div>
-                                                <div class="price-badge @diffClass">
-                                                    <span class="material-symbols-outlined" style="font-size: 12px;">@diffIcon</span>
-                                                    <span>₹@Math.Abs(diff).ToString("F2")</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    }
-                                    else
-                                    {
-                                        <div class="price-ticker-box text-center py-2">
-                                            <span class="text-muted small fw-bold lang-en-text">Price on Request</span>
-                                            <span class="text-muted small fw-bold lang-ta-text">கேட்கப்படும் போது வழங்கப்படும்</span>
-                                        </div>
-                                    }
-                                </div>
-
-                                <!-- Action Buttons -->
-                                <div class="action-btn-grid mt-2">
-                                    <a asp-controller="Catalog" asp-action="Product" asp-route-slug="@p.Slug" class="btn-app btn-app-outline">
-                                        <span class="material-symbols-outlined" style="font-size: 15px;">visibility</span>
-                                        <span class="lang-en-text">View</span>
-                                        <span class="lang-ta-text">விவரம்</span>
-                                    </a>
-                                    <a asp-controller="Order" asp-action="Request" asp-route-productId="@p.Id" class="btn-app btn-app-primary">
-                                        <span class="material-symbols-outlined" style="font-size: 15px;">shopping_bag</span>
-                                        <span class="lang-en-text">Order</span>
-                                        <span class="lang-ta-text">ஆர்டர்</span>
-                                    </a>
-                                </div>
-
-                            </div>
+                        <div class="d-flex gap-1">
+                            <button class="scroll-arrow-btn" onclick="scrollCarousel('scroll-@sub.Id', -260)" title="Scroll Left">
+                                <span class="material-symbols-outlined" style="font-size: 18px;">arrow_back_ios</span>
+                            </button>
+                            <button class="scroll-arrow-btn" onclick="scrollCarousel('scroll-@sub.Id', 260)" title="Scroll Right">
+                                <span class="material-symbols-outlined" style="font-size: 18px;">arrow_forward_ios</span>
+                            </button>
                         </div>
                     }
                 </div>
+
+                @if (isGrocery)
+                {
+                    <!-- GROCERY SECTION: GRADE-WISE DISPLAY -->
+                    var gradeGroups = sub.Products
+                        .GroupBy(x => string.IsNullOrWhiteSpace(x.Grade) ? "Standard Grade" : x.Grade)
+                        .OrderBy(g => g.Key);
+
+                    @foreach (var gradeGroup in gradeGroups)
+                    {
+                        var scrollId = $"scroll-{sub.Id}-{gradeGroup.Key.Replace(" ", "-")}";
+
+                        <div class="grade-section-block mb-3">
+                            <div class="d-flex align-items-center justify-content-between">
+                                <div class="grade-section-title">
+                                    <span class="material-symbols-outlined" style="font-size: 18px; color: var(--primary-gold-dark);">verified</span>
+                                    <span>@gradeGroup.Key</span>
+                                </div>
+                                <div class="d-flex gap-1">
+                                    <button class="scroll-arrow-btn" onclick="scrollCarousel('@scrollId', -260)">
+                                        <span class="material-symbols-outlined" style="font-size: 16px;">arrow_back_ios</span>
+                                    </button>
+                                    <button class="scroll-arrow-btn" onclick="scrollCarousel('@scrollId', 260)">
+                                        <span class="material-symbols-outlined" style="font-size: 16px;">arrow_forward_ios</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="products-horizontal-scroll" id="@scrollId">
+                                @foreach (var p in gradeGroup)
+                                {
+                                    @Html.Partial("_ProductCardPartial", p, new ViewDataDictionary(ViewData) { { "TodaysPrices", todaysPrices } })
+                                }
+                            </div>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <!-- REGULAR HORIZONTAL SCROLLING FOR OTHER CATEGORIES -->
+                    <div class="products-horizontal-scroll" id="scroll-@sub.Id">
+                        @foreach (var p in sub.Products)
+                        {
+                            @Html.Partial("_ProductCardPartial", p, new ViewDataDictionary(ViewData) { { "TodaysPrices", todaysPrices } })
+                        }
+                    </div>
+                }
+
             </div>
         }
     </div>
@@ -570,15 +541,95 @@
     </a>
 </nav>
 
-<!-- Interactive Scripts -->
+<!-- Inline Helper Partial rendering for Product Card -->
+@helper RenderProductCard(Product p, Dictionary<int, MarketPrice> todaysPrices)
+{
+    var hasPrice = todaysPrices.ContainsKey(p.Id);
+    var mp = hasPrice ? todaysPrices[p.Id] : null;
+
+    <div class="horizontal-product-card-item col-product" data-product-name="@p.Name @p.NameTamil">
+        <div class="product-app-card">
+            <div>
+                <div class="card-media-wrapper">
+                    @if (!string.IsNullOrEmpty(p.ImageUrl))
+                    {
+                        <img src="@p.ImageUrl" alt="@p.Name" loading="lazy" />
+                    }
+                    else
+                    {
+                        <span class="material-symbols-outlined fallback-media-icon">eco</span>
+                    }
+
+                    @if (mp != null && mp.PriceDifference < 0)
+                    {
+                        <span class="hot-deal-tag">Price Drop</span>
+                    }
+
+                    <button class="share-quick-btn" onclick="shareProduct('@p.Name', '@(mp != null ? mp.TodayPrice.ToString("F2") : "N/A")')" title="Share">
+                        <span class="material-symbols-outlined" style="font-size: 16px;">share</span>
+                    </button>
+                </div>
+
+                <h3 class="product-title lang-en-text">@p.Name</h3>
+                <h3 class="product-title lang-ta-text">@(!string.IsNullOrEmpty(p.NameTamil) ? p.NameTamil : p.Name)</h3>
+
+                @if (!string.IsNullOrEmpty(p.Grade))
+                {
+                    <span class="grade-chip">@p.Grade</span>
+                }
+
+                @if (mp != null)
+                {
+                    var diff = mp.PriceDifference;
+                    var diffClass = diff > 0 ? "up" : diff < 0 ? "down" : "stable";
+                    var diffIcon = diff > 0 ? "north_east" : diff < 0 ? "south_east" : "remove";
+
+                    <div class="price-ticker-box">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <div>
+                                <span class="price-value">₹@mp.TodayPrice.ToString("F2")</span>
+                                <span class="price-unit">/ KG</span>
+                            </div>
+                            <div class="price-badge @diffClass">
+                                <span class="material-symbols-outlined" style="font-size: 12px;">@diffIcon</span>
+                                <span>₹@Math.Abs(diff).ToString("F2")</span>
+                            </div>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="price-ticker-box text-center py-2">
+                        <span class="text-muted small fw-bold lang-en-text">Price on Request</span>
+                        <span class="text-muted small fw-bold lang-ta-text">கேட்கப்படும் போது வழங்கப்படும்</span>
+                    </div>
+                }
+            </div>
+
+            <div class="action-btn-grid mt-2">
+                <a asp-controller="Catalog" asp-action="Product" asp-route-slug="@p.Slug" class="btn-app btn-app-outline">
+                    <span class="material-symbols-outlined" style="font-size: 15px;">visibility</span>
+                    <span class="lang-en-text">View</span>
+                    <span class="lang-ta-text">விவரம்</span>
+                </a>
+                <a asp-controller="Order" asp-action="Request" asp-route-productId="@p.Id" class="btn-app btn-app-primary">
+                    <span class="material-symbols-outlined" style="font-size: 15px;">shopping_bag</span>
+                    <span class="lang-en-text">Order</span>
+                    <span class="lang-ta-text">ஆர்டர்</span>
+                </a>
+            </div>
+        </div>
+    </div>
+}
+
 <script>
-    // Smooth Horizontal Scroll Action for Categories
     function scrollCarousel(containerId, distance) {
         const container = document.getElementById(containerId);
-        container.scrollBy({ left: distance, behavior: 'smooth' });
+        if (container) {
+            container.scrollBy({ left: distance, behavior: 'smooth' });
+        }
     }
 
-    // Smooth Scroll to Category from Pills
     function scrollToCategory(catId) {
         if (catId === 'all') {
             window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -586,20 +637,16 @@
         }
         const target = document.getElementById(catId);
         if (target) {
-            const offset = 120; // Dock spacing adjustment
+            const offset = 120;
             const bodyRect = document.body.getBoundingClientRect().top;
             const elementRect = target.getBoundingClientRect().top;
             const elementPosition = elementRect - bodyRect;
             const offsetPosition = elementPosition - offset;
 
-            window.scrollTo({
-                top: offsetPosition,
-                behavior: 'smooth'
-            });
+            window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
         }
     }
 
-    // Instant Search Filter across Horizontal Cards
     function filterProducts() {
         const query = document.getElementById('productSearchInput').value.toLowerCase().trim();
         const productCols = document.querySelectorAll('.col-product');
@@ -614,7 +661,6 @@
             }
         });
 
-        // Hide Empty Categories automatically
         subBlocks.forEach(block => {
             const visibleProducts = block.querySelectorAll('.col-product[style="display: block;"], .col-product:not([style*="display: none"])');
             if (visibleProducts.length === 0 && query !== '') {
@@ -625,15 +671,10 @@
         });
     }
 
-    // WhatsApp Native Share Integration
     function shareProduct(name, price) {
-        const shareText = `*${name}*\nToday's Market Rate: ₹${price}/KG\nCheck out live rates here: ${window.location.href}`;
+        const shareText = `*${name}*\nToday's Market Rate: ₹${price}/KG\nCheck live rates: ${window.location.href}`;
         if (navigator.share) {
-            navigator.share({
-                title: name,
-                text: shareText,
-                url: window.location.href,
-            }).catch(() => {});
+            navigator.share({ title: name, text: shareText, url: window.location.href }).catch(() => {});
         } else {
             window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(shareText)}`, '_blank');
         }
