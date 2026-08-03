@@ -24,19 +24,30 @@
         color: var(--text-main);
     }
 
-    /* DYNAMIC LANGUAGE SWITCH SYSTEM WITH LAYOUT INTEGRATION */
+    /* DYNAMIC LANGUAGE SWITCH SYSTEM */
     html[lang="en"] .lang-en, body[lang="en"] .lang-en { display: inline-block !important; }
     html[lang="en"] .lang-ta, body[lang="en"] .lang-ta { display: none !important; }
     html[lang="ta"] .lang-en, body[lang="ta"] .lang-en { display: none !important; }
     html[lang="ta"] .lang-ta, body[lang="ta"] .lang-ta { display: inline-block !important; }
 
-    /* Corporate Hero Block */
+    /* Corporate Hero Block - FIXED FLEX ALIGNMENT */
     .corporate-hero-block {
         background: radial-gradient(100% 100% at 50% 0%, rgba(212, 175, 55, 0.06) 0%, rgba(255, 255, 255, 0) 100%), var(--bg-light);
-        padding: 70px 20px 50px 20px;
+        padding: 60px 20px 45px 20px;
         position: relative;
         border-bottom: 1px solid var(--border-refined);
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .hero-flex-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
         text-align: center;
+        max-width: 900px;
+        margin: 0 auto;
     }
 
     .corporate-hero-block::before {
@@ -59,30 +70,38 @@
         font-weight: 700;
         font-size: 0.78rem;
         display: inline-block;
-        margin-bottom: 1rem;
+        margin-bottom: 1.2rem;
         text-transform: uppercase;
         letter-spacing: 1.5px;
     }
 
+    /* FIX: Force Block Element & Line Height to Avoid Overlapping */
     .hero-corporate-title {
+        display: block !important;
+        width: 100%;
         font-family: 'Cinzel', serif;
         font-weight: 900;
-        font-size: clamp(2.2rem, 4.5vw, 3.2rem);
+        font-size: clamp(2rem, 4.5vw, 3.2rem);
         color: var(--dark-corporate);
         letter-spacing: 1px;
-        margin-bottom: 12px;
+        margin: 0 0 16px 0 !important;
+        line-height: 1.25 !important;
+        text-align: center;
     }
 
     .hero-corporate-subtitle {
-        font-size: 1.05rem;
+        display: block !important;
+        width: 100%;
+        font-size: clamp(0.95rem, 2vw, 1.1rem);
         color: var(--text-muted);
         max-width: 650px;
-        margin: 0 auto;
+        margin: 0 auto !important;
         font-weight: 500;
         line-height: 1.6;
+        text-align: center;
     }
 
-    /* Original Link & Card Structure */
+    /* Link & Card Structure */
     .wholesale-corporate-link {
         text-decoration: none !important;
         display: block;
@@ -94,7 +113,7 @@
         background: #FFFFFF;
         border: 1px solid var(--border-refined);
         border-radius: 24px;
-        padding: 40px;
+        padding: 36px 32px;
         height: 100%;
         position: relative;
         box-shadow: 0 10px 30px -10px rgba(15, 23, 42, 0.04);
@@ -108,8 +127,8 @@
     .card-meta-header {
         display: flex;
         justify-content: space-between;
-        align-items: flex-start;
-        margin-bottom: 28px;
+        align-items: center;
+        margin-bottom: 24px;
     }
 
     .live-ticker-pill {
@@ -135,11 +154,11 @@
         animation: tickerBlink 1.8s infinite;
     }
 
-    /* Original Avatar & Glow Animations */
+    /* Avatar & Glow Animations */
     .b2b-avatar-holder {
         position: relative;
-        width: 96px;
-        height: 96px;
+        width: 80px;
+        height: 80px;
     }
 
     .b2b-avatar-glow-ring {
@@ -172,38 +191,20 @@
         transition: transform 0.6s ease;
     }
 
-    /* Original Interactive Desktop Hover Animations */
+    /* Desktop Hover Effects */
     @@media (min-width: 992px) {
         .wholesale-corporate-link:hover .b2b-catalog-card {
-            transform: translateY(-8px) scale(1.01);
+            transform: translateY(-8px);
             border-color: rgba(212, 175, 55, 0.4);
             box-shadow: 0 30px 60px -15px rgba(15, 23, 42, 0.08), 0 0 50px -10px var(--brt-gold-glow);
         }
 
-        .wholesale-corporate-link:hover .b2b-avatar-glow-ring {
-            opacity: 1;
-        }
-
-        .wholesale-corporate-link:hover .b2b-image-avatar-frame {
-            transform: scale(1.05);
-        }
-
-        .wholesale-corporate-link:hover .b2b-image-avatar-frame img {
-            transform: scale(1.12) rotate(3deg);
-        }
-
-        .wholesale-corporate-link:hover .b2b-card-title {
-            color: #B59226;
-        }
-
-        .wholesale-corporate-link:hover .b2b-action-trigger {
-            color: #B59226;
-        }
-
-        .wholesale-corporate-link:hover .btn-circle-arrow {
-            background: var(--dark-corporate);
-        }
-
+        .wholesale-corporate-link:hover .b2b-avatar-glow-ring { opacity: 1; }
+        .wholesale-corporate-link:hover .b2b-image-avatar-frame { transform: scale(1.05); }
+        .wholesale-corporate-link:hover .b2b-image-avatar-frame img { transform: scale(1.12) rotate(3deg); }
+        .wholesale-corporate-link:hover .b2b-card-title { color: #B59226; }
+        .wholesale-corporate-link:hover .b2b-action-trigger { color: #B59226; }
+        .wholesale-corporate-link:hover .btn-circle-arrow { background: var(--dark-corporate); }
         .wholesale-corporate-link:hover .btn-circle-arrow span.material-symbols-outlined {
             color: #FFFFFF;
             transform: rotate(-45deg);
@@ -213,26 +214,26 @@
     .b2b-card-title {
         font-family: 'Cinzel', serif;
         font-weight: 700;
-        font-size: 1.85rem;
+        font-size: 1.75rem;
         color: var(--dark-corporate);
         margin-bottom: 12px;
         transition: color 0.3s ease;
     }
 
     .b2b-card-desc {
-        font-size: 0.96rem;
+        font-size: 0.95rem;
         color: var(--text-muted);
-        line-height: 1.65;
-        margin-bottom: 35px;
+        line-height: 1.6;
+        margin-bottom: 28px;
         font-weight: 400;
     }
 
     .b2b-action-trigger {
-        display: inline-flex;
+        display: flex;
         align-items: center;
         justify-content: space-between;
         width: 100%;
-        padding-top: 22px;
+        padding-top: 20px;
         border-top: 1px dashed #E2E8F0;
         font-size: 0.85rem;
         font-weight: 800;
@@ -243,8 +244,8 @@
     }
 
     .btn-circle-arrow {
-        width: 44px;
-        height: 44px;
+        width: 42px;
+        height: 42px;
         border-radius: 50%;
         background: #F1F5F9;
         display: flex;
@@ -259,17 +260,17 @@
         transition: transform 0.3s ease;
     }
 
-    /* Keyframes with Razor escape @@ */
+    /* Keyframes */
     @@keyframes tickerBlink {
         0% { opacity: 0.3; }
         50% { opacity: 1; }
         100% { opacity: 0.3; }
     }
 
-    /* Mobile Responsive Optimizations */
+    /* Mobile Alignment Rules */
     @@media (max-width: 767.98px) {
         .corporate-hero-block {
-            padding: 50px 15px 35px;
+            padding: 40px 15px 30px;
         }
 
         .b2b-catalog-card {
@@ -278,12 +279,12 @@
         }
 
         .b2b-avatar-holder {
-            width: 72px;
-            height: 72px;
+            width: 68px;
+            height: 68px;
         }
 
         .b2b-card-title {
-            font-size: 1.45rem;
+            font-size: 1.4rem;
         }
 
         .b2b-card-desc {
@@ -293,21 +294,28 @@
     }
 </style>
 
+<!-- Hero Section with Flexbox Wrapper -->
 <section class="corporate-hero-block">
-    <div class="container">
+    <div class="hero-flex-wrapper">
         <div class="hero-badge">
             <span class="lang-en">B2B Trade Portal</span>
             <span class="lang-ta">B2B வர்த்தக தளம்</span>
         </div>
-        <h1 class="hero-corporate-title lang-en">Wholesale Products</h1>
-        <h1 class="hero-corporate-title lang-ta">மொத்த விற்பனை தயாரிப்புகள்</h1>
+        
+        <h1 class="hero-corporate-title">
+            <span class="lang-en">Wholesale Products</span>
+            <span class="lang-ta">மொத்த விற்பனை தயாரிப்புகள்</span>
+        </h1>
 
-        <p class="hero-corporate-subtitle lang-en">Choose a category to browse live-priced dealer wholesale rates</p>
-        <p class="hero-corporate-subtitle lang-ta">டீலர் மொத்த விற்பனை விலைகளை அறிய ஒரு வகையைத் தேர்ந்தெடுக்கவும்</p>
+        <p class="hero-corporate-subtitle">
+            <span class="lang-en">Choose a category to browse live-priced dealer wholesale rates</span>
+            <span class="lang-ta">டீலர் மொத்த விற்பனை விலைகளை அறிய ஒரு வகையைத் தேர்ந்தெடுக்கவும்</span>
+        </p>
     </div>
 </section>
 
-<div class="container my-5 py-2">
+<!-- Content Grid -->
+<div class="container my-4 my-md-5">
     <div class="row g-4 justify-content-center">
 
         <!-- Garlic Category -->
