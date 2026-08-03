@@ -1,7 +1,8 @@
 @model Product
 @{
-    Layout = "_Layout";
-    var mp = (MarketPrice?)ViewBag.TodayPrice;
+    Layout = "_Layout";
+    ViewData["Title"] = Model.Name;
+    var mp = (MarketPrice?)ViewBag.TodayPrice;
 }
 
 <!-- Premium Corporate Fonts & Icons Core -->
@@ -9,580 +10,505 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 
 <style>
-    :root {
-        --brt-gold-pure: #B38F43;
-        --brt-gold-dark: #8C6D2D;
-        --brt-gold-light: #FBF4E4;
-        --brt-dark-navy: #0B0F19;
-        --brt-surface-white: #FFFFFF;
-        --brt-bg-cream: #FFFDF9;
-        --text-main: #1F2937;
-        --text-muted: #6B7280;
-        --border-refined: rgba(179, 143, 67, 0.18);
-        --price-up-bg: rgba(16, 185, 129, 0.08);
-        --price-up-text: #059669;
-        --price-down-bg: rgba(239, 68, 68, 0.08);
-        --price-down-text: #DC2626;
-        --whatsapp-green: #25D366;
-    }
+    :root {
+        --brt-gold-pure: #B38F43;
+        --brt-gold-dark: #8C6D2D;
+        --brt-gold-light: #FBF4E4;
+        --brt-dark-navy: #0B0F19;
+        --brt-surface-white: #FFFFFF;
+        --brt-bg-cream: #FFFDF9;
+        --text-main: #1F2937;
+        --text-muted: #6B7280;
+        --border-refined: rgba(179, 143, 67, 0.18);
+        
+        /* Dynamic Price Box Colors */
+        --price-down-border: #DC2626;
+        --price-down-bg: #FEF2F2;
+        --price-down-text: #991B1B;
+        
+        --price-up-border: #059669;
+        --price-up-bg: #ECFDF5;
+        --price-up-text: #065F46;
 
-    body {
-        font-family: 'Plus Jakarta Sans', sans-serif;
-        background-color: var(--brt-bg-cream);
-        color: var(--text-main);
-        padding-bottom: 90px; /* Space for Sticky Mobile Bar */
-    }
+        --whatsapp-green: #25D366;
+    }
 
-    /* AUTOMATIC DYNAMIC LANGUAGE CONTROLLER */
-    html[lang="en"] .lang-ta, body[lang="en"] .lang-ta {
-        display: none !important;
-    }
+    body {
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        background-color: var(--brt-bg-cream);
+        color: var(--text-main);
+        padding-bottom: 90px;
+    }
 
-    html[lang="ta"] .lang-en, body[lang="ta"] .lang-en {
-        display: none !important;
-    }
+    /* DYNAMIC LANGUAGE CONTROLLER */
+    html[lang="en"] .lang-ta, body[lang="en"] .lang-ta { display: none !important; }
+    html[lang="ta"] .lang-en, body[lang="ta"] .lang-en { display: none !important; }
 
-    /* APP TOP HEADER BAR (Mobile First) */
-    .app-top-nav {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        margin-bottom: 20px;
-    }
+    /* APP TOP NAV BAR */
+    .app-top-nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 24px;
+    }
 
-    .app-back-btn {
-        width: 42px;
-        height: 42px;
-        border-radius: 50%;
-        background: var(--brt-surface-white);
-        border: 1px solid var(--border-refined);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: var(--brt-dark-navy);
-        text-decoration: none;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
-    }
+    .app-back-btn {
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        background: var(--brt-surface-white);
+        border: 1px solid var(--border-refined);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--brt-dark-navy);
+        text-decoration: none !important;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+    }
 
-    /* HERO SHOWCASE CARD (Matches Wholesale Products Clean Light Vibe) */
-    .app-hero-card {
-        background: var(--brt-surface-white);
-        border: 1px solid var(--border-refined);
-        border-radius: 28px;
-        padding: 24px;
-        box-shadow: 0 15px 35px -10px rgba(11, 15, 25, 0.05);
-        text-align: center;
-        position: relative;
-    }
+    .corporate-path-capsule {
+        display: inline-flex;
+        align-items: center;
+        background: var(--brt-gold-light);
+        border: 1px solid var(--border-refined);
+        color: var(--brt-gold-dark);
+        padding: 6px 18px;
+        border-radius: 100px;
+        font-size: 0.72rem;
+        font-weight: 800;
+        letter-spacing: 0.6px;
+        text-transform: uppercase;
+    }
 
-    .app-product-img {
-        max-height: 280px;
-        width: auto;
-        object-fit: contain;
-        border-radius: 18px;
-        transition: transform 0.4s ease;
-    }
+    /* LEFT HERO IMAGE SHOWCASE */
+    .app-hero-card {
+        background: var(--brt-surface-white);
+        border: 1px solid var(--border-refined);
+        border-radius: 28px;
+        padding: 24px;
+        box-shadow: 0 10px 30px -10px rgba(11, 15, 25, 0.03);
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 380px;
+    }
 
-    .detail-fallback-frame {
-        height: 260px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 4rem;
-        color: var(--brt-gold-pure);
-        background: var(--brt-gold-light);
-        border-radius: 20px;
-    }
+    .app-product-img {
+        max-height: 320px;
+        width: 100%;
+        object-fit: cover;
+        border-radius: 20px;
+    }
 
-    /* BREADCRUMB CAPSULE */
-    .corporate-path-capsule {
-        display: inline-flex;
-        align-items: center;
-        background: var(--brt-gold-light);
-        border: 1px solid var(--border-refined);
-        color: var(--brt-gold-dark);
-        padding: 5px 14px;
-        border-radius: 100px;
-        font-size: 0.72rem;
-        font-weight: 700;
-        letter-spacing: 0.6px;
-        text-transform: uppercase;
-    }
+    /* TYPOGRAPHY */
+    .detail-corporate-title {
+        font-family: 'Playfair Display', serif;
+        font-weight: 700;
+        font-size: 2.5rem;
+        color: var(--brt-dark-navy);
+        line-height: 1.1;
+        margin: 0 0 8px 0;
+    }
 
-    /* TYPOGRAPHY (LIGHT BACKGROUND STYLE) */
-    .detail-corporate-title {
-        font-family: 'Playfair Display', serif;
-        font-weight: 700;
-        font-size: 2.2rem;
-        color: var(--brt-dark-navy);
-        line-height: 1.2;
-        margin: 12px 0 8px 0;
-        letter-spacing: -0.3px;
-    }
+    .detail-corporate-title-ta {
+        font-size: 2rem;
+        font-weight: 800;
+        color: var(--brt-dark-navy);
+        margin: 0 0 8px 0;
+    }
 
-    .detail-corporate-title-ta {
-        font-family: 'Plus Jakarta Sans', sans-serif;
-        font-weight: 800;
-        font-size: 1.9rem;
-        color: var(--brt-dark-navy);
-        line-height: 1.3;
-        margin: 12px 0 8px 0;
-    }
+    .premium-grade-badge {
+        display: inline-flex;
+        align-items: center;
+        background: var(--brt-dark-navy);
+        color: var(--brt-gold-pure);
+        font-weight: 800;
+        font-size: 0.68rem;
+        padding: 5px 12px;
+        border-radius: 6px;
+        letter-spacing: 1.2px;
+        text-transform: uppercase;
+        margin-bottom: 20px;
+    }
 
-    .premium-grade-badge {
-        display: inline-flex;
-        align-items: center;
-        background: var(--brt-dark-navy);
-        color: var(--brt-gold-pure);
-        font-weight: 800;
-        font-size: 0.7rem;
-        padding: 5px 12px;
-        border-radius: 6px;
-        letter-spacing: 1.2px;
-        text-transform: uppercase;
-        margin-bottom: 18px;
-    }
+    /* EXACT FINANCIAL PRICE WIDGET (MATCHING SCREENSHOT) */
+    .detail-ticker-panel {
+        border-radius: 20px;
+        padding: 20px 24px;
+        margin: 20px 0;
+        border: 1px solid var(--border-refined);
+        background: var(--brt-surface-white);
+        box-shadow: 0 8px 20px -5px rgba(11, 15, 25, 0.03);
+        position: relative;
+        overflow: hidden;
+    }
 
-    /* FINANCIAL TRADING TICKER WIDGET */
-    .detail-ticker-panel {
-        border-radius: 20px;
-        padding: 20px;
-        margin: 20px 0;
-        border: 1px solid var(--border-refined);
-        background: var(--brt-surface-white);
-        box-shadow: 0 10px 25px -5px rgba(11, 15, 25, 0.04);
-        position: relative;
-    }
+    /* RED ACCENT LINE LEFT (PRICE DROP) */
+    .detail-ticker-panel.state-down::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 6px;
+        height: 100%;
+        background: var(--price-down-border);
+    }
 
-    .detail-ticker-panel::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 5px;
-        height: 100%;
-        border-radius: 20px 0 0 20px;
-    }
+    /* GREEN ACCENT LINE LEFT (PRICE UP) */
+    .detail-ticker-panel.state-up::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 6px;
+        height: 100%;
+        background: var(--price-up-border);
+    }
 
-    .detail-ticker-panel.state-up::before { background: var(--price-up-text); }
-    .detail-ticker-panel.state-down::before { background: var(--price-down-text); }
-    .detail-ticker-panel.state-stable::before { background: var(--brt-gold-pure); }
+    .panel-price-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
 
-    .panel-price-row {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-    }
+    .panel-live-amount {
+        font-size: 2.5rem;
+        font-weight: 800;
+        color: var(--brt-dark-navy);
+        letter-spacing: -1px;
+    }
 
-    .panel-live-amount {
-        font-size: 2.2rem;
-        font-weight: 800;
-        color: var(--brt-dark-navy);
-        letter-spacing: -1px;
-    }
+    .panel-live-unit {
+        font-size: 0.9rem;
+        color: var(--text-muted);
+        font-weight: 700;
+    }
 
-    .panel-live-unit {
-        font-size: 0.85rem;
-        color: var(--text-muted);
-        font-weight: 600;
-    }
+    .panel-status-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        font-size: 0.82rem;
+        font-weight: 800;
+        padding: 6px 14px;
+        border-radius: 10px;
+    }
 
-    .panel-status-pill {
-        display: inline-flex;
-        align-items: center;
-        gap: 4px;
-        font-size: 0.8rem;
-        font-weight: 800;
-        padding: 6px 12px;
-        border-radius: 10px;
-    }
+    .panel-status-pill.down {
+        background: var(--price-down-bg);
+        color: var(--price-down-text);
+    }
 
-    .panel-status-pill.up { background: var(--price-up-bg); color: var(--price-up-text); }
-    .panel-status-pill.down { background: var(--price-down-bg); color: var(--price-down-text); }
-    .panel-status-pill.stable { background: var(--brt-gold-light); color: var(--brt-gold-dark); }
+    .panel-status-pill.up {
+        background: var(--price-up-bg);
+        color: var(--price-up-text);
+    }
 
-    .panel-ticker-footer {
-        margin-top: 12px;
-        font-size: 0.75rem;
-        font-weight: 600;
-        color: var(--text-muted);
-        display: flex;
-        justify-content: space-between;
-        border-top: 1px solid var(--border-refined);
-        padding-top: 10px;
-    }
+    .panel-ticker-footer {
+        margin-top: 14px;
+        font-size: 0.78rem;
+        font-weight: 600;
+        color: var(--text-muted);
+        display: flex;
+        justify-content: space-between;
+        border-top: 1px solid var(--border-refined);
+        padding-top: 12px;
+    }
 
-    /* B2B CUSTOM REQUEST PANEL */
-    .detail-quote-panel {
-        background: var(--brt-gold-light);
-        border: 1px dashed var(--brt-gold-pure);
-        border-radius: 20px;
-        padding: 20px;
-        text-align: center;
-        margin: 20px 0;
-    }
+    /* PACKAGING TAGS (CAPSULE CHIPS) */
+    .quantum-pack-heading {
+        font-size: 0.75rem;
+        font-weight: 800;
+        color: var(--brt-gold-dark);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 12px;
+    }
 
-    .detail-quote-title {
-        font-size: 0.95rem;
-        font-weight: 800;
-        color: var(--brt-dark-navy);
-        text-transform: uppercase;
-        margin-bottom: 4px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 6px;
-    }
+    .quantum-pack-vault {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 24px;
+    }
 
-    .detail-quote-desc {
-        font-size: 0.82rem;
-        color: var(--brt-gold-dark);
-        margin: 0;
-        font-weight: 600;
-    }
+    .quantum-pack-chip {
+        background: var(--brt-gold-light);
+        border: 1px solid var(--border-refined);
+        color: var(--brt-dark-navy);
+        font-size: 0.82rem;
+        font-weight: 700;
+        padding: 8px 18px;
+        border-radius: 12px;
+    }
 
-    /* PACKAGING INFRASTRUCTURE */
-    .quantum-pack-heading {
-        font-size: 0.78rem;
-        font-weight: 800;
-        color: var(--brt-gold-dark);
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        margin-bottom: 10px;
-    }
+    /* 2x2 DISCLAIMER GRID */
+    .cyber-disclaimer-vault {
+        background: var(--brt-surface-white);
+        border: 1px solid var(--border-refined);
+        border-radius: 20px;
+        padding: 20px;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+        margin-bottom: 24px;
+    }
 
-    .quantum-pack-vault {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
-        margin-bottom: 24px;
-    }
+    .cyber-disclaimer-item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
 
-    .quantum-pack-chip {
-        background: var(--brt-surface-white);
-        border: 1px solid var(--border-refined);
-        color: var(--brt-dark-navy);
-        font-size: 0.8rem;
-        font-weight: 700;
-        padding: 6px 14px;
-        border-radius: 10px;
-    }
+    .cyber-disclaimer-item .icon-wrapper {
+        width: 38px;
+        height: 38px;
+        background: var(--brt-gold-light);
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--brt-gold-dark);
+        flex-shrink: 0;
+    }
 
-    .quantum-pack-chip.is-loose {
-        border-style: dashed;
-        background: var(--brt-gold-light);
-        color: var(--brt-gold-dark);
-    }
+    .cyber-text-title {
+        font-size: 0.8rem;
+        font-weight: 800;
+        color: var(--brt-dark-navy);
+        display: block;
+    }
 
-    /* REGULATORY INFORMATION GRID */
-    .cyber-disclaimer-vault {
-        background: var(--brt-surface-white);
-        border: 1px solid var(--border-refined);
-        border-radius: 20px;
-        padding: 16px;
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 12px;
-        margin-bottom: 20px;
-    }
+    .cyber-text-subtitle {
+        font-size: 0.72rem;
+        color: var(--text-muted);
+        display: block;
+    }
 
-    .cyber-disclaimer-item {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-    }
+    /* STICKY FOOTER BAR FOR MOBILE & DESKTOP */
+    .app-sticky-bar {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: var(--brt-surface-white);
+        border-top: 1px solid var(--border-refined);
+        padding: 14px 20px;
+        box-shadow: 0 -10px 25px rgba(0,0,0,0.04);
+        z-index: 1000;
+        display: flex;
+        gap: 12px;
+        align-items: center;
+    }
 
-    .cyber-disclaimer-item .icon-wrapper {
-        width: 36px;
-        height: 36px;
-        background: var(--brt-gold-light);
-        border-radius: 8px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: var(--brt-gold-dark);
-        flex-shrink: 0;
-    }
+    .btn-app-action {
+        height: 52px;
+        border-radius: 14px;
+        font-weight: 800;
+        font-size: 0.9rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        text-decoration: none !important;
+        transition: transform 0.2s ease;
+    }
 
-    .cyber-text-title {
-        font-size: 0.78rem;
-        font-weight: 700;
-        color: var(--brt-dark-navy);
-        display: block;
-    }
+    .btn-app-gold {
+        background: var(--brt-dark-navy);
+        color: var(--brt-surface-white) !important;
+        flex: 3;
+    }
 
-    .cyber-text-subtitle {
-        font-size: 0.7rem;
-        color: var(--text-muted);
-        display: block;
-    }
+    .btn-app-icon {
+        width: 52px;
+        background: var(--brt-surface-white);
+        border: 1px solid var(--border-refined);
+        color: var(--brt-dark-navy) !important;
+        flex: 0 0 52px;
+    }
 
-    /* APP STICKY FOOTER ACTION BAR */
-    .app-sticky-bar {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        background: var(--brt-surface-white);
-        border-top: 1px solid var(--border-refined);
-        padding: 12px 16px;
-        box-shadow: 0 -10px 25px rgba(0,0,0,0.06);
-        z-index: 1000;
-        display: flex;
-        gap: 10px;
-        align-items: center;
-    }
+    .btn-app-whatsapp {
+        width: 52px;
+        background: rgba(37, 211, 102, 0.12);
+        border: 1px solid var(--whatsapp-green);
+        color: var(--whatsapp-green) !important;
+        flex: 0 0 52px;
+    }
 
-    .btn-app-action {
-        height: 48px;
-        border-radius: 14px;
-        font-weight: 800;
-        font-size: 0.88rem;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 6px;
-        text-decoration: none !important;
-        transition: transform 0.2s ease;
-    }
+    /* RESPONSIVE CSS */
+    @@media (min-width: 992px) {
+        .app-sticky-bar {
+            position: static;
+            box-shadow: none;
+            background: transparent;
+            padding: 0;
+            border: none;
+        }
+        body { padding-bottom: 20px; }
+    }
 
-    .btn-app-action:active {
-        transform: scale(0.97);
-    }
-
-    .btn-app-gold {
-        background: var(--brt-dark-navy);
-        color: var(--brt-surface-white) !important;
-        border: 1px solid var(--brt-gold-pure);
-        flex: 2;
-    }
-
-    .btn-app-icon {
-        width: 48px;
-        background: var(--brt-bg-cream);
-        border: 1px solid var(--border-refined);
-        color: var(--brt-dark-navy) !important;
-        flex: 0 0 48px;
-    }
-
-    .btn-app-whatsapp {
-        width: 48px;
-        background: rgba(37, 211, 102, 0.1);
-        border: 1px solid var(--whatsapp-green);
-        color: var(--whatsapp-green) !important;
-        flex: 0 0 48px;
-    }
-
-    /* RESPONSIVE CSS */
-    @@media (min-width: 992px) {
-        .app-sticky-bar {
-            position: static;
-            box-shadow: none;
-            background: transparent;
-            padding: 0;
-            border: none;
-        }
-        .btn-app-icon, .btn-app-whatsapp {
-            width: auto;
-            padding: 0 20px;
-            flex: 1;
-        }
-        body {
-            padding-bottom: 0;
-        }
-    }
-
-    @@media (max-width: 576px) {
-        .cyber-disclaimer-vault { grid-template-columns: 1fr; }
-        .detail-corporate-title { font-size: 1.8rem; }
-        .detail-corporate-title-ta { font-size: 1.5rem; }
-    }
+    @@media (max-width: 576px) {
+        .cyber-disclaimer-vault { grid-template-columns: 1fr; }
+        .detail-corporate-title { font-size: 2rem; }
+    }
 </style>
 
 <div class="container my-3 my-md-4">
 
-    <!-- Top App Bar Navigation -->
-    <div class="app-top-nav">
-        <a href="javascript:history.back()" class="app-back-btn">
-            <span class="material-symbols-outlined">arrow_back</span>
-        </a>
-        <div class="corporate-path-capsule">
-            @Model.SubCategory?.Category?.Name &rarr; @Model.SubCategory?.Name
-        </div>
-        <button class="app-back-btn" onclick="navigator.share ? navigator.share({title: '@Model.Name', url: window.location.href}) : null">
-            <span class="material-symbols-outlined" style="font-size: 20px;">share</span>
-        </button>
-    </div>
+    <!-- Top Navigation Bar -->
+    <div class="app-top-nav">
+        <a href="javascript:history.back()" class="app-back-btn">
+            <span class="material-symbols-outlined">arrow_back</span>
+        </a>
 
-    <div class="row g-4">
+        <div class="corporate-path-capsule">
+            @Model.SubCategory?.Category?.Name &rarr; @Model.SubCategory?.Name
+        </div>
 
-        <!-- Showcase Image Section -->
-        <div class="col-lg-6">
-            <div class="app-hero-card">
-                @if (!string.IsNullOrEmpty(Model.ImageUrl))
-                {
-                    <img src="@Model.ImageUrl" alt="@Model.Name" class="img-fluid app-product-img" />
-                }
-                else
-                {
-                    <div class="detail-fallback-frame">
-                        <span class="material-symbols-outlined">eco</span>
-                    </div>
-                }
-            </div>
-        </div>
+        <button class="app-back-btn" onclick="navigator.share ? navigator.share({title: '@Model.Name', url: window.location.href}) : null">
+            <span class="material-symbols-outlined" style="font-size: 20px;">share</span>
+        </button>
+    </div>
 
-        <!-- Spec Terminal -->
-        <div class="col-lg-6">
+    <div class="row g-4 align-items-center">
 
-            <!-- Titles -->
-            <h1 class="detail-corporate-title lang-en">@Model.Name</h1>
-            @if (!string.IsNullOrEmpty(Model.NameTamil))
-            {
-                <h1 class="detail-corporate-title-ta lang-ta">@Model.NameTamil</h1>
-            }
+        <!-- Showcase Image Section (Left) -->
+        <div class="col-lg-6">
+            <div class="app-hero-card">
+                @if (!string.IsNullOrEmpty(Model.ImageUrl))
+                {
+                    <img src="@Model.ImageUrl" alt="@Model.Name" class="app-product-img" />
+                }
+                else
+                {
+                    <div class="py-5 text-center">
+                        <span class="material-symbols-outlined text-muted" style="font-size: 4rem;">eco</span>
+                    </div>
+                }
+            </div>
+        </div>
 
-            @if (!string.IsNullOrEmpty(Model.Grade))
-            {
-                <span class="premium-grade-badge">@Model.Grade</span>
-            }
+        <!-- Details & Pricing Engine (Right) -->
+        <div class="col-lg-6">
 
-            <!-- Pricing Engine Widget -->
-            @if (mp != null)
-            {
-                var diff = mp.PriceDifference;
-                var boxState = diff > 0 ? "state-up" : diff < 0 ? "state-down" : "state-stable";
-                var diffClass = diff > 0 ? "up" : diff < 0 ? "down" : "stable";
-                var diffIcon = diff > 0 ? "arrow_upward" : diff < 0 ? "arrow_downward" : "horizontal_rule";
+            <!-- Titles -->
+            <h1 class="detail-corporate-title lang-en">@Model.Name</h1>
+            @if (!string.IsNullOrEmpty(Model.NameTamil))
+            {
+                <h1 class="detail-corporate-title-ta lang-ta">@Model.NameTamil</h1>
+            }
 
-                <div class="detail-ticker-panel @boxState">
-                    <div class="panel-price-row">
-                        <div>
-                            <span class="panel-live-amount">₹@mp.TodayPrice.ToString("F2")</span>
-                            <span class="panel-live-unit">/ KG</span>
-                        </div>
-                        <span class="panel-status-pill @diffClass">
-                            <span class="material-symbols-outlined" style="font-size: 15px;">@diffIcon</span>
-                            <strong>₹@Math.Abs(diff).ToString("F2")</strong>
-                        </span>
-                    </div>
-                    <div class="panel-ticker-footer">
-                        <span>
-                            <span class="lang-en">GST Net Included</span>
-                            <span class="lang-ta">GST வரிகள் உட்பட</span>
-                        </span>
-                        <span>
-                            @mp.UpdatedAt.ToString("dd MMM, hh:mm tt")
-                        </span>
-                    </div>
-                </div>
-            }
-            else
-            {
-                <div class="detail-quote-panel">
-                    <div class="detail-quote-title">
-                        <span class="material-symbols-outlined">analytics</span>
-                        <span class="lang-en">Custom Price Requested</span>
-                        <span class="lang-ta">பிரத்தியேக விலை தேவை</span>
-                    </div>
-                    <p class="detail-quote-desc">
-                        <span class="lang-en">Wholesale Supply Matrix — High Volume Orders</span>
-                        <span class="lang-ta">பெரிய பல்க் ஆர்டர்களுக்கு மட்டும் விலை</span>
-                    </p>
-                </div>
-            }
+            @if (!string.IsNullOrEmpty(Model.Grade))
+            {
+                <span class="premium-grade-badge">@Model.Grade</span>
+            }
 
-            <!-- Description -->
-            @if (!string.IsNullOrEmpty(Model.Description))
-            {
-                <p style="font-size: 0.92rem; color: var(--text-main); line-height: 1.6; margin-bottom: 20px;">
-                    @Model.Description
-                </p>
-            }
+            <!-- Screenshot Style Ticker Panel -->
+            @if (mp != null)
+            {
+                var diff = mp.PriceDifference;
+                var boxState = diff < 0 ? "state-down" : diff > 0 ? "state-up" : "state-stable";
 
-            <!-- Configured Packing Tags -->
-            <h6 class="quantum-pack-heading">
-                <span class="lang-en">Available Packings</span>
-                <span class="lang-ta">கிடைக்கும் பேக்கிங் அளவுகள்</span>
-            </h6>
-            <div class="quantum-pack-vault">
-                @foreach (var pt in Model.PackingTypes.Where(x => x.IsActive))
-                {
-                    var looseClass = pt.IsLoose ? "is-loose" : "";
-                    <span class="quantum-pack-chip @looseClass">
-                        @pt.PackSize
-                        @if (pt.IsLoose)
-                        {
-                            <small class="lang-en">(Loose)</small>
-                            <small class="lang-ta">(உதிரி)</small>
-                        }
-                    </span>
-                }
-            </div>
+                <div class="detail-ticker-panel @boxState">
+                    <div class="panel-price-row">
+                        <div>
+                            <span class="panel-live-amount">₹@mp.TodayPrice.ToString("F2")</span>
+                            <span class="panel-live-unit">/KG</span>
+                        </div>
 
-            <!-- Safe Trade Vault Layout -->
-            <div class="cyber-disclaimer-vault">
-                <div class="cyber-disclaimer-item">
-                    <div class="icon-wrapper">
-                        <span class="material-symbols-outlined">verified</span>
-                    </div>
-                    <div>
-                        <span class="cyber-text-title lang-en">Bulk Preferred</span>
-                        <span class="cyber-text-title lang-ta">மொத்த விற்பனை</span>
-                        <span class="cyber-text-subtitle lang-en">High volume</span>
-                        <span class="cyber-text-subtitle lang-ta">பெரிய அளவு</span>
-                    </div>
-                </div>
-                <div class="cyber-disclaimer-item">
-                    <div class="icon-wrapper">
-                        <span class="material-symbols-outlined">receipt_long</span>
-                    </div>
-                    <div>
-                        <span class="cyber-text-title lang-en">GST/Taxes Inc.</span>
-                        <span class="cyber-text-title lang-ta">GST வரிகள் உட்பட</span>
-                        <span class="cyber-text-subtitle lang-en">Tax Invoicing</span>
-                        <span class="cyber-text-subtitle lang-ta">வரி சீட்டுடன்</span>
-                    </div>
-                </div>
-                <div class="cyber-disclaimer-item">
-                    <div class="icon-wrapper">
-                        <span class="material-symbols-outlined">local_shipping</span>
-                    </div>
-                    <div>
-                        <span class="cyber-text-title lang-en">Transport Extra</span>
-                        <span class="cyber-text-title lang-ta">போக்குவரத்து தனி</span>
-                        <span class="cyber-text-subtitle lang-en">Ex-Warehouse</span>
-                        <span class="cyber-text-subtitle lang-ta">கிடங்கு விலை</span>
-                    </div>
-                </div>
-                <div class="cyber-disclaimer-item">
-                    <div class="icon-wrapper">
-                        <span class="material-symbols-outlined">gavel</span>
-                    </div>
-                    <div>
-                        <span class="cyber-text-title lang-en">Admin Clearance</span>
-                        <span class="cyber-text-title lang-ta">அங்கீகரிக்கப்பட்டது</span>
-                        <span class="cyber-text-subtitle lang-en">Verified Order</span>
-                        <span class="cyber-text-subtitle lang-ta">சரிபார்க்கப்பட்டது</span>
-                    </div>
-                </div>
-            </div>
+                        @if (diff < 0)
+                        {
+                            <!-- Red Drop Badge -->
+                            <span class="panel-status-pill down">
+                                ↓ ₹@Math.Abs(diff).ToString("F2")
+                            </span>
+                        }
+                        else if (diff > 0)
+                        {
+                            <!-- Green Up Badge -->
+                            <span class="panel-status-pill up">
+                                ↑ ₹@Math.Abs(diff).ToString("F2")
+                            </span>
+                        }
+                    </div>
 
-            <!-- App Sticky Action Bar (Mobile native action bar) -->
-            <div class="app-sticky-bar">
-                <a asp-controller="Order" asp-action="Request" asp-route-productId="@Model.Id" class="btn-app-action btn-app-gold">
-                    <span class="material-symbols-outlined">shopping_cart</span>
-                    <span class="lang-en">Request Bulk Order</span>
-                    <span class="lang-ta">பல்க் ஆர்டர் செய்க</span>
-                </a>
-                <a href="tel:9865680694" class="btn-app-action btn-app-icon" title="Call">
-                    <span class="material-symbols-outlined">call</span>
-                </a>
-                <a href="https://api.whatsapp.com/send?phone=919865680694&text=Enquiry%20about%20@Model.Name" class="btn-app-action btn-app-whatsapp" title="WhatsApp">
-                    <span class="material-symbols-outlined">chat</span>
-                </a>
-            </div>
+                    <div class="panel-ticker-footer">
+                        <span>GST Net Included</span>
+                        <span>@mp.UpdatedAt.ToString("dd MMM, hh:mm tt")</span>
+                    </div>
+                </div>
+            }
 
-        </div>
-    </div>
-</div> 
+            <!-- Packaging Sizes -->
+            <h6 class="quantum-pack-heading">Available Packings</h6>
+            <div class="quantum-pack-vault">
+                @foreach (var pt in Model.PackingTypes.Where(x => x.IsActive))
+                {
+                    <span class="quantum-pack-chip">
+                        @pt.PackSize @(pt.IsLoose ? "(Loose)" : "")
+                    </span>
+                }
+            </div>
+
+            <!-- 2x2 Regulatory Vault -->
+            <div class="cyber-disclaimer-vault">
+                <div class="cyber-disclaimer-item">
+                    <div class="icon-wrapper">
+                        <span class="material-symbols-outlined">verified</span>
+                    </div>
+                    <div>
+                        <span class="cyber-text-title">Bulk Preferred</span>
+                        <span class="cyber-text-subtitle">High volume</span>
+                    </div>
+                </div>
+
+                <div class="cyber-disclaimer-item">
+                    <div class="icon-wrapper">
+                        <span class="material-symbols-outlined">receipt_long</span>
+                    </div>
+                    <div>
+                        <span class="cyber-text-title">GST/Taxes Inc.</span>
+                        <span class="cyber-text-subtitle">Tax Invoicing</span>
+                    </div>
+                </div>
+
+                <div class="cyber-disclaimer-item">
+                    <div class="icon-wrapper">
+                        <span class="material-symbols-outlined">local_shipping</span>
+                    </div>
+                    <div>
+                        <span class="cyber-text-title">Transport Extra</span>
+                        <span class="cyber-text-subtitle">Ex-Warehouse</span>
+                    </div>
+                </div>
+
+                <div class="cyber-disclaimer-item">
+                    <div class="icon-wrapper">
+                        <span class="material-symbols-outlined">gavel</span>
+                    </div>
+                    <div>
+                        <span class="cyber-text-title">Admin Clearance</span>
+                        <span class="cyber-text-subtitle">Verified Order</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sticky Action Buttons -->
+            <div class="app-sticky-bar">
+                <a asp-controller="Order" asp-action="Request" asp-route-productId="@Model.Id" class="btn-app-action btn-app-gold">
+                    <span class="material-symbols-outlined">shopping_cart</span>
+                    <span>Request Bulk Order</span>
+                </a>
+                <a href="tel:9865680694" class="btn-app-action btn-app-icon" title="Call">
+                    <span class="material-symbols-outlined">call</span>
+                </a>
+                <a href="https://api.whatsapp.com/send?phone=919865680694&text=Enquiry%20about%20@Model.Name" class="btn-app-action btn-app-whatsapp" title="WhatsApp">
+                    <span class="material-symbols-outlined">chat</span>
+                </a>
+            </div>
+
+        </div>
+    </div>
+</div>
