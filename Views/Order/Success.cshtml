@@ -1,6 +1,8 @@
-<div class="container my-5 text-center fade-in-up" style="max-width: 650px; padding: 60px 20px;">
+@* Exact Success Page Logic preserved with Ultra-Pro Mobile App & Desktop UI *@
+<div class="container my-5 text-center fade-in-up" style="max-width: 680px; padding: 40px 16px;">
+    
     <!-- ===== Google Fonts & Icons ===== -->
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0..1,0" />
 
     <style>
@@ -11,96 +13,300 @@
             --brt-gold-bg: #FBF4E4;
             --text-headline: #111827;
             --text-body: #6B7280;
+            --brt-gold-border: rgba(179, 143, 67, 0.25);
+            --wa-green: #25D366;
+            --wa-green-dark: #1EBE5D;
         }
 
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
             background-color: var(--brt-bg-cream);
+            color: var(--text-headline);
         }
 
-        /* EXACT ORB ICON MATCH FROM YOUR SYSTEM */
+        /* Dynamic Language Controller */
+        html[lang="en"] .lang-ta-text, body[lang="en"] .lang-ta-text { display: none !important; }
+        html[lang="ta"] .lang-en-text, body[lang="ta"] .lang-en-text { display: none !important; }
+
+        /* SUCCESS ORB WITH PULSE ANIMATION */
+        .success-icon-wrapper {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 28px;
+        }
+
         .success-icon-orb {
-            width: 80px;
-            height: 80px;
+            width: 90px;
+            height: 90px;
             background-color: var(--brt-gold-bg);
-            border: 1px solid rgba(179, 143, 67, 0.2);
+            border: 2px solid var(--brt-gold-border);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 30px auto;
-            box-shadow: 0 10px 25px rgba(179, 143, 67, 0.1);
-        }
-        .success-icon-orb span {
-            color: var(--brt-gold-text);
-            font-size: 3rem;
-            font-variation-settings: 'FILL' 1;
+            margin: 0 auto;
+            box-shadow: 0 12px 30px rgba(179, 143, 67, 0.18);
+            position: relative;
+            z-index: 2;
         }
 
-        /* TYPOGRAPHY MATCHING PLAYFAIR SYSTEM */
+        .success-icon-orb span {
+            color: var(--brt-gold-text);
+            font-size: 3.5rem;
+            font-variation-settings: 'FILL' 1;
+            animation: popCheck 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        .orb-pulse-ring {
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            border: 2px solid var(--brt-gold-text);
+            border-radius: 50%;
+            opacity: 0.4;
+            animation: orbPulse 2s infinite cubic-bezier(0.4, 0, 0.6, 1);
+            z-index: 1;
+        }
+
+        @@keyframes popCheck {
+            0% { transform: scale(0); opacity: 0; }
+            80% { transform: scale(1.15); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        @@keyframes orbPulse {
+            0% { transform: scale(0.9); opacity: 0.6; }
+            100% { transform: scale(1.3); opacity: 0; }
+        }
+
+        /* TYPOGRAPHY */
         .success-title {
             font-family: 'Playfair Display', serif;
             font-weight: 700;
-            font-size: 2.8rem;
+            font-size: 2.5rem;
             color: var(--text-headline);
             letter-spacing: -0.02em;
-        }
-
-        .order-badge-ticker {
-            display: inline-block;
-            background-color: #FFFFFF;
-            border: 1px solid #E5E7EB;
-            padding: 8px 20px;
-            border-radius: 100px;
-            font-weight: 600;
-            font-size: 0.95rem;
-            color: var(--text-headline);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.01);
+            line-height: 1.2;
         }
 
         .success-desc {
             color: var(--text-body);
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             line-height: 1.6;
             max-width: 520px;
             margin: 0 auto;
         }
 
-        /* EXACT DARK ACCENT BUTTON MATCH */
+        /* ORDER NUMBER TICKER CARD WITH COPY ID */
+        .order-badge-ticker {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background-color: #FFFFFF;
+            border: 1px solid rgba(0,0,0,0.08);
+            padding: 8px 18px;
+            border-radius: 100px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: var(--text-headline);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+            transition: all 0.2s ease;
+        }
+
+        .order-badge-ticker:hover {
+            border-color: var(--brt-gold-text);
+            box-shadow: 0 6px 24px rgba(179, 143, 67, 0.12);
+        }
+
+        .btn-copy-id {
+            background: #F3F4F6;
+            border: none;
+            border-radius: 50px;
+            padding: 4px 10px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--brt-dark-navy);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            transition: all 0.2s ease;
+        }
+
+        .btn-copy-id:hover {
+            background: var(--brt-dark-navy);
+            color: #FFF;
+        }
+
+        /* FULFILLMENT TIMELINE TRACKER (MOBILE APP DESIGN) */
+        .fulfillment-card {
+            background: #FFFFFF;
+            border: 1px solid rgba(0,0,0,0.06);
+            border-radius: 20px;
+            padding: 24px 20px;
+            margin: 28px 0;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
+        }
+
+        .timeline-steps {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        .timeline-steps::before {
+            content: '';
+            position: absolute;
+            top: 18px;
+            left: 15%;
+            right: 15%;
+            height: 2px;
+            background: #E5E7EB;
+            z-index: 1;
+        }
+
+        .t-step {
+            position: relative;
+            z-index: 2;
+            flex: 1;
+            text-align: center;
+        }
+
+        .t-dot {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: #F3F4F6;
+            color: #9CA3AF;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 8px auto;
+            font-size: 1.1rem;
+            border: 3px solid #FFFFFF;
+            transition: all 0.3s ease;
+        }
+
+        .t-step.completed .t-dot {
+            background: var(--brt-gold-text);
+            color: #FFFFFF;
+            box-shadow: 0 0 0 3px var(--brt-gold-bg);
+        }
+
+        .t-step.active .t-dot {
+            background: var(--brt-dark-navy);
+            color: #FFFFFF;
+            box-shadow: 0 0 0 3px rgba(17, 24, 39, 0.1);
+        }
+
+        .t-label {
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: var(--text-body);
+        }
+
+        .t-step.completed .t-label, .t-step.active .t-label {
+            color: var(--text-headline);
+        }
+
+        /* WHATSAPP HIGH CONVERSION FLOATING CARD */
+        .wa-action-card {
+            background: linear-gradient(135deg, #25D366 0%, #1EBE5D 100%);
+            border-radius: 18px;
+            padding: 20px;
+            color: #FFFFFF;
+            box-shadow: 0 12px 28px rgba(37, 211, 102, 0.25);
+            margin-bottom: 24px;
+            transition: all 0.25s ease;
+            text-decoration: none !important;
+            display: block;
+        }
+
+        .wa-action-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 16px 32px rgba(37, 211, 102, 0.35);
+        }
+
+        .wa-card-body {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        .wa-badge {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 4px 10px;
+            border-radius: 50px;
+            font-size: 0.72rem;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        /* BUTTONS */
         .btn-brt-dark-home {
             display: inline-flex;
             align-items: center;
+            justify-content: center;
             gap: 8px;
             background-color: var(--brt-dark-navy);
             color: #FFFFFF !important;
-            font-weight: 600;
+            font-weight: 700;
             font-size: 0.95rem;
             letter-spacing: 0.5px;
-            padding: 14px 32px;
+            padding: 16px 36px;
             border: none;
-            border-radius: 10px;
+            border-radius: 12px;
             text-decoration: none !important;
             transition: all 0.2s ease;
-            box-shadow: 0 4px 12px rgba(17, 24, 39, 0.1);
+            box-shadow: 0 8px 20px rgba(17, 24, 39, 0.12);
+            width: 100%;
+            max-width: 320px;
         }
+
         .btn-brt-dark-home:hover {
             background-color: #1F2937;
-            transform: translateY(-1px);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 24px rgba(17, 24, 39, 0.18);
+        }
+
+        .auto-redirect-ticker {
+            font-size: 0.8rem;
+            color: var(--brt-gold-text);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            margin-bottom: 12px;
         }
 
         .fade-in-up {
             animation: brtSuccessFade 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
+
+        @@media (max-width: 576px) {
+            .success-title { font-size: 2rem; }
+            .fulfillment-card { padding: 18px 12px; }
+            .t-label { font-size: 0.7rem; }
+        }
+
         @Html.Raw("@keyframes brtSuccessFade { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }")
     </style>
 
-    <!-- Success Orb Identifier -->
-    <div class="success-icon-orb">
-        <span class="material-symbols-outlined">check_circle</span>
+    <!-- SUCCESS ANIMATED ORB IDENTIFIER -->
+    <div class="success-icon-wrapper">
+        <div class="orb-pulse-ring"></div>
+        <div class="success-icon-orb">
+            <span class="material-symbols-outlined">check_circle</span>
+        </div>
     </div>
 
-    <!-- Title and Manifest Tracker -->
-    <h2 class="success-title mt-3 mb-3">
+    <!-- TITLE & ORDER NUMBER TICKER -->
+    <h2 class="success-title mb-3">
         <span class="lang-en-text">Order Request Submitted!</span>
         <span class="lang-ta-text">ஆர்டர் கோரிக்கை சமர்ப்பிக்கப்பட்டது!</span>
     </h2>
@@ -109,28 +315,79 @@
         <div class="order-badge-ticker">
             <span class="lang-en-text">Order Number:</span>
             <span class="lang-ta-text">ஆர்டர் எண்:</span>
-            <span style="color: var(--brt-gold-text); font-weight: 700;">@ViewBag.OrderNumber</span>
+            <span id="orderNumText" style="color: var(--brt-gold-text); font-weight: 800; font-family: 'Space Grotesk', sans-serif;">@ViewBag.OrderNumber</span>
+            
+            <button type="button" class="btn-copy-id" onclick="copyOrderId()" title="Copy ID">
+                <span class="material-symbols-outlined" style="font-size: 14px;">content_copy</span>
+                <span id="copyBtnLabel">Copy</span>
+            </button>
         </div>
     </div>
 
-    <p class="success-desc mb-4">
+    <p class="success-desc mb-2">
         <span class="lang-en-text">Our admin will review your request and confirm pricing &amp; dispatch details shortly via WhatsApp / phone call.</span>
         <span class="lang-ta-text">எங்கள் நிர்வாகி உங்கள் கோரிக்கையை மறுஆய்வு செய்து, விலை &amp; அனுப்புகை விவரங்களை வாட்ஸ்அப் / தொலைபேசி அழைப்பு மூலம் விரைவில் உறுதிப்படுத்துவார்.</span>
     </p>
 
+    <!-- 3-STEP FULFILLMENT TRACKER -->
+    <div class="fulfillment-card">
+        <div class="timeline-steps">
+            <div class="t-step completed">
+                <div class="t-dot"><span class="material-symbols-outlined" style="font-size:18px;">check</span></div>
+                <div class="t-label">
+                    <span class="lang-en-text">Request Sent</span>
+                    <span class="lang-ta-text">கோரிக்கை அனுப்பப்பட்டது</span>
+                </div>
+            </div>
+            <div class="t-step active">
+                <div class="t-dot"><span class="material-symbols-outlined" style="font-size:18px;">analytics</span></div>
+                <div class="t-label">
+                    <span class="lang-en-text">Admin Review</span>
+                    <span class="lang-ta-text">நிர்வாக மறுஆய்வு</span>
+                </div>
+            </div>
+            <div class="t-step">
+                <div class="t-dot"><span class="material-symbols-outlined" style="font-size:18px;">local_shipping</span></div>
+                <div class="t-label">
+                    <span class="lang-en-text">Dispatch</span>
+                    <span class="lang-ta-text">அனுப்புதல்</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- WHATSAPP INTEGRATION ENGINE -->
     @if (!string.IsNullOrEmpty((string)ViewBag.WhatsAppUrl))
     {
-        <p class="success-desc mb-4" style="font-size:0.95rem">
-            <span class="lang-en-text">Tap below to send your order details to us on WhatsApp so we can confirm it faster.</span>
-            <span class="lang-ta-text">உங்கள் ஆர்டர் விவரங்களை வாட்ஸ்அப் மூலம் எங்களுக்கு அனுப்ப கீழே தட்டவும், அதனால் நாங்கள் வேகமாக உறுதிப்படுத்த முடியும்.</span>
-        </p>
-        <a href="@ViewBag.WhatsAppUrl" target="_blank" id="waConfirmBtn"
-           style="display:inline-flex;align-items:center;gap:8px;background:#25D366;color:#fff;font-weight:600;padding:14px 32px;border-radius:10px;text-decoration:none;margin-bottom:20px;">
-            <span class="material-symbols-outlined" style="font-size:1.1rem;">chat</span>
-            <span class="lang-en-text">Confirm via WhatsApp</span>
-            <span class="lang-ta-text">வாட்ஸ்அப் மூலம் உறுதிப்படுத்த</span>
+        <!-- Auto Redirect Indicator Ticker -->
+        <div class="auto-redirect-ticker">
+            <span class="material-symbols-outlined" style="font-size:16px;">sync</span>
+            <span class="lang-en-text">Opening WhatsApp for instant confirmation...</span>
+            <span class="lang-ta-text">வாட்ஸ்அப் திறக்கப்படுகிறது...</span>
+        </div>
+
+        <a href="@ViewBag.WhatsAppUrl" target="_blank" id="waConfirmBtn" class="wa-action-card">
+            <div class="wa-card-body">
+                <div class="text-start">
+                    <div class="wa-badge mb-1">
+                        <span class="lang-en-text">Fast Track</span>
+                        <span class="lang-ta-text">வேகமான வழி</span>
+                    </div>
+                    <div style="font-weight: 800; font-size: 1.1rem; line-height: 1.2;">
+                        <span class="lang-en-text">Confirm Order via WhatsApp</span>
+                        <span class="lang-ta-text">வாட்ஸ்அப் மூலம் உறுதிப்படுத்த</span>
+                    </div>
+                    <div style="font-size: 0.8rem; opacity: 0.9;" class="mt-1">
+                        <span class="lang-en-text">Tap to chat with allocation desk directly</span>
+                        <span class="lang-ta-text">எங்கள் குழுவுடன் நேரடியாகப் பேச இங்கே தொடவும்</span>
+                    </div>
+                </div>
+                <div>
+                    <span class="material-symbols-outlined" style="font-size: 2.5rem;">chat</span>
+                </div>
+            </div>
         </a>
-        <br />
+
         <script>
             // Auto-open WhatsApp with the order details pre-filled — customer just taps Send.
             setTimeout(function () {
@@ -139,12 +396,26 @@
         </script>
     }
 
-    <div class="mb-3"></div>
+    <div class="mt-4"></div>
 
-    <!-- Action Pipeline Trigger -->
+    <!-- HOME NAVIGATION TRIGGER -->
     <a asp-controller="Home" asp-action="Index" class="btn-brt-dark-home">
         <span class="material-symbols-outlined" style="font-size: 1.1rem;">arrow_back</span>
         <span class="lang-en-text">Back to Home</span>
         <span class="lang-ta-text">முகப்புக்கு திரும்ப</span>
     </a>
 </div>
+
+<!-- COPY ORDER ID JAVASCRIPT -->
+<script>
+    function copyOrderId() {
+        const orderNum = document.getElementById('orderNumText').innerText;
+        navigator.clipboard.writeText(orderNum).then(() => {
+            const label = document.getElementById('copyBtnLabel');
+            label.innerText = 'Copied!';
+            setTimeout(() => {
+                label.innerText = 'Copy';
+            }, 2000);
+        });
+    }
+</script>
