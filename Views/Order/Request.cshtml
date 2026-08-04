@@ -1,6 +1,6 @@
 @model BRT.ViewModels.OrderRequestViewModel
 @{
-    ViewData["Title"] = "Request Bulk Order";
+    ViewData["Title"] = "Request to Order";
     var products = (List<Product>)ViewBag.Products;
     var summaryDisplay = ViewData.ModelState.IsValid ? "none" : "block";
 }
@@ -19,8 +19,7 @@
         --brt-bg-cream: #FFFDF9;
         --text-main: #1F2937;
         --text-muted: #6B7280;
-        --border-refined: rgba(179, 143, 67, 0.2);
-        --input-focus: #0B0F19;
+        --border-refined: rgba(179, 143, 67, 0.22);
     }
 
     body {
@@ -71,7 +70,7 @@
         line-height: 1.5;
     }
 
-    /* STEP TRACKER BAR (Mobile App Vibe) */
+    /* STEP TRACKER BAR */
     .app-step-tracker {
         display: flex;
         align-items: center;
@@ -127,7 +126,7 @@
     .section-headline {
         display: flex;
         align-items: center;
-        gap: 10px;
+        justify-content: space-between;
         font-size: 1.1rem;
         font-weight: 800;
         color: var(--brt-dark-navy);
@@ -136,8 +135,24 @@
         border-bottom: 1px solid rgba(0, 0, 0, 0.06);
     }
 
+    .section-headline-title {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
     .section-headline .material-symbols-outlined {
         color: var(--brt-gold-pure);
+    }
+
+    .item-count-badge {
+        font-size: 0.75rem;
+        font-weight: 700;
+        background: var(--brt-gold-light);
+        color: var(--brt-gold-dark);
+        padding: 4px 12px;
+        border-radius: 20px;
+        border: 1px solid var(--border-refined);
     }
 
     /* FLOATING FORM INPUTS */
@@ -174,14 +189,20 @@
         outline: none;
     }
 
-    /* PRODUCT BUILDER MANIFEST (CARD STYLE FOR MOBILE & DESKTOP) */
+    /* PRODUCT BUILDER MANIFEST */
     .app-manifest-box {
         background: #F9FAFB;
         border: 1px solid #E5E7EB;
         border-radius: 16px;
         padding: 16px;
         margin-bottom: 12px;
-        transition: all 0.2s ease;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        animation: fadeIn 0.3s ease-in-out;
+    }
+
+    @@keyframes fadeIn {
+        from { opacity: 0; transform: translateY(-8px); }
+        to { opacity: 1; transform: translateY(0); }
     }
 
     .app-manifest-box:focus-within, .app-manifest-box:hover {
@@ -195,11 +216,56 @@
         font-weight: 700;
         color: var(--brt-gold-dark);
         background: var(--brt-gold-light);
-        padding: 4px 8px;
-        border-radius: 6px;
+        padding: 6px 10px;
+        border-radius: 8px;
         display: inline-flex;
         align-items: center;
         gap: 4px;
+        height: 100%;
+    }
+
+    /* ADD & REMOVE BUTTONS */
+    .btn-add-product {
+        width: 100%;
+        background: #F3F4F6;
+        border: 2px dashed #D1D5DB;
+        color: var(--brt-dark-navy);
+        font-weight: 700;
+        font-size: 0.9rem;
+        padding: 14px;
+        border-radius: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        margin-bottom: 24px;
+    }
+
+    .btn-add-product:hover {
+        background: var(--brt-gold-light);
+        border-color: var(--brt-gold-pure);
+        color: var(--brt-gold-dark);
+    }
+
+    .btn-remove-row {
+        background: #FEE2E2;
+        color: #DC2626;
+        border: none;
+        border-radius: 10px;
+        width: 40px;
+        height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
+
+    .btn-remove-row:hover {
+        background: #DC2626;
+        color: #FFFFFF;
     }
 
     /* SUBMIT BUTTON */
@@ -228,7 +294,7 @@
         box-shadow: 0 12px 24px rgba(11, 15, 25, 0.2);
     }
 
-    /* TRUST BADGES STRIP */
+    /* TRUST STRIP */
     .app-trust-strip {
         background: var(--brt-dark-navy);
         border-radius: 18px;
@@ -255,7 +321,6 @@
         font-size: 1.2rem;
     }
 
-    /* RESPONSIVE DESIGN TOUCH-UPS */
     @@media (max-width: 576px) {
         .app-form-card { padding: 20px 16px; border-radius: 18px; }
         .app-page-title { font-size: 1.75rem; }
@@ -274,14 +339,15 @@
             <span class="lang-ta-text">B2B மொத்த விற்பனை தளம்</span>
         </div>
         
+        <!-- NEW TITLE HERE -->
         <h1 class="app-page-title">
-            <span class="lang-en-text">Request Bulk Order</span>
-            <span class="lang-ta-text">மொத்த ஆர்டர் கோருங்கள்</span>
+            <span class="lang-en-text">Request to Order</span>
+            <span class="lang-ta-text">ஆர்டர் கோரிக்கை</span>
         </h1>
         
         <p class="app-page-subtitle">
-            <span class="lang-en-text">Fill in your requirements below to receive dynamic wholesale market pricing and bulk allocation instantly.</span>
-            <span class="lang-ta-text">சிறந்த மொத்த விற்பனை விலை பெற உங்கள் விவரங்கள் மற்றும் தேவையான பொருட்களை கீழே நிரப்பவும்.</span>
+            <span class="lang-en-text">Select your products, add quantities, and send your requirements directly to our allocation team.</span>
+            <span class="lang-ta-text">உங்களுக்குத் தேவையான பொருட்களைத் தேர்ந்தெடுத்து அளவுகளை உள்ளிட்டு நேரடியாக ஆர்டர் கோரிக்கையை அனுப்பவும்.</span>
         </p>
 
         <!-- Stepper Indicator -->
@@ -294,7 +360,7 @@
             <div class="step-divider"></div>
             <div class="step-node active">
                 <span class="number">2</span>
-                <span class="lang-en-text">Product Manifest</span>
+                <span class="lang-en-text">Product List</span>
                 <span class="lang-ta-text">பொருட்கள் பட்டியல்</span>
             </div>
         </div>
@@ -316,9 +382,11 @@
                     
                     <!-- SECTION 1: BUSINESS & BUYER DETAILS -->
                     <div class="section-headline">
-                        <span class="material-symbols-outlined">badge</span>
-                        <span class="lang-en-text">Business & Buyer Details</span>
-                        <span class="lang-ta-text">வணிகம் மற்றும் வாடிக்கையாளர் விவரங்கள்</span>
+                        <div class="section-headline-title">
+                            <span class="material-symbols-outlined">badge</span>
+                            <span class="lang-en-text">Business & Buyer Details</span>
+                            <span class="lang-ta-text">வணிகம் மற்றும் வாடிக்கையாளர் விவரங்கள்</span>
+                        </div>
                     </div>
                     
                     <div class="row">
@@ -363,63 +431,67 @@
                         </div>
                     </div>
 
-                    <!-- SECTION 2: REQUIRED PRODUCTS LIST -->
+                    <!-- SECTION 2: REQUIRED PRODUCTS LIST (DYNAMIC ENGINE) -->
                     <div class="section-headline mt-4">
-                        <span class="material-symbols-outlined">inventory_2</span>
-                        <span class="lang-en-text">Select Required Products</span>
-                        <span class="lang-ta-text">தேவையான பொருட்கள்</span>
+                        <div class="section-headline-title">
+                            <span class="material-symbols-outlined">inventory_2</span>
+                            <span class="lang-en-text">Select Required Products</span>
+                            <span class="lang-ta-text">தேவையான பொருட்கள்</span>
+                        </div>
+                        <span class="item-count-badge" id="productCountBadge">1 Item Added</span>
                     </div>
 
-                    <p class="text-muted small mb-3">
-                        <span class="lang-en-text">Select products and enter quantity. Unused rows will be ignored automatically.</span>
-                        <span class="lang-ta-text">பொருட்களைத் தேர்ந்தெடுத்து அளவை உள்ளிடவும். காலியாக உள்ள வரிசைகள் புறக்கணிக்கப்படும்.</span>
-                    </p>
-                    
-                    <div>
-                        @for (int i = 0; i < Model.Items.Count; i++)
-                        {
-                            <div class="app-manifest-box">
-                                <div class="row g-3 align-items-center">
-                                    
-                                    <!-- Product Selection Dropdown -->
-                                    <div class="col-md-6">
-                                        <label class="form-label small text-muted fw-bold d-md-none">
-                                            <span class="lang-en-text">Product #@(i + 1)</span>
-                                            <span class="lang-ta-text">பொருள் #@(i + 1)</span>
-                                        </label>
-                                        <select name="Items[@i].ProductId" class="form-select form-control-app">
-                                            <option value="">-- Choose Product --</option>
-                                            @foreach (var p in products)
-                                            {
-                                                var selected = Model.Items[i].ProductId == p.Id;
-                                                <option value="@p.Id" selected="@selected">@p.Name</option>
-                                            }
-                                        </select>
-                                    </div>
+                    <!-- DYNAMIC PRODUCT CONTAINER -->
+                    <div id="productRowsContainer">
+                        <!-- Default First Row -->
+                        <div class="app-manifest-box product-row" data-index="0">
+                            <div class="row g-2 align-items-center">
+                                <!-- Product Selection Dropdown -->
+                                <div class="col-md-5 col-12">
+                                    <select name="Items[0].ProductId" class="form-select form-control-app product-select" required>
+                                        <option value="">-- Choose Product --</option>
+                                        @foreach (var p in products)
+                                        {
+                                            <option value="@p.Id">@p.Name</option>
+                                        }
+                                    </select>
+                                </div>
 
-                                    <!-- Quantity Input -->
-                                    <div class="col-6 col-md-3">
-                                        <input name="Items[@i].Quantity" type="number" step="0.01" class="form-control-app" placeholder="Qty" value="@Model.Items[i].Quantity" />
-                                    </div>
+                                <!-- Quantity Input -->
+                                <div class="col-md-3 col-6">
+                                    <input name="Items[0].Quantity" type="number" step="0.01" min="0.1" class="form-control-app" placeholder="Qty" required />
+                                </div>
 
-                                    <!-- Unit / Packing Tag -->
-                                    <div class="col-6 col-md-3">
-                                        <div class="unit-tag">
-                                            <span class="material-symbols-outlined" style="font-size:14px;">info</span>
-                                            <span class="lang-en-text">Bags / KGs</span>
-                                            <span class="lang-ta-text">பைகள் / KG</span>
-                                        </div>
+                                <!-- Unit Tag -->
+                                <div class="col-md-3 col-4">
+                                    <div class="unit-tag">
+                                        <span class="material-symbols-outlined" style="font-size:14px;">info</span>
+                                        <span class="lang-en-text">Bags / KGs</span>
+                                        <span class="lang-ta-text">பைகள் / KG</span>
                                     </div>
+                                </div>
 
+                                <!-- Action (Delete Button Hidden for first row) -->
+                                <div class="col-md-1 col-2 text-end">
+                                    <button type="button" class="btn-remove-row d-none" onclick="removeProductRow(this)" title="Remove Item">
+                                        <span class="material-symbols-outlined" style="font-size: 18px;">delete</span>
+                                    </button>
                                 </div>
                             </div>
-                        }
+                        </div>
                     </div>
 
+                    <!-- INNOVATIVE "ADD PRODUCT" BUTTON -->
+                    <button type="button" class="btn-add-product" onclick="addProductRow()">
+                        <span class="material-symbols-outlined">add_circle</span>
+                        <span class="lang-en-text">Add Another Product</span>
+                        <span class="lang-ta-text">மற்றொரு பொருளைச் சேர்க்க</span>
+                    </button>
+
                     <!-- SUBMIT BUTTON -->
-                    <button type="submit" class="btn-app-submit mt-4">
+                    <button type="submit" class="btn-app-submit">
                         <span class="material-symbols-outlined">send</span>
-                        <span class="lang-en-text">Submit Order Request</span>
+                        <span class="lang-en-text">Submit Request to Order</span>
                         <span class="lang-ta-text">ஆர்டர் கோரிக்கையை சமர்ப்பிக்க</span>
                     </button>
                 </form>
@@ -448,3 +520,91 @@
         </div>
     </div>
 </div>
+
+<!-- ===================================================
+     DYNAMIC JAVASCRIPT ENGINE FOR ADD/REMOVE ROWS
+     =================================================== -->
+<script>
+    // Hidden Options Template for JS Dynamic Inject
+    const productOptionsHtml = `@foreach (var p in products) { <option value="@p.Id">@p.Name</option> }`;
+
+    function updateBadgeCount() {
+        const rows = document.querySelectorAll('.product-row');
+        const badge = document.getElementById('productCountBadge');
+        if (badge) {
+            badge.textContent = `${rows.length} ${rows.length === 1 ? 'Item Added' : 'Items Added'}`;
+        }
+    }
+
+    function addProductRow() {
+        const container = document.getElementById('productRowsContainer');
+        const currentRows = container.querySelectorAll('.product-row');
+        const newIndex = currentRows.length;
+
+        const newRow = document.createElement('div');
+        newRow.className = 'app-manifest-box product-row';
+        newRow.setAttribute('data-index', newIndex);
+
+        newRow.innerHTML = `
+            <div class="row g-2 align-items-center">
+                <div class="col-md-5 col-12">
+                    <select name="Items[${newIndex}].ProductId" class="form-select form-control-app product-select" required>
+                        <option value="">-- Choose Product --</option>
+                        ${productOptionsHtml}
+                    </select>
+                </div>
+                <div class="col-md-3 col-6">
+                    <input name="Items[${newIndex}].Quantity" type="number" step="0.01" min="0.1" class="form-control-app" placeholder="Qty" required />
+                </div>
+                <div class="col-md-3 col-4">
+                    <div class="unit-tag">
+                        <span class="material-symbols-outlined" style="font-size:14px;">info</span>
+                        <span class="lang-en-text">Bags / KGs</span>
+                        <span class="lang-ta-text">பைகள் / KG</span>
+                    </div>
+                </div>
+                <div class="col-md-1 col-2 text-end">
+                    <button type="button" class="btn-remove-row" onclick="removeProductRow(this)" title="Remove Item">
+                        <span class="material-symbols-outlined" style="font-size: 18px;">delete</span>
+                    </button>
+                </div>
+            </div>
+        `;
+
+        container.appendChild(newRow);
+        updateBadgeCount();
+        
+        // Show delete button on first row if items count > 1
+        if (container.querySelectorAll('.product-row').length > 1) {
+            const firstRowDeleteBtn = container.querySelector('.product-row .btn-remove-row');
+            if (firstRowDeleteBtn) firstRowDeleteBtn.classList.remove('d-none');
+        }
+    }
+
+    function removeProductRow(btn) {
+        const row = btn.closest('.product-row');
+        row.remove();
+        reindexRows();
+        updateBadgeCount();
+    }
+
+    function reindexRows() {
+        const container = document.getElementById('productRowsContainer');
+        const rows = container.querySelectorAll('.product-row');
+
+        rows.forEach((row, index) => {
+            row.setAttribute('data-index', index);
+            const select = row.querySelector('select');
+            const input = row.querySelector('input[type="number"]');
+
+            if (select) select.name = `Items[${index}].ProductId`;
+            if (input) input.name = `Items[${index}].Quantity`;
+        });
+
+        // Hide delete button if only 1 row remains
+        if (rows.length === 1) {
+            const firstRowDeleteBtn = rows[0].querySelector('.btn-remove-row');
+            if (firstRowDeleteBtn) firstRowDeleteBtn.classList.add('d-none');
+        }
+    }
+</script>
