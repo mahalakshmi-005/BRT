@@ -153,6 +153,7 @@
         padding: 4px 12px;
         border-radius: 20px;
         border: 1px solid var(--border-refined);
+        transition: all 0.3s ease;
     }
 
     /* FLOATING FORM INPUTS */
@@ -321,7 +322,7 @@
         font-size: 1.2rem;
     }
 
-    @@media (max-width: 576px) {
+    @media (max-width: 576px) {
         .app-form-card { padding: 20px 16px; border-radius: 18px; }
         .app-page-title { font-size: 1.75rem; }
         .app-trust-strip { flex-direction: column; align-items: flex-start; gap: 12px; }
@@ -339,7 +340,6 @@
             <span class="lang-ta-text">B2B மொத்த விற்பனை தளம்</span>
         </div>
         
-        <!-- NEW TITLE HERE -->
         <h1 class="app-page-title">
             <span class="lang-en-text">Request to Order</span>
             <span class="lang-ta-text">ஆர்டர் கோரிக்கை</span>
@@ -438,7 +438,8 @@
                             <span class="lang-en-text">Select Required Products</span>
                             <span class="lang-ta-text">தேவையான பொருட்கள்</span>
                         </div>
-                        <span class="item-count-badge" id="productCountBadge">1 Item Added</span>
+                        <!-- REALTIME DYNAMIC BADGE -->
+                        <span class="item-count-badge" id="productCountBadge">0 Items Selected</span>
                     </div>
 
                     <!-- DYNAMIC PRODUCT CONTAINER -->
@@ -448,8 +449,8 @@
                             <div class="row g-2 align-items-center">
                                 <!-- Product Selection Dropdown -->
                                 <div class="col-md-5 col-12">
-                                    <select name="Items[0].ProductId" class="form-select form-control-app product-select" required>
-                                        <option value="">-- Choose Product --</option>
+                                    <select name="Items[0].ProductId" class="form-select form-control-app product-select" onchange="updateBadgeCount()" required>
+                                        <option value="" selected>-- Choose Product --</option>
                                         @foreach (var p in products)
                                         {
                                             <option value="@p.Id">@p.Name</option>
@@ -471,7 +472,7 @@
                                     </div>
                                 </div>
 
-                                <!-- Action (Delete Button Hidden for first row) -->
+                                <!-- Action Button (Hidden for First Row) -->
                                 <div class="col-md-1 col-2 text-end">
                                     <button type="button" class="btn-remove-row d-none" onclick="removeProductRow(this)" title="Remove Item">
                                         <span class="material-symbols-outlined" style="font-size: 18px;">delete</span>
@@ -498,7 +499,7 @@
 
             </div>
 
-            <!-- 3. COMPLIANCE TRUST STRIP -->
+            <!-- TRUST STRIP -->
             <div class="app-trust-strip">
                 <div class="trust-item">
                     <span class="material-symbols-outlined">payments</span>
@@ -522,17 +523,25 @@
 </div>
 
 <!-- ===================================================
-     DYNAMIC JAVASCRIPT ENGINE FOR ADD/REMOVE ROWS
+     DYNAMIC JAVASCRIPT ENGINE FOR ACCURATE ITEM COUNTING
      =================================================== -->
 <script>
-    // Hidden Options Template for JS Dynamic Inject
     const productOptionsHtml = `@foreach (var p in products) { <option value="@p.Id">@p.Name</option> }`;
 
+    // Corrected Dynamic Count Logic
     function updateBadgeCount() {
-        const rows = document.querySelectorAll('.product-row');
+        const selects = document.querySelectorAll('.product-select');
+        let selectedCount = 0;
+
+        selects.forEach(select => {
+            if (select.value !== "") {
+                selectedCount++;
+            }
+        });
+
         const badge = document.getElementById('productCountBadge');
         if (badge) {
-            badge.textContent = `${rows.length} ${rows.length === 1 ? 'Item Added' : 'Items Added'}`;
+            badge.textContent = `${selectedCount} ${selectedCount === 1 ? 'Item Selected' : 'Items Selected'}`;
         }
     }
 
@@ -548,8 +557,8 @@
         newRow.innerHTML = `
             <div class="row g-2 align-items-center">
                 <div class="col-md-5 col-12">
-                    <select name="Items[${newIndex}].ProductId" class="form-select form-control-app product-select" required>
-                        <option value="">-- Choose Product --</option>
+                    <select name="Items[${newIndex}].ProductId" class="form-select form-control-app product-select" onchange="updateBadgeCount()" required>
+                        <option value="" selected>-- Choose Product --</option>
                         ${productOptionsHtml}
                     </select>
                 </div>
@@ -574,7 +583,7 @@
         container.appendChild(newRow);
         updateBadgeCount();
         
-        // Show delete button on first row if items count > 1
+        // Show delete button if rows count > 1
         if (container.querySelectorAll('.product-row').length > 1) {
             const firstRowDeleteBtn = container.querySelector('.product-row .btn-remove-row');
             if (firstRowDeleteBtn) firstRowDeleteBtn.classList.remove('d-none');
@@ -607,4 +616,9 @@
             if (firstRowDeleteBtn) firstRowDeleteBtn.classList.add('d-none');
         }
     }
+
+    // Run on initial page load
+    document.addEventListener('DOMContentLoaded', () => {
+        updateBadgeCount();
+    });
 </script>
