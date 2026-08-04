@@ -5,261 +5,390 @@
     var summaryDisplay = ViewData.ModelState.IsValid ? "none" : "block";
 }
 
-<!-- ===== Google Fonts Extracted from Your Live Theme ===== -->
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0..1,0" />
+<!-- Premium Corporate Fonts & Google Icons Core -->
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 
 <style>
     :root {
-        --brt-bg-cream: #FFFDF9; /* Exact off-white/cream background from your image */
-        --brt-dark-navy: #111827; /* Exact deep dark tone from your middle card */
-        --brt-emerald-deep: #064E3B; /* Nav brand green */
-        --brt-gold-text: #B38F43; /* Elegant muted gold for badges */
-        --brt-gold-bg: #FBF4E4; /* Soft gold pill background */
-        --text-headline: #111827;
-        --text-body: #6B7280;
+        --brt-gold-pure: #B38F43;
+        --brt-gold-dark: #8C6D2D;
+        --brt-gold-light: #FBF4E4;
+        --brt-dark-navy: #0B0F19;
+        --brt-surface-white: #FFFFFF;
+        --brt-bg-cream: #FFFDF9;
+        --text-main: #1F2937;
+        --text-muted: #6B7280;
+        --border-refined: rgba(179, 143, 67, 0.2);
+        --input-focus: #0B0F19;
     }
 
     body {
         font-family: 'Plus Jakarta Sans', sans-serif;
         background-color: var(--brt-bg-cream);
-        color: var(--text-headline);
+        color: var(--text-main);
     }
 
-    /* ====== 1. EXACT HERO MATCH PANEL ====== */
-    .page-hero-brt {
-        padding: 60px 0 30px 0;
+    /* Dynamic Language Controller */
+    html[lang="en"] .lang-ta-text, body[lang="en"] .lang-ta-text { display: none !important; }
+    html[lang="ta"] .lang-en-text, body[lang="ta"] .lang-en-text { display: none !important; }
+
+    /* APP TOP HEADER & STEPPER */
+    .app-header-shell {
         text-align: center;
-        background-color: var(--brt-bg-cream);
-    }
-    .brt-wholesale-badge {
-        display: inline-flex;
-        align-items: center;
-        padding: 6px 20px;
-        background-color: var(--brt-gold-bg);
-        border: 1px solid rgba(179, 143, 67, 0.2);
-        color: var(--brt-gold-text);
-        border-radius: 100px;
-        font-size: 0.78rem;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 1.5px;
-        margin-bottom: 24px;
-    }
-    .page-hero-brt h1 {
-        font-family: 'Playfair Display', serif;
-        font-weight: 700;
-        font-size: 3.25rem;
-        color: var(--text-headline);
-        margin-bottom: 12px;
-    }
-    .page-hero-brt p {
-        color: var(--text-body);
-        font-size: 1.1rem;
-        max-width: 700px;
-        margin: 0 auto;
-        font-weight: 400;
+        padding: 30px 0 20px 0;
     }
 
-    /* ====== 2. FORM STRUCTURAL CARDS ====== */
-    .order-card-clean {
-        background: #FFFFFF;
-        border: 1px solid #E5E7EB;
-        border-radius: 20px;
-        padding: 40px;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
-    }
-    
-    .form-section-header {
-        font-family: 'Playfair Display', serif;
-        font-weight: 700;
-        font-size: 1.4rem;
-        color: var(--text-headline);
-        border-bottom: 1px solid #F3F4F6;
-        padding-bottom: 12px;
-    }
-
-    /* INPUT ARCHITECTURE MATCHING PREMIUM MINIMALISM */
-    .form-group-brt .form-label {
-        font-size: 0.82rem;
-        font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-        color: #4B5563;
-        margin-bottom: 8px;
-    }
-    .form-input-brt {
-        background: #FFFFFF;
-        border: 1px solid #D1D5DB;
-        border-radius: 10px;
-        padding: 12px 16px;
-        font-size: 0.95rem;
-        color: var(--text-headline);
-        transition: all 0.2s ease;
-    }
-    .form-input-brt:focus {
-        border-color: var(--brt-emerald-deep);
-        box-shadow: 0 0 0 3px rgba(6, 78, 59, 0.08);
-        outline: none;
-    }
-
-    /* PRODUCT GENERATOR ROWS */
-    .product-manifest-item {
-        background: #FAFAFA;
-        border: 1px solid #E5E7EB;
-        border-radius: 12px;
-        padding: 16px;
-        transition: all 0.2s ease;
-    }
-    .product-manifest-item:hover {
-        background: #FFFFFF;
-        border-color: #D1D5DB;
-    }
-
-    /* EXACT DARK ACCENT MATCH BUTTON */
-    .btn-brt-dark-submit {
-        background-color: var(--brt-dark-navy);
-        color: #FFFFFF !important;
-        font-weight: 600;
-        font-size: 1rem;
-        letter-spacing: 0.5px;
-        padding: 15px;
-        border: none;
-        border-radius: 10px;
-        transition: all 0.2s ease;
-        width: 100%;
-        box-shadow: 0 4px 12px rgba(17, 24, 39, 0.1);
-    }
-    .btn-brt-dark-submit:hover {
-        background-color: #1F2937;
-        transform: translateY(-1px);
-    }
-
-    /* ====== 3. MINIMAL CLEAN TITANIUM COMPLIANCE ZONE ====== */
-    .compliance-strip-brt {
-        background: #1F2937;
-        border-radius: 14px;
-        padding: 16px 24px;
-        display: flex;
-        justify-content: center;
-        gap: 24px;
-        flex-wrap: wrap;
-    }
-    .compliance-unit {
+    .app-b2b-pill {
         display: inline-flex;
         align-items: center;
         gap: 6px;
-        font-size: 0.8rem;
-        font-weight: 600;
-        color: #9CA3AF;
+        padding: 6px 16px;
+        background: var(--brt-gold-light);
+        border: 1px solid var(--border-refined);
+        color: var(--brt-gold-dark);
+        border-radius: 100px;
+        font-size: 0.75rem;
+        font-weight: 800;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        margin-bottom: 12px;
     }
-    .compliance-unit span.icon { color: var(--brt-gold-text); font-size: 1rem; }
 
-    .fade-in-up {
-        animation: brtFadeInUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    .app-page-title {
+        font-family: 'Playfair Display', serif;
+        font-weight: 700;
+        font-size: 2.2rem;
+        color: var(--brt-dark-navy);
+        margin-bottom: 6px;
     }
-    @Html.Raw("@keyframes brtFadeInUp { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }")
+
+    .app-page-subtitle {
+        color: var(--text-muted);
+        font-size: 0.92rem;
+        max-width: 580px;
+        margin: 0 auto 20px auto;
+        line-height: 1.5;
+    }
+
+    /* STEP TRACKER BAR (Mobile App Vibe) */
+    .app-step-tracker {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        margin-bottom: 24px;
+    }
+
+    .step-node {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 0.8rem;
+        font-weight: 700;
+        color: var(--text-muted);
+    }
+
+    .step-node.active {
+        color: var(--brt-dark-navy);
+    }
+
+    .step-node .number {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background: #E5E7EB;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.75rem;
+    }
+
+    .step-node.active .number {
+        background: var(--brt-dark-navy);
+        color: #FFF;
+    }
+
+    .step-divider {
+        width: 30px;
+        height: 2px;
+        background: #E5E7EB;
+    }
+
+    /* FORM MAIN CARD */
+    .app-form-card {
+        background: var(--brt-surface-white);
+        border: 1px solid var(--border-refined);
+        border-radius: 24px;
+        padding: 32px;
+        box-shadow: 0 10px 30px -10px rgba(11, 15, 25, 0.05);
+    }
+
+    .section-headline {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 1.1rem;
+        font-weight: 800;
+        color: var(--brt-dark-navy);
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    }
+
+    .section-headline .material-symbols-outlined {
+        color: var(--brt-gold-pure);
+    }
+
+    /* FLOATING FORM INPUTS */
+    .form-group-app {
+        margin-bottom: 16px;
+    }
+
+    .form-group-app .form-label {
+        font-size: 0.78rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        color: var(--text-main);
+        margin-bottom: 6px;
+        display: block;
+    }
+
+    .form-control-app {
+        width: 100%;
+        background: #FAFAFA;
+        border: 1px solid #E5E7EB;
+        border-radius: 12px;
+        padding: 12px 16px;
+        font-size: 0.95rem;
+        font-weight: 600;
+        color: var(--brt-dark-navy);
+        transition: all 0.25s ease;
+    }
+
+    .form-control-app:focus {
+        background: #FFFFFF;
+        border-color: var(--brt-dark-navy);
+        box-shadow: 0 0 0 4px rgba(11, 15, 25, 0.06);
+        outline: none;
+    }
+
+    /* PRODUCT BUILDER MANIFEST (CARD STYLE FOR MOBILE & DESKTOP) */
+    .app-manifest-box {
+        background: #F9FAFB;
+        border: 1px solid #E5E7EB;
+        border-radius: 16px;
+        padding: 16px;
+        margin-bottom: 12px;
+        transition: all 0.2s ease;
+    }
+
+    .app-manifest-box:focus-within, .app-manifest-box:hover {
+        background: #FFFFFF;
+        border-color: var(--brt-gold-pure);
+        box-shadow: 0 4px 14px rgba(179, 143, 67, 0.12);
+    }
+
+    .unit-tag {
+        font-size: 0.72rem;
+        font-weight: 700;
+        color: var(--brt-gold-dark);
+        background: var(--brt-gold-light);
+        padding: 4px 8px;
+        border-radius: 6px;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+    }
+
+    /* SUBMIT BUTTON */
+    .btn-app-submit {
+        background: var(--brt-dark-navy);
+        color: #FFFFFF !important;
+        font-weight: 800;
+        font-size: 1rem;
+        letter-spacing: 0.5px;
+        padding: 16px;
+        border-radius: 14px;
+        border: none;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        box-shadow: 0 8px 20px rgba(11, 15, 25, 0.15);
+        transition: all 0.25s ease;
+        cursor: pointer;
+    }
+
+    .btn-app-submit:hover {
+        background: #1F2937;
+        transform: translateY(-2px);
+        box-shadow: 0 12px 24px rgba(11, 15, 25, 0.2);
+    }
+
+    /* TRUST BADGES STRIP */
+    .app-trust-strip {
+        background: var(--brt-dark-navy);
+        border-radius: 18px;
+        padding: 18px 24px;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 16px;
+        margin-top: 30px;
+    }
+
+    .trust-item {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: #E5E7EB;
+        font-size: 0.8rem;
+        font-weight: 700;
+    }
+
+    .trust-item .material-symbols-outlined {
+        color: var(--brt-gold-pure);
+        font-size: 1.2rem;
+    }
+
+    /* RESPONSIVE DESIGN TOUCH-UPS */
+    @@media (max-width: 576px) {
+        .app-form-card { padding: 20px 16px; border-radius: 18px; }
+        .app-page-title { font-size: 1.75rem; }
+        .app-trust-strip { flex-direction: column; align-items: flex-start; gap: 12px; }
+    }
 </style>
 
 <!-- ===================================================
-     1. HERO ZONE (EXACT MATCH FROM IMAGE)
+     1. HERO & STEPPER HEADER
      =================================================== -->
-<section class="page-hero-brt">
+<section class="app-header-shell">
     <div class="container">
-        <div class="brt-wholesale-badge">
-            <span class="lang-en-text">B2B Wholesale Partner</span>
-            <span class="lang-ta-text">B2B மொத்த விற்பனை பங்குதாரர்</span>
+        <div class="app-b2b-pill">
+            <span class="material-symbols-outlined" style="font-size: 16px;">verified</span>
+            <span class="lang-en-text">B2B Wholesale Portal</span>
+            <span class="lang-ta-text">B2B மொத்த விற்பனை தளம்</span>
         </div>
-        <h1>
+        
+        <h1 class="app-page-title">
             <span class="lang-en-text">Request Bulk Order</span>
             <span class="lang-ta-text">மொத்த ஆர்டர் கோருங்கள்</span>
         </h1>
-        <p>
-            <span class="lang-en-text">What makes BRT the trusted wholesale partner for dealers across the region — submit your dynamic container loads and item metrics below.</span>
-            <span class="lang-ta-text">பிராந்தியம் முழுவதும் உள்ள டீலர்களுக்கு BRT-ஐ நம்பகமான மொத்த விற்பனை பங்குதாரராக ஆக்குவது என்ன — உங்கள் தேவையான பொருட்கள் மற்றும் அளவுகளை கீழே சமர்ப்பிக்கவும்.</span>
+        
+        <p class="app-page-subtitle">
+            <span class="lang-en-text">Fill in your requirements below to receive dynamic wholesale market pricing and bulk allocation instantly.</span>
+            <span class="lang-ta-text">சிறந்த மொத்த விற்பனை விலை பெற உங்கள் விவரங்கள் மற்றும் தேவையான பொருட்களை கீழே நிரப்பவும்.</span>
         </p>
+
+        <!-- Stepper Indicator -->
+        <div class="app-step-tracker">
+            <div class="step-node active">
+                <span class="number">1</span>
+                <span class="lang-en-text">Business Info</span>
+                <span class="lang-ta-text">வணிக விவரம்</span>
+            </div>
+            <div class="step-divider"></div>
+            <div class="step-node active">
+                <span class="number">2</span>
+                <span class="lang-en-text">Product Manifest</span>
+                <span class="lang-ta-text">பொருட்கள் பட்டியல்</span>
+            </div>
+        </div>
     </div>
 </section>
 
 <!-- ===================================================
-     2. FORM CONTROLLER CARD
+     2. FORM CONTROLLER SECTION
      =================================================== -->
 <div class="container mb-5">
     <div class="row justify-content-center">
-        <div class="col-lg-9 col-md-11">
-            <div class="order-card-clean fade-in-up">
+        <div class="col-lg-8 col-md-10">
+            <div class="app-form-card">
                 
-                <div asp-validation-summary="ModelOnly" class="alert alert-danger rounded-3" style="display:@summaryDisplay; font-size:0.9rem;"></div>
+                <div asp-validation-summary="ModelOnly" class="alert alert-danger rounded-3 mb-4" style="display:@summaryDisplay; font-size:0.88rem;"></div>
 
                 <form asp-action="Request" method="post">
                     @Html.AntiForgeryToken()
                     
-                    <!-- Section: Details -->
-                    <div class="form-section-header mb-4">
-                        <span class="lang-en-text">Your Professional Details</span>
-                        <span class="lang-ta-text">உங்கள் தொழில்முறை விவரங்கள்</span>
+                    <!-- SECTION 1: BUSINESS & BUYER DETAILS -->
+                    <div class="section-headline">
+                        <span class="material-symbols-outlined">badge</span>
+                        <span class="lang-en-text">Business & Buyer Details</span>
+                        <span class="lang-ta-text">வணிகம் மற்றும் வாடிக்கையாளர் விவரங்கள்</span>
                     </div>
                     
-                    <div class="row g-4 mb-5">
-                        <div class="col-md-6 form-group-brt">
+                    <div class="row">
+                        <div class="col-md-6 form-group-app">
                             <label class="form-label">
                                 <span class="lang-en-text">Your Name</span>
                                 <span class="lang-ta-text">உங்கள் பெயர்</span>
                             </label>
-                            <input asp-for="BuyerName" class="form-control form-input-brt" placeholder="Enter your full name" required />
+                            <input asp-for="BuyerName" class="form-control-app" placeholder="e.g. Rahul Sharma" required />
                         </div>
-                        <div class="col-md-6 form-group-brt">
+
+                        <div class="col-md-6 form-group-app">
                             <label class="form-label">
                                 <span class="lang-en-text">Business Name</span>
                                 <span class="lang-ta-text">வணிக பெயர்</span>
                             </label>
-                            <input asp-for="BusinessName" class="form-control form-input-brt" placeholder="Company registration title" required />
+                            <input asp-for="BusinessName" class="form-control-app" placeholder="e.g. BRT Traders" required />
                         </div>
-                        <div class="col-md-6 form-group-brt">
+
+                        <div class="col-md-6 form-group-app">
                             <label class="form-label">
                                 <span class="lang-en-text">Phone Number</span>
                                 <span class="lang-ta-text">தொலைபேசி எண்</span>
                             </label>
-                            <input asp-for="PhoneNumber" class="form-control form-input-brt" placeholder="10-digit enterprise mobile" required />
+                            <input asp-for="PhoneNumber" type="tel" class="form-control-app" placeholder="10-digit mobile number" required />
                         </div>
-                        <div class="col-md-6 form-group-brt">
+
+                        <div class="col-md-6 form-group-app">
                             <label class="form-label">
-                                <span class="lang-en-text">City</span>
+                                <span class="lang-en-text">City / Town</span>
                                 <span class="lang-ta-text">நகரம்</span>
                             </label>
-                            <input asp-for="City" class="form-control form-input-brt" placeholder="e.g. Pondicherry, Cochin" />
+                            <input asp-for="City" class="form-control-app" placeholder="e.g. Madurai, Chennai" />
                         </div>
-                        <div class="col-12 form-group-brt">
+
+                        <div class="col-12 form-group-app">
                             <label class="form-label">
                                 <span class="lang-en-text">Delivery Address</span>
                                 <span class="lang-ta-text">டெலிவரி முகவரி</span>
                             </label>
-                            <input asp-for="BuyerAddress" class="form-control form-input-brt" placeholder="Complete destination logistics address" />
+                            <input asp-for="BuyerAddress" class="form-control-app" placeholder="Complete destination address for transport" />
                         </div>
                     </div>
 
-                    <!-- Section: Products -->
-                    <div class="form-section-header mb-2">
-                        <span class="lang-en-text">Products Required</span>
+                    <!-- SECTION 2: REQUIRED PRODUCTS LIST -->
+                    <div class="section-headline mt-4">
+                        <span class="material-symbols-outlined">inventory_2</span>
+                        <span class="lang-en-text">Select Required Products</span>
                         <span class="lang-ta-text">தேவையான பொருட்கள்</span>
                     </div>
-                    <p class="text-muted small mb-4">
-                        <span class="lang-en-text">Fill in the products you need — leave unused rows completely blank.</span>
-                        <span class="lang-ta-text">உங்களுக்கு தேவையான பொருட்களை நிரப்பவும் — பயன்படுத்தாத வரிசைகளை காலியாக விடவும்.</span>
+
+                    <p class="text-muted small mb-3">
+                        <span class="lang-en-text">Select products and enter quantity. Unused rows will be ignored automatically.</span>
+                        <span class="lang-ta-text">பொருட்களைத் தேர்ந்தெடுத்து அளவை உள்ளிடவும். காலியாக உள்ள வரிசைகள் புறக்கணிக்கப்படும்.</span>
                     </p>
                     
-                    <div class="d-flex flex-column gap-3 mb-4">
+                    <div>
                         @for (int i = 0; i < Model.Items.Count; i++)
                         {
-                            <div class="product-manifest-item">
+                            <div class="app-manifest-box">
                                 <div class="row g-3 align-items-center">
+                                    
+                                    <!-- Product Selection Dropdown -->
                                     <div class="col-md-6">
                                         <label class="form-label small text-muted fw-bold d-md-none">
-                                            <span class="lang-en-text">Select Product</span>
-                                            <span class="lang-ta-text">பொருளைத் தேர்ந்தெடுக்கவும்</span>
+                                            <span class="lang-en-text">Product #@(i + 1)</span>
+                                            <span class="lang-ta-text">பொருள் #@(i + 1)</span>
                                         </label>
-                                        <select name="Items[@i].ProductId" class="form-select form-input-brt py-2">
-                                            <option value="">-- Select Product --</option>
+                                        <select name="Items[@i].ProductId" class="form-select form-control-app">
+                                            <option value="">-- Choose Product --</option>
                                             @foreach (var p in products)
                                             {
                                                 var selected = Model.Items[i].ProductId == p.Id;
@@ -267,57 +396,55 @@
                                             }
                                         </select>
                                     </div>
-                                    <div class="col-md-3">
-                                        <label class="form-label small text-muted fw-bold d-md-none">
-                                            <span class="lang-en-text">Quantity</span>
-                                            <span class="lang-ta-text">அளவு</span>
-                                        </label>
-                                        <input name="Items[@i].Quantity" type="number" step="0.01" class="form-control form-input-brt py-2" placeholder="Quantity" value="@Model.Items[i].Quantity" />
+
+                                    <!-- Quantity Input -->
+                                    <div class="col-6 col-md-3">
+                                        <input name="Items[@i].Quantity" type="number" step="0.01" class="form-control-app" placeholder="Qty" value="@Model.Items[i].Quantity" />
                                     </div>
-                                    <div class="col-md-3">
-                                        <div class="d-flex align-items-center gap-1 text-muted small" style="font-weight: 500;">
-                                            <span class="material-symbols-outlined text-secondary" style="font-size:1rem;">help_outline</span>
-                                            <span>
-                                                <span class="lang-en-text">bags/kg as per packing</span>
-                                                <span class="lang-ta-text">பேக்கிங் படி பைகள்/கிலோ</span>
-                                            </span>
+
+                                    <!-- Unit / Packing Tag -->
+                                    <div class="col-6 col-md-3">
+                                        <div class="unit-tag">
+                                            <span class="material-symbols-outlined" style="font-size:14px;">info</span>
+                                            <span class="lang-en-text">Bags / KGs</span>
+                                            <span class="lang-ta-text">பைகள் / KG</span>
                                         </div>
                                     </div>
+
                                 </div>
                             </div>
                         }
                     </div>
 
-                    <!-- Submission Trigger -->
-                    <button type="submit" class="btn-brt-dark-submit mt-3">
+                    <!-- SUBMIT BUTTON -->
+                    <button type="submit" class="btn-app-submit mt-4">
+                        <span class="material-symbols-outlined">send</span>
                         <span class="lang-en-text">Submit Order Request</span>
                         <span class="lang-ta-text">ஆர்டர் கோரிக்கையை சமர்ப்பிக்க</span>
                     </button>
                 </form>
+
             </div>
+
+            <!-- 3. COMPLIANCE TRUST STRIP -->
+            <div class="app-trust-strip">
+                <div class="trust-item">
+                    <span class="material-symbols-outlined">payments</span>
+                    <span class="lang-en-text">Best Wholesale Rates</span>
+                    <span class="lang-ta-text">சிறந்த மொத்த விலை</span>
+                </div>
+                <div class="trust-item">
+                    <span class="material-symbols-outlined">high_quality</span>
+                    <span class="lang-en-text">Graded Quality</span>
+                    <span class="lang-ta-text">உயர்தர சோதனை</span>
+                </div>
+                <div class="trust-item">
+                    <span class="material-symbols-outlined">local_shipping</span>
+                    <span class="lang-en-text">Direct Transport</span>
+                    <span class="lang-ta-text">நேரடி லாஜிஸ்டிக்ஸ்</span>
+                </div>
+            </div>
+
         </div>
     </div>
 </div>
-
-<!-- ===================================================
-     3. CLEAN COMPLIANCE STRIP (NO GREEN)
-     =================================================== -->
-<section class="container my-5">
-    <div class="compliance-strip-brt">
-        <div class="compliance-unit">
-            <span class="material-symbols-outlined icon">verified</span>
-            <span class="lang-en-text">Live Market Pricing</span>
-            <span class="lang-ta-text">நேரடி சந்தை விலை</span>
-        </div>
-        <div class="compliance-unit">
-            <span class="material-symbols-outlined icon">verified</span>
-            <span class="lang-en-text">Graded Quality Assured</span>
-            <span class="lang-ta-text">தரம் பிரிக்கப்பட்ட தர உத்தரவாதம்</span>
-        </div>
-        <div class="compliance-unit">
-            <span class="material-symbols-outlined icon">verified</span>
-            <span class="lang-en-text">Bulk Packing Options</span>
-            <span class="lang-ta-text">மொத்த பேக்கிங் விருப்பங்கள்</span>
-        </div>
-    </div>
-</section>
