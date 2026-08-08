@@ -2,44 +2,34 @@
     var settings = (Dictionary<string, string>)ViewBag.Settings;
 }
 
-<!-- High-Performance Modern Architecture Fonts & Icons -->
+<!-- Premium Typography & Icons -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&family=Playfair+Display:ital,wght@1,600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 
 <style>
     /* ==========================================================================
-       DESIGN SYSTEM & CORE VARIABLES
+       THEME DESIGN SYSTEM (WHITE & GOLD ELEGANCE)
        ========================================================================== */
     :root {
-        --brt-bg: #07090E;
-        --brt-surface: rgba(18, 24, 38, 0.75);
-        --brt-surface-hover: rgba(28, 36, 56, 0.85);
-        --brt-border: rgba(212, 175, 55, 0.18);
-        --brt-border-glow: rgba(212, 175, 55, 0.45);
-        
-        --gold-primary: #D4AF37;
-        --gold-light: #F3E7C4;
-        --gold-dark: #8A6F27;
-        --gold-gradient: linear-gradient(135deg, #F3E7C4 0%, #D4AF37 50%, #8A6F27 100%);
-        --glass-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%);
-        
-        --text-heading: #F8FAFC;
-        --text-sub: #94A3B8;
+        --theme-bg: #FAF9F6;
+        --card-bg: #FFFFFF;
+        --border-color: #E2E8F0;
+        --gold-primary: #B8860B;
+        --gold-light: #DFB15B;
+        --gold-bg: rgba(184, 134, 11, 0.05);
+        --text-dark: #1E293B;
         --text-muted: #64748B;
-        
-        --whatsapp-color: #25D366;
-        --email-color: #EA4335;
-        --radius-xl: 28px;
-        --radius-lg: 18px;
-        --radius-md: 12px;
+        --whatsapp-green: #25D366;
+        --radius-lg: 16px;
+        --radius-md: 10px;
     }
 
     body {
         font-family: 'Plus Jakarta Sans', sans-serif;
-        background-color: var(--brt-bg);
-        color: var(--text-heading);
+        background-color: var(--theme-bg);
+        color: var(--text-dark);
         overflow-x: hidden;
     }
 
@@ -55,613 +45,412 @@
     html[lang="ta"] .lang-ta-inline { display: inline-block !important; }
 
     /* ==========================================================================
-       HERO CANOPY ARCHITECTURE
+       HERO HEADER SECTION
        ========================================================================== */
-    .ultra-hero {
-        position: relative;
-        padding: 70px 20px 40px;
+    .hero-section {
+        padding: 50px 20px 30px;
         text-align: center;
-        background: radial-gradient(circle at 50% 0%, rgba(212, 175, 55, 0.12) 0%, rgba(7, 9, 14, 0) 70%);
+        background: radial-gradient(circle at 50% 0%, rgba(184, 134, 11, 0.08) 0%, rgba(250, 249, 246, 0) 70%);
     }
 
-    .ultra-badge {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        padding: 6px 18px;
-        background: rgba(212, 175, 55, 0.08);
-        border: 1px solid var(--brt-border);
-        border-radius: 100px;
-        color: var(--gold-primary);
+    .sub-tag {
+        display: inline-block;
         font-size: 0.75rem;
         font-weight: 700;
         letter-spacing: 2px;
+        color: var(--gold-primary);
         text-transform: uppercase;
-        margin-bottom: 24px;
-        backdrop-filter: blur(10px);
+        margin-bottom: 8px;
     }
 
-    .ultra-hero h1 {
-        font-family: 'Space Grotesk', sans-serif;
+    .hero-title {
+        font-family: 'Cinzel', serif;
         font-weight: 700;
-        font-size: clamp(2.2rem, 5vw, 3.8rem);
-        line-height: 1.1;
-        letter-spacing: -0.03em;
-        background: linear-gradient(180deg, #FFFFFF 0%, #CBD5E1 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
+        font-size: clamp(2rem, 4vw, 3rem);
+        color: var(--text-dark);
+        margin-bottom: 12px;
+        letter-spacing: -0.5px;
+    }
+
+    .hero-divider {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
         margin-bottom: 16px;
     }
 
-    .ultra-hero p {
-        color: var(--text-sub);
-        font-size: clamp(0.98rem, 2vw, 1.15rem);
-        max-width: 600px;
-        margin: 0 auto 32px;
+    .hero-divider .line {
+        width: 40px;
+        height: 1px;
+        background: var(--gold-light);
+    }
+
+    .hero-divider .sub-text {
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 1.5px;
+        color: var(--gold-primary);
+        text-transform: uppercase;
+    }
+
+    .hero-desc {
+        color: var(--text-muted);
+        max-width: 550px;
+        margin: 0 auto;
+        font-size: 0.95rem;
         line-height: 1.6;
     }
 
-    /* HERO TRUST NODES */
-    .trust-metrics-wrapper {
-        display: flex;
-        justify-content: center;
-        gap: 16px;
-        flex-wrap: wrap;
-    }
-
-    .trust-node {
-        background: var(--brt-surface);
-        border: 1px solid var(--brt-border);
-        padding: 10px 20px;
-        border-radius: 100px;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        backdrop-filter: blur(12px);
-        transition: all 0.3s ease;
-    }
-
-    .trust-node:hover {
-        border-color: var(--gold-primary);
-        transform: translateY(-2px);
-        box-shadow: 0 8px 20px rgba(212, 175, 55, 0.15);
-    }
-
-    .trust-node .icon {
-        background: var(--gold-gradient);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        font-size: 1.25rem;
-    }
-
-    .trust-node span.text {
-        font-size: 0.82rem;
-        font-weight: 700;
-        letter-spacing: 0.5px;
-        color: var(--text-heading);
-        text-transform: uppercase;
-    }
-
     /* ==========================================================================
-       BENTO GRID GLASS CARDS
+       WHITE & GOLD CARDS
        ========================================================================== */
-    .bento-card {
-        background: var(--brt-surface);
-        background-image: var(--glass-gradient);
-        border: 1px solid var(--brt-border);
-        border-radius: var(--radius-xl);
-        padding: clamp(24px, 4vw, 40px);
-        backdrop-filter: blur(24px);
-        -webkit-backdrop-filter: blur(24px);
-        box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.5);
+    .theme-card {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        border-radius: var(--radius-lg);
+        padding: clamp(20px, 3vw, 32px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
         height: 100%;
-        transition: border-color 0.4s ease, transform 0.4s ease;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
-    .bento-card:hover {
-        border-color: var(--brt-border-glow);
+    .theme-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 15px 35px rgba(184, 134, 11, 0.08);
+        border-color: rgba(184, 134, 11, 0.3);
     }
 
-    .card-head-title {
-        font-family: 'Space Grotesk', sans-serif;
+    .card-title {
+        font-family: 'Cinzel', serif;
         font-weight: 700;
-        font-size: clamp(1.4rem, 2.5vw, 1.8rem);
-        color: var(--text-heading);
+        font-size: 1.35rem;
+        color: var(--text-dark);
         margin-bottom: 24px;
-        letter-spacing: -0.02em;
+        text-align: center;
     }
 
-    /* LIVE RADAR BAR */
-    .radar-status {
-        display: inline-flex;
-        align-items: center;
-        gap: 10px;
-        padding: 6px 14px;
-        background: rgba(34, 197, 94, 0.08);
-        border: 1px solid rgba(34, 197, 94, 0.25);
-        border-radius: 100px;
-        font-size: 0.78rem;
-        font-weight: 700;
-        color: #4ADE80;
-        margin-bottom: 20px;
-    }
-
-    .radar-dot {
-        width: 8px;
-        height: 8px;
-        background: #22C55E;
-        border-radius: 50%;
-        position: relative;
-    }
-
-    .radar-dot::after {
-        content: '';
-        position: absolute;
-        inset: 0;
-        background: #22C55E;
-        border-radius: 50%;
-        animation: pulseRadar 2s infinite ease-out;
-    }
-
-    /* EXECUTIVE BADGE */
-    .exec-card-badge {
-        background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.01) 100%);
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        padding: 16px 20px;
-        border-radius: var(--radius-lg);
+    /* INFO TILE */
+    .info-tile {
         display: flex;
-        align-items: center;
-        justify-content: space-between;
-        margin-bottom: 24px;
-    }
-
-    .exec-role {
-        font-size: 0.68rem;
-        text-transform: uppercase;
-        letter-spacing: 1.5px;
-        color: var(--gold-primary);
-        font-weight: 800;
-    }
-
-    .exec-name-title {
-        font-size: 1.2rem;
-        font-weight: 700;
-        font-family: 'Space Grotesk', sans-serif;
-        color: var(--text-heading);
-    }
-
-    .exec-sign {
-        font-family: 'Playfair Display', Georgia, serif;
-        font-style: italic;
-        color: var(--text-muted);
-        font-size: 1.1rem;
-        padding-left: 15px;
-        border-left: 1px solid rgba(255,255,255,0.1);
-    }
-
-    /* HQ TILES */
-    .hq-tile {
-        display: flex;
-        gap: 16px;
-        padding: 18px;
-        background: rgba(255, 255, 255, 0.02);
-        border: 1px solid rgba(255, 255, 255, 0.05);
-        border-radius: var(--radius-lg);
-        margin-bottom: 16px;
-        transition: all 0.3s ease;
-    }
-
-    .hq-tile:hover {
-        background: rgba(255, 255, 255, 0.04);
-        border-color: var(--brt-border);
-    }
-
-    .tile-orb {
-        width: 48px;
-        height: 48px;
+        align-items: flex-start;
+        gap: 14px;
+        padding: 14px;
+        background: var(--theme-bg);
+        border: 1px solid var(--border-color);
         border-radius: var(--radius-md);
-        background: rgba(212, 175, 55, 0.1);
-        border: 1px solid var(--brt-border);
+        margin-bottom: 14px;
+    }
+
+    .info-tile .tile-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: var(--gold-bg);
+        border: 1px solid rgba(184, 134, 11, 0.2);
+        color: var(--gold-primary);
         display: flex;
         align-items: center;
         justify-content: center;
         flex-shrink: 0;
     }
 
-    .tile-orb span {
-        background: var(--gold-gradient);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-    }
-
     .tile-label {
         font-size: 0.72rem;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        color: var(--text-muted);
         font-weight: 700;
+        letter-spacing: 1px;
+        color: var(--gold-primary);
+        text-transform: uppercase;
         margin-bottom: 2px;
     }
 
-    .tile-val {
-        font-size: 0.98rem;
-        color: var(--text-heading);
+    .tile-value {
+        font-size: 0.92rem;
         font-weight: 600;
-        line-height: 1.5;
+        color: var(--text-dark);
+        line-height: 1.4;
     }
 
-    /* ACTION BUTTON DECK */
-    .action-deck {
+    /* ACTION BUTTONS */
+    .action-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
         gap: 10px;
-        margin: 24px 0;
+        margin: 20px 0;
     }
 
-    .btn-act {
-        padding: 12px 14px;
+    .btn-action {
+        padding: 10px 14px;
         border-radius: var(--radius-md);
-        font-weight: 700;
+        font-weight: 600;
         font-size: 0.85rem;
         text-decoration: none !important;
-        display: inline-flex;
+        display: flex;
         align-items: center;
         justify-content: center;
         gap: 6px;
         transition: all 0.3s ease;
-        text-align: center;
     }
 
-    .btn-act-wire {
+    .btn-outline-gold {
+        border: 1px solid var(--gold-primary);
+        color: var(--gold-primary);
         background: transparent;
-        border: 1px solid var(--text-sub);
-        color: var(--text-heading);
     }
 
-    .btn-act-wire:hover {
-        background: var(--text-heading);
-        color: var(--brt-bg);
+    .btn-outline-gold:hover {
+        background: var(--gold-primary);
+        color: #FFF;
     }
 
-    .btn-act-wa {
-        background: var(--whatsapp-color);
-        color: #FFFFFF !important;
-        box-shadow: 0 6px 16px rgba(37, 211, 102, 0.25);
+    .btn-wa {
+        background: var(--whatsapp-green);
+        color: #FFF !important;
     }
 
-    .btn-act-wa:hover {
+    .btn-wa:hover {
+        opacity: 0.9;
         transform: translateY(-2px);
-        box-shadow: 0 10px 20px rgba(37, 211, 102, 0.4);
     }
 
-    .btn-act-mail {
-        background: var(--email-color);
-        color: #FFFFFF !important;
-        box-shadow: 0 6px 16px rgba(234, 67, 53, 0.25);
+    /* FORM STYLING */
+    .form-group {
+        margin-bottom: 18px;
     }
 
-    .btn-act-mail:hover {
+    .form-group label {
+        display: block;
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.8px;
+        color: var(--text-dark);
+        text-transform: uppercase;
+        margin-bottom: 6px;
+    }
+
+    .form-group input, 
+    .form-group textarea {
+        width: 100%;
+        background: var(--theme-bg);
+        border: 1px solid var(--border-color);
+        border-radius: var(--radius-md);
+        padding: 12px 14px;
+        font-size: 0.9rem;
+        color: var(--text-dark);
+        transition: all 0.3s ease;
+    }
+
+    .form-group input:focus, 
+    .form-group textarea:focus {
+        outline: none;
+        border-color: var(--gold-primary);
+        background: #FFF;
+        box-shadow: 0 0 0 3px rgba(184, 134, 11, 0.1);
+    }
+
+    .btn-submit {
+        width: 100%;
+        padding: 14px;
+        background: linear-gradient(135deg, #DFB15B 0%, #B8860B 100%);
+        border: none;
+        border-radius: var(--radius-md);
+        color: #FFF;
+        font-weight: 700;
+        font-size: 0.85rem;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 6px 18px rgba(184, 134, 11, 0.2);
+    }
+
+    .btn-submit:hover {
+        opacity: 0.95;
         transform: translateY(-2px);
-        box-shadow: 0 10px 20px rgba(234, 67, 53, 0.4);
+        box-shadow: 0 10px 22px rgba(184, 134, 11, 0.3);
     }
 
     /* MAP CONTAINER */
-    .geo-map-card {
-        border-radius: var(--radius-lg);
+    .map-frame {
+        border-radius: var(--radius-md);
         overflow: hidden;
-        border: 1px solid var(--brt-border);
-        background: #000;
+        border: 1px solid var(--border-color);
     }
 
-    .geo-map-actions {
-        padding: 14px;
-        background: rgba(18, 24, 38, 0.95);
-        display: flex;
-        gap: 10px;
-        flex-wrap: wrap;
-    }
-
-    .geo-map-actions .btn-act {
-        flex: 1;
-        min-width: 130px;
-    }
-
-    /* ==========================================================================
-       HIGH-PERFORMANCE FORM STYLES
-       ========================================================================== */
-    .field-group {
-        margin-bottom: 20px;
-    }
-
-    .field-group label {
-        display: block;
-        font-size: 0.72rem;
-        font-weight: 800;
-        color: var(--gold-primary);
-        text-transform: uppercase;
-        letter-spacing: 1.2px;
-        margin-bottom: 8px;
-    }
-
-    .field-group input, 
-    .field-group textarea {
-        width: 100%;
-        background: rgba(255, 255, 255, 0.03);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: var(--radius-md);
-        padding: 14px 16px;
-        font-size: 0.95rem;
-        color: var(--text-heading);
-        font-weight: 500;
-        transition: all 0.3s ease;
-    }
-
-    .field-group input:focus, 
-    .field-group textarea:focus {
-        outline: none;
-        background: rgba(255, 255, 255, 0.07);
-        border-color: var(--gold-primary);
-        box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.15);
-    }
-
-    .btn-dispatch {
-        width: 100%;
-        padding: 16px;
-        background: var(--gold-gradient);
-        border: none;
-        border-radius: var(--radius-md);
-        color: #07090E;
-        font-weight: 800;
-        font-size: 0.9rem;
-        text-transform: uppercase;
-        letter-spacing: 2px;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        box-shadow: 0 10px 25px rgba(212, 175, 55, 0.25);
-    }
-
-    .btn-dispatch:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 14px 30px rgba(212, 175, 55, 0.4);
-    }
-
-    /* ==========================================================================
-       MOBILE FLOATING QUICK ACTION DOCK (INNOVATIVE MOBILE UI)
-       ========================================================================== */
-    .mobile-float-dock {
+    /* MOBILE DOCK */
+    .mobile-dock {
         display: none;
         position: fixed;
-        bottom: 16px;
-        left: 16px;
-        right: 16px;
+        bottom: 12px;
+        left: 12px;
+        right: 12px;
         z-index: 999;
-        background: rgba(18, 24, 38, 0.85);
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
-        border: 1px solid var(--brt-border);
+        background: rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(12px);
+        border: 1px solid var(--border-color);
         border-radius: 100px;
-        padding: 8px 12px;
-        box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+        padding: 8px 16px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.1);
         justify-content: space-around;
-        align-items: center;
     }
 
-    .dock-item {
-        color: var(--text-heading);
+    .dock-link {
+        color: var(--text-dark);
         text-decoration: none !important;
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 2px;
         font-size: 0.65rem;
         font-weight: 700;
     }
 
-    .dock-item .material-symbols-outlined {
-        font-size: 1.3rem;
+    .dock-link span.material-symbols-outlined {
         color: var(--gold-primary);
+        font-size: 1.25rem;
     }
 
-    /* ANIMATIONS & RESPONSIVE BREAKPOINTS */
-    @@keyframes pulseRadar {
-        0% { transform: scale(1); opacity: 1; }
-        100% { transform: scale(3.5); opacity: 0; }
-    }
-
-    @@media (max-width: 991px) {
-        .bento-card { padding: 28px 20px; }
-    }
-
-    @@media (max-width: 767px) {
-        .trust-metrics-wrapper { display: grid; grid-template-columns: 1fr; }
-        .trust-node { justify-content: center; }
-        .mobile-float-dock { display: flex; }
-        body { padding-bottom: 70px; } /* Space for float dock */
+    @media (max-width: 767px) {
+        .mobile-dock { display: flex; }
+        body { padding-bottom: 60px; }
     }
 </style>
 
-<!-- HERO HEADER SECTION -->
-<section class="ultra-hero">
+<!-- HERO HEADER -->
+<section class="hero-section">
     <div class="container">
-        <div class="ultra-badge">
-            <span class="material-symbols-outlined" style="font-size:16px;">hub</span>
-            <span class="lang-en-inline">Global HQ</span>
-            <span class="lang-ta-inline">தலைமையகம்</span>
-        </div>
+        <span class="sub-tag">Contact Us</span>
+        <h1 class="hero-title">B RAJ TRADERS</h1>
         
-        <h1 class="lang-en-node">Connect Globally</h1>
-        <h1 class="lang-ta-node">தொடர்பு கொள்ள</h1>
-
-        <p class="lang-en-node">Partner with B Raj Traders for verified enterprise logistics and real-time market valuations.</p>
-        <p class="lang-ta-node">உடனடி சந்தை விலை நிலவரங்கள் மற்றும் நம்பகமான வணிகத் தொடர்புகளுக்கு எங்களை அணுகவும்.</p>
-
-        <!-- TRUST NODES -->
-        <div class="trust-metrics-wrapper">
-            <div class="trust-node">
-                <span class="material-symbols-outlined icon">verified_user</span>
-                <span class="text lang-en-inline">Verified Supply</span>
-                <span class="text lang-ta-inline">நம்பகமான விநியோகம்</span>
-            </div>
-            <div class="trust-node">
-                <span class="material-symbols-outlined icon">trending_up</span>
-                <span class="text lang-en-inline">Real-Time Pricing</span>
-                <span class="text lang-ta-inline">நேரலை விலை நிலவரம்</span>
-            </div>
-            <div class="trust-node">
-                <span class="material-symbols-outlined icon">workspace_premium</span>
-                <span class="text lang-en-inline">Premium Grade</span>
-                <span class="text lang-ta-inline">உயர்தர தரம்</span>
-            </div>
+        <div class="hero-divider">
+            <div class="line"></div>
+            <span class="sub-text">Honest Pricing • Premium Quality • Unmatched Legacy</span>
+            <div class="line"></div>
         </div>
+
+        <p class="hero-desc lang-en-node">Get in touch with us for bulk trade inquiries, real-time garlic pricing, and dependable supply schedules.</p>
+        <p class="hero-desc lang-ta-node">மொத்த வியாபாரம், பூண்டு விலை நிலவரங்கள் மற்றும் விநியோக தகவல்களுக்கு எங்களை எளிதாக தொடர்பு கொள்ளவும்.</p>
     </div>
 </section>
 
-<!-- MAIN CONTENT BENTO GRID -->
+<!-- MAIN CONTENT CONTENT -->
 <div class="container my-4">
     <div class="row g-4">
 
-        <!-- LEFT COLUMN: EXECUTIVE DESK & CONTACT DETAILS -->
+        <!-- LEFT CARD: CONTACT INFORMATION -->
         <div class="col-lg-5 col-md-12">
-            <div class="bento-card">
-                
-                <!-- LIVE STATUS -->
-                <div class="radar-status">
-                    <div class="radar-dot"></div>
-                    <span class="lang-en-inline">Live Connection Established</span>
-                    <span class="lang-ta-inline">நேரடி சந்தை இணைப்பில் உள்ளது</span>
-                </div>
-
-                <h2 class="card-head-title">
-                    <span class="lang-en-inline">Executive Desk</span>
-                    <span class="lang-ta-inline">நிர்வாக மேசை</span>
+            <div class="theme-card">
+                <h2 class="card-title">
+                    <span class="lang-en-inline">Get In Touch</span>
+                    <span class="lang-ta-inline">தொடர்பு கொள்ள</span>
                 </h2>
 
-                <!-- EXECUTIVE PROPRIETOR BADGE -->
-                <div class="exec-card-badge">
-                    <div>
-                        <div class="exec-role">Proprietor</div>
-                        <div class="exec-name-title">BR. Gopal B.A.</div>
-                    </div>
-                    <div class="exec-sign">B.R.T.</div>
-                </div>
-
-                <!-- ADDRESS TILE -->
-                <div class="hq-tile">
-                    <div class="tile-orb">
-                        <span class="material-symbols-outlined">corporate_fare</span>
+                <!-- PROPRIETOR INFO -->
+                <div class="info-tile">
+                    <div class="tile-icon">
+                        <span class="material-symbols-outlined">person</span>
                     </div>
                     <div>
-                        <div class="tile-label">
-                            <span class="lang-en-inline">Official Address</span>
-                            <span class="lang-ta-inline">அதிகாரப்பூர்வ முகவரி</span>
-                        </div>
-                        <div class="tile-val">
-                            B Raj Traders, TCA complex, Periyakulam road, Vadugapatti, Tamil Nadu 625603
-                        </div>
+                        <div class="tile-label">Proprietor</div>
+                        <div class="tile-value">BRT. Gopal B.A.</div>
                     </div>
                 </div>
 
-                <!-- PHONE TILE -->
-                <div class="hq-tile">
-                    <div class="tile-orb">
-                        <span class="material-symbols-outlined">support_agent</span>
+                <!-- ADDRESS INFO -->
+                <div class="info-tile">
+                    <div class="tile-icon">
+                        <span class="material-symbols-outlined">location_on</span>
                     </div>
                     <div>
                         <div class="tile-label">
-                            <span class="lang-en-inline">Direct Command Line</span>
-                            <span class="lang-ta-inline">நேரடி தொடர்பு எண்</span>
+                            <span class="lang-en-inline">Address</span>
+                            <span class="lang-ta-inline">முகவரி</span>
                         </div>
-                        <div class="tile-val" style="font-size: 1.1rem; color: var(--gold-primary);">
+                        <div class="tile-value">
+                            TCA Complex, Periyakulam Road, Vadugapatti, Tamil Nadu 625603
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PHONE INFO -->
+                <div class="info-tile">
+                    <div class="tile-icon">
+                        <span class="material-symbols-outlined">call</span>
+                    </div>
+                    <div>
+                        <div class="tile-label">
+                            <span class="lang-en-inline">Phone</span>
+                            <span class="lang-ta-inline">தொலைபேசி</span>
+                        </div>
+                        <div class="tile-value" style="color: var(--gold-primary);">
                             +91 98656 80694
                         </div>
                     </div>
                 </div>
 
-                <!-- EMAIL TILE -->
-                <div class="hq-tile">
-                    <div class="tile-orb">
+                <!-- EMAIL INFO -->
+                <div class="info-tile">
+                    <div class="tile-icon">
                         <span class="material-symbols-outlined">mail</span>
                     </div>
                     <div>
                         <div class="tile-label">
-                            <span class="lang-en-inline">Digital Mail / Email</span>
-                            <span class="lang-ta-inline">மின்னஞ்சல் முகவரி</span>
+                            <span class="lang-en-inline">Email</span>
+                            <span class="lang-ta-inline">மின்னஞ்சல்</span>
                         </div>
-                        <div class="tile-val">
+                        <div class="tile-value">
                             brajtraders2000@gmail.com
                         </div>
                     </div>
                 </div>
 
-                <!-- QUICK ACTIONS DECK -->
-                <div class="action-deck">
-                    <a href="tel:9865680694" class="btn-act btn-act-wire">
-                        <span class="lang-en-inline">Direct Dial</span>
-                        <span class="lang-ta-inline">அழைப்பு</span>
+                <!-- ACTION BUTTONS -->
+                <div class="action-grid">
+                    <a href="tel:9865680694" class="btn-action btn-outline-gold">
+                        <span class="material-symbols-outlined" style="font-size:16px;">call</span> Call
                     </a>
-                    <a href="https://api.whatsapp.com/send?phone=919865680694" target="_blank" class="btn-act btn-act-wa">
-                        <svg style="width:14px; height:14px; fill:currentColor;" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.513 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.713-1.457L0 24zm6.59-4.846c1.66.986 3.288 1.447 4.805 1.448 5.429 0 9.849-4.317 9.852-9.621.002-2.568-1.002-4.983-2.827-6.809-1.825-1.826-4.247-2.831-6.815-2.832-5.43 0-9.852 4.318-9.855 9.622-.001 1.705.469 3.374 1.356 4.886l-.991 3.62 3.73-.969zm10.748-4.734c-.287-.143-1.696-.838-1.959-.933-.262-.096-.452-.143-.642.143-.19.286-.737.933-.903 1.123-.166.19-.333.214-.62.071-1.005-.503-1.695-.794-2.365-1.942-.187-.32-.075-.526.04-.662.115-.135.286-.333.43-.5.143-.166.19-.285.286-.476.095-.19.047-.357-.024-.5-.071-.143-.642-1.548-.88-2.119-.232-.56-.467-.482-.642-.491-.166-.008-.356-.01-.547-.01-.19 0-.501.071-.762.357-.262.286-.999.976-.999 2.38 0 1.404 1.023 2.761 1.166 2.952.143.19 2.013 3.074 4.877 4.31 1.144.494 1.83.673 2.457.873.687.219 1.302.188 1.791.115.546-.082 1.696-.692 1.935-1.36.239-.668.239-1.24.167-1.36-.072-.119-.262-.214-.549-.357z"/></svg>
-                        <span>WhatsApp</span>
-                    </a>
-                    <a href="mailto:brajtraders2000@gmail.com" class="btn-act btn-act-mail">
-                        <span class="material-symbols-outlined" style="font-size: 15px;">send</span>
-                        <span>Email</span>
+                    <a href="https://api.whatsapp.com/send?phone=919865680694" target="_blank" class="btn-action btn-wa">
+                        <span class="material-symbols-outlined" style="font-size:16px;">chat</span> WhatsApp
                     </a>
                 </div>
 
-                <!-- GEO LOCATION MAP CARD -->
-                <div class="geo-map-card">
+                <!-- MAP -->
+                <div class="map-frame">
                     <iframe 
-                        src="https://www.google.com/maps?q=10.106752,77.569917&z=18&output=embed" 
+                        src="https://www.google.com/maps?q=10.106752,77.569917&z=17&output=embed" 
                         width="100%" 
-                        height="220" 
+                        height="180" 
                         style="border:0; display:block;" 
                         allowfullscreen="" 
-                        loading="lazy" 
-                        referrerpolicy="no-referrer-when-downgrade">
+                        loading="lazy">
                     </iframe>
-                    <div class="geo-map-actions">
-                        <a href="https://www.google.com/maps?q=10.106752,77.569917" target="_blank" class="btn-act btn-act-wire">
-                            <span class="material-symbols-outlined" style="font-size: 16px;">location_on</span>
-                            <span class="lang-en-inline">View Map</span>
-                            <span class="lang-ta-inline">வரைபடம்</span>
-                        </a>
-                        <a href="https://www.google.com/maps/dir/?api=1&destination=10.106752,77.569917" target="_blank" class="btn-act btn-act-wa">
-                            <span class="material-symbols-outlined" style="font-size: 16px;">directions</span>
-                            <span class="lang-en-inline">Directions</span>
-                            <span class="lang-ta-inline">வழிகாட்டல்</span>
-                        </a>
-                    </div>
                 </div>
-
             </div>
         </div>
 
-        <!-- RIGHT COLUMN: INTERACTIVE DISPATCH FORM -->
+        <!-- RIGHT CARD: CONTACT FORM -->
         <div class="col-lg-7 col-md-12">
-            <div class="bento-card">
-                <h2 class="card-head-title">
-                    <span class="lang-en-inline">Instant Transmission</span>
-                    <span class="lang-ta-inline">தகவல்களை அனுப்ப</span>
+            <div class="theme-card">
+                <h2 class="card-title">
+                    <span class="lang-en-inline">Send A Message</span>
+                    <span class="lang-ta-inline">செய்தி அனுப்ப</span>
                 </h2>
 
                 @if (TempData["Success"] != null)
                 {
-                    <div class="alert alert-success shadow-sm mb-4" style="border-radius: var(--radius-md); font-weight:700; background:rgba(34,197,94,0.15); border:1px solid rgba(34,197,94,0.3); color:#4ADE80; padding:16px 20px;">
+                    <div class="alert alert-success mb-4" style="border-radius: var(--radius-md); font-weight:600; background:#E8F5E9; color:#2E7D32; border:1px solid #C8E6C9; padding:12px 16px;">
                         @TempData["Success"]
                     </div>
 
                     @if (TempData["WhatsAppUrl"] != null)
                     {
                         var waUrl = TempData["WhatsAppUrl"]!.ToString();
-                        <a href="@waUrl" target="_blank" id="contactWaBtn" class="btn-act btn-act-wa mb-4" style="padding: 14px 24px; display:inline-flex;">
-                            <span class="material-symbols-outlined" style="font-size:1.2rem;">chat</span>
-                            Send Details via WhatsApp
+                        <a href="@waUrl" target="_blank" class="btn-action btn-wa mb-4" style="padding:12px 20px;">
+                            <span class="material-symbols-outlined">chat</span> Send via WhatsApp
                         </a>
                         <script>
                             setTimeout(function () {
                                 window.open('@Html.Raw(waUrl)', '_blank');
-                            }, 1200);
+                            }, 1000);
                         </script>
                     }
                 }
@@ -669,28 +458,28 @@
                 <form asp-controller="Contact" asp-action="Submit" method="post">
                     @Html.AntiForgeryToken()
 
-                    <div class="field-group">
+                    <div class="form-group">
                         <label>
-                            <span class="lang-en-inline">Full Identity / Name</span>
-                            <span class="lang-ta-inline">முழுப் பெயர்</span>
+                            <span class="lang-en-inline">Your Name</span>
+                            <span class="lang-ta-inline">உங்கள் பெயர்</span>
                         </label>
-                        <input name="Name" required autocomplete="off" placeholder="e.g. John Doe / எ.கா. இராமன்" />
+                        <input name="Name" required placeholder="e.g. John Doe" />
                     </div>
 
                     <div class="row">
                         <div class="col-md-6">
-                            <div class="field-group">
+                            <div class="form-group">
                                 <label>
-                                    <span class="lang-en-inline">Comms Line / Phone</span>
+                                    <span class="lang-en-inline">Phone Number</span>
                                     <span class="lang-ta-inline">தொலைபேசி எண்</span>
                                 </label>
                                 <input name="Phone" required type="tel" placeholder="+91..." />
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <div class="field-group">
+                            <div class="form-group">
                                 <label>
-                                    <span class="lang-en-inline">Digital Mail / Email</span>
+                                    <span class="lang-en-inline">Email Address</span>
                                     <span class="lang-ta-inline">மின்னஞ்சல் முகவரி</span>
                                 </label>
                                 <input name="Email" type="email" placeholder="name@domain.com" />
@@ -698,17 +487,17 @@
                         </div>
                     </div>
 
-                    <div class="field-group">
+                    <div class="form-group">
                         <label>
-                            <span class="lang-en-inline">Transmission / Message</span>
-                            <span class="lang-ta-inline">செய்தி விவரம்</span>
+                            <span class="lang-en-inline">Message</span>
+                            <span class="lang-ta-inline">செய்தி</span>
                         </label>
-                        <textarea name="Message" rows="6" required placeholder="Outline your logistics requirements or volume targets..."></textarea>
+                        <textarea name="Message" rows="5" required placeholder="How can we help you?"></textarea>
                     </div>
 
-                    <button type="submit" class="btn-dispatch">
-                        <span class="lang-en-inline">Dispatch Message</span>
-                        <span class="lang-ta-inline">செய்தியை சமர்ப்பிக்க</span>
+                    <button type="submit" class="btn-submit">
+                        <span class="lang-en-inline">Submit Request</span>
+                        <span class="lang-ta-inline">சமர்ப்பிக்கவும்</span>
                     </button>
                 </form>
             </div>
@@ -717,22 +506,18 @@
     </div>
 </div>
 
-<!-- INNOVATIVE MOBILE FLOATING QUICK DOCK -->
-<div class="mobile-float-dock">
-    <a href="tel:9865680694" class="dock-item">
+<!-- MOBILE QUICK DOCK -->
+<div class="mobile-dock">
+    <a href="tel:9865680694" class="dock-link">
         <span class="material-symbols-outlined">call</span>
         <span>Call</span>
     </a>
-    <a href="https://api.whatsapp.com/send?phone=919865680694" target="_blank" class="dock-item">
-        <span class="material-symbols-outlined" style="color:var(--whatsapp-color);">chat</span>
+    <a href="https://api.whatsapp.com/send?phone=919865680694" target="_blank" class="dock-link">
+        <span class="material-symbols-outlined" style="color:var(--whatsapp-green);">chat</span>
         <span>WhatsApp</span>
     </a>
-    <a href="https://www.google.com/maps/dir/?api=1&destination=10.106752,77.569917" target="_blank" class="dock-item">
+    <a href="https://www.google.com/maps/dir/?api=1&destination=10.106752,77.569917" target="_blank" class="dock-link">
         <span class="material-symbols-outlined">near_me</span>
         <span>Route</span>
-    </a>
-    <a href="mailto:brajtraders2000@gmail.com" class="dock-item">
-        <span class="material-symbols-outlined" style="color:var(--email-color);">mail</span>
-        <span>Email</span>
     </a>
 </div>
